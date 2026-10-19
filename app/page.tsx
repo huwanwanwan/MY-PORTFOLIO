@@ -57,7 +57,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <AboutSection />
+      <AboutSection projectPlaceholder />
       <ProjectsSection />
       <SkillsSection />
       <ExperienceSection />
