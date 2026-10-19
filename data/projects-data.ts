@@ -1,0 +1,267 @@
+export interface ProjectItem {
+  id: string;
+  title: string;
+  category: "Mobile & AR" | "Web & Systems" | "Games & Animation" | "IoT & Hardware";
+  type: string;
+  role: string;
+  period: string;
+  chronologicalIndex: number;
+  featuredIndex: number;
+  isFeatured?: boolean;
+  paragraphs: string[];
+  highlights?: { label: string; value: string }[];
+  tags: string[];
+}
+
+export const projectsData: ProjectItem[] = [
+  {
+    id: "milktaste",
+    title: "Milktaste",
+    category: "Web & Systems",
+    type: "Desktop Application · First-Year Project",
+    role: "Lead Developer",
+    period: "1st Year College",
+    chronologicalIndex: 1,
+    featuredIndex: 12,
+    paragraphs: [
+      "This was my first project during my first year of college using Java programming. It was a group project that required two members, and I was the one who developed the system.",
+      "Since it was my first time building a system that connects with users, I found Java quite challenging and confusing at first. However, it became a valuable learning experience for me as a beginner developer.",
+    ],
+    highlights: [
+      { label: "Team Setup", value: "2 Members (Sole Developer)" },
+      { label: "Milestone", value: "First College Software Project" },
+    ],
+    tags: ["Java Programming"],
+  },
+  {
+    id: "marilao-fantasy",
+    title: "Marilao Fantasy",
+    category: "Games & Animation",
+    type: "2D Animation · CGA Project",
+    role: "Character Animator",
+    period: "CGA (Computer Graphics & Animation)",
+    chronologicalIndex: 2,
+    featuredIndex: 11,
+    paragraphs: [
+      "This was our project for CGA (Computer Graphics and Animation). I was assigned to animate the characters using FlipaClip, where I drew each movement frame by frame to bring them to life.",
+      "Marilao Fantasy is a story about a hero who is based in Marilao and must protect the city from three enemies. The hero has two special abilities: Thunder Wave, which allows him to attack using thunder, and Dash, which helps him move quickly.",
+      "The three enemies are the Shielder, who carries a shield; the Knight, who wields a sword; and the Ranger, who uses a bow and arrow. Each enemy has a different weapon and fighting style, making the hero's mission to protect Marilao more challenging.",
+    ],
+    highlights: [
+      { label: "Animation Technique", value: "Frame-by-Frame Hand-Drawn Animation" },
+      { label: "Hero Abilities", value: "Thunder Wave & Dash" },
+      { label: "Enemy Classes", value: "Shielder, Knight, and Ranger" },
+    ],
+    tags: ["Unity"],
+  },
+  {
+    id: "attack-on-pdm",
+    title: "Attack on PDM",
+    category: "Mobile & AR",
+    type: "Augmented Reality (AR) Game · Unity",
+    role: "Co-Developer",
+    period: "College AR Project",
+    chronologicalIndex: 3,
+    featuredIndex: 6,
+    isFeatured: true,
+    paragraphs: [
+      "I was a co-developer of this system, and we used Unity to create an augmented reality (AR) game inspired by Pokémon GO. When the player points their phone at the ground, a character appears on the screen, allowing the player to control the character and fight against enemies in the real world through augmented reality.",
+      "The game features five characters inspired by Filipino mythology: Mayari, the goddess of the moon; Dian Masalanta, the goddess of love; Mapulong, the god of seasons; Amanikable, the god of hunters; and Bathala, the supreme creator god. Through this project, we explored how augmented reality can make gaming more interactive and engaging.",
+    ],
+    highlights: [
+      { label: "Technology", value: "Unity & AR Integration (Pokémon GO-inspired)" },
+      { label: "Mythology Deities", value: "Mayari, Dian Masalanta, Mapulong, Amanikable & Bathala" },
+    ],
+    tags: ["Unity"],
+  },
+  {
+    id: "force-x",
+    title: "Force X",
+    category: "Games & Animation",
+    type: "3D Combat Action Game · Unity",
+    role: "Game Developer & Animator",
+    period: "Game Development Project",
+    chronologicalIndex: 4,
+    featuredIndex: 7,
+    paragraphs: [
+      "I developed this game called Force X using Unity, including the character designs and animations. The game features one main character, Ranger X, inspired by the look of the Power Rangers but with unique solid green crystal powers. Players can right-click to summon and activate these powers.",
+      "The game also features randomly summoned enemies with a zombie-like, witch-like appearance. When Ranger X gets close to an enemy, it will approach the player and attack. This project allowed me to explore game development, character animation, enemy AI behavior, and interactive combat mechanics using Unity.",
+    ],
+    highlights: [
+      { label: "Hero Character", value: "Ranger X (Green Crystal Power Summoning)" },
+      { label: "Combat AI", value: "Random Enemy Summoning & Proximity Attack AI" },
+    ],
+    tags: ["Unity"],
+  },
+  {
+    id: "almighty-jungle",
+    title: "Almighty Jungle",
+    category: "Games & Animation",
+    type: "Action-Adventure Game · Unity",
+    role: "Game Developer",
+    period: "Game Development Project",
+    chronologicalIndex: 5,
+    featuredIndex: 8,
+    paragraphs: [
+      "I was the developer of this game called Almighty Jungle. The story follows a muscular, fit Asian man who travels to the Amazon to find a powerful crystal solution. His mission is to bring it back to the Philippines to help solve the country's problems and save its people.",
+      "Along his journey, he faces numerous enemies that he must defeat to obtain the crystal solution. This project allowed me to explore game development while bringing an action-adventure story to life.",
+    ],
+    highlights: [
+      { label: "Narrative Quest", value: "Expedition to Amazon for Crystal Healing Solution" },
+      { label: "Core Focus", value: "Action-Adventure, Level Design & Enemy Combat" },
+    ],
+    tags: ["Unity"],
+  },
+  {
+    id: "fitness-management-system",
+    title: "Fitness Management System",
+    category: "Web & Systems",
+    type: "Database Management System",
+    role: "Co-Developer",
+    period: "Database Systems Project",
+    chronologicalIndex: 6,
+    featuredIndex: 10,
+    paragraphs: [
+      "I am the co-developer of this project entitled Fitness Management System, built using MS Access. The system allows users to create accounts or log in to reserve, monitor, and manage their health, workouts, and wellness records.",
+    ],
+    highlights: [
+      { label: "Platform", value: "Microsoft Access Database Engine" },
+      { label: "Core Features", value: "User Authentication, Workout Tracking & Reservation" },
+    ],
+    tags: ["MS Access"],
+  },
+  {
+    id: "la-nina-detector",
+    title: "La Niña Detector",
+    category: "IoT & Hardware",
+    type: "IoT & Rain Sensing Alarm · Arduino Exhibit",
+    role: "Hardware & Firmware Developer",
+    period: "1st Year College · Arduino Exhibit",
+    chronologicalIndex: 7,
+    featuredIndex: 9,
+    paragraphs: [
+      "I was the developer of a project called La Niña Detector, which I created during my first year of college using Arduino and the Arduino IDE to program and connect the components.",
+      "The system uses a rain sensor to detect raindrops falling on the roof. When rain is detected, the sensor triggers an audible alarm to notify the homeowner, reminding them to collect clothes hanging outside before they get wet.",
+      "We presented this project at an event called the Arduino Exhibit, where all first-year IT sections were required to participate. During the presentation, we demonstrated our project to our college dean, Ma'am Emma. She smiled as we demonstrated how our system worked, which made the experience memorable for us.",
+      "This project was my first experience developing an Arduino-based system, and it helped me gain practical knowledge of hardware components, programming, and sensor integration.",
+    ],
+    highlights: [
+      { label: "Exhibit Milestone", value: "Live Demonstration to College Dean Ma'am Emma" },
+      { label: "Hardware Stack", value: "Arduino Microcontroller, Rain Sensor & Audio Alarm" },
+    ],
+    tags: ["Arduino IDE"],
+  },
+  {
+    id: "doculink",
+    title: "DocuLink",
+    category: "Web & Systems",
+    type: "Web Document Request System · EDOOP Case Study",
+    role: "Front-End Developer",
+    period: "EDOOP Case Study · PDM",
+    chronologicalIndex: 8,
+    featuredIndex: 5,
+    isFeatured: true,
+    paragraphs: [
+      "I was the front-end developer of a system entitled DocuLink, which we developed as our case study for Emerging Driven Object-Oriented Programming (EDOOP) at Pambayang Dalubhasaan ng Marilao (PDM).",
+      "DocuLink is a web-based document request system that allows students to create an account, log in, and request school documents such as grades, transcripts of records (TOR), and other academic records. The administrator can review each request and either approve or decline it. Once a request is approved, the student receives a notification with the scheduled date for claiming the requested document at the school.",
+      "The system also features an order-tracking interface inspired by online shopping platforms, allowing users to monitor the status of their requests, such as Processing, Ongoing, or Delivered.",
+      "Through this project, I gained experience in front-end development and learned how to design a user-friendly interface for managing document requests and tracking their status.",
+    ],
+    highlights: [
+      { label: "Status Pipeline", value: "Processing → Ongoing → Delivered (Order Tracking)" },
+      { label: "Admin Workflow", value: "Review, Approve/Decline & Scheduled Claiming Dates" },
+      { label: "Subject", value: "EDOOP Case Study (Pambayang Dalubhasaan ng Marilao)" },
+    ],
+    tags: ["HTML", "CSS", "JavaScript", "MySQL"],
+  },
+  {
+    id: "inventopos",
+    title: "InventoPOS",
+    category: "Web & Systems",
+    type: "Point of Sale & Inventory · Web Dev & SAD Case Study",
+    role: "UI/UX Designer",
+    period: "Web Development & Systems Analysis and Design",
+    chronologicalIndex: 9,
+    featuredIndex: 3,
+    isFeatured: true,
+    paragraphs: [
+      "I was the UI/UX Designer of a system entitled InventoPOS, a collaborative case study for our Web Development and Systems Analysis and Design subjects.",
+      "The name InventoPOS combines the words Inventory and Point of Sale (POS). It is a point-of-sale system designed to help business owners manage sales transactions and monitor their inventory efficiently.",
+      "We used React.js for the system's development and CSS for styling the user interface. I used Figma to design the UI/UX, focusing on creating a user-friendly, organized, and visually appealing interface.",
+      "Our professor gave us a 100/100 grade because we completed the system's required features and presented the project very well. This experience helped me improve my UI/UX design skills, teamwork, and understanding of how to create an effective system that meets user needs.",
+    ],
+    highlights: [
+      { label: "Academic Score", value: "100/100 Grade (Perfect Rating)" },
+      { label: "Design Process", value: "Figma Prototyping, Wireframing & Design System" },
+      { label: "Technologies", value: "React.js, CSS, Modular Component Architecture" },
+    ],
+    tags: ["React.js", "CSS", "HTML", "MySQL"],
+  },
+  {
+    id: "halal-2025",
+    title: "HALAL 2025",
+    category: "Web & Systems",
+    type: "E-Voting System · Collaborative Case Study",
+    role: "Co-Developer",
+    period: "Collab Case Study (2025)",
+    chronologicalIndex: 10,
+    featuredIndex: 4,
+    isFeatured: true,
+    paragraphs: [
+      "I was the co-developer of the system entitled HALAL 2025. We developed an e-voting system designed to modernize, streamline, and secure the electoral voting process for 2025.",
+      "This project was a collaborative case study combining Database Management Systems and Object-Oriented Programming (OOP). We utilized Java programming to build the system architecture and application logic, and MySQL for database records, voter verification, candidate profiling, and automated ballot tabulation.",
+    ],
+    highlights: [
+      { label: "Collab Subjects", value: "Database Management Systems & Object-Oriented Programming (OOP)" },
+      { label: "Core Solution", value: "Automated E-Voting System (Ballot management & voter verification)" },
+      { label: "Technologies", value: "Java & MySQL Database Integration" },
+    ],
+    tags: ["Java Programming", "MySQL"],
+  },
+  {
+    id: "recognizarenus",
+    title: "RecogniZarenus",
+    category: "IoT & Hardware",
+    type: "Facial Recognition Attendance & Turnstile Gate · Proposed Thesis",
+    role: "Lead Developer",
+    period: "Proposed Thesis Project",
+    chronologicalIndex: 11,
+    featuredIndex: 2,
+    isFeatured: true,
+    paragraphs: [
+      "I was the developer of RecogniZarenus, a proposed thesis project designed to automate the school's attendance monitoring process. I used PHP, CSS, JavaScript, and the Arduino IDE to develop the system.",
+      "The system consists of two main components: a web-based platform for administrators, teachers, and students, and a hardware setup that includes a turnstile gate, camera, and RFID reader.",
+      "When a student scans their face using the camera, the system verifies whether they are registered. If the student's identity is successfully verified, the turnstile gate opens automatically to allow entry, and an SMS notification is sent to their parents to inform them of their child's arrival at school.",
+      "The system aims to make attendance monitoring more efficient, improve campus security, and help parents stay informed about their children's school attendance through SMS notifications.",
+    ],
+    highlights: [
+      { label: "Hardware Duo", value: "Automated Turnstile Gate + RFID Scanner" },
+      { label: "Biometric Security", value: "Camera Facial Recognition Verification" },
+      { label: "Parent Alerts", value: "Automated Real-Time SMS Arrival Notification" },
+    ],
+    tags: ["PHP", "CSS", "JavaScript", "Arduino IDE"],
+  },
+  {
+    id: "sigla",
+    title: "SigLa",
+    category: "Mobile & AR",
+    type: "Mobile Sign Language Translator · Capstone / Thesis Project",
+    role: "Front-End Developer & UI/UX",
+    period: "Latest Capstone / Thesis Project",
+    chronologicalIndex: 12,
+    featuredIndex: 1,
+    isFeatured: true,
+    paragraphs: [
+      "SigLa is our latest thesis/capstone project. The name comes from the words Sign Language. It is a mobile sign language translator designed to help persons with speech and/or hearing disabilities communicate with people who do not understand sign language.",
+      "The mobile application can be used offline for sign language recognition and translation once the necessary resources are downloaded. An internet connection is only required for features such as updating the application's model version and synchronizing data.",
+      "I am the front-end developer of this project, responsible for developing the mobile application's user interface and user experience. The system architecture consists of five main components: SigLa Mobile, SigLa Backend, SigLa Admin, SigLa ML (Machine Learning), and the Database, which connects the system's components and manages its data.",
+      "Through this project, I continue to develop my skills in mobile application development, front-end design, and system integration while contributing to a solution that promotes more accessible communication for persons with speech and/or hearing disabilities.",
+    ],
+    highlights: [
+      { label: "5-Tier System Architecture", value: "SigLa Mobile · SigLa Backend · SigLa Admin · SigLa ML · Database" },
+      { label: "Core Innovation", value: "Offline-First Sign Language Recognition & Translation" },
+      { label: "Mission & Impact", value: "Accessible Communication for Speech & Hearing-Impaired Communities" },
+    ],
+    tags: ["Kotlin", "React.js", "Node.js", "Tailwind", "JavaScript", "Python", "HTML", "CSS", "PLpgSQL"],
+  },
+];

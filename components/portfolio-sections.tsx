@@ -1,5 +1,7 @@
 import Link from "next/link";
 import AboutPortrait from "./about-portrait";
+import ProjectsShowcase from "./projects-showcase";
+import SkillsShowcase from "./skills-showcase";
 
 const educationIcons = {
   school: "M22 10 12 4 2 10l10 6 10-6z M6 12v5c3 3 9 3 12 0v-5",
@@ -334,7 +336,8 @@ export function AboutSection({
                   </h4>
                   <p>AFGBMTS</p>
                   <ul>
-                    <li>Graduated from Senior High School with Honors</li>
+                    <li>Graduated from Senior High School</li>
+                    <li>With Honors</li>
                     <li>Received a Conduct Award</li>
                   </ul>
                 </article>
@@ -391,7 +394,11 @@ export function AboutSection({
   );
 }
 
-export function ProjectsSection() {
+export function ProjectsSection({
+  featuredOnly = false,
+}: {
+  featuredOnly?: boolean;
+} = {}) {
   return (
     <section
       className="section-block content-section"
@@ -400,44 +407,21 @@ export function ProjectsSection() {
       aria-labelledby="projects-heading"
     >
       <div className="content-section-heading editorial-heading">
-        <p className="section-kicker">SELECTED WORK</p>
+        <p className="section-kicker">SELECTED WORK &amp; CASE STUDIES</p>
         <h1 id="projects-heading">Projects</h1>
-        <p>Ideas I&apos;ve explored through building and collaboration.</p>
+        <p>
+          Ideas and systems I&apos;ve built across mobile applications, web systems, game development, and IoT hardware.
+        </p>
       </div>
-      <div className="work-list project-grid">
-        <article className="work-card scroll-reveal" data-scroll-reveal>
-          <div className="project-mark" aria-hidden="true">01</div>
-          <div className="work-title-row">
-            <h3>SIGLA</h3>
-            <span className="work-type">MOBILE APP</span>
-          </div>
-          <p>
-            A Filipino Sign Language translator that turns recognized gestures
-            into text and voice.
-          </p>
-          <div className="tag-row">
-            <span>Kotlin</span>
-            <span>Machine Learning</span>
-            <span>FSL</span>
-          </div>
-        </article>
-        <article className="work-card scroll-reveal" data-scroll-reveal>
-          <div className="project-mark" aria-hidden="true">02</div>
-          <div className="work-title-row">
-            <h3>NAZATRACK</h3>
-            <span className="work-type">WEB APP</span>
-          </div>
-          <p>
-            An RFID attendance system designed to improve attendance monitoring
-            and record management.
-          </p>
-          <div className="tag-row">
-            <span>PHP</span>
-            <span>MySQL</span>
-            <span>RFID</span>
-          </div>
-        </article>
-      </div>
+      <ProjectsShowcase featuredOnly={featuredOnly} />
+      {featuredOnly && (
+        <div className="projects-view-all-wrap">
+          <Link className="intro-link" href="/projects">
+            <span>Explore all 12 projects in the full directory</span>
+            <span aria-hidden="true">→</span>
+          </Link>
+        </div>
+      )}
     </section>
   );
 }
@@ -451,61 +435,13 @@ export function SkillsSection() {
       aria-labelledby="skills-heading"
     >
       <div className="content-section-heading editorial-heading">
-        <p className="section-kicker">WHAT I&apos;M LEARNING</p>
-        <h1 id="skills-heading">Skills</h1>
+        <p className="section-kicker">01 — TECHNICAL TOOLKIT</p>
+        <h1 id="skills-heading">Skills &amp; Technologies</h1>
         <p>
-          Growing my technical toolkit while staying curious beyond the screen.
+          The languages, frameworks, platforms, and tools I&apos;ve explored through my projects and studies. Select any technology below to see which projects use it in their stack.
         </p>
       </div>
-      <div className="skill-rows">
-        <article className="skill-row scroll-reveal" data-scroll-reveal>
-          <div className="skill-row-heading">
-            <span>01</span>
-            <div>
-              <h3>Development</h3>
-              <p>Building a strong foundation in software and application development.</p>
-            </div>
-          </div>
-          <div className="tag-row">
-            <span>Web Development</span>
-            <span>Mobile Development</span>
-            <span>UI/UX Design</span>
-            <span>Databases</span>
-          </div>
-        </article>
-        <article className="skill-row scroll-reveal" data-scroll-reveal>
-          <div className="skill-row-heading">
-            <span>02</span>
-            <div>
-              <h3>Tools &amp; technologies</h3>
-              <p>Technologies I&apos;ve explored through projects and practice.</p>
-            </div>
-          </div>
-          <div className="tag-row">
-            <span>Kotlin</span>
-            <span>PHP</span>
-            <span>MySQL</span>
-            <span>Machine Learning</span>
-            <span>RFID</span>
-          </div>
-        </article>
-        <article className="skill-row scroll-reveal" data-scroll-reveal>
-          <div className="skill-row-heading">
-            <span>03</span>
-            <div>
-              <h3>Outside the code</h3>
-              <p>Interests that keep me curious and balanced.</p>
-            </div>
-          </div>
-          <div className="tag-row">
-            <span>Mobile Legends</span>
-            <span>League of Legends</span>
-            <span>CrossFire</span>
-            <span>Table Tennis</span>
-            <span>Learning Guitar</span>
-          </div>
-        </article>
-      </div>
+      <SkillsShowcase />
     </section>
   );
 }
@@ -559,7 +495,7 @@ export function ExperienceSection() {
             <div>
               <p className="education-level">Junior &amp; Senior High School</p>
               <h4>Assemblywoman Felicita&apos;s G. Bernardino Memorial Trade School</h4>
-              <p className="journey-role">AFGBMTS · Graduated with Honors · Conduct Award</p>
+              <p className="journey-role">AFGBMTS · Graduated · With Honors · Conduct Award</p>
             </div>
           </article>
           <article className="journey-entry scroll-reveal" data-scroll-reveal>

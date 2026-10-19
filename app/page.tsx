@@ -42,23 +42,19 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <div className="portrait-column">
-          <div className="portrait-mark">
-            <Image
-              className="portrait-image portrait-image-primary"
-              src="/professional_profile_cutout.png"
-              alt="Juan Domanico Militante in professional attire"
-              width={2048}
-              height={2048}
-              sizes="(min-width: 1024px) 54vw, (min-width: 720px) 46vw, 90vw"
-              unoptimized
-              priority
-            />
-          </div>
-        </div>
+        <figure className="home-portrait-frame">
+          <Image
+            src="/professional_profile_cutout.png"
+            alt="Portrait of Juan Domanico Militante"
+            fill
+            sizes="(min-width: 1024px) 40vw, 90vw"
+            className="home-portrait-image"
+            unoptimized
+          />
+        </figure>
       </section>
       <AboutSection projectPlaceholder />
-      <ProjectsSection />
+      <ProjectsSection featuredOnly={true} />
       <SkillsSection />
       <ExperienceSection />
       <ContactSection />
