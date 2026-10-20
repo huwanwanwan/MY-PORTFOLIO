@@ -264,4 +264,25 @@ export const projectsData: ProjectItem[] = [
     ],
     tags: ["Kotlin", "React.js", "Node.js", "Tailwind", "JavaScript", "Python", "HTML", "CSS", "PLpgSQL"],
   },
+  {
+    id: "isla-arena",
+    title: "Isla Arena",
+    category: "Games & Animation",
+    type: "3D Battle Arena · Unity Class Project",
+    role: "Game Developer & Combat Mechanics",
+    period: "College Game Dev Class Project",
+    chronologicalIndex: 13,
+    featuredIndex: 13,
+    isFeatured: true,
+    paragraphs: [
+      "I developed this project entitled Isla Arena using Unity for our Game Development class. The game is set in a mysterious tropical island battle arena where players must navigate dynamic combat zones, confront aggressive enemy waves, and survive challenging gameplay mechanics.",
+      "In this project, I was responsible for designing the island level environment, player combat controls, weapon interaction, enemy wave spawning AI, and health management systems. It allowed me to sharpen my expertise in Unity 3D physics, C# scripting, and responsive player experience.",
+    ],
+    highlights: [
+      { label: "Game Environment", value: "3D Tropical Island Combat Arena & Level Design" },
+      { label: "Core Mechanics", value: "Player Combat, Wave Spawning AI & Survival Systems" },
+      { label: "Technology", value: "Unity 3D Engine & C# Gameplay Architecture" },
+    ],
+    tags: ["Unity", "C#", "Game Development"],
+  },
 ];

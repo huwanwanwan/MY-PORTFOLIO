@@ -138,6 +138,21 @@ function ProjectEmblem({ id }: { id: string }) {
           <path d="M32 36v8M28 40h8" strokeWidth="1.4" strokeLinecap="round" />
         </svg>
       );
+    case "isla-arena":
+      return (
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" className="emblem-svg" aria-hidden="true">
+          {/* Tropical Island Battle Arena */}
+          <ellipse cx="32" cy="48" rx="26" ry="6" strokeWidth="1.5" opacity="0.4" />
+          <path d="M18 48c0-6 4-16 14-16s14 10 14 16" strokeWidth="1.8" />
+          <path d="M30 32V14" strokeWidth="2" strokeLinecap="round" />
+          <path d="M30 14c4 2 12 6 14 10" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M30 18c3 1.5 9 5 11 8" strokeWidth="1.4" strokeLinecap="round" />
+          <path d="M30 22c2 1.5 6 4 8 6" strokeWidth="1.2" strokeLinecap="round" />
+          <circle cx="46" cy="16" r="6" strokeWidth="1.5" opacity="0.5" />
+          <path d="M22 42l4-5 3 3 4-6 5 4 4-3" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M14 38l2 2m34-2l-2 2" strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
+        </svg>
+      );
     case "milktaste":
     default:
       return (
