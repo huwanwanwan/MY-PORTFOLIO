@@ -501,6 +501,38 @@ export function ExperienceSection() {
               <p className="journey-role">NCHFI</p>
             </div>
           </article>
+
+          {/* Academic Awards & Recognition Highlight Card */}
+          <div className="education-awards-card scroll-reveal" data-scroll-reveal>
+            <span className="education-awards-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <circle cx="12" cy="8" r="7" />
+                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+              </svg>
+              Academic Honors &amp; Awards
+            </span>
+            <div className="education-awards-grid">
+              <div className="education-award-item">
+                <svg className="award-medal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor" fillOpacity="0.2" />
+                </svg>
+                <div className="award-details">
+                  <h5>Graduated With Honors</h5>
+                  <p>Assemblywoman Felicita&apos;s G. Bernardino Memorial Trade School (AFGBMTS)</p>
+                </div>
+              </div>
+              <div className="education-award-item">
+                <svg className="award-medal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M12 15a7 7 0 1 0 0-14 7 7 0 0 0 0 14z" />
+                  <path d="M8.21 13.89 7 23l5-3 5 3-1.21-9.12" fill="currentColor" fillOpacity="0.2" />
+                </svg>
+                <div className="award-details">
+                  <h5>Conduct Awardee</h5>
+                  <p>Recognized for exemplary deportment, discipline, and moral character</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="credentials-single">
