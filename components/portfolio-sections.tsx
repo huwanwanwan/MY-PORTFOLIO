@@ -4,6 +4,7 @@ import ProjectsShowcase from "./projects-showcase";
 import SkillsShowcase from "./skills-showcase";
 import CertificationsShowcase from "./certifications-showcase";
 import ExperienceList from "./experience-list";
+import ContactHub from "./contact-hub";
 
 const educationIcons = {
   school: "M22 10 12 4 2 10l10 6 10-6z M6 12v5c3 3 9 3 12 0v-5",
@@ -552,22 +553,5 @@ export function ExperienceSection() {
 }
 
 export function ContactSection() {
-  return (
-    <section
-      className="section-block content-section contact-section"
-      id="contact"
-      data-scroll-reveal
-      aria-labelledby="contact-heading"
-    >
-      <p className="section-kicker">LET&apos;S CONNECT</p>
-      <h1 id="contact-heading">Contact</h1>
-      <p>
-        I&apos;m always interested in sharing ideas, collaborating, and taking
-        on new challenges.
-      </p>
-      <a className="intro-link" href="mailto:your-email@example.com">
-        Get in touch <span aria-hidden="true">↗</span>
-      </a>
-    </section>
-  );
+  return <ContactHub />;
 }
