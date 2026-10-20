@@ -2,6 +2,7 @@ import Link from "next/link";
 import AboutPortrait from "./about-portrait";
 import ProjectsShowcase from "./projects-showcase";
 import SkillsShowcase from "./skills-showcase";
+import CertificationsShowcase from "./certifications-showcase";
 
 const educationIcons = {
   school: "M22 10 12 4 2 10l10 6 10-6z M6 12v5c3 3 9 3 12 0v-5",
@@ -516,21 +517,18 @@ export function ExperienceSection() {
           </article>
         </div>
       </div>
-      <div className="credentials-grid">
+      <div className="credentials-single">
         <article className="credential-panel scroll-reveal" id="credentials" data-scroll-reveal>
-          <p className="section-kicker">CREDENTIALS</p>
-          <h2>Academic recognition</h2>
+          <p className="section-kicker">ACADEMIC HONORS</p>
+          <h2>Academic Recognition</h2>
           <p>
             Graduated with Honors and received a Conduct Award from
             Assemblywoman Felicita&apos;s G. Bernardino Memorial Trade School.
           </p>
         </article>
-        <article className="credential-panel scroll-reveal" id="certifications" data-scroll-reveal>
-          <p className="section-kicker">CERTIFICATIONS</p>
-          <h2>Certifications</h2>
-          <p>No certification details have been added yet.</p>
-        </article>
       </div>
+
+      <CertificationsShowcase />
     </section>
   );
 }
