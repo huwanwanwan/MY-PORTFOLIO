@@ -372,6 +372,107 @@ function SkillIcon({ name }: { name: string }) {
       </svg>
     );
 
+  // TypeScript
+  if (n === "typescript" || n === "ts")
+    return (
+      <svg viewBox="0 0 24 24" className="skill-card-icon" aria-hidden="true">
+        <rect width="24" height="24" rx="4" fill="#3178C6" />
+        <path fill="#FFFFFF" d="M3 10.5h6v1.5H6.8v7.5H5.2V12H3v-1.5zm8.5 7.7c.8.5 1.8.8 2.8.8 1.6 0 2.6-.8 2.6-2.1 0-1.2-.7-1.8-2-2.3l-.7-.3c-.7-.3-1.2-.6-1.2-1.2 0-.5.5-1 1.3-1 .7 0 1.3.3 1.8.5l.4-1.2c-.5-.3-1.3-.5-2.2-.5-1.5 0-2.5.8-2.5 2 0 1.1.7 1.7 1.8 2.2l.7.3c.8.3 1.3.7 1.3 1.4 0 .7-.6 1.2-1.5 1.2-.8 0-1.6-.3-2.2-.7l-.5 1.2z" />
+      </svg>
+    );
+
+  // Next.js
+  if (n.includes("next"))
+    return (
+      <svg viewBox="0 0 24 24" className="skill-card-icon" aria-hidden="true">
+        <circle cx="12" cy="12" r="10.5" fill="#000000" />
+        <path fill="#FFFFFF" d="M15.5 8.5v7h-1.6V9.7l-5.4 7.3H7V8.5h1.6v5.8l5.4-7.3h1.5z" />
+      </svg>
+    );
+
+  // Bootstrap
+  if (n === "bootstrap")
+    return (
+      <svg viewBox="0 0 24 24" className="skill-card-icon" aria-hidden="true">
+        <rect width="24" height="24" rx="5" fill="#7952B3" />
+        <path fill="#FFFFFF" d="M7 6h5c2.2 0 3.6 1.1 3.6 2.7 0 1.1-.6 1.9-1.6 2.3 1.3.4 2 1.4 2 2.7 0 1.8-1.5 3.3-3.9 3.3H7V6zm2.4 4.1h2.4c.8 0 1.4-.4 1.4-1.2s-.6-1.2-1.4-1.2H9.4v2.4zm0 5.1h2.7c1 0 1.6-.5 1.6-1.4 0-.9-.6-1.4-1.6-1.4H9.4v2.8z" />
+      </svg>
+    );
+
+  // C / C Language
+  if (n === "c" || n.includes("c language") || n === "c-language")
+    return (
+      <svg viewBox="0 0 24 24" className="skill-card-icon" aria-hidden="true">
+        <circle cx="12" cy="12" r="10.5" fill="#00599C" />
+        <path fill="#FFFFFF" d="M15.8 8.6c-.8-.7-1.9-1.1-3.2-1.1-2.6 0-4.6 1.9-4.6 4.5s2 4.5 4.6 4.5c1.3 0 2.4-.4 3.2-1.1l-1-1.3c-.6.5-1.3.8-2.2.8-1.7 0-3-1.2-3-2.9s1.3-2.9 3-2.9c.9 0 1.6.3 2.2.8l1-1.2z" />
+      </svg>
+    );
+
+  // Laravel
+  if (n === "laravel")
+    return (
+      <svg viewBox="0 0 24 24" className="skill-card-icon" aria-hidden="true">
+        <path fill="#FF2D20" d="M12 2.5l8.5 4.9v9.2L12 21.5 3.5 16.6V7.4L12 2.5zm0 2.3L5.5 8.5v7l6.5 3.7 6.5-3.7v-7L12 4.8zm0 2.8l4.4 2.5v5L12 16.8l-4.4-2.5v-5L12 7.6z" />
+      </svg>
+    );
+
+  // Grok
+  if (n === "grok")
+    return (
+      <svg viewBox="0 0 24 24" className="skill-card-icon" aria-hidden="true">
+        <rect width="24" height="24" rx="5" fill="#18181B" />
+        <path fill="#FFFFFF" d="M6 17.5l5.5-5.5L6 6.5h2.5l4.3 4.3 4.3-4.3H18L12.5 12l5.5 5.5h-2.5l-4.3-4.3-4.3 4.3H6z" />
+      </svg>
+    );
+
+  // Figma
+  if (n === "figma")
+    return (
+      <svg viewBox="0 0 24 24" className="skill-card-icon" aria-hidden="true">
+        <path d="M8 12a3.5 3.5 0 1 1 0-7h4v7H8z" fill="#F24E1E" />
+        <path d="M12 5h4a3.5 3.5 0 0 1 0 7h-4V5z" fill="#FF7262" />
+        <path d="M12 12h4a3.5 3.5 0 0 1 0 7h-4v-7z" fill="#1ABCFE" />
+        <path d="M8 19a3.5 3.5 0 0 1 0-7h4v7a3.5 3.5 0 0 1-4 0z" fill="#0ACF83" />
+        <path d="M8 12h4v3.5a3.5 3.5 0 0 1-4 0V12z" fill="#A259FF" />
+      </svg>
+    );
+
+  // Vercel
+  if (n === "vercel")
+    return (
+      <svg viewBox="0 0 24 24" className="skill-card-icon" aria-hidden="true">
+        <rect width="24" height="24" rx="5" fill="#000000" />
+        <polygon points="12,5 20,19 4,19" fill="#FFFFFF" />
+      </svg>
+    );
+
+  // Vite
+  if (n === "vite")
+    return (
+      <svg viewBox="0 0 24 24" className="skill-card-icon" aria-hidden="true">
+        <defs>
+          <linearGradient id="viteGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#41D1FF" />
+            <stop offset="100%" stopColor="#BD34FE" />
+          </linearGradient>
+          <linearGradient id="viteBolt" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FFEA83" />
+            <stop offset="100%" stopColor="#FFDD35" />
+          </linearGradient>
+        </defs>
+        <path fill="url(#viteGrad)" d="M21.5 4.5L12.5 21l-9-16.5 8.5 2.5 8.5-2.5z" />
+        <path fill="url(#viteBolt)" d="M13.2 4.2L7.5 12h3.5l-1.5 6.5 6-7.8h-3.6l1.3-6.5z" />
+      </svg>
+    );
+
+  // Cloudflare
+  if (n.includes("cloudflare"))
+    return (
+      <svg viewBox="0 0 24 24" className="skill-card-icon" aria-hidden="true">
+        <path fill="#F38020" d="M19.4 12.8c-.3-2.6-2.5-4.6-5.2-4.6-1.8 0-3.3.9-4.2 2.3-.6-.3-1.3-.4-2-.4-2.5 0-4.5 2-4.5 4.5 0 .3 0 .6.1.9C1.6 15.8 0 17.5 0 19.5 0 22 2 24 4.5 24h14.8c2.6 0 4.7-2.1 4.7-4.7 0-2.2-1.5-4-3.6-4.6-.3-.7-.6-1.3-1-1.9z" transform="scale(0.85) translate(2, 0)" />
+      </svg>
+    );
+
   // Fallback
   return (
     <svg viewBox="0 0 24 24" className="skill-card-icon" aria-hidden="true">
@@ -407,6 +508,8 @@ function getProjectsUsingSkill(skillName: string): ProjectItem[] {
       if (normSkill === "kotlin" && t.includes("kotlin")) return true;
       if (normSkill === "tailwind css" && t.includes("tailwind")) return true;
       if (normSkill === "postgresql" && (t.includes("pgsql") || t.includes("postgres"))) return true;
+      if (normSkill === "figma" && (t.includes("figma") || project.id === "inventopos" || project.id === "sigla")) return true;
+      if (normSkill === "c language" && (t.includes(" c") || t === "c")) return true;
       return false;
     })
   );

@@ -9,7 +9,10 @@ export const skills: Skill[] = [
   { name: "CSS", category: "Frontend" },
   { name: "Tailwind CSS", category: "Frontend" },
   { name: "JavaScript", category: "Frontend" },
+  { name: "TypeScript", category: "Frontend" },
   { name: "React", category: "Frontend" },
+  { name: "Next.js", category: "Frontend" },
+  { name: "Bootstrap", category: "Frontend" },
   { name: "Dart", category: "Frontend" },
   { name: "Flutter", category: "Frontend" },
   { name: "Kotlin", category: "Frontend" },
@@ -17,9 +20,11 @@ export const skills: Skill[] = [
 
   // Backend
   { name: "Java", category: "Backend" },
+  { name: "C Language", category: "Backend" },
   { name: "Node.js", category: "Backend" },
   { name: "Express", category: "Backend" },
   { name: "PHP", category: "Backend" },
+  { name: "Laravel", category: "Backend" },
   { name: "Python", category: "Backend" },
   { name: "Flask", category: "Backend" },
   { name: "C#", category: "Backend" },
@@ -47,13 +52,18 @@ export const skills: Skill[] = [
   { name: "ChatGPT", category: "AI" },
   { name: "Gemini", category: "AI" },
   { name: "Claude Code", category: "AI" },
+  { name: "Grok", category: "AI" },
   { name: "Canva", category: "AI" },
 
   // Tools
+  { name: "Figma", category: "Tools" },
   { name: "Git", category: "Tools" },
   { name: "GitHub", category: "Tools" },
   { name: "VS Code", category: "Tools" },
   { name: "Visual Studio 2022", category: "Tools" },
+  { name: "Vite", category: "Tools" },
+  { name: "Vercel", category: "Tools" },
+  { name: "Cloudflare", category: "Tools" },
   { name: "XAMPP", category: "Tools" },
 ];
 
