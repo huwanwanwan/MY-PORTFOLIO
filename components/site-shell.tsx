@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useRef, useSyncExternalStore, type ReactNode } from "react";
 
 const themeChangeEvent = "portfolio-theme-change";
 
@@ -36,11 +36,24 @@ type SiteShellProps = {
 
 export default function SiteShell({ activePage, children }: SiteShellProps) {
   const pathname = usePathname();
+  const navRef = useRef<HTMLElement | null>(null);
   const darkMode = useSyncExternalStore(
     subscribeToTheme,
     getThemeSnapshot,
     () => false,
   );
+
+  useEffect(() => {
+    if (!navRef.current) return;
+    if (activePage === "home") {
+      navRef.current.scrollTo({ left: 0, behavior: "smooth" });
+    } else {
+      const activeEl = navRef.current.querySelector<HTMLElement>('[aria-current="page"]');
+      if (activeEl) {
+        activeEl.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+      }
+    }
+  }, [activePage, pathname]);
 
   useEffect(() => {
     const revealItems = document.querySelectorAll<HTMLElement>(
@@ -96,7 +109,7 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
             </Link>
             <p className="active-mode">Web &amp; Mobile Developer</p>
           </div>
-          <nav className="primary-nav" aria-label="Main navigation">
+          <nav className="primary-nav" aria-label="Main navigation" ref={navRef}>
             {navigationItems.map(({ label, href, key }) => (
               <Link
                 aria-current={activePage === key ? "page" : undefined}
