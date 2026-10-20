@@ -56,9 +56,9 @@ Phone: ${formState.phone || "Not provided"}`;
       aria-labelledby="contact-heading"
     >
       {/* Centered Editorial Header */}
-      <div className="content-section-heading editorial-heading text-center">
+      <div className="contact-hero-header">
         <p className="section-kicker">LET&apos;S CONNECT &amp; BUILD</p>
-        <h1 id="contact-heading">Get in Touch</h1>
+        <h1 id="contact-heading" className="contact-hero-title">Get in Touch</h1>
         <p className="contact-subtitle">
           Have an exciting project, collaboration inquiry, or question? Feel free to reach out directly through any channel or send a message below.
         </p>
