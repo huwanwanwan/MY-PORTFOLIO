@@ -22,7 +22,7 @@ export const projectsData: ProjectItem[] = [
     role: "Lead Developer",
     period: "1st Year College",
     chronologicalIndex: 1,
-    featuredIndex: 12,
+    featuredIndex: 13,
     paragraphs: [
       "This was my first project during my first year of college using Java programming. It was a group project that required two members, and I was the one who developed the system.",
       "Since it was my first time building a system that connects with users, I found Java quite challenging and confusing at first. However, it became a valuable learning experience for me as a beginner developer.",
@@ -41,7 +41,7 @@ export const projectsData: ProjectItem[] = [
     role: "Character Animator",
     period: "CGA (Computer Graphics & Animation)",
     chronologicalIndex: 2,
-    featuredIndex: 11,
+    featuredIndex: 12,
     paragraphs: [
       "This was our project for CGA (Computer Graphics and Animation). I was assigned to animate the characters using FlipaClip, where I drew each movement frame by frame to bring them to life.",
       "Marilao Fantasy is a story about a hero who is based in Marilao and must protect the city from three enemies. The hero has two special abilities: Thunder Wave, which allows him to attack using thunder, and Dash, which helps him move quickly.",
@@ -62,7 +62,7 @@ export const projectsData: ProjectItem[] = [
     role: "Co-Developer",
     period: "College AR Project",
     chronologicalIndex: 3,
-    featuredIndex: 6,
+    featuredIndex: 7,
     isFeatured: true,
     paragraphs: [
       "I was a co-developer of this system, and we used Unity to create an augmented reality (AR) game inspired by Pokémon GO. When the player points their phone at the ground, a character appears on the screen, allowing the player to control the character and fight against enemies in the real world through augmented reality.",
@@ -82,7 +82,7 @@ export const projectsData: ProjectItem[] = [
     role: "Game Developer & Animator",
     period: "Game Development Project",
     chronologicalIndex: 4,
-    featuredIndex: 7,
+    featuredIndex: 8,
     paragraphs: [
       "I developed this game called Force X using Unity, including the character designs and animations. The game features one main character, Ranger X, inspired by the look of the Power Rangers but with unique solid green crystal powers. Players can right-click to summon and activate these powers.",
       "The game also features randomly summoned enemies with a zombie-like, witch-like appearance. When Ranger X gets close to an enemy, it will approach the player and attack. This project allowed me to explore game development, character animation, enemy AI behavior, and interactive combat mechanics using Unity.",
@@ -101,7 +101,7 @@ export const projectsData: ProjectItem[] = [
     role: "Game Developer",
     period: "Game Development Project",
     chronologicalIndex: 5,
-    featuredIndex: 8,
+    featuredIndex: 9,
     paragraphs: [
       "I was the developer of this game called Almighty Jungle. The story follows a muscular, fit Asian man who travels to the Amazon to find a powerful crystal solution. His mission is to bring it back to the Philippines to help solve the country's problems and save its people.",
       "Along his journey, he faces numerous enemies that he must defeat to obtain the crystal solution. This project allowed me to explore game development while bringing an action-adventure story to life.",
@@ -120,7 +120,7 @@ export const projectsData: ProjectItem[] = [
     role: "Co-Developer",
     period: "Database Systems Project",
     chronologicalIndex: 6,
-    featuredIndex: 10,
+    featuredIndex: 11,
     paragraphs: [
       "I am the co-developer of this project entitled Fitness Management System, built using MS Access. The system allows users to create accounts or log in to reserve, monitor, and manage their health, workouts, and wellness records.",
     ],
@@ -138,7 +138,7 @@ export const projectsData: ProjectItem[] = [
     role: "Hardware & Firmware Developer",
     period: "1st Year College · Arduino Exhibit",
     chronologicalIndex: 7,
-    featuredIndex: 9,
+    featuredIndex: 10,
     paragraphs: [
       "I was the developer of a project called La Niña Detector, which I created during my first year of college using Arduino and the Arduino IDE to program and connect the components.",
       "The system uses a rain sensor to detect raindrops falling on the roof. When rain is detected, the sensor triggers an audible alarm to notify the homeowner, reminding them to collect clothes hanging outside before they get wet.",
@@ -159,7 +159,7 @@ export const projectsData: ProjectItem[] = [
     role: "Front-End Developer",
     period: "EDOOP Case Study · PDM",
     chronologicalIndex: 8,
-    featuredIndex: 5,
+    featuredIndex: 6,
     isFeatured: true,
     paragraphs: [
       "I was the front-end developer of a system entitled DocuLink, which we developed as our case study for Emerging Driven Object-Oriented Programming (EDOOP) at Pambayang Dalubhasaan ng Marilao (PDM).",
@@ -182,7 +182,7 @@ export const projectsData: ProjectItem[] = [
     role: "UI/UX Designer",
     period: "Web Development & Systems Analysis and Design",
     chronologicalIndex: 9,
-    featuredIndex: 3,
+    featuredIndex: 4,
     isFeatured: true,
     paragraphs: [
       "I was the UI/UX Designer of a system entitled InventoPOS, a collaborative case study for our Web Development and Systems Analysis and Design subjects.",
@@ -205,7 +205,7 @@ export const projectsData: ProjectItem[] = [
     role: "Co-Developer",
     period: "Collab Case Study (2025)",
     chronologicalIndex: 10,
-    featuredIndex: 4,
+    featuredIndex: 5,
     isFeatured: true,
     paragraphs: [
       "I was the co-developer of the system entitled HALAL 2025. We developed an e-voting system designed to modernize, streamline, and secure the electoral voting process for 2025.",
@@ -226,7 +226,7 @@ export const projectsData: ProjectItem[] = [
     role: "Lead Developer",
     period: "Proposed Thesis Project",
     chronologicalIndex: 11,
-    featuredIndex: 2,
+    featuredIndex: 3,
     isFeatured: true,
     paragraphs: [
       "I was the developer of RecogniZarenus, a proposed thesis project designed to automate the school's attendance monitoring process. I used PHP, CSS, JavaScript, and the Arduino IDE to develop the system.",
@@ -265,14 +265,35 @@ export const projectsData: ProjectItem[] = [
     tags: ["Kotlin", "React.js", "Node.js", "Tailwind", "JavaScript", "Python", "HTML", "CSS", "PLpgSQL"],
   },
   {
+    id: "class-project-game",
+    title: "Class Project (Game Dev)",
+    category: "Games & Animation",
+    type: "Collaborative Game Development · Whole Class Project",
+    role: "Game Developer & Systems Contributor",
+    period: "College Game Development",
+    chronologicalIndex: 13,
+    featuredIndex: 2,
+    isFeatured: true,
+    paragraphs: [
+      "This is our collaborative Game Development project created collectively by our whole class. Every member contributed to the conceptualization, asset production, gameplay mechanics, and world design.",
+      "Working as an entire class on a unified game development pipeline taught us essential industry workflows—cross-functional team coordination, version integration, asset optimization, and collective problem-solving to bring an ambitious interactive vision to life.",
+    ],
+    highlights: [
+      { label: "Collaboration Scope", value: "Whole Class Collaborative Project" },
+      { label: "Core Discipline", value: "Game Development, Level Design & Mechanics Integration" },
+      { label: "Key Experience", value: "Team Coordination, Version Control & Asset Optimization" },
+    ],
+    tags: ["Unity", "C#", "Game Development"],
+  },
+  {
     id: "isla-arena",
     title: "Isla Arena",
     category: "Games & Animation",
     type: "3D Battle Arena · Unity Class Project",
     role: "Game Developer & Combat Mechanics",
     period: "College Game Dev Class Project",
-    chronologicalIndex: 13,
-    featuredIndex: 13,
+    chronologicalIndex: 14,
+    featuredIndex: 14,
     isFeatured: true,
     paragraphs: [
       "I developed this project entitled Isla Arena using Unity for our Game Development class. The game is set in a mysterious tropical island battle arena where players must navigate dynamic combat zones, confront aggressive enemy waves, and survive challenging gameplay mechanics.",

@@ -784,7 +784,7 @@ export default function SkillsShowcase() {
               </button>
             </div>
             <Link href="/projects" className="skills-all-projects-btn">
-              View All 13 Projects →
+              View All 14 Projects →
             </Link>
           </div>
         </div>

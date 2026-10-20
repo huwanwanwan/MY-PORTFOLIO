@@ -2051,6 +2051,58 @@ h1 {
   margin-top: 12px;
 }
 
+/* Experience Expand / Collapse Action */
+.experience-list-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.experience-expand-action {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.experience-expand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: var(--accent);
+  background: var(--raised-surface);
+  border: 1px solid var(--card-border);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.experience-expand-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(198, 83, 54, 0.25);
+}
+
+.experience-arrow-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.experience-expand-btn.expanded .experience-arrow-icon {
+  transform: rotate(180deg);
+}
+
+.experience-expand-btn:hover .experience-arrow-icon {
+  stroke: #fff;
+}
+
 .education-section {
   margin-top: 48px;
 }

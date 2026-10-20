@@ -138,6 +138,24 @@ function ProjectEmblem({ id }: { id: string }) {
           <path d="M32 36v8M28 40h8" strokeWidth="1.4" strokeLinecap="round" />
         </svg>
       );
+    case "class-project-game":
+      return (
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" className="emblem-svg" aria-hidden="true">
+          {/* Game Controller & Collaborative Team Community Nodes */}
+          <rect x="10" y="20" width="44" height="28" rx="14" strokeWidth="1.8" />
+          {/* D-pad */}
+          <path d="M22 28v12M16 34h12" strokeWidth="2.2" strokeLinecap="round" />
+          {/* Action buttons */}
+          <circle cx="42" cy="30" r="2.2" fill="currentColor" />
+          <circle cx="48" cy="36" r="2.2" fill="currentColor" />
+          <circle cx="36" cy="36" r="2.2" fill="currentColor" />
+          <circle cx="42" cy="42" r="2.2" fill="currentColor" />
+          {/* Team spark overhead */}
+          <path d="M28 12l4-4 4 4" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="32" cy="14" r="2" fill="currentColor" />
+          <path d="M22 14c2-4 6-6 10-6s8 2 10 6" strokeWidth="1.2" strokeDasharray="2 2" opacity="0.6" />
+        </svg>
+      );
     case "isla-arena":
       return (
         <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" className="emblem-svg" aria-hidden="true">
