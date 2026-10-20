@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import {
   certificationsData,
@@ -10,6 +10,7 @@ import {
 export default function CertificationsShowcase() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [lightboxCert, setLightboxCert] = useState<CertificationItem | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   const categories = ["All", "Certifications", "Seminars", "Competitions"] as const;
 
@@ -17,6 +18,16 @@ export default function CertificationsShowcase() {
     activeCategory === "All"
       ? certificationsData
       : certificationsData.filter((c) => c.category === activeCategory);
+
+  function scrollCertificates(direction: "left" | "right") {
+    if (!scrollContainerRef.current) return;
+    const cardWidth = 380;
+    const scrollAmount = direction === "left" ? -cardWidth : cardWidth;
+    scrollContainerRef.current.scrollBy({
+      left: scrollAmount,
+      behavior: "smooth",
+    });
+  }
 
   const handleCloseLightbox = useCallback(() => {
     setLightboxCert(null);
@@ -48,130 +59,174 @@ export default function CertificationsShowcase() {
   }, [lightboxCert, handleCloseLightbox, handleNextLightbox, handlePrevLightbox]);
 
   return (
-    <div className="certifications-showcase" id="certifications" data-scroll-reveal>
-      {/* ── Section Title & Filter Tabs ── */}
-      <div className="certifications-header-row">
-        <div>
-          <p className="section-kicker">VERIFIED CREDENTIALS &amp; PARTICIPATION</p>
-          <h2 className="certifications-title">Certifications &amp; Achievements</h2>
-          <p className="certifications-subtitle">
-            Official training certificates, technical seminars, and competition entries. Sized in landscape layout for full legibility.
+    <section className="cert-gallery-section" id="certifications" data-scroll-reveal>
+      {/* ── Top Header Row with Arrows ── */}
+      <div className="cert-gallery-header" data-scroll-reveal>
+        <div className="cert-gallery-intro">
+          <p className="section-kicker">04 — CERTIFICATION GALLERY</p>
+          <h2 className="cert-gallery-title">Verified Credentials &amp; Achievements</h2>
+          <p className="cert-gallery-subtitle">
+            Use the arrows to browse official certificates, technical seminars, and competition entries.
           </p>
         </div>
 
-        <div className="cert-filter-bar">
-          {categories.map((cat) => (
+        <div className="cert-gallery-actions">
+          {/* Category Filter Tabs */}
+          <div className="cert-filter-pills" role="tablist" aria-label="Certification categories">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                className={`cert-pill-btn${activeCategory === cat ? " active" : ""}`}
+                onClick={() => setActiveCategory(cat)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* Top-Right Arrow Buttons */}
+          <div className="cert-carousel-nav" aria-label="Certificate carousel navigation">
             <button
-              key={cat}
               type="button"
-              className={`cert-filter-btn${activeCategory === cat ? " active" : ""}`}
-              onClick={() => setActiveCategory(cat)}
+              className="cert-nav-arrow"
+              onClick={() => scrollCertificates("left")}
+              aria-label="Previous certificate"
             >
-              {cat}
+              ←
             </button>
-          ))}
+            <button
+              type="button"
+              className="cert-nav-arrow"
+              onClick={() => scrollCertificates("right")}
+              aria-label="Next certificate"
+            >
+              →
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* ── Landscape Cards Grid ── */}
-      <div className="cert-landscape-grid">
-        {filtered.map((cert, idx) => (
-          <article
-            key={cert.id}
-            className="cert-landscape-card scroll-reveal"
-            data-scroll-reveal
-            data-reveal-delay={(idx % 4) * 80}
-          >
-            {/* Landscape Picture Frame */}
-            <div
-              className="cert-image-frame"
-              onClick={() => setLightboxCert(cert)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  setLightboxCert(cert);
-                }
-              }}
-              aria-label={`View full certificate: ${cert.title}`}
-            >
-              <Image
-                src={cert.image}
-                alt={cert.alt}
-                fill
-                sizes="(min-width: 1024px) 560px, (min-width: 640px) 50vw, 100vw"
-                className="cert-picture"
-                unoptimized
-              />
-              <div className="cert-image-overlay">
-                <span className="cert-zoom-pill">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="cert-zoom-icon"
-                    aria-hidden="true"
-                  >
-                    <circle cx="11" cy="11" r="8" />
-                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                    <line x1="11" y1="8" x2="11" y2="14" />
-                    <line x1="8" y1="11" x2="14" y2="11" />
-                  </svg>
-                  <span>Click to Expand</span>
-                </span>
-              </div>
-            </div>
+      {/* ── Sliding Carousel Wrapper with Floating Arrows ── */}
+      <div className="cert-carousel-wrapper" data-scroll-reveal>
+        <button
+          type="button"
+          className="cert-side-arrow cert-side-arrow-left"
+          onClick={() => scrollCertificates("left")}
+          aria-label="Previous certificate"
+        >
+          ‹
+        </button>
 
-            {/* Card Content */}
-            <div className="cert-card-body">
-              <div className="cert-meta-row">
-                <span className={`cert-badge cert-badge-${cert.category.toLowerCase()}`}>
-                  {cert.category}
-                </span>
-                <time className="cert-date">{cert.date}</time>
-              </div>
-
-              <h3 className="cert-card-title">{cert.title}</h3>
-              <p className="cert-card-issuer">Issued by <strong>{cert.issuer}</strong></p>
-              <p className="cert-card-desc">{cert.description}</p>
-
-              <div className="cert-tags-row">
-                {cert.tags.map((tag) => (
-                  <span key={tag} className="cert-tag">
-                    {tag}
+        <div
+          ref={scrollContainerRef}
+          className="cert-carousel-scroll"
+          tabIndex={0}
+          aria-label="Certificates sliding gallery"
+        >
+          {filtered.map((cert, index) => {
+            const indexStr = String(index + 1).padStart(2, "0");
+            return (
+              <article
+                key={cert.id}
+                className="cert-slide-card scroll-reveal"
+                data-scroll-reveal
+                data-reveal-delay={(index % 4) * 80}
+              >
+                {/* Header: Category Badge + Index Number */}
+                <div className="cert-card-topbar">
+                  <span className={`cert-card-badge cert-badge-${cert.category.toLowerCase()}`}>
+                    {cert.category}
                   </span>
-                ))}
-              </div>
+                  <span className="cert-card-index">{indexStr}</span>
+                </div>
 
-              <div className="cert-action-row">
-                <button
-                  type="button"
-                  className="cert-preview-btn"
+                {/* Landscape Certificate Picture: Fitted to Card */}
+                <div
+                  className="cert-card-image-box"
                   onClick={() => setLightboxCert(cert)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setLightboxCert(cert);
+                    }
+                  }}
+                  aria-label={`View full certificate: ${cert.title}`}
                 >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="cert-btn-icon"
-                    aria-hidden="true"
+                  <Image
+                    src={cert.image}
+                    alt={cert.alt}
+                    fill
+                    sizes="(min-width: 1024px) 380px, 90vw"
+                    className="cert-card-img"
+                    unoptimized
+                  />
+                  <div className="cert-card-overlay">
+                    <span className="cert-zoom-tag">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="cert-zoom-svg"
+                        aria-hidden="true"
+                      >
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        <line x1="11" y1="8" x2="11" y2="14" />
+                        <line x1="8" y1="11" x2="14" y2="11" />
+                      </svg>
+                      <span>Expand</span>
+                    </span>
+                  </div>
+                </div>
+
+                {/* Card Title & Issuer */}
+                <h3 className="cert-slide-title">{cert.title}</h3>
+                <p className="cert-slide-issuer">
+                  {cert.issuer} · <time>{cert.date}</time>
+                </p>
+
+                {/* Description */}
+                <p className="cert-slide-desc">{cert.description}</p>
+
+                {/* Tag Pills */}
+                <div className="cert-slide-tags">
+                  {cert.tags.map((tag) => (
+                    <span key={tag} className="cert-tech-pill">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Footer Link to View Full */}
+                <div className="cert-card-footer">
+                  <button
+                    type="button"
+                    className="cert-card-link-btn"
+                    onClick={() => setLightboxCert(cert)}
                   >
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                  <span>Preview Full Certificate</span>
-                </button>
-              </div>
-            </div>
-          </article>
-        ))}
+                    <span>View full certificate</span>
+                    <span aria-hidden="true" className="cert-link-arrow">→</span>
+                  </button>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        <button
+          type="button"
+          className="cert-side-arrow cert-side-arrow-right"
+          onClick={() => scrollCertificates("right")}
+          aria-label="Next certificate"
+        >
+          ›
+        </button>
       </div>
 
       {/* ── High-Resolution Lightbox Modal ── */}
@@ -221,8 +276,8 @@ export default function CertificationsShowcase() {
               <Image
                 src={lightboxCert.image}
                 alt={lightboxCert.alt}
-                width={1200}
-                height={800}
+                width={1400}
+                height={950}
                 className="cert-lightbox-image"
                 unoptimized
                 priority
@@ -231,7 +286,7 @@ export default function CertificationsShowcase() {
 
             <div className="cert-lightbox-caption">
               <div className="cert-lightbox-header">
-                <span className={`cert-badge cert-badge-${lightboxCert.category.toLowerCase()}`}>
+                <span className={`cert-card-badge cert-badge-${lightboxCert.category.toLowerCase()}`}>
                   {lightboxCert.category}
                 </span>
                 <span className="cert-date">{lightboxCert.date}</span>
@@ -245,7 +300,6 @@ export default function CertificationsShowcase() {
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 }
-
