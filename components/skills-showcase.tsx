@@ -520,10 +520,11 @@ export default function SkillsShowcase() {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const filtered =
+  const filtered = (
     activeCategory === "All"
       ? skills
-      : skills.filter((s) => s.category === activeCategory);
+      : skills.filter((s) => s.category === activeCategory)
+  ).slice().sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: "base" }));
 
   const matchingProjects = selectedSkill ? getProjectsUsingSkill(selectedSkill) : [];
 
