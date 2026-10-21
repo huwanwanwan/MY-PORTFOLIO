@@ -172,7 +172,7 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "doculink",
-    images: ["/DOCULINK/3.png","/DOCULINK/1.png","/DOCULINK/2.png","/DOCULINK/4.png","/DOCULINK/5.png"],
+    images: ["/DOCULINK/1.png","/DOCULINK/2.png","/DOCULINK/4.png","/DOCULINK/5.png"],
 
     title: "DocuLink",
     category: "Web & Systems",
@@ -197,7 +197,7 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "inventopos",
-    images: ["/INVENTOPOS/2.png","/INVENTOPOS/a.png","/INVENTOPOS/b.png","/INVENTOPOS/c.png","/INVENTOPOS/d.png","/INVENTOPOS/e.png"],
+    images: ["/INVENTOPOS/inventopos-login.png","/INVENTOPOS/a.png","/INVENTOPOS/b.png","/INVENTOPOS/c.png","/INVENTOPOS/d.png","/INVENTOPOS/e.png"],
 
     title: "InventoPOS",
     category: "Web & Systems",
