@@ -2,6 +2,7 @@
 
 import { useState, useRef, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { projectsData, type ProjectItem } from "../data/projects-data";
 import { TechIcon } from "./tech-icon";
 
@@ -29,7 +30,6 @@ export default function ProjectsSlider() {
     if (activeCategory !== "All") {
       list = list.filter((p) => p.category === activeCategory);
     }
-    // Sort featured first
     list.sort((a, b) => a.featuredIndex - b.featuredIndex);
     return list;
   }, [activeCategory]);
@@ -112,6 +112,7 @@ export default function ProjectsSlider() {
         >
           {filtered.map((project: ProjectItem, index) => {
             const indexStr = String(index + 1).padStart(2, "0");
+            const firstImage = project.images && project.images.length > 0 ? project.images[0] : null;
 
             return (
               <article
@@ -128,7 +129,7 @@ export default function ProjectsSlider() {
                   <span className="cert-card-index">{indexStr} / {String(filtered.length).padStart(2, "0")}</span>
                 </div>
 
-                {/* Landscape Video Demo ONLY (16:9 ratio, no screenshots) */}
+                {/* Media Showcase: Video Demo, or First Project Picture Preview */}
                 <div className="project-slide-media-box">
                   {project.video ? (
                     <div className="project-slide-video-wrap">
@@ -148,6 +149,20 @@ export default function ProjectsSlider() {
                       <div className="video-live-badge">
                         <span className="live-dot" />
                         <span>DEMO VIDEO</span>
+                      </div>
+                    </div>
+                  ) : firstImage ? (
+                    <div className="project-slide-img-wrap">
+                      <Image
+                        src={firstImage}
+                        alt={`${project.title} preview`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 560px"
+                        className="project-slide-img"
+                        unoptimized
+                      />
+                      <div className="video-live-badge project-preview-badge">
+                        <span>PROJECT PREVIEW</span>
                       </div>
                     </div>
                   ) : (

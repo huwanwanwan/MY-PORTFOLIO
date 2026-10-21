@@ -110,35 +110,22 @@ export function AboutSection({
               </Link>
             </div>
           </div>
-          <aside className="about-profile-card" aria-label="About Juan">
-            {projectPlaceholder ? (
+          {projectPlaceholder ? (
+            <div className="about-sigla-standalone-wrapper">
               <SiglaShowcase />
-            ) : (
-              <AboutPortrait />
-            )}
-            <div className="about-profile-meta">
-              <span className="section-kicker">
-                <AboutIcon name="pin" /> BASED IN
-              </span>
-              <strong>Bulacan, Philippines</strong>
-              <p>Front-end developer · App and website creator</p>
             </div>
-            {projectPlaceholder && (
-              <div className="about-focus-card">
-                <p className="section-kicker">THESIS / CAPSTONE</p>
-                <h2>SIGLA</h2>
-                <p>
-                  A mobile sign language translator for people with speech
-                  and/or hearing disabilities.
-                </p>
-                <div className="tag-row">
-                  <span>Mobile app</span>
-                  <span>Front-end</span>
-                  <span>Accessibility</span>
-                </div>
+          ) : (
+            <aside className="about-profile-card" aria-label="About Juan">
+              <AboutPortrait />
+              <div className="about-profile-meta">
+                <span className="section-kicker">
+                  <AboutIcon name="pin" /> BASED IN
+                </span>
+                <strong>Bulacan, Philippines</strong>
+                <p>Front-end developer · App and website creator</p>
               </div>
-            )}
-          </aside>
+            </aside>
+          )}
         </div>
       </section>
 

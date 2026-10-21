@@ -14,7 +14,7 @@ export default function AboutPortrait() {
     >
       {!failed ? (
         <Image
-          src="/professional_profile_cutout.png"
+          src="/profile/professional_profile_cutout.png"
           alt="Portrait of Juan Domanico Militante"
           fill
           sizes="(min-width: 1024px) 420px, 90vw"

@@ -18,7 +18,7 @@ export const certificationsData: CertificationItem[] = [
     issuer: "Amazon Web Services (AWS) Training & Certification",
     date: "November 04, 2025",
     category: "Certifications",
-    image: "/AWS.png",
+    image: "/certificates/AWS.png",
     alt: "AWS Cloud Practitioner Essentials Completion Certificate for Juan Enrico D. Militante",
     recipient: "Juan Enrico D. Militante",
     description:
@@ -31,7 +31,7 @@ export const certificationsData: CertificationItem[] = [
     issuer: "Pambayang Dalubhasaan ng Marilao · College of Computer Studies",
     date: "May 20, 2024",
     category: "Competitions",
-    image: "/ARDUINO.jpg",
+    image: "/certificates/ARDUINO.jpg",
     alt: "Certificate of Participation in Arduino Competition for project La Niña",
     recipient: "Juan Enrico D. Militante",
     description:
@@ -44,7 +44,7 @@ export const certificationsData: CertificationItem[] = [
     issuer: "Pambayang Dalubhasaan ng Marilao · Computer Science Department",
     date: "March 02, 2026",
     category: "Seminars",
-    image: "/CERT-GIT.jpg",
+    image: "/certificates/CERT-GIT.jpg",
     alt: "Certificate of Participation for Git Happens seminar presented to Juan Enrico D. Militante",
     recipient: "Juan Enrico D. Militante",
     description:
@@ -57,7 +57,7 @@ export const certificationsData: CertificationItem[] = [
     issuer: "Pambayang Dalubhasaan ng Marilao · Information Technology Department",
     date: "January 21, 2026",
     category: "Seminars",
-    image: "/CERT-ATT.png",
+    image: "/certificates/CERT-ATT.png",
     alt: "Certificate of Attendance for IT Capstone Project Public Forum",
     recipient: "Juan Enrico Militante",
     description:
@@ -70,7 +70,7 @@ export const certificationsData: CertificationItem[] = [
     issuer: "College of Computer Studies · Computer Science Society",
     date: "March 02, 2026",
     category: "Seminars",
-    image: "/RES-SPEAK.png",
+    image: "/certificates/RES-SPEAK.png",
     alt: "Event poster for Git Happens: The Essential for New Dev featuring Ms. MJ Manaog",
     recipient: "Computer Science Society",
     description:
@@ -83,7 +83,7 @@ export const certificationsData: CertificationItem[] = [
     issuer: "College of Computer Studies · Computer Science Society",
     date: "March 06, 2026",
     category: "Seminars",
-    image: "/RES-SPEAK-AI.jpg",
+    image: "/certificates/RES-SPEAK-AI.jpg",
     alt: "Event poster for Technology and AI Integrated in Your Life Webinar with Ms. Julia Torres",
     recipient: "Computer Science Society",
     description:
@@ -96,7 +96,7 @@ export const certificationsData: CertificationItem[] = [
     issuer: "Google Cloud",
     date: "Nov 7, 2025",
     category: "Certifications",
-    image: "/aws-1.png",
+    image: "/certificates/aws-1.png",
     alt: "Applying AI Principles with Google Cloud Completion Badge - Google Cloud",
     recipient: "Juan Enrico D. Militante",
     description:
@@ -109,7 +109,7 @@ export const certificationsData: CertificationItem[] = [
     issuer: "Google Cloud",
     date: "Nov 1, 2025",
     category: "Certifications",
-    image: "/aws-2.png",
+    image: "/certificates/aws-2.png",
     alt: "Prompt Design in Vertex AI Skill Badge - Google Cloud",
     recipient: "Juan Enrico D. Militante",
     description:
@@ -122,7 +122,7 @@ export const certificationsData: CertificationItem[] = [
     issuer: "Google Cloud",
     date: "Oct 30, 2025",
     category: "Certifications",
-    image: "/aws-3.png",
+    image: "/certificates/aws-3.png",
     alt: "Introduction to Responsible AI Completion Badge - Google Cloud",
     recipient: "Juan Enrico D. Militante",
     description:
@@ -135,7 +135,7 @@ export const certificationsData: CertificationItem[] = [
     issuer: "Google Cloud",
     date: "Oct 30, 2025",
     category: "Certifications",
-    image: "/aws-4.png",
+    image: "/certificates/aws-4.png",
     alt: "Introduction to Large Language Models Completion Badge - Google Cloud",
     recipient: "Juan Enrico D. Militante",
     description:
@@ -148,7 +148,7 @@ export const certificationsData: CertificationItem[] = [
     issuer: "Google Cloud",
     date: "Oct 29, 2025",
     category: "Certifications",
-    image: "/aws-5.png",
+    image: "/certificates/aws-5.png",
     alt: "Introduction to Generative AI Completion Badge - Google Cloud",
     recipient: "Juan Enrico D. Militante",
     description:
