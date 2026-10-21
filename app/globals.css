@@ -5557,14 +5557,37 @@ h2 {
 }
 
 /* Lightbox Modal Responsive Size Fix:
-   Normal size, contained within viewport, perfectly sized for both portrait mobile and landscape screenshots.
+   Normal size, perfectly centered in screen viewport with soft cinematic dim backdrop.
 */
+.cert-lightbox-backdrop.smart-fullscreen-dim-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 999999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(0, 0, 0, 0.78) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  padding: clamp(16px, 3.5vw, 40px) !important;
+  box-sizing: border-box !important;
+}
+
 .cert-lightbox-container.project-lightbox-modal {
+  position: relative !important;
   max-width: 860px !important;
   width: auto !important;
-  display: inline-flex;
-  flex-direction: column;
-  margin: auto;
+  max-height: 88vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  margin: auto !important;
+  box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
 }
 
 .cert-lightbox-container.project-lightbox-modal.is-portrait {
@@ -5577,7 +5600,7 @@ h2 {
   align-items: center;
   justify-content: center;
   background: #09090b;
-  padding: clamp(12px, 2.5vw, 24px);
+  padding: clamp(14px, 2.5vw, 24px);
   max-height: 72vh;
   overflow: hidden;
 }
@@ -5590,4 +5613,5 @@ h2 {
   object-fit: contain !important;
   border-radius: 8px;
   display: block;
+  margin: 0 auto;
 }

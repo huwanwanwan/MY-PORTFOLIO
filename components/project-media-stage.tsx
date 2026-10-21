@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 
 interface ProjectMediaStageProps {
@@ -53,8 +54,13 @@ export default function ProjectMediaStage({
     src: string;
     caption: string;
   } | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   const thumbStripRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Close lightbox on Escape key and lock page scroll while open
   useEffect(() => {
@@ -279,10 +285,10 @@ export default function ProjectMediaStage({
         </div>
       )}
 
-      {/* 3. LIGHTBOX MODAL WITH SVG CLOSE BUTTON */}
-      {selectedLightbox && (
+      {/* 3. LIGHTBOX MODAL PORTAL (Renders directly into document.body so it is perfectly centered on the screen) */}
+      {selectedLightbox && mounted && createPortal(
         <div
-          className="cert-lightbox-backdrop"
+          className="cert-lightbox-backdrop smart-fullscreen-dim-backdrop"
           onClick={() => setSelectedLightbox(null)}
           role="dialog"
           aria-modal="true"
@@ -346,7 +352,8 @@ export default function ProjectMediaStage({
               </p>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
