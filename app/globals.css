@@ -2613,8 +2613,29 @@ h2 {
   justify-content: space-between;
   gap: 16px;
   margin-bottom: 24px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid var(--line);
+  padding-bottom: 22px;
+  position: relative;
+}
+
+/* Full-bleed edge-to-edge subtle divider for the controls bar */
+.projects-controls-bar::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 1px;
+  background: var(--line);
+  pointer-events: none;
+}
+
+[data-theme="light"] .projects-controls-bar::after {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .projects-controls-bar::after {
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .projects-category-tabs {

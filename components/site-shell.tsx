@@ -44,6 +44,20 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
   );
 
   useEffect(() => {
+    const pageTitles: Record<string, string> = {
+      home: "Home | Portfolio",
+      about: "About Me | Portfolio",
+      projects: "Projects | Portfolio",
+      skills: "Skills | Portfolio",
+      experience: "Experience | Portfolio",
+      contact: "Contact | Portfolio",
+    };
+    if (pageTitles[activePage]) {
+      document.title = pageTitles[activePage];
+    }
+  }, [activePage]);
+
+  useEffect(() => {
     if (!navRef.current) return;
     if (activePage === "home") {
       navRef.current.scrollTo({ left: 0, behavior: "smooth" });
