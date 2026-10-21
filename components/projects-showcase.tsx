@@ -295,37 +295,61 @@ export default function ProjectsShowcase({
           return (
             <article
               key={project.id}
-              className={`project-feature-row scroll-reveal ${isReversed ? "row-reversed" : ""}`}
+              className="project-stacked-card scroll-reveal"
               data-scroll-reveal
               id={`project-${project.id}`}
             >
-              {/* Column 1: The Project Card Container */}
-              <div className="project-card-container">
-                <div className="project-card-glass">
-                  <div className="card-top-header">
+              {/* TOP: Project Title, Meta Pill, and Overview Description */}
+              <header className="stacked-project-header">
+                <div className="stacked-meta-line">
+                  <div className="stacked-kicker-group">
                     <span className="card-index-pill">
                       {displayNumber} / {String(projectsData.length).padStart(2, "0")}
                     </span>
                     <span className="card-category-badge">{project.category}</span>
+                    <span className="desc-role-kicker">{project.role}</span>
                   </div>
+                  <span className="stacked-period-badge">{project.period}</span>
+                </div>
 
-                  <ProjectMediaStage
-                    title={project.title}
-                    category={project.category}
-                    video={project.video}
-                    images={project.images}
-                    fallbackEmblem={
-                      <>
-                        <div className="emblem-halo">
-                          <ProjectEmblem id={project.id} />
-                        </div>
-                        <h3 className="card-emblem-title">{project.title}</h3>
-                        <p className="card-emblem-subtitle">{project.type}</p>
-                      </>
-                    }
-                  />
+                <div className="stacked-title-row">
+                  <div>
+                    <h2 className="stacked-project-title">{project.title}</h2>
+                    <p className="stacked-project-type">{project.type}</p>
+                  </div>
+                </div>
 
-                  {/* Quick Facts Grid */}
+                {/* Concise Project Overview */}
+                <div className="stacked-overview-box">
+                  <p className="stacked-overview-text">
+                    {project.paragraphs[0]}
+                  </p>
+                </div>
+              </header>
+
+              {/* CENTER: Project Media Stage (Hero Video + Gallery of Screenshots) */}
+              <div className="stacked-media-container">
+                <ProjectMediaStage
+                  title={project.title}
+                  category={project.category}
+                  video={project.video}
+                  images={project.images}
+                  fallbackEmblem={
+                    <>
+                      <div className="emblem-halo">
+                        <ProjectEmblem id={project.id} />
+                      </div>
+                      <h3 className="card-emblem-title">{project.title}</h3>
+                      <p className="card-emblem-subtitle">{project.type}</p>
+                    </>
+                  }
+                />
+              </div>
+
+              {/* BOTTOM: Quick Facts Specs, Highlights, and Technologies */}
+              <footer className="stacked-project-footer">
+                <div className="stacked-footer-grid">
+                  {/* Quick Specs */}
                   <div className="card-spec-grid">
                     <div className="card-spec-item">
                       <span className="spec-label">MY ROLE</span>
@@ -342,49 +366,29 @@ export default function ProjectsShowcase({
                       </div>
                     )}
                   </div>
-                </div>
-              </div>
 
-              {/* Column 2: The Description Beside the Project */}
-              <div className="project-description-container">
-                <div className="description-header">
-                  <div className="desc-meta-lead">
-                    <span className="desc-index-mark">PROJECT {displayNumber}</span>
-                    <span className="desc-divider">·</span>
-                    <span className="desc-role-kicker">{project.role}</span>
-                  </div>
-                  <h2 className="desc-project-title">{project.title}</h2>
-                  <p className="desc-project-type">{project.type}</p>
-                </div>
-
-                {/* Concise Project Overview */}
-                <div className="description-narrative">
-                  <p className="desc-paragraph desc-overview-lead">
-                    {project.paragraphs[0]}
-                  </p>
+                  {/* Highlights Callout if available */}
+                  {project.highlights && project.highlights.length > 1 && (
+                    <div className="stacked-highlights-callout">
+                      <p className="callout-heading">Project Highlights &amp; Features</p>
+                      <ul className="callout-list">
+                        {project.highlights.slice(1).map((h, hIdx) => (
+                          <li key={hIdx}>
+                            <span className="callout-bullet">?</span>
+                            <div>
+                              <strong>{h.label}: </strong>
+                              <span>{h.value}</span>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
 
-                {/* Additional Highlights Box */}
-                {project.highlights && project.highlights.length > 1 && (
-                  <div className="description-highlights-callout">
-                    <p className="callout-heading">Project Highlights &amp; Features</p>
-                    <ul className="callout-list">
-                      {project.highlights.slice(1).map((h, hIdx) => (
-                        <li key={hIdx}>
-                          <span className="callout-bullet">◆</span>
-                          <div>
-                            <strong>{h.label}: </strong>
-                            <span>{h.value}</span>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {/* Tech Stack beside description */}
-                <div className="description-stack-section">
-                  <p className="stack-heading">Technologies &amp; Tools</p>
+                {/* Tech Stack Pills */}
+                <div className="stacked-tech-bar">
+                  <span className="stack-heading">Technologies &amp; Tools:</span>
                   <div className="tag-row" aria-label={`Technologies used in ${project.title}`}>
                     {project.tags.map((tag) => (
                       <span key={tag} className="tech-tag-pill">
@@ -394,7 +398,7 @@ export default function ProjectsShowcase({
                     ))}
                   </div>
                 </div>
-              </div>
+              </footer>
             </article>
           );
         })}
