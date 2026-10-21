@@ -5074,6 +5074,50 @@ h2 {
   align-items: start;
   padding-bottom: clamp(36px, 5vw, 60px);
   border-bottom: 1px solid var(--line);
+  overflow-x: clip;
+}
+
+/* Converge / meet-in-the-center scroll animation */
+.smart-project-row .smart-col-media,
+.smart-project-row .smart-col-info {
+  transition: opacity 750ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 750ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+/* Normal row (Media Left, Info Right): Media slides from left, Info slides from right towards center */
+.smart-project-row[data-reveal-ready="true"]:not([data-reveal-visible="true"]) .smart-col-media {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+.smart-project-row[data-reveal-ready="true"]:not([data-reveal-visible="true"]) .smart-col-info {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+/* Reversed row (Info Left, Media Right): Info slides from left, Media slides from right towards center */
+.smart-project-row.row-reversed[data-reveal-ready="true"]:not([data-reveal-visible="true"]) .smart-col-info {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+.smart-project-row.row-reversed[data-reveal-ready="true"]:not([data-reveal-visible="true"]) .smart-col-media {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+.smart-project-row[data-reveal-visible="true"] .smart-col-media,
+.smart-project-row[data-reveal-visible="true"] .smart-col-info {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .smart-project-row .smart-col-media,
+  .smart-project-row .smart-col-info {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
 }
 
 .smart-project-row.row-reversed {
@@ -5140,7 +5184,7 @@ h2 {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
-  background: #090c10;
+  background: radial-gradient(circle at 50% 50%, #161a22 0%, #090c10 100%);
   overflow: hidden;
 }
 
@@ -5165,6 +5209,18 @@ h2 {
   object-fit: cover;
   cursor: pointer;
   transition: transform 0.3s ease;
+}
+
+/* Portrait screenshots responsive presentation within the hero card */
+.smart-image-wrapper.is-portrait-preview {
+  background: radial-gradient(circle at 50% 50%, #1c2128 0%, #0d1117 100%);
+}
+
+.smart-image-wrapper.is-portrait-preview .smart-main-img {
+  object-fit: contain !important;
+  max-width: 60%;
+  margin: 0 auto;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.45));
 }
 
 .smart-image-wrapper:hover .smart-main-img {
@@ -5436,22 +5492,38 @@ h2 {
 
 .smart-highlight-banner {
   display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 12px 14px;
-  border-radius: 12px;
-  background: var(--raised-surface);
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--accent);
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 13px;
   line-height: 1.5;
   color: var(--ink);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+[data-theme="light"] .smart-highlight-banner {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.smart-highlight-banner:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .smart-highlight-dot {
-  color: var(--accent);
-  font-size: 10px;
-  margin-top: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  flex-shrink: 0;
+  display: inline-block;
 }
 
 .smart-tech-section {

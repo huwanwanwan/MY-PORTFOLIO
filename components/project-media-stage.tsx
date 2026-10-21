@@ -56,15 +56,20 @@ export default function ProjectMediaStage({
 
   const thumbStripRef = useRef<HTMLDivElement | null>(null);
 
-  // Close lightbox on Escape key
+  // Close lightbox on Escape key and lock page scroll while open
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setSelectedLightbox(null);
     };
     if (selectedLightbox) {
       window.addEventListener("keydown", handleKeyDown);
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+        document.body.style.overflow = originalOverflow;
+      };
     }
-    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedLightbox]);
 
   if (mediaList.length === 0) {
@@ -122,7 +127,12 @@ export default function ProjectMediaStage({
             </div>
           ) : (
             <div
-              className="smart-image-wrapper"
+              className={`smart-image-wrapper ${
+                currentMedia.src.includes("SIGLA") ||
+                currentMedia.caption.toLowerCase().includes("mobile")
+                  ? "is-portrait-preview"
+                  : ""
+              }`}
               onClick={() => setSelectedLightbox(currentMedia)}
             >
               <Image
