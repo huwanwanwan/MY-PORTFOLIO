@@ -357,13 +357,11 @@ export default function ProjectsShowcase({
                   <p className="desc-project-type">{project.type}</p>
                 </div>
 
-                {/* Full story paragraphs */}
+                {/* Concise Project Overview */}
                 <div className="description-narrative">
-                  {project.paragraphs.map((para, pIdx) => (
-                    <p key={pIdx} className="desc-paragraph">
-                      {para}
-                    </p>
-                  ))}
+                  <p className="desc-paragraph desc-overview-lead">
+                    {project.paragraphs[0]}
+                  </p>
                 </div>
 
                 {/* Additional Highlights Box */}

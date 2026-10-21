@@ -2732,7 +2732,7 @@ h2 {
 
 .project-feature-row {
   display: grid;
-  grid-template-columns: minmax(320px, 0.95fr) minmax(360px, 1.25fr);
+  grid-template-columns: minmax(420px, 1.65fr) minmax(320px, 1fr);
   gap: clamp(28px, 4.5vw, 56px);
   align-items: stretch;
   padding-bottom: clamp(36px, 5vw, 60px);
@@ -2745,7 +2745,7 @@ h2 {
 }
 
 .project-feature-row.row-reversed {
-  grid-template-columns: minmax(360px, 1.25fr) minmax(320px, 0.95fr);
+  grid-template-columns: minmax(320px, 1fr) minmax(420px, 1.65fr);
 }
 
 .project-feature-row.row-reversed .project-card-container {
@@ -5045,4 +5045,338 @@ h2 {
 .media-thumb-item.selected .thumb-item-label {
   color: var(--accent);
   font-weight: 700;
+}
+
+
+/* ==========================================================================
+   ENHANCED PROJECT MEDIA SHOWCASE MOSAIC
+   - Larger landscape video hero
+   - Side screenshots stack (2 top/bottom or 3 with 1 top + 2 bottom split)
+   - Mobile portrait screenshot strip (SigLa etc.)
+   ========================================================================== */
+
+.project-media-showcase-mosaic {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* For landscape mode with screenshots beside the video */
+.project-media-showcase-mosaic.landscape-mode {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
+  gap: 12px;
+  align-items: stretch;
+}
+
+@media (max-width: 768px) {
+  .project-media-showcase-mosaic.landscape-mode {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Primary Media Column (Video Hero or Lead Landscape Screen) */
+.mosaic-primary-col {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+}
+
+.media-card-viewport {
+  position: relative;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #080a0c;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.video-hero-viewport {
+  aspect-ratio: 16 / 9;
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image-viewport {
+  aspect-ratio: 16 / 9;
+  min-height: 240px;
+  cursor: pointer;
+}
+
+.hero-image-viewport.portrait-viewport {
+  aspect-ratio: 9 / 16;
+  max-height: 480px;
+  background: #0f1318;
+}
+
+.media-video-element {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #000;
+}
+
+.media-img-element {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.media-img-element.landscape-cover,
+.media-img-element.unity-crop-landscape {
+  object-fit: cover;
+  object-position: center;
+}
+
+.media-img-element.portrait-contain {
+  object-fit: contain;
+  object-position: center;
+}
+
+.preview-zoom-hint {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  padding: 3px 8px;
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.hero-image-viewport:hover .preview-zoom-hint,
+.side-screen-item:hover .preview-zoom-hint {
+  opacity: 1;
+}
+
+/* Side Screenshots Stack Beside the Video */
+.mosaic-screenshots-col {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.landscape-beside-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  width: 100%;
+}
+
+/* When 2 screenshots: top and bottom */
+.landscape-beside-grid.grid-two-stacked {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px;
+  height: 100%;
+}
+
+.side-screen-item {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 110px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #111418;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.side-screen-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.side-screen-item:hover .media-img-element {
+  transform: scale(1.03);
+}
+
+/* When 3 screenshots: 1 full-width on top, 2 sharing the bottom row equally */
+.landscape-beside-grid.grid-three-layout {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px;
+  height: 100%;
+}
+
+.item-top-full {
+  width: 100%;
+  height: 100%;
+}
+
+.bottom-two-split-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+}
+
+.item-split {
+  width: 100%;
+  height: 100%;
+}
+
+.screen-card-label {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: rgba(14, 18, 23, 0.75);
+  backdrop-filter: blur(4px);
+  padding: 2px 6px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+/* Portrait / Mobile Projects (e.g. SigLa) */
+.project-media-showcase-mosaic.portrait-mode {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.portrait-screen-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.portrait-screen-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.portrait-screen-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  background: var(--raised-surface);
+}
+
+.portrait-img-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 18;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0e1217;
+}
+
+.portrait-img-element {
+  object-fit: contain;
+  object-position: center;
+}
+
+.portrait-screen-card .screen-card-label {
+  position: static;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 0;
+}
+
+.portrait-screen-card:hover .screen-card-label {
+  color: var(--accent);
+}
+
+/* Lightbox Modal */
+.media-lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(7, 9, 12, 0.88);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.media-lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.lightbox-media-wrapper {
+  position: relative;
+  width: min(85vw, 1100px);
+  height: min(75vh, 650px);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox-img {
+  object-fit: contain;
+}
+
+.lightbox-close-btn {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  border: 2px solid #fff;
+  font-size: 16px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.lightbox-caption {
+  font-size: 13px;
+  font-weight: 700;
+  color: #f1f3f5;
+  letter-spacing: 0.04em;
+}
+
+/* Overview lead text styling */
+.desc-overview-lead {
+  font-size: 14.5px;
+  line-height: 1.68;
+  color: var(--ink);
 }

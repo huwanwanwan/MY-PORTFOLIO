@@ -1,6 +1,4 @@
-"use client";
-
-import { useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
 interface ProjectMediaStageProps {
@@ -18,34 +16,17 @@ export default function ProjectMediaStage({
   images = [],
   fallbackEmblem,
 }: ProjectMediaStageProps) {
-  // Collect all media items:
-  // Video goes on top / first slot if present, followed by all screenshot images
-  const mediaItems: Array<{ type: "video" | "image"; src: string; label: string }> = [];
+  const [selectedModalMedia, setSelectedModalMedia] = useState<{
+    type: "video" | "image";
+    src: string;
+    label: string;
+  } | null>(null);
 
-  if (video) {
-    mediaItems.push({
-      type: "video",
-      src: video,
-      label: "Project Demo Video",
-    });
-  }
-
-  images.forEach((img, idx) => {
-    mediaItems.push({
-      type: "image",
-      src: img,
-      label: `Screenshot ${String(idx + 1).padStart(2, "0")}`,
-    });
-  });
-
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  // If no media files at all, fallback gracefully to the SVG emblem stage
-  if (mediaItems.length === 0) {
+  // If no media at all, render fallback emblem
+  if (!video && (!images || images.length === 0)) {
     return <div className="card-emblem-stage">{fallbackEmblem}</div>;
   }
 
-  const currentMedia = mediaItems[activeIndex] || mediaItems[0];
   const isUnityOrGame =
     category === "Games & Animation" ||
     title.toLowerCase().includes("arena") ||
@@ -53,33 +34,39 @@ export default function ProjectMediaStage({
     title.toLowerCase().includes("jungle") ||
     title.toLowerCase().includes("game");
 
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev > 0 ? prev - 1 : mediaItems.length - 1));
-  };
+  // Determine if project screenshots are portrait (e.g. Mobile like SigLa)
+  const isPortraitProject =
+    category === "Mobile & AR" ||
+    title.toLowerCase().includes("sigla") ||
+    title.toLowerCase().includes("mobile");
 
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev < mediaItems.length - 1 ? prev + 1 : 0));
-  };
+  // Primary video or lead showcase
+  const hasVideo = Boolean(video);
+  const screenshotCount = images.length;
 
   return (
-    <div className="project-media-stage">
-      {/* Top Main Showcase Display: Video or Selected Screenshot (Landscape Fit/Crop) */}
-      <div
-        className={`project-media-viewport ${
-          isUnityOrGame ? "unity-landscape-viewport" : ""
-        }`}
-      >
-        {currentMedia.type === "video" ? (
-          <div className="video-player-container">
+    <div
+      className={`project-media-showcase-mosaic ${
+        isPortraitProject ? "portrait-mode" : "landscape-mode"
+      } ${hasVideo ? "has-video" : "no-video"}`}
+    >
+      {/* LEFT / PRIMARY MEDIA CONTAINER: Video Hero (or Main Screenshot if no video) */}
+      <div className="mosaic-primary-col">
+        {hasVideo ? (
+          <div
+            className={`media-card-viewport video-hero-viewport ${
+              isUnityOrGame ? "unity-landscape-viewport" : ""
+            }`}
+          >
             <video
-              src={currentMedia.src}
+              src={video}
               controls
               autoPlay
               muted
               loop
               playsInline
-              className="landscape-media-video"
-              title={`${title} demo video preview`}
+              className="media-video-element"
+              title={`${title} interactive demo preview`}
             >
               Your browser does not support the video tag.
             </video>
@@ -89,104 +76,348 @@ export default function ProjectMediaStage({
             </div>
           </div>
         ) : (
-          <div className="image-viewport-container">
-            <Image
-              src={currentMedia.src}
-              alt={`${title} - ${currentMedia.label}`}
-              fill
-              sizes="(max-width: 900px) 100vw, 550px"
-              className={`landscape-media-image ${
-                isUnityOrGame ? "unity-crop-landscape" : "contain-landscape"
+          /* If no video, slot first screenshot in primary viewport */
+          images[0] && (
+            <div
+              className={`media-card-viewport hero-image-viewport ${
+                isPortraitProject ? "portrait-viewport" : "landscape-viewport"
               }`}
-              priority={false}
-            />
-          </div>
+              onClick={() =>
+                setSelectedModalMedia({
+                  type: "image",
+                  src: images[0],
+                  label: `${title} - Overview Preview`,
+                })
+              }
+            >
+              <Image
+                src={images[0]}
+                alt={`${title} main preview`}
+                fill
+                sizes="(max-width: 900px) 100vw, 700px"
+                className={`media-img-element ${
+                  isPortraitProject
+                    ? "portrait-contain"
+                    : isUnityOrGame
+                    ? "unity-crop-landscape"
+                    : "landscape-cover"
+                }`}
+              />
+              <span className="preview-zoom-hint">Click to enlarge</span>
+            </div>
+          )
         )}
-
-        {/* Caption / Label at the bottom of the viewport */}
-        <div className="viewport-caption-bar">
-          <span className="caption-text">{currentMedia.label}</span>
-          <span className="caption-counter">
-            {activeIndex + 1} / {mediaItems.length}
-          </span>
-        </div>
       </div>
 
-      {/* Bottom Thumbnail Strip + Controls (Matching the Thrifly mockup) */}
-      {mediaItems.length > 1 && (
-        <div className="media-thumbnail-section">
-          <div className="thumbnail-header-row">
-            <span className="thumbnail-lead-title">
-              {currentMedia.type === "video"
-                ? "MEDIA DEMO 01 / " + String(mediaItems.length).padStart(2, "0")
-                : `SCREENSHOT ${String(
-                    currentMedia.type === "video" ? activeIndex : activeIndex + (video ? 0 : 1)
-                  ).padStart(2, "0")} / ${String(
-                    video ? mediaItems.length - 1 : mediaItems.length
-                  ).padStart(2, "0")}`}
-            </span>
-            <div className="thumbnail-nav-arrows">
-              <button
-                type="button"
-                onClick={handlePrev}
-                className="thumb-nav-btn"
-                aria-label="Previous preview"
-              >
-                ‹
-              </button>
-              <button
-                type="button"
-                onClick={handleNext}
-                className="thumb-nav-btn"
-                aria-label="Next preview"
-              >
-                ›
-              </button>
-            </div>
-          </div>
-
-          <div className="media-thumbnails-strip">
-            {mediaItems.map((item, idx) => {
-              const isSelected = idx === activeIndex;
-              return (
+      {/* RIGHT / SIDE SCREENSHOTS STACK */}
+      {screenshotCount > 0 && (
+        <div
+          className={`mosaic-screenshots-col ${
+            isPortraitProject
+              ? "portrait-screenshots-scroll"
+              : hasVideo
+              ? `landscape-beside-stack count-${Math.min(screenshotCount, 3)}`
+              : `landscape-grid-rest count-${Math.min(screenshotCount - 1, 4)}`
+          }`}
+        >
+          {isPortraitProject ? (
+            /* PORTRAIT / MOBILE PROJECT (e.g. SigLa):
+               Scrollable horizontal row or clean responsive portrait cards that fit the full mobile phone height without cropping */
+            <div className="portrait-screen-strip">
+              {images.map((img, idx) => (
                 <button
-                  key={item.src + idx}
+                  key={img + idx}
                   type="button"
-                  onClick={() => setActiveIndex(idx)}
-                  className={`media-thumb-item ${isSelected ? "selected" : ""}`}
-                  aria-label={`Select ${item.label}`}
+                  onClick={() =>
+                    setSelectedModalMedia({
+                      type: "image",
+                      src: img,
+                      label: `${title} Mobile Screen ${String(idx + 1).padStart(2, "0")}`,
+                    })
+                  }
+                  className="portrait-screen-card"
+                  aria-label={`View screenshot ${idx + 1}`}
                 >
-                  <div className="thumb-preview-box">
-                    {item.type === "video" ? (
-                      <div className="thumb-video-icon-box">
-                        <svg
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          className="thumb-play-icon"
-                          aria-hidden="true"
-                        >
-                          <polygon points="5 3 19 12 5 21 5 3" />
-                        </svg>
-                        <span className="thumb-video-tag">VIDEO</span>
-                      </div>
-                    ) : (
-                      <Image
-                        src={item.src}
-                        alt={`Thumbnail preview ${idx + 1}`}
-                        fill
-                        sizes="80px"
-                        className="thumb-img"
-                      />
-                    )}
+                  <div className="portrait-img-box">
+                    <Image
+                      src={img}
+                      alt={`${title} screen ${idx + 1}`}
+                      fill
+                      sizes="180px"
+                      className="portrait-img-element"
+                    />
                   </div>
-                  <span className="thumb-item-label">{item.label}</span>
+                  <span className="screen-card-label">Screen {idx + 1}</span>
                 </button>
-              );
-            })}
+              ))}
+            </div>
+          ) : hasVideo ? (
+            /* LANDSCAPE PROJECT WITH VIDEO:
+               User rule:
+               - If 2 screenshots: top and bottom (2 rows)
+               - If 3 screenshots: top 1 full width, bottom 2 side-by-side with same combined width
+            */
+            <div
+              className={`landscape-beside-grid ${
+                screenshotCount === 2 ? "grid-two-stacked" : "grid-three-layout"
+              }`}
+            >
+              {screenshotCount === 2 ? (
+                // Exactly 2 screenshots: Top & Bottom
+                <>
+                  <div
+                    className="side-screen-item item-top"
+                    onClick={() =>
+                      setSelectedModalMedia({
+                        type: "image",
+                        src: images[0],
+                        label: `${title} Preview 01`,
+                      })
+                    }
+                  >
+                    <Image
+                      src={images[0]}
+                      alt={`${title} Preview 01`}
+                      fill
+                      sizes="400px"
+                      className="media-img-element landscape-cover"
+                    />
+                    <span className="screen-card-label">Screen 01</span>
+                  </div>
+                  <div
+                    className="side-screen-item item-bottom"
+                    onClick={() =>
+                      setSelectedModalMedia({
+                        type: "image",
+                        src: images[1],
+                        label: `${title} Preview 02`,
+                      })
+                    }
+                  >
+                    <Image
+                      src={images[1]}
+                      alt={`${title} Preview 02`}
+                      fill
+                      sizes="400px"
+                      className="media-img-element landscape-cover"
+                    />
+                    <span className="screen-card-label">Screen 02</span>
+                  </div>
+                </>
+              ) : (
+                // 3 or more screenshots: 1 on top, 2 on bottom sharing the exact same total width
+                <>
+                  <div
+                    className="side-screen-item item-top-full"
+                    onClick={() =>
+                      setSelectedModalMedia({
+                        type: "image",
+                        src: images[0],
+                        label: `${title} Preview 01`,
+                      })
+                    }
+                  >
+                    <Image
+                      src={images[0]}
+                      alt={`${title} Preview 01`}
+                      fill
+                      sizes="450px"
+                      className="media-img-element landscape-cover"
+                    />
+                    <span className="screen-card-label">Screen 01</span>
+                  </div>
+                  <div className="bottom-two-split-row">
+                    <div
+                      className="side-screen-item item-split"
+                      onClick={() =>
+                        setSelectedModalMedia({
+                          type: "image",
+                          src: images[1],
+                          label: `${title} Preview 02`,
+                        })
+                      }
+                    >
+                      <Image
+                        src={images[1]}
+                        alt={`${title} Preview 02`}
+                        fill
+                        sizes="250px"
+                        className="media-img-element landscape-cover"
+                      />
+                      <span className="screen-card-label">Screen 02</span>
+                    </div>
+                    <div
+                      className="side-screen-item item-split"
+                      onClick={() =>
+                        setSelectedModalMedia({
+                          type: "image",
+                          src: images[2] || images[0],
+                          label: `${title} Preview 03`,
+                        })
+                      }
+                    >
+                      <Image
+                        src={images[2] || images[0]}
+                        alt={`${title} Preview 03`}
+                        fill
+                        sizes="250px"
+                        className="media-img-element landscape-cover"
+                      />
+                      <span className="screen-card-label">Screen 03</span>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          ) : (
+            /* LANDSCAPE PROJECT WITHOUT VIDEO (images[0] is in hero, remaining images beside/below): */
+            <div
+              className={`landscape-beside-grid ${
+                images.slice(1).length === 2 ? "grid-two-stacked" : "grid-three-layout"
+              }`}
+            >
+              {images.slice(1, 4).length === 2 ? (
+                <>
+                  <div
+                    className="side-screen-item item-top"
+                    onClick={() =>
+                      setSelectedModalMedia({
+                        type: "image",
+                        src: images[1],
+                        label: `${title} Preview 02`,
+                      })
+                    }
+                  >
+                    <Image
+                      src={images[1]}
+                      alt={`${title} Preview 02`}
+                      fill
+                      sizes="400px"
+                      className="media-img-element landscape-cover"
+                    />
+                    <span className="screen-card-label">Screen 02</span>
+                  </div>
+                  <div
+                    className="side-screen-item item-bottom"
+                    onClick={() =>
+                      setSelectedModalMedia({
+                        type: "image",
+                        src: images[2],
+                        label: `${title} Preview 03`,
+                      })
+                    }
+                  >
+                    <Image
+                      src={images[2]}
+                      alt={`${title} Preview 03`}
+                      fill
+                      sizes="400px"
+                      className="media-img-element landscape-cover"
+                    />
+                    <span className="screen-card-label">Screen 03</span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div
+                    className="side-screen-item item-top-full"
+                    onClick={() =>
+                      setSelectedModalMedia({
+                        type: "image",
+                        src: images[1] || images[0],
+                        label: `${title} Preview 02`,
+                      })
+                    }
+                  >
+                    <Image
+                      src={images[1] || images[0]}
+                      alt={`${title} Preview 02`}
+                      fill
+                      sizes="450px"
+                      className="media-img-element landscape-cover"
+                    />
+                    <span className="screen-card-label">Screen 02</span>
+                  </div>
+                  <div className="bottom-two-split-row">
+                    <div
+                      className="side-screen-item item-split"
+                      onClick={() =>
+                        setSelectedModalMedia({
+                          type: "image",
+                          src: images[2] || images[0],
+                          label: `${title} Preview 03`,
+                        })
+                      }
+                    >
+                      <Image
+                        src={images[2] || images[0]}
+                        alt={`${title} Preview 03`}
+                        fill
+                        sizes="250px"
+                        className="media-img-element landscape-cover"
+                      />
+                      <span className="screen-card-label">Screen 03</span>
+                    </div>
+                    <div
+                      className="side-screen-item item-split"
+                      onClick={() =>
+                        setSelectedModalMedia({
+                          type: "image",
+                          src: images[3] || images[1] || images[0],
+                          label: `${title} Preview 04`,
+                        })
+                      }
+                    >
+                      <Image
+                        src={images[3] || images[1] || images[0]}
+                        alt={`${title} Preview 04`}
+                        fill
+                        sizes="250px"
+                        className="media-img-element landscape-cover"
+                      />
+                      <span className="screen-card-label">Screen 04</span>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* LIGHTBOX MODAL FOR PREVIEWING AT FULL RESOLUTION */}
+      {selectedModalMedia && (
+        <div
+          className="media-lightbox-backdrop"
+          onClick={() => setSelectedModalMedia(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className="media-lightbox-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="lightbox-close-btn"
+              onClick={() => setSelectedModalMedia(null)}
+              aria-label="Close preview"
+            >
+              ✕
+            </button>
+            <div className="lightbox-media-wrapper">
+              <Image
+                src={selectedModalMedia.src}
+                alt={selectedModalMedia.label}
+                fill
+                sizes="95vw"
+                className="lightbox-img"
+              />
+            </div>
+            <div className="lightbox-caption">{selectedModalMedia.label}</div>
           </div>
         </div>
       )}
     </div>
   );
 }
-
