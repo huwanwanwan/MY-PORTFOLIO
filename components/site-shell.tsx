@@ -179,7 +179,7 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
               <span className="mega-footer-heading">CONNECT</span>
               <ul className="mega-footer-list">
                 <li>
-                  <a href="https://www.linkedin.com/in/juan-enrico-militante-784869376/" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.linkedin.com/in/juan-domanico-militante-88606b445/" target="_blank" rel="noopener noreferrer">
                     LinkedIn ↗
                   </a>
                 </li>
@@ -189,7 +189,7 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.facebook.com/juanenrico.militante" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.facebook.com/huwananan" target="_blank" rel="noopener noreferrer">
                     Facebook ↗
                   </a>
                 </li>

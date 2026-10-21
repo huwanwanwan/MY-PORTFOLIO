@@ -172,7 +172,7 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "doculink",
-    images: ["/DOCULINK/dologin.png","/DOCULINK/1.png","/DOCULINK/2.png","/DOCULINK/4.png","/DOCULINK/5.png"],
+    images: ["/DOCULINK/dologin.png","/DOCULINK/1.png","/DOCULINK/4.png","/DOCULINK/5.png"],
 
     title: "DocuLink",
     category: "Web & Systems",
