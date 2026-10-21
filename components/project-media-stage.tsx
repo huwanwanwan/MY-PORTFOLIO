@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 
 interface ProjectMediaStageProps {
@@ -18,269 +18,221 @@ export default function ProjectMediaStage({
   images = [],
   fallbackEmblem,
 }: ProjectMediaStageProps) {
-  const [selectedModalMedia, setSelectedModalMedia] = useState<{
+  // Collect all media items:
+  // If video exists, it's item 0 ("Interactive Demo" or "Video Project").
+  // Followed by all screenshots.
+  const mediaList: Array<{ type: "video" | "image"; src: string; caption: string }> = [];
+
+  if (video) {
+    mediaList.push({
+      type: "video",
+      src: video,
+      caption: title + " Demo Video",
+    });
+  }
+
+  images.forEach((img, idx) => {
+    // Generate clean friendly label
+    let caption = "Screenshot " + String(idx + 1).padStart(2, "0");
+    if (img.toLowerCase().includes("home")) caption = "Home Interface";
+    else if (img.toLowerCase().includes("login")) caption = "Login Screen";
+    else if (img.toLowerCase().includes("dashboard")) caption = "Dashboard View";
+    else if (img.toLowerCase().includes("admin")) caption = "Admin Workspace";
+    else if (img.toLowerCase().includes("partylist")) caption = "Partylist & Candidates";
+    else if (img.toLowerCase().includes("settings")) caption = "System Settings";
+
+    mediaList.push({
+      type: "image",
+      src: img,
+      caption,
+    });
+  });
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedLightbox, setSelectedLightbox] = useState<{
     type: "video" | "image";
     src: string;
-    label: string;
+    caption: string;
   } | null>(null);
 
-  // Close modal on Escape key
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSelectedModalMedia(null);
-    };
-    if (selectedModalMedia) {
-      window.addEventListener("keydown", handleKeyDown);
-    }
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedModalMedia]);
+  const thumbStripRef = useRef<HTMLDivElement | null>(null);
 
-  // If no media at all, render fallback emblem
-  if (!video && (!images || images.length === 0)) {
+  if (mediaList.length === 0) {
     return <div className="card-emblem-stage">{fallbackEmblem}</div>;
   }
 
-  // Exactly check if this project has portrait screenshots (SigLa mobile translator)
-  const isPortraitProject =
-    title.toLowerCase().includes("sigla") ||
-    images.some((img) => img.includes("SIGLA"));
+  const currentMedia = mediaList[activeIndex] || mediaList[0];
 
-  const isUnityOrGame =
-    category === "Games & Animation" ||
-    title.toLowerCase().includes("arena") ||
-    title.toLowerCase().includes("force") ||
-    title.toLowerCase().includes("jungle") ||
-    title.toLowerCase().includes("game");
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev > 0 ? prev - 1 : mediaList.length - 1));
+    scrollThumbTo(activeIndex > 0 ? activeIndex - 1 : mediaList.length - 1);
+  };
 
-  const hasVideo = Boolean(video);
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev < mediaList.length - 1 ? prev + 1 : 0));
+    scrollThumbTo(activeIndex < mediaList.length - 1 ? activeIndex + 1 : 0);
+  };
+
+  const scrollThumbTo = (idx: number) => {
+    if (!thumbStripRef.current) return;
+    const itemWidth = 140;
+    thumbStripRef.current.scrollTo({
+      left: idx * itemWidth - 20,
+      behavior: "smooth",
+    });
+  };
 
   return (
-    <div className="project-media-stage-wrapper">
-      {/* 
-        MEDIA VIEWPORT:
-        - Full-width hero media (video or lead screenshot) with NO awkward black bars.
-        - For 16:9 video / landscape games: object-fit cover / fit.
-        - For screenshots: natural clean aspect ratio.
-      */}
-      <div className="project-primary-hero-container">
-        {hasVideo ? (
-          <div
-            className={
-              "media-card-viewport video-hero-viewport" +
-              (isUnityOrGame ? " unity-landscape-viewport" : "")
-            }
-          >
-            <video
-              src={video}
-              controls
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="media-video-element"
-              title={title + " interactive demo preview"}
-            >
-              Your browser does not support the video tag.
-            </video>
-            <div className="video-live-badge">
-              <span className="live-dot" />
-              <span>LOOPING DEMO</span>
-            </div>
-          </div>
-        ) : (
-          images[0] && (
-            <div
-              className="media-card-viewport hero-image-viewport"
-              onClick={() =>
-                setSelectedModalMedia({
-                  type: "image",
-                  src: images[0],
-                  label: title + " - Overview Preview",
-                })
-              }
-            >
-              <Image
-                src={images[0]}
-                alt={title + " main preview"}
-                fill
-                sizes="(max-width: 900px) 100vw, 900px"
-                className="media-img-element cover-fit"
-              />
-              <span className="preview-zoom-hint">Click to enlarge</span>
-            </div>
-          )
-        )}
-      </div>
-
-      {/* 
-        SCREENSHOTS GRID:
-        - Positioned cleanly with full responsive flexibility.
-        - If Portrait (SigLa): 6 portrait mobile phone cards in a neat responsive grid.
-        - If Landscape:
-          * If 2 screenshots: 2 side-by-side equal cards (50% / 50%)
-          * If 3 screenshots: Top 1 full-width, Bottom 2 twin side-by-side (50% / 50%)
-      */}
-      {images.length > 0 && (
-        <div className="project-screenshots-gallery">
-          <div className="gallery-header-row">
-            <span className="gallery-lead-label">PROJECT SCREENSHOTS & UI</span>
-            <span className="gallery-count-pill">{images.length} PREVIEWS</span>
-          </div>
-
-          {isPortraitProject ? (
-            /* PORTRAIT MOBILE SCREENS */
-            <div className="portrait-mobile-grid">
-              {images.map((img, idx) => (
-                <button
-                  key={img + idx}
-                  type="button"
-                  onClick={() =>
-                    setSelectedModalMedia({
-                      type: "image",
-                      src: img,
-                      label: title + " Mobile Screen " + String(idx + 1).padStart(2, "0"),
-                    })
-                  }
-                  className="portrait-mobile-card"
-                  aria-label={"View screenshot " + (idx + 1)}
-                >
-                  <div className="portrait-mobile-box">
-                    <Image
-                      src={img}
-                      alt={title + " mobile screen " + (idx + 1)}
-                      fill
-                      sizes="180px"
-                      className="portrait-mobile-img"
-                    />
-                  </div>
-                  <span className="portrait-card-label">Screen {idx + 1}</span>
-                </button>
-              ))}
+    <div className="smart-pdm-media-column">
+      {/* 1. TOP MAIN SHOWCASE CARD (Hero with Caption Footer and Enlarge Button) */}
+      <div className="smart-hero-card">
+        <div className="smart-hero-viewport">
+          {currentMedia.type === "video" ? (
+            <div className="smart-video-wrapper">
+              <video
+                key={currentMedia.src}
+                src={currentMedia.src}
+                controls
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="smart-main-video"
+                title={title + " video preview"}
+              >
+                Your browser does not support the video tag.
+              </video>
+              <div className="video-live-badge">
+                <span className="live-dot" />
+                <span>LOOPING DEMO</span>
+              </div>
             </div>
           ) : (
-            /* LANDSCAPE SCREENS:
-               - If 2 screenshots: 2 equal cards side-by-side
-               - If 3 screenshots: Top 1 full-width, bottom 2 equal twin cards
-            */
-            <div className="landscape-screens-mosaic">
-              {images.length === 2 ? (
-                <div className="landscape-twin-row">
-                  <div
-                    className="landscape-screen-card"
-                    onClick={() =>
-                      setSelectedModalMedia({
-                        type: "image",
-                        src: images[0],
-                        label: title + " Screen 01",
-                      })
-                    }
-                  >
-                    <Image
-                      src={images[0]}
-                      alt={title + " Screen 01"}
-                      fill
-                      sizes="(max-width: 900px) 50vw, 450px"
-                      className="media-img-element cover-fit"
-                    />
-                    <span className="screen-card-label">Screen 01</span>
-                  </div>
-                  <div
-                    className="landscape-screen-card"
-                    onClick={() =>
-                      setSelectedModalMedia({
-                        type: "image",
-                        src: images[1],
-                        label: title + " Screen 02",
-                      })
-                    }
-                  >
-                    <Image
-                      src={images[1]}
-                      alt={title + " Screen 02"}
-                      fill
-                      sizes="(max-width: 900px) 50vw, 450px"
-                      className="media-img-element cover-fit"
-                    />
-                    <span className="screen-card-label">Screen 02</span>
-                  </div>
-                </div>
-              ) : (
-                <div className="landscape-three-stack">
-                  <div
-                    className="landscape-screen-card top-span-card"
-                    onClick={() =>
-                      setSelectedModalMedia({
-                        type: "image",
-                        src: images[0],
-                        label: title + " Screen 01",
-                      })
-                    }
-                  >
-                    <Image
-                      src={images[0]}
-                      alt={title + " Screen 01"}
-                      fill
-                      sizes="(max-width: 900px) 100vw, 900px"
-                      className="media-img-element cover-fit"
-                    />
-                    <span className="screen-card-label">Screen 01</span>
-                  </div>
-                  <div className="landscape-twin-row">
-                    <div
-                      className="landscape-screen-card"
-                      onClick={() =>
-                        setSelectedModalMedia({
-                          type: "image",
-                          src: images[1],
-                          label: title + " Screen 02",
-                        })
-                      }
-                    >
-                      <Image
-                        src={images[1]}
-                        alt={title + " Screen 02"}
-                        fill
-                        sizes="(max-width: 900px) 50vw, 450px"
-                        className="media-img-element cover-fit"
-                      />
-                      <span className="screen-card-label">Screen 02</span>
-                    </div>
-                    <div
-                      className="landscape-screen-card"
-                      onClick={() =>
-                        setSelectedModalMedia({
-                          type: "image",
-                          src: images[2] || images[0],
-                          label: title + " Screen 03",
-                        })
-                      }
-                    >
-                      <Image
-                        src={images[2] || images[0]}
-                        alt={title + " Screen 03"}
-                        fill
-                        sizes="(max-width: 900px) 50vw, 450px"
-                        className="media-img-element cover-fit"
-                      />
-                      <span className="screen-card-label">Screen 03</span>
-                    </div>
-                  </div>
-                </div>
-              )}
+            <div
+              className="smart-image-wrapper"
+              onClick={() => setSelectedLightbox(currentMedia)}
+            >
+              <Image
+                src={currentMedia.src}
+                alt={currentMedia.caption}
+                fill
+                sizes="(max-width: 900px) 100vw, 650px"
+                className="smart-main-img"
+              />
             </div>
           )}
+
+          {/* Enlarge / Zoom button top-right (like in reference pic) */}
+          <button
+            type="button"
+            className="smart-enlarge-btn"
+            onClick={() => setSelectedLightbox(currentMedia)}
+            aria-label="Enlarge view"
+            title="Enlarge preview"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              width="14"
+              height="14"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="7" y1="17" x2="17" y2="7" />
+              <polyline points="7 7 17 7 17 17" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Caption Bar below the main screen (matching "Scholarship Homepage" in image) */}
+        <div className="smart-hero-caption-bar">
+          <span className="smart-hero-caption-title">{currentMedia.caption}</span>
+        </div>
+      </div>
+
+      {/* 2. BOTTOM THUMBNAILS CAROUSEL (matching SCREENSHOT 01 / 09 with < > arrows in image) */}
+      {mediaList.length > 1 && (
+        <div className="smart-thumbnails-container">
+          <div className="smart-thumbnails-nav-row">
+            <span className="smart-counter-label">
+              {currentMedia.type === "video"
+                ? "MEDIA DEMO 01 / " + String(mediaList.length).padStart(2, "0")
+                : "SCREENSHOT " +
+                  String(activeIndex + 1).padStart(2, "0") +
+                  " / " +
+                  String(mediaList.length).padStart(2, "0")}
+            </span>
+            <div className="smart-nav-arrows">
+              <button
+                type="button"
+                onClick={handlePrev}
+                className="smart-arrow-btn"
+                aria-label="Previous screenshot"
+              >
+                �
+              </button>
+              <button
+                type="button"
+                onClick={handleNext}
+                className="smart-arrow-btn"
+                aria-label="Next screenshot"
+              >
+                �
+              </button>
+            </div>
+          </div>
+
+          <div className="smart-thumbs-scroll-strip" ref={thumbStripRef}>
+            {mediaList.map((item, idx) => {
+              const isSelected = idx === activeIndex;
+              return (
+                <button
+                  key={item.src + idx}
+                  type="button"
+                  onClick={() => setActiveIndex(idx)}
+                  className={"smart-thumb-card" + (isSelected ? " active-thumb" : "")}
+                  aria-label={"Select " + item.caption}
+                >
+                  <div className="smart-thumb-preview-box">
+                    {item.type === "video" ? (
+                      <div className="smart-thumb-video-icon">
+                        <svg
+                          viewBox="0 0 24 24"
+                          width="18"
+                          height="18"
+                          fill="currentColor"
+                        >
+                          <polygon points="5 3 19 12 5 21 5 3" />
+                        </svg>
+                        <span className="smart-thumb-video-text">VIDEO</span>
+                      </div>
+                    ) : (
+                      <Image
+                        src={item.src}
+                        alt={item.caption}
+                        fill
+                        sizes="160px"
+                        className="smart-thumb-img"
+                      />
+                    )}
+                  </div>
+                  <span className="smart-thumb-caption-text">
+                    {item.caption}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       )}
 
-      {/* 
-        MODAL LIGHTBOX:
-        Clean, centered, responsive modal (matching the certifications & experience lightbox).
-        Never overflows, maintains true resolution without black letterbox cutoffs.
-      */}
-      {selectedModalMedia && (
+      {/* 3. LIGHTBOX MODAL (Full Responsive Zoom on Click) */}
+      {selectedLightbox && (
         <div
           className="cert-lightbox-backdrop"
-          onClick={() => setSelectedModalMedia(null)}
+          onClick={() => setSelectedLightbox(null)}
           role="dialog"
           aria-modal="true"
         >
@@ -291,26 +243,35 @@ export default function ProjectMediaStage({
             <button
               type="button"
               className="cert-lightbox-close"
-              onClick={() => setSelectedModalMedia(null)}
+              onClick={() => setSelectedLightbox(null)}
               aria-label="Close preview"
             >
               ?
             </button>
 
             <div className="project-lightbox-media-wrapper">
-              <Image
-                src={selectedModalMedia.src}
-                alt={selectedModalMedia.label}
-                width={1600}
-                height={1000}
-                className="project-lightbox-image"
-                unoptimized
-                priority
-              />
+              {selectedLightbox.type === "video" ? (
+                <video
+                  src={selectedLightbox.src}
+                  controls
+                  autoPlay
+                  className="smart-lightbox-video"
+                />
+              ) : (
+                <Image
+                  src={selectedLightbox.src}
+                  alt={selectedLightbox.caption}
+                  width={1400}
+                  height={900}
+                  className="project-lightbox-image"
+                  unoptimized
+                  priority
+                />
+              )}
             </div>
 
             <div className="cert-lightbox-caption">
-              <h3 className="cert-lightbox-title">{selectedModalMedia.label}</h3>
+              <h3 className="cert-lightbox-title">{selectedLightbox.caption}</h3>
               <p className="cert-lightbox-issuer">
                 High-Resolution Preview � Click outside or press <strong>Esc</strong> to close
               </p>

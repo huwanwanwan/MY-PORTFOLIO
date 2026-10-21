@@ -295,101 +295,76 @@ export default function ProjectsShowcase({
           return (
             <article
               key={project.id}
-              className="project-stacked-card scroll-reveal"
+              className="smart-project-row scroll-reveal"
               data-scroll-reveal
               id={`project-${project.id}`}
             >
-              {/* TOP: Project Title, Meta Pill, and Overview Description */}
-              <header className="stacked-project-header">
-                <div className="stacked-meta-line">
-                  <div className="stacked-kicker-group">
-                    <span className="card-index-pill">
-                      {displayNumber} / {String(projectsData.length).padStart(2, "0")}
-                    </span>
-                    <span className="card-category-badge">{project.category}</span>
-                    <span className="desc-role-kicker">{project.role}</span>
-                  </div>
-                  <span className="stacked-period-badge">{project.period}</span>
-                </div>
-
-                <div className="stacked-title-row">
-                  <div>
-                    <h2 className="stacked-project-title">{project.title}</h2>
-                    <p className="stacked-project-type">{project.type}</p>
-                  </div>
-                </div>
-
-                {/* Concise Project Overview */}
-                <div className="stacked-overview-box">
-                  <p className="stacked-overview-text">
-                    {project.paragraphs[0]}
-                  </p>
-                </div>
-              </header>
-
-              {/* CENTER: Project Media Stage (Hero Video + Gallery of Screenshots) */}
-              <div className="stacked-media-container">
+              {/* LEFT COLUMN: Media Hero + Screenshot Strip Below (Exact SMaRT-PDM reference mockup) */}
+              <div className="smart-col-media">
                 <ProjectMediaStage
                   title={project.title}
                   category={project.category}
                   video={project.video}
                   images={project.images}
                   fallbackEmblem={
-                    <>
+                    <div className="card-emblem-stage">
                       <div className="emblem-halo">
                         <ProjectEmblem id={project.id} />
                       </div>
                       <h3 className="card-emblem-title">{project.title}</h3>
                       <p className="card-emblem-subtitle">{project.type}</p>
-                    </>
+                    </div>
                   }
                 />
               </div>
 
-              {/* BOTTOM: Quick Facts Specs, Highlights, and Technologies */}
-              <footer className="stacked-project-footer">
-                <div className="stacked-footer-grid">
-                  {/* Quick Specs */}
-                  <div className="card-spec-grid">
-                    <div className="card-spec-item">
-                      <span className="spec-label">MY ROLE</span>
-                      <strong className="spec-value">{project.role}</strong>
-                    </div>
-                    <div className="card-spec-item">
-                      <span className="spec-label">CONTEXT</span>
-                      <strong className="spec-value">{project.period}</strong>
-                    </div>
-                    {project.highlights && project.highlights[0] && (
-                      <div className="card-spec-item full-width-spec">
-                        <span className="spec-label">{project.highlights[0].label.toUpperCase()}</span>
-                        <strong className="spec-value highlight-accent">{project.highlights[0].value}</strong>
-                      </div>
-                    )}
-                  </div>
+              {/* RIGHT COLUMN: Metadata, Large Title, Overview Description, Role, Tech Stack (Exact reference mockup) */}
+              <div className="smart-col-info">
+                {/* 01 / 14  CATEGORY */}
+                <div className="smart-kicker-meta">
+                  <span className="smart-kicker-number">{displayNumber} / {String(projectsData.length).padStart(2, "0")}</span>
+                  <span className="smart-kicker-sep">�</span>
+                  <span className="smart-kicker-cat">{project.category.toUpperCase()}</span>
+                </div>
 
-                  {/* Highlights Callout if available */}
-                  {project.highlights && project.highlights.length > 1 && (
-                    <div className="stacked-highlights-callout">
-                      <p className="callout-heading">Project Highlights &amp; Features</p>
-                      <ul className="callout-list">
-                        {project.highlights.slice(1).map((h, hIdx) => (
-                          <li key={hIdx}>
-                            <span className="callout-bullet">?</span>
-                            <div>
-                              <strong>{h.label}: </strong>
-                              <span>{h.value}</span>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
+                {/* Big Title & Project Type */}
+                <h2 className="smart-info-title">{project.title}</h2>
+                <p className="smart-info-subtitle">{project.type}</p>
+
+                {/* Concise Overview Paragraph */}
+                <div className="smart-info-desc-box">
+                  <p className="smart-info-overview">{project.paragraphs[0]}</p>
+                </div>
+
+                {/* MY ROLE / CONTEXT row */}
+                <div className="smart-spec-row">
+                  <div className="smart-spec-cell">
+                    <span className="smart-spec-name">MY ROLE</span>
+                    <strong className="smart-spec-val">{project.role}</strong>
+                  </div>
+                  {project.period && (
+                    <div className="smart-spec-cell">
+                      <span className="smart-spec-name">CONTEXT</span>
+                      <strong className="smart-spec-val">{project.period}</strong>
                     </div>
                   )}
                 </div>
 
-                {/* Tech Stack Pills */}
-                <div className="stacked-tech-bar">
-                  <span className="stack-heading">Technologies &amp; Tools:</span>
-                  <div className="tag-row" aria-label={`Technologies used in ${project.title}`}>
+                {/* Key Highlight Feature box if available */}
+                {project.highlights && project.highlights[0] && (
+                  <div className="smart-highlight-banner">
+                    <span className="smart-highlight-dot">?</span>
+                    <div>
+                      <strong>{project.highlights[0].label}: </strong>
+                      <span>{project.highlights[0].value}</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* BUILT WITH / TECHNOLOGIES */}
+                <div className="smart-tech-section">
+                  <span className="smart-tech-heading">BUILT WITH</span>
+                  <div className="smart-tech-tags" aria-label={`Technologies used in ${project.title}`}>
                     {project.tags.map((tag) => (
                       <span key={tag} className="tech-tag-pill">
                         <TechIcon name={tag} />
@@ -398,7 +373,7 @@ export default function ProjectsShowcase({
                     ))}
                   </div>
                 </div>
-              </footer>
+              </div>
             </article>
           );
         })}
