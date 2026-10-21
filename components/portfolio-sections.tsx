@@ -399,8 +399,10 @@ export function AboutSection({
 
 export function ProjectsSection({
   featuredOnly = false,
+  limit,
 }: {
   featuredOnly?: boolean;
+  limit?: number;
 } = {}) {
   return (
     <section
@@ -416,7 +418,7 @@ export function ProjectsSection({
           Ideas and systems I&apos;ve built across mobile applications, web systems, game development, and IoT hardware.
         </p>
       </div>
-      <ProjectsShowcase featuredOnly={featuredOnly} />
+      <ProjectsShowcase featuredOnly={featuredOnly} limit={limit} />
       {featuredOnly && (
         <div className="projects-view-all-wrap">
           <Link className="intro-link" href="/projects">

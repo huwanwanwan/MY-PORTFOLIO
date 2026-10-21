@@ -1,5 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import {
+  AboutSection,
+  ContactSection,
+  ExperienceSection,
+  ProjectsSection,
+  SkillsSection,
+} from "../components/portfolio-sections";
 import SiteShell from "../components/site-shell";
 
 export default function Home() {
@@ -44,57 +51,11 @@ export default function Home() {
           />
         </figure>
       </section>
-      {/* Compact Summary Cards — each links to its full page */}
-      <section className="home-summary-grid" data-scroll-reveal>
-        <Link href="/about" className="home-summary-card">
-          <span className="home-summary-kicker">ABOUT ME</span>
-          <h2>Curious by nature. Building with purpose.</h2>
-          <p>
-            I&apos;m Juan Domanico Militante, an IT student from Bulacan, Philippines.
-            I enjoy creating websites and mobile apps that make ideas useful and easy to experience.
-          </p>
-          <span className="home-summary-arrow">Learn more →</span>
-        </Link>
-
-        <Link href="/projects" className="home-summary-card">
-          <span className="home-summary-kicker">PROJECTS</span>
-          <h2>14 projects across web, mobile, games &amp; IoT.</h2>
-          <p>
-            From SigLa (sign language translator) to RecogniZarenus (facial recognition),
-            InventoPOS, DocuLink, and Unity games — systems I&apos;ve built through college.
-          </p>
-          <span className="home-summary-arrow">View projects →</span>
-        </Link>
-
-        <Link href="/skills" className="home-summary-card">
-          <span className="home-summary-kicker">SKILLS &amp; TECH</span>
-          <h2>Languages, frameworks &amp; tools I work with.</h2>
-          <p>
-            React.js, Kotlin, JavaScript, PHP, Python, Unity, C#, Arduino IDE,
-            HTML, CSS, Tailwind, Node.js, MySQL, and more.
-          </p>
-          <span className="home-summary-arrow">See all skills →</span>
-        </Link>
-
-        <Link href="/experience" className="home-summary-card">
-          <span className="home-summary-kicker">EXPERIENCE</span>
-          <h2>Learning through building &amp; real-world work.</h2>
-          <p>
-            Education at Pambayang Dalubhasaan ng Marilao (PDM), work experience at Lazada,
-            academic honors, and professional certifications.
-          </p>
-          <span className="home-summary-arrow">View experience →</span>
-        </Link>
-
-        <Link href="/contact" className="home-summary-card">
-          <span className="home-summary-kicker">CONTACT</span>
-          <h2>Let&apos;s connect and work together.</h2>
-          <p>
-            Have an idea or want to collaborate? Reach out via email, LinkedIn, GitHub, or Facebook.
-          </p>
-          <span className="home-summary-arrow">Get in touch →</span>
-        </Link>
-      </section>
+      <AboutSection projectPlaceholder />
+      <ProjectsSection featuredOnly={true} limit={2} />
+      <SkillsSection />
+      <ExperienceSection />
+      <ContactSection />
     </SiteShell>
   );
 }
