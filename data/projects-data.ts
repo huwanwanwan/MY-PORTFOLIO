@@ -297,7 +297,7 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "class-project-game",
-    video: "/GAME CLASS PROJECT/Video Project 3.mp4",
+    video: "/GAME CLASS PROJECT/video-demo.mp4",
     images: ["/GAME CLASS PROJECT/1 (1).png","/GAME CLASS PROJECT/1 (2).png","/GAME CLASS PROJECT/1 (3).png","/GAME CLASS PROJECT/1 (4).png"],
 
     title: "Class Project (Game Dev)",

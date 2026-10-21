@@ -323,7 +323,7 @@ export default function ProjectsShowcase({
                 {/* 01 / 14  CATEGORY */}
                 <div className="smart-kicker-meta">
                   <span className="smart-kicker-number">{displayNumber} / {String(projectsData.length).padStart(2, "0")}</span>
-                  <span className="smart-kicker-sep">�</span>
+                  <span className="smart-kicker-sep">&bull;</span>
                   <span className="smart-kicker-cat">{project.category.toUpperCase()}</span>
                 </div>
 
@@ -353,7 +353,7 @@ export default function ProjectsShowcase({
                 {/* Key Highlight Feature box if available */}
                 {project.highlights && project.highlights[0] && (
                   <div className="smart-highlight-banner">
-                    <span className="smart-highlight-dot">?</span>
+                    <span className="smart-highlight-dot">&bull;</span>
                     <div>
                       <strong>{project.highlights[0].label}: </strong>
                       <span>{project.highlights[0].value}</span>

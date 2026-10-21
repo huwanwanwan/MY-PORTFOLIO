@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 
 interface ProjectMediaStageProps {
@@ -32,7 +32,6 @@ export default function ProjectMediaStage({
   }
 
   images.forEach((img, idx) => {
-    // Generate clean friendly label
     let caption = "Screenshot " + String(idx + 1).padStart(2, "0");
     if (img.toLowerCase().includes("home")) caption = "Home Interface";
     else if (img.toLowerCase().includes("login")) caption = "Login Screen";
@@ -57,6 +56,17 @@ export default function ProjectMediaStage({
 
   const thumbStripRef = useRef<HTMLDivElement | null>(null);
 
+  // Close lightbox on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedLightbox(null);
+    };
+    if (selectedLightbox) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedLightbox]);
+
   if (mediaList.length === 0) {
     return <div className="card-emblem-stage">{fallbackEmblem}</div>;
   }
@@ -64,13 +74,15 @@ export default function ProjectMediaStage({
   const currentMedia = mediaList[activeIndex] || mediaList[0];
 
   const handlePrev = () => {
-    setActiveIndex((prev) => (prev > 0 ? prev - 1 : mediaList.length - 1));
-    scrollThumbTo(activeIndex > 0 ? activeIndex - 1 : mediaList.length - 1);
+    const nextIdx = activeIndex > 0 ? activeIndex - 1 : mediaList.length - 1;
+    setActiveIndex(nextIdx);
+    scrollThumbTo(nextIdx);
   };
 
   const handleNext = () => {
-    setActiveIndex((prev) => (prev < mediaList.length - 1 ? prev + 1 : 0));
-    scrollThumbTo(activeIndex < mediaList.length - 1 ? activeIndex + 1 : 0);
+    const nextIdx = activeIndex < mediaList.length - 1 ? activeIndex + 1 : 0;
+    setActiveIndex(nextIdx);
+    scrollThumbTo(nextIdx);
   };
 
   const scrollThumbTo = (idx: number) => {
@@ -97,6 +109,7 @@ export default function ProjectMediaStage({
                 muted
                 loop
                 playsInline
+                preload="metadata"
                 className="smart-main-video"
                 title={title + " video preview"}
               >
@@ -122,7 +135,7 @@ export default function ProjectMediaStage({
             </div>
           )}
 
-          {/* Enlarge / Zoom button top-right (like in reference pic) */}
+          {/* Enlarge / Zoom button bottom-right (like in reference pic) */}
           <button
             type="button"
             className="smart-enlarge-btn"
@@ -132,13 +145,14 @@ export default function ProjectMediaStage({
           >
             <svg
               viewBox="0 0 24 24"
-              width="14"
-              height="14"
+              width="15"
+              height="15"
               fill="none"
               stroke="currentColor"
               strokeWidth="2.2"
               strokeLinecap="round"
               strokeLinejoin="round"
+              aria-hidden="true"
             >
               <line x1="7" y1="17" x2="17" y2="7" />
               <polyline points="7 7 17 7 17 17" />
@@ -152,7 +166,7 @@ export default function ProjectMediaStage({
         </div>
       </div>
 
-      {/* 2. BOTTOM THUMBNAILS CAROUSEL (matching SCREENSHOT 01 / 09 with < > arrows in image) */}
+      {/* 2. BOTTOM THUMBNAILS CAROUSEL (with clean SVG left/right arrow buttons) */}
       {mediaList.length > 1 && (
         <div className="smart-thumbnails-container">
           <div className="smart-thumbnails-nav-row">
@@ -171,7 +185,19 @@ export default function ProjectMediaStage({
                 className="smart-arrow-btn"
                 aria-label="Previous screenshot"
               >
-                �
+                <svg
+                  viewBox="0 0 24 24"
+                  width="14"
+                  height="14"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
               </button>
               <button
                 type="button"
@@ -179,7 +205,19 @@ export default function ProjectMediaStage({
                 className="smart-arrow-btn"
                 aria-label="Next screenshot"
               >
-                �
+                <svg
+                  viewBox="0 0 24 24"
+                  width="14"
+                  height="14"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
               </button>
             </div>
           </div>
@@ -203,6 +241,7 @@ export default function ProjectMediaStage({
                           width="18"
                           height="18"
                           fill="currentColor"
+                          aria-hidden="true"
                         >
                           <polygon points="5 3 19 12 5 21 5 3" />
                         </svg>
@@ -228,7 +267,7 @@ export default function ProjectMediaStage({
         </div>
       )}
 
-      {/* 3. LIGHTBOX MODAL (Full Responsive Zoom on Click) */}
+      {/* 3. LIGHTBOX MODAL WITH SVG CLOSE BUTTON */}
       {selectedLightbox && (
         <div
           className="cert-lightbox-backdrop"
@@ -246,7 +285,20 @@ export default function ProjectMediaStage({
               onClick={() => setSelectedLightbox(null)}
               aria-label="Close preview"
             >
-              ?
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
             </button>
 
             <div className="project-lightbox-media-wrapper">
@@ -273,7 +325,7 @@ export default function ProjectMediaStage({
             <div className="cert-lightbox-caption">
               <h3 className="cert-lightbox-title">{selectedLightbox.caption}</h3>
               <p className="cert-lightbox-issuer">
-                High-Resolution Preview � Click outside or press <strong>Esc</strong> to close
+                High-Resolution Preview · Click outside or press <strong>Esc</strong> to close
               </p>
             </div>
           </div>
