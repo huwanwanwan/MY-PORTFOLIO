@@ -52,7 +52,7 @@ export default function Home() {
         </figure>
       </section>
       <AboutSection projectPlaceholder />
-      <ProjectsSection featuredOnly={true} limit={2} />
+      <ProjectsSection slider={true} />
       <SkillsSection />
       <ExperienceSection />
       <ContactSection />

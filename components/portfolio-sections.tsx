@@ -1,3 +1,5 @@
+import SiglaShowcase from "./sigla-showcase";
+import ProjectsSlider from "./projects-slider";
 import Link from "next/link";
 import AboutPortrait from "./about-portrait";
 import ProjectsShowcase from "./projects-showcase";
@@ -110,11 +112,7 @@ export function AboutSection({
           </div>
           <aside className="about-profile-card" aria-label="About Juan">
             {projectPlaceholder ? (
-              <div
-                className="home-project-placeholder about-project-placeholder"
-                role="img"
-                aria-label="Reserved space for a future thesis project showcase"
-              />
+              <SiglaShowcase />
             ) : (
               <AboutPortrait />
             )}
@@ -400,9 +398,11 @@ export function AboutSection({
 export function ProjectsSection({
   featuredOnly = false,
   limit,
+  slider = false,
 }: {
   featuredOnly?: boolean;
   limit?: number;
+  slider?: boolean;
 } = {}) {
   return (
     <section
@@ -418,14 +418,20 @@ export function ProjectsSection({
           Ideas and systems I&apos;ve built across mobile applications, web systems, game development, and IoT hardware.
         </p>
       </div>
-      <ProjectsShowcase featuredOnly={featuredOnly} limit={limit} />
-      {featuredOnly && (
-        <div className="projects-view-all-wrap">
-          <Link className="intro-link" href="/projects">
-            <span>Explore all 12 projects in the full directory</span>
-            <span aria-hidden="true">→</span>
-          </Link>
-        </div>
+      {slider ? (
+        <ProjectsSlider />
+      ) : (
+        <>
+          <ProjectsShowcase featuredOnly={featuredOnly} limit={limit} />
+          {featuredOnly && (
+            <div className="projects-view-all-wrap">
+              <Link className="intro-link" href="/projects">
+                <span>Explore all 14 projects in the full directory</span>
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          )}
+        </>
       )}
     </section>
   );
