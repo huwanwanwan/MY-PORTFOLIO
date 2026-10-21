@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export default function ContactHub() {
   const [copied, setCopied] = useState(false);
+  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -25,14 +26,46 @@ export default function ContactHub() {
     }
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const mailSubject = encodeURIComponent(
-      formState.subject
-        ? `[Portfolio] ${formState.subject} - from ${formState.name}`
-        : `Portfolio Inquiry from ${formState.name || "Visitor"}`
-    );
-    const bodyContent = `Hi Juan,
+    setFormStatus("submitting");
+
+    try {
+      // Send directly to militantejuanenricodomanico@gmail.com via FormSubmit AJAX endpoint
+      const response = await fetch("https://formsubmit.co/ajax/militantejuanenricodomanico@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          _subject: formState.subject
+            ? `[Portfolio Contact] ${formState.subject} - from ${formState.name}`
+            : `New Portfolio Message from ${formState.name}`,
+          name: formState.name,
+          email: formState.email,
+          phone: formState.phone || "Not provided",
+          subject: formState.subject || "General Inquiry",
+          message: formState.message,
+          _template: "table",
+        }),
+      });
+
+      if (response.ok) {
+        setFormStatus("success");
+        setFormState({ name: "", email: "", phone: "", subject: "", message: "" });
+      } else {
+        throw new Error("Form submission error");
+      }
+    } catch {
+      // Fallback: open user's mail client directly with all prefilled details
+      setFormStatus("error");
+      const mailSubject = encodeURIComponent(
+        formState.subject
+          ? `[Portfolio] ${formState.subject} - from ${formState.name}`
+          : `Portfolio Inquiry from ${formState.name || "Visitor"}`
+      );
+      const bodyContent = `Hi Juan,
 
 ${formState.message}
 
@@ -42,10 +75,10 @@ Name: ${formState.name}
 Email: ${formState.email}
 Phone: ${formState.phone || "Not provided"}`;
 
-    const mailtoUrl = `mailto:${emailAddress}?subject=${mailSubject}&body=${encodeURIComponent(
-      bodyContent
-    )}`;
-    window.location.href = mailtoUrl;
+      window.location.href = `mailto:${emailAddress}?subject=${mailSubject}&body=${encodeURIComponent(
+        bodyContent
+      )}`;
+    }
   };
 
   return (
@@ -264,15 +297,34 @@ Phone: ${formState.phone || "Not provided"}`;
               />
             </div>
 
+            {formStatus === "success" && (
+              <div className="contact-status-banner success">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+                <span>Thank you! Your message was sent directly to my Gmail inbox. I will reply soon.</span>
+              </div>
+            )}
+
+            {formStatus === "error" && (
+              <div className="contact-status-banner info">
+                <span>Opening your email app to send directly to militantejuanenricodomanico@gmail.com...</span>
+              </div>
+            )}
+
             <div className="form-footer-action">
               <div className="form-security-note">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
-                <span>Directly routes to militantejuanenricodomanico@gmail.com</span>
+                <span>Directly sends to militantejuanenricodomanico@gmail.com</span>
               </div>
-              <button type="submit" className="submit-dispatch-btn">
-                <span>Send via Gmail</span>
+              <button
+                type="submit"
+                className="submit-dispatch-btn"
+                disabled={formStatus === "submitting"}
+              >
+                <span>{formStatus === "submitting" ? "Sending Message..." : "Send Message"}</span>
                 <span className="dispatch-arrow" aria-hidden="true">↗</span>
               </button>
             </div>

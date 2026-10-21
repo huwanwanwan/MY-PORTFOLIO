@@ -149,9 +149,79 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
 
         <div className="dashboard-content page-content">{children}</div>
 
-        <footer className="footer">
-          <Link href="/">Juan Domanico Militante</Link>
-          <span>© 2026 · BUILT WITH CURIOSITY</span>
+        <footer className="site-mega-footer">
+          <div className="site-mega-footer-content">
+            {/* Column 1: Identity & Bio */}
+            <div className="mega-footer-col brand-col">
+              <Link href="/" className="mega-footer-logo">
+                juanmilitante.
+              </Link>
+              <p className="mega-footer-tagline">
+                Information Technology student building practical web, mobile, game, and IoT projects.
+              </p>
+            </div>
+
+            {/* Column 2: Navigation Links */}
+            <div className="mega-footer-col">
+              <span className="mega-footer-heading">NAVIGATE</span>
+              <ul className="mega-footer-list">
+                <li><Link href="/about">About me</Link></li>
+                <li><Link href="/projects">Projects</Link></li>
+                <li><Link href="/skills">Skills</Link></li>
+                <li><Link href="/experience">Experience</Link></li>
+                <li><Link href="/contact">Contact</Link></li>
+                <li><Link href="/experience#credentials">Certifications</Link></li>
+              </ul>
+            </div>
+
+            {/* Column 3: Connect Links */}
+            <div className="mega-footer-col">
+              <span className="mega-footer-heading">CONNECT</span>
+              <ul className="mega-footer-list">
+                <li>
+                  <a href="https://www.linkedin.com/in/juan-enrico-militante-784869376/" target="_blank" rel="noopener noreferrer">
+                    LinkedIn ↗
+                  </a>
+                </li>
+                <li>
+                  <a href="https://github.com/huwanwanwan" target="_blank" rel="noopener noreferrer">
+                    GitHub ↗
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.facebook.com/juanenrico.militante" target="_blank" rel="noopener noreferrer">
+                    Facebook ↗
+                  </a>
+                </li>
+                <li>
+                  <a href="mailto:militantejuanenricodomanico@gmail.com">
+                    Email ↗
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 4: Education */}
+            <div className="mega-footer-col">
+              <span className="mega-footer-heading">EDUCATION</span>
+              <div className="mega-footer-edu">
+                <p className="mega-footer-degree">Information Technology</p>
+                <p className="mega-footer-school">Pambayang Dalubhasaan ng Marilao</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="site-mega-footer-bottom">
+            <span>© 2026 Juan Enrico Domanico Militante</span>
+            <span className="bottom-tag">Designed &amp; Developed by Juan Enrico Militante</span>
+            <button
+              type="button"
+              className="back-to-top-btn"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
+              Back to top ↑
+            </button>
+          </div>
         </footer>
       </article>
     </main>
