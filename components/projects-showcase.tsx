@@ -295,7 +295,7 @@ export default function ProjectsShowcase({
           return (
             <article
               key={project.id}
-              className="smart-project-row scroll-reveal"
+              className={`smart-project-row scroll-reveal ${isReversed ? "row-reversed" : ""}`}
               data-scroll-reveal
               id={`project-${project.id}`}
             >

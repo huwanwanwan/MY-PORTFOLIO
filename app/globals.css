@@ -5076,15 +5076,36 @@ h2 {
   border-bottom: 1px solid var(--line);
 }
 
+.smart-project-row.row-reversed {
+  grid-template-columns: minmax(320px, 1fr) minmax(0, 1.15fr);
+}
+
+.smart-project-row.row-reversed .smart-col-media {
+  order: 2;
+}
+
+.smart-project-row.row-reversed .smart-col-info {
+  order: 1;
+}
+
 .smart-project-row:last-child {
   border-bottom: none;
   padding-bottom: 0;
 }
 
 @media (max-width: 960px) {
-  .smart-project-row {
+  .smart-project-row,
+  .smart-project-row.row-reversed {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+
+  .smart-project-row.row-reversed .smart-col-media {
+    order: 1;
+  }
+
+  .smart-project-row.row-reversed .smart-col-info {
+    order: 2;
   }
 }
 
@@ -5213,31 +5234,37 @@ h2 {
   text-transform: uppercase;
 }
 
-.smart-nav-arrows {
-  display: inline-flex;
-  gap: 6px;
+/* Endpoint Arrows Wrapper: Left arrow on far left, Right arrow on far right */
+.smart-carousel-endpoint-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
 }
 
-.smart-arrow-btn {
-  width: 28px;
-  height: 28px;
+.smart-arrow-endpoint-btn {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
   border-radius: 99px;
   border: 1px solid var(--line);
   background: var(--card-surface);
   color: var(--ink);
-  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
-  line-height: 1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  z-index: 2;
 }
 
-.smart-arrow-btn:hover {
+.smart-arrow-endpoint-btn:hover {
   background: var(--accent);
   color: #fff;
   border-color: var(--accent);
+  transform: scale(1.05);
 }
 
 /* Thumbnails Strip */
@@ -5248,6 +5275,8 @@ h2 {
   padding-bottom: 6px;
   scrollbar-width: thin;
   scrollbar-color: var(--line) transparent;
+  width: 100%;
+  flex: 1;
 }
 
 .smart-thumb-card {
@@ -5453,4 +5482,40 @@ h2 {
   width: auto;
   height: auto;
   border-radius: 8px;
+}
+
+/* Lightbox Modal Responsive Size Fix:
+   Normal size, contained within viewport, perfectly sized for both portrait mobile and landscape screenshots.
+*/
+.cert-lightbox-container.project-lightbox-modal {
+  max-width: 860px !important;
+  width: auto !important;
+  display: inline-flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.cert-lightbox-container.project-lightbox-modal.is-portrait {
+  max-width: 440px !important;
+}
+
+.project-lightbox-media-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #09090b;
+  padding: clamp(12px, 2.5vw, 24px);
+  max-height: 72vh;
+  overflow: hidden;
+}
+
+.project-lightbox-image {
+  max-width: 100%;
+  max-height: 66vh !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  border-radius: 8px;
+  display: block;
 }

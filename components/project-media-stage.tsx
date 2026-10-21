@@ -166,7 +166,7 @@ export default function ProjectMediaStage({
         </div>
       </div>
 
-      {/* 2. BOTTOM THUMBNAILS CAROUSEL (with clean SVG left/right arrow buttons) */}
+      {/* 2. BOTTOM THUMBNAILS CAROUSEL (Arrows at opposite end points: left arrow on the far left, right arrow on the far right) */}
       {mediaList.length > 1 && (
         <div className="smart-thumbnails-container">
           <div className="smart-thumbnails-nav-row">
@@ -178,91 +178,93 @@ export default function ProjectMediaStage({
                   " / " +
                   String(mediaList.length).padStart(2, "0")}
             </span>
-            <div className="smart-nav-arrows">
-              <button
-                type="button"
-                onClick={handlePrev}
-                className="smart-arrow-btn"
-                aria-label="Previous screenshot"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  width="14"
-                  height="14"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <polyline points="15 18 9 12 15 6" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                onClick={handleNext}
-                className="smart-arrow-btn"
-                aria-label="Next screenshot"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  width="14"
-                  height="14"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <polyline points="9 18 15 12 9 6" />
-                </svg>
-              </button>
-            </div>
           </div>
 
-          <div className="smart-thumbs-scroll-strip" ref={thumbStripRef}>
-            {mediaList.map((item, idx) => {
-              const isSelected = idx === activeIndex;
-              return (
-                <button
-                  key={item.src + idx}
-                  type="button"
-                  onClick={() => setActiveIndex(idx)}
-                  className={"smart-thumb-card" + (isSelected ? " active-thumb" : "")}
-                  aria-label={"Select " + item.caption}
-                >
-                  <div className="smart-thumb-preview-box">
-                    {item.type === "video" ? (
-                      <div className="smart-thumb-video-icon">
-                        <svg
-                          viewBox="0 0 24 24"
-                          width="18"
-                          height="18"
-                          fill="currentColor"
-                          aria-hidden="true"
-                        >
-                          <polygon points="5 3 19 12 5 21 5 3" />
-                        </svg>
-                        <span className="smart-thumb-video-text">VIDEO</span>
-                      </div>
-                    ) : (
-                      <Image
-                        src={item.src}
-                        alt={item.caption}
-                        fill
-                        sizes="160px"
-                        className="smart-thumb-img"
-                      />
-                    )}
-                  </div>
-                  <span className="smart-thumb-caption-text">
-                    {item.caption}
-                  </span>
-                </button>
-              );
-            })}
+          <div className="smart-carousel-endpoint-wrapper">
+            <button
+              type="button"
+              onClick={handlePrev}
+              className="smart-arrow-endpoint-btn prev"
+              aria-label="Previous screenshot"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+
+            <div className="smart-thumbs-scroll-strip" ref={thumbStripRef}>
+              {mediaList.map((item, idx) => {
+                const isSelected = idx === activeIndex;
+                return (
+                  <button
+                    key={item.src + idx}
+                    type="button"
+                    onClick={() => setActiveIndex(idx)}
+                    className={"smart-thumb-card" + (isSelected ? " active-thumb" : "")}
+                    aria-label={"Select " + item.caption}
+                  >
+                    <div className="smart-thumb-preview-box">
+                      {item.type === "video" ? (
+                        <div className="smart-thumb-video-icon">
+                          <svg
+                            viewBox="0 0 24 24"
+                            width="18"
+                            height="18"
+                            fill="currentColor"
+                            aria-hidden="true"
+                          >
+                            <polygon points="5 3 19 12 5 21 5 3" />
+                          </svg>
+                          <span className="smart-thumb-video-text">VIDEO</span>
+                        </div>
+                      ) : (
+                        <Image
+                          src={item.src}
+                          alt={item.caption}
+                          fill
+                          sizes="160px"
+                          className="smart-thumb-img"
+                        />
+                      )}
+                    </div>
+                    <span className="smart-thumb-caption-text">
+                      {item.caption}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <button
+              type="button"
+              onClick={handleNext}
+              className="smart-arrow-endpoint-btn next"
+              aria-label="Next screenshot"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
           </div>
         </div>
       )}
@@ -276,7 +278,12 @@ export default function ProjectMediaStage({
           aria-modal="true"
         >
           <div
-            className="cert-lightbox-container project-lightbox-modal"
+            className={`cert-lightbox-container project-lightbox-modal ${
+              selectedLightbox.src.includes("SIGLA") ||
+              selectedLightbox.caption.toLowerCase().includes("mobile")
+                ? "is-portrait"
+                : ""
+            }`}
             onClick={(e) => e.stopPropagation()}
           >
             <button
