@@ -40,6 +40,7 @@ export const projectsData: ProjectItem[] = [
   {
     id: "marilao-fantasy",
     video: "/MARILAO FANTASY/Video Project 4.mp4",
+    images: ["/MARILAO FANTASY/1.png","/MARILAO FANTASY/2.png","/MARILAO FANTASY/3.png"],
 
     title: "Marilao Fantasy",
     category: "Games & Animation",
@@ -245,6 +246,7 @@ export const projectsData: ProjectItem[] = [
   {
     id: "recognizarenus",
     video: "/RECOGNIZARENUS/733ad45e-4c1c-42a5-a5b8-46d6ef3362c0.mp4",
+    images: ["/RECOGNIZARENUS/1.png","/RECOGNIZARENUS/2.png","/RECOGNIZARENUS/3.png"],
 
     title: "RecogniZarenus",
     category: "IoT & Hardware",
