@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { ProjectItem, projectsData } from "../data/projects-data";
 import { TechIcon } from "./tech-icon";
+import ProjectMediaStage from "./project-media-stage";
 
 type CategoryFilter =
   | "All"
@@ -308,13 +309,21 @@ export default function ProjectsShowcase({
                     <span className="card-category-badge">{project.category}</span>
                   </div>
 
-                  <div className="card-emblem-stage">
-                    <div className="emblem-halo">
-                      <ProjectEmblem id={project.id} />
-                    </div>
-                    <h3 className="card-emblem-title">{project.title}</h3>
-                    <p className="card-emblem-subtitle">{project.type}</p>
-                  </div>
+                  <ProjectMediaStage
+                    title={project.title}
+                    category={project.category}
+                    video={project.video}
+                    images={project.images}
+                    fallbackEmblem={
+                      <>
+                        <div className="emblem-halo">
+                          <ProjectEmblem id={project.id} />
+                        </div>
+                        <h3 className="card-emblem-title">{project.title}</h3>
+                        <p className="card-emblem-subtitle">{project.type}</p>
+                      </>
+                    }
+                  />
 
                   {/* Quick Facts Grid */}
                   <div className="card-spec-grid">

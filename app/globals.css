@@ -4769,3 +4769,280 @@ h2 {
     animation: none;
   }
 }
+
+
+/* ==========================================================================
+   PROJECT MEDIA STAGE (HERO VIDEO + SCREENSHOT CAROUSEL)
+   Thriftly-inspired bespoke presentation with landscape crop & loopable video
+   ========================================================================== */
+
+.project-media-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 22px;
+  width: 100%;
+}
+
+.project-media-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #090a0c;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-player-container,
+.image-viewport-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landscape-media-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #000;
+}
+
+.landscape-media-image.unity-crop-landscape {
+  object-fit: cover;
+  object-position: center;
+}
+
+.landscape-media-image.contain-landscape {
+  object-fit: contain;
+  object-position: center;
+  background: #090a0c;
+}
+
+/* Video Live / Looping badge */
+.video-live-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(14, 18, 23, 0.78);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: livePulse 1.8s infinite ease-in-out;
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* Viewport Caption Bar */
+.viewport-caption-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: linear-gradient(180deg, transparent 0%, rgba(9, 10, 12, 0.88) 100%);
+  color: #f1f3f5;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+
+.caption-text {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 12px;
+}
+
+.caption-counter {
+  font-family: var(--font-mono, monospace);
+  font-size: 10px;
+  opacity: 0.85;
+  flex-shrink: 0;
+}
+
+/* Thumbnail Section */
+.media-thumbnail-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--raised-surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 10px 12px;
+}
+
+.thumbnail-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2px;
+}
+
+.thumbnail-lead-title {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.thumbnail-nav-arrows {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.thumb-nav-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--card-surface);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.thumb-nav-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* Thumbnails horizontal strip */
+.media-thumbnails-strip {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+.media-thumbnails-strip::-webkit-scrollbar {
+  height: 4px;
+}
+
+.media-thumbnails-strip::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 999px;
+}
+
+.media-thumb-item {
+  flex: 0 0 76px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: transparent;
+  border: 1.5px solid transparent;
+  border-radius: 8px;
+  padding: 3px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.media-thumb-item:hover {
+  border-color: var(--line);
+  transform: translateY(-1px);
+}
+
+.media-thumb-item.selected {
+  border-color: var(--accent);
+  background: var(--card-surface);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.thumb-preview-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #111418;
+}
+
+.thumb-img {
+  object-fit: cover;
+}
+
+.thumb-video-icon-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  background: linear-gradient(135deg, rgba(200, 75, 49, 0.18), rgba(0, 0, 0, 0.85));
+  color: #fff;
+}
+
+.thumb-play-icon {
+  width: 16px;
+  height: 16px;
+  fill: var(--accent);
+}
+
+.thumb-video-tag {
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #fff;
+}
+
+.thumb-item-label {
+  font-size: 9px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 2px;
+  line-height: 1.2;
+}
+
+.media-thumb-item.selected .thumb-item-label {
+  color: var(--accent);
+  font-weight: 700;
+}

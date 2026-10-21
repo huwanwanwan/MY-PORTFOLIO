@@ -11,11 +11,15 @@ export interface ProjectItem {
   paragraphs: string[];
   highlights?: { label: string; value: string }[];
   tags: string[];
+  video?: string;
+  images?: string[];
 }
 
 export const projectsData: ProjectItem[] = [
   {
     id: "milktaste",
+    images: ["/MILKTASTE/Milktaste POS Dashboard.png","/MILKTASTE/Milktaste POS Sales Dashboard.png","/MILKTASTE/Milktaste POS_ Good Drinks, Better Days.png"],
+
     title: "Milktaste",
     category: "Web & Systems",
     type: "Desktop Application · First-Year Project",
@@ -35,6 +39,8 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "marilao-fantasy",
+    video: "/MARILAO FANTASY/Video Project 4.mp4",
+
     title: "Marilao Fantasy",
     category: "Games & Animation",
     type: "2D Animation · CGA Project",
@@ -56,6 +62,8 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "attack-on-pdm",
+    images: ["/ATTACK ON PDM/1.png","/ATTACK ON PDM/2.png","/ATTACK ON PDM/3.png"],
+
     title: "Attack on PDM",
     category: "Mobile & AR",
     type: "Augmented Reality (AR) Game · Unity",
@@ -76,6 +84,9 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "force-x",
+    video: "/FORCE X/Video Project 5.mp4",
+    images: ["/FORCE X/1.png","/FORCE X/2.png","/FORCE X/3.png"],
+
     title: "Force X",
     category: "Games & Animation",
     type: "3D Combat Action Game · Unity",
@@ -95,6 +106,9 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "almighty-jungle",
+    video: "/ALMIGHTY JUNGLE/Video Project 6.mp4",
+    images: ["/ALMIGHTY JUNGLE/1.png","/ALMIGHTY JUNGLE/2.png","/ALMIGHTY JUNGLE/3.png"],
+
     title: "Almighty Jungle",
     category: "Games & Animation",
     type: "Action-Adventure Game · Unity",
@@ -114,6 +128,8 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "fitness-management-system",
+    images: ["/FITNESS MANAGEMENT SYSTEM/login.jpg","/FITNESS MANAGEMENT SYSTEM/dashboard.jpg","/FITNESS MANAGEMENT SYSTEM/Fitness Management Preferences Dashboard.png"],
+
     title: "Fitness Management System",
     category: "Web & Systems",
     type: "Database Management System",
@@ -132,6 +148,8 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "la-nina-detector",
+    images: ["/LA NINA DETECTOR/1.png","/LA NINA DETECTOR/2.png"],
+
     title: "La Niña Detector",
     category: "IoT & Hardware",
     type: "IoT & Rain Sensing Alarm · Arduino Exhibit",
@@ -153,6 +171,8 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "doculink",
+    images: ["/DOCULINK/1.png","/DOCULINK/2.png","/DOCULINK/3.png","/DOCULINK/4.png","/DOCULINK/5.png"],
+
     title: "DocuLink",
     category: "Web & Systems",
     type: "Web Document Request System · EDOOP Case Study",
@@ -176,6 +196,8 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "inventopos",
+    images: ["/INVENTOPOS/a.png","/INVENTOPOS/b.png","/INVENTOPOS/c.png","/INVENTOPOS/d.png","/INVENTOPOS/e.png"],
+
     title: "InventoPOS",
     category: "Web & Systems",
     type: "Point of Sale & Inventory · Web Dev & SAD Case Study",
@@ -199,6 +221,8 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "halal-2025",
+    images: ["/HALAL/01-login.png","/HALAL/admin (1).png","/HALAL/names.png","/HALAL/partylist.png"],
+
     title: "HALAL 2025",
     category: "Web & Systems",
     type: "E-Voting System · Collaborative Case Study",
@@ -220,6 +244,8 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "recognizarenus",
+    video: "/RECOGNIZARENUS/733ad45e-4c1c-42a5-a5b8-46d6ef3362c0.mp4",
+
     title: "RecogniZarenus",
     category: "IoT & Hardware",
     type: "Facial Recognition Attendance & Turnstile Gate · Proposed Thesis",
@@ -243,6 +269,9 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "sigla",
+    video: "/SIGLA/mobile-demo.mp4",
+    images: ["/SIGLA/home.jpg","/SIGLA/demo.jpg","/SIGLA/wbank.jpg","/SIGLA/words.jpg","/SIGLA/thistory.jpg","/SIGLA/settings.jpg"],
+
     title: "SigLa",
     category: "Mobile & AR",
     type: "Mobile Sign Language Translator · Capstone / Thesis Project",
@@ -266,6 +295,9 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "class-project-game",
+    video: "/GAME CLASS PROJECT/Video Project 3.mp4",
+    images: ["/GAME CLASS PROJECT/1 (1).png","/GAME CLASS PROJECT/1 (2).png","/GAME CLASS PROJECT/1 (3).png","/GAME CLASS PROJECT/1 (4).png"],
+
     title: "Class Project (Game Dev)",
     category: "Games & Animation",
     type: "Collaborative Game Development · Whole Class Project",
@@ -287,6 +319,9 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "isla-arena",
+    video: "/ISLA ARENA/ISLA-ARENA.mp4",
+    images: ["/ISLA ARENA/581922790_1915684318982377_750569404941995645_n.png","/ISLA ARENA/582005784_679413974991478_5356055866333338387_n.png","/ISLA ARENA/582038529_1158891479684778_5547038022113125779_n.png","/ISLA ARENA/582111548_1356947798645470_2580309156226525690_n.png","/ISLA ARENA/582241666_1508299640282798_1117224788198386177_n.png"],
+
     title: "Isla Arena",
     category: "Games & Animation",
     type: "3D Battle Arena · Unity Class Project",
