@@ -192,7 +192,7 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
             {/* Column 1: Identity & Bio */}
             <div className="mega-footer-col brand-col">
               <Link href="/" className="mega-footer-logo">
-                Huwananan.
+                Huwananan
               </Link>
               <p className="mega-footer-tagline">
                 Information Technology student building practical web, mobile, game, and IoT projects.

@@ -1776,7 +1776,7 @@ h1 {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 5;
+  z-index: 10;
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -1801,11 +1801,11 @@ h1 {
 }
 
 .skills-side-arrow-left {
-  left: -20px;
+  left: 12px;
 }
 
 .skills-side-arrow-right {
-  right: -20px;
+  right: 12px;
 }
 
 .skills-projects-horizontal-scroll {
@@ -2762,6 +2762,24 @@ h2 {
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .projects-category-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    width: 100%;
+    padding-bottom: 4px;
+  }
+  .projects-category-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .project-filter-pill {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
 }
 
 .project-filter-pill {
@@ -4454,8 +4472,29 @@ h2 {
 
   .mobile-only-actions {
     display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
     justify-content: center;
+    align-items: center;
     width: 100%;
+    max-width: 420px;
+    gap: 10px !important;
+  }
+
+  .mobile-only-actions .intro-link {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    padding-inline: 10px !important;
+    min-height: 50px !important;
+    font-size: 13.5px !important;
+    white-space: nowrap !important;
+    gap: 5px !important;
+  }
+
+  .mobile-only-actions .intro-link svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
   }
 
   .mobile-only-tech {
@@ -4685,7 +4724,7 @@ h2 {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 5;
+  z-index: 10;
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -4703,11 +4742,11 @@ h2 {
 }
 
 .cert-side-arrow-left {
-  left: -20px;
+  left: 12px;
 }
 
 .cert-side-arrow-right {
-  right: -20px;
+  right: 12px;
 }
 
 .cert-side-arrow:hover {
@@ -5163,7 +5202,20 @@ h2 {
     margin-top: 4px;
   }
   .cert-side-arrow {
-    display: none !important;
+    display: flex !important;
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 20px !important;
+    background: color-mix(in srgb, var(--card-surface) 90%, transparent) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    box-shadow: 0 4px 14px rgb(0 0 0 / 30%) !important;
+  }
+  .cert-side-arrow-left {
+    left: 8px !important;
+  }
+  .cert-side-arrow-right {
+    right: 8px !important;
   }
   .cert-carousel-wrapper {
     padding: 0;
@@ -5191,7 +5243,20 @@ h2 {
 
   /* Skills Projects Carousel on Mobile */
   .skills-side-arrow {
-    display: none !important;
+    display: flex !important;
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 20px !important;
+    background: color-mix(in srgb, var(--card-surface) 90%, transparent) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    box-shadow: 0 4px 14px rgb(0 0 0 / 30%) !important;
+  }
+  .skills-side-arrow-left {
+    left: 8px !important;
+  }
+  .skills-side-arrow-right {
+    right: 8px !important;
   }
   .skills-projects-carousel-wrapper {
     padding: 0;
@@ -7420,29 +7485,35 @@ h2 {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 13px 22px;
+  padding: 13px 24px;
   border-radius: 12px;
-  border: 1.5px solid var(--card-border);
-  background: var(--card-surface);
-  color: var(--ink);
+  border: 1px solid #ff574b;
+  background: #f04e42;
+  color: #ffffff !important;
   font-size: 14px;
   font-weight: 750;
   text-decoration: none;
-  transition: transform 0.22s ease, border-color 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
+  box-shadow: 0 8px 24px rgb(240 78 66 / 24%);
+  transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+}
+
+.home-about-outline-btn svg {
+  stroke: #ffffff;
 }
 
 .dark .home-about-outline-btn,
 [data-theme="dark"] .home-about-outline-btn {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.22);
-  color: #f5f3ef;
+  background: #f04e42;
+  border-color: #ff574b;
+  color: #ffffff !important;
+  box-shadow: 0 8px 24px rgb(240 78 66 / 32%);
 }
 
 .home-about-outline-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  background: #e0382c;
+  color: #ffffff !important;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(198, 83, 54, 0.14);
+  box-shadow: 0 12px 28px rgb(240 78 66 / 36%);
 }
 
 @media (max-width: 900px) {
