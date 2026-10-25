@@ -210,19 +210,19 @@ export function AboutSection({
           <div className="about-hero-copy">
             <p className="section-kicker">ABOUT ME · BULACAN, PHILIPPINES</p>
             <h1 id="about-heading">
-              Curious by nature.
+              Designing with precision.
               <br />
-              Building with <em>purpose.</em>
+              Engineering with <em>impact.</em>
             </h1>
             <p className="about-lead">
-              I&apos;m Juan Domanico Militante, known as Ikoy. I enjoy creating
-              websites and mobile apps that make ideas useful and easy to
-              experience.
+              I&apos;m Juan Domanico Militante (known as Ikoy)—a Web &amp; Mobile
+              Developer dedicated to crafting responsive digital products,
+              intuitive interfaces, and performant user experiences.
             </p>
             <p className="about-supporting-copy">
-              As a front-end developer, I contributed to SIGLA, my
-              thesis/capstone project: a mobile sign language translator
-              application for people with speech and/or hearing disabilities.
+              From clean front-end architecture to offline-first engineering in
+              projects like SIGLA (a mobile sign language translator app), I build
+              purposeful software that connects ideas with real-world accessibility.
             </p>
             <div className="intro-actions about-actions">
               <Link className="intro-link" href="/projects">
@@ -268,7 +268,10 @@ export function AboutSection({
         </div>
         <div className="about-principles-grid">
           <article className="about-principle scroll-reveal" data-scroll-reveal>
-            <span>01</span>
+            <div className="about-principle-top">
+              <span>01</span>
+              <span className="about-principle-highlight">HUMAN-CENTERED</span>
+            </div>
             <h3>Start with the people</h3>
             <p>
               I think about who will use a project and what they need it to help
@@ -276,7 +279,10 @@ export function AboutSection({
             </p>
           </article>
           <article className="about-principle scroll-reveal" data-scroll-reveal>
-            <span>02</span>
+            <div className="about-principle-top">
+              <span>02</span>
+              <span className="about-principle-highlight">INTUITIVE UI</span>
+            </div>
             <h3>Shape a clear experience</h3>
             <p>
               I enjoy building friendly interfaces for websites and mobile
@@ -284,7 +290,10 @@ export function AboutSection({
             </p>
           </article>
           <article className="about-principle scroll-reveal" data-scroll-reveal>
-            <span>03</span>
+            <div className="about-principle-top">
+              <span>03</span>
+              <span className="about-principle-highlight">GROWTH MINDSET</span>
+            </div>
             <h3>Keep learning by building</h3>
             <p>
               Each project helps me practice, improve, and make my next work

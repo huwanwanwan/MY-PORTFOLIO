@@ -493,9 +493,13 @@ h1 {
 }
 
 .about-hero-copy h1 em {
-  color: var(--section-ink);
-  font-family: Georgia, serif;
-  font-weight: 500;
+  color: var(--accent);
+  font-family: inherit;
+  font-weight: 800;
+  font-style: normal;
+  background: linear-gradient(135deg, var(--accent) 0%, #ff8359 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .about-lead {
@@ -731,6 +735,27 @@ h1 {
   letter-spacing: 1px;
 }
 
+.about-principle-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.about-principle-highlight {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  padding: 3px 8px;
+  border-radius: 999px;
+  display: inline-block;
+  line-height: 1.3;
+}
+
 .about-principle h3 {
   margin: 24px 0 8px;
   color: var(--ink);
@@ -778,15 +803,20 @@ h1 {
 }
 
 .about-detail-card {
+  position: relative;
+  overflow: hidden;
   min-width: 0;
   padding: clamp(20px, 3vw, 30px);
   border: 1px solid var(--card-border);
+  border-top: 3px solid var(--accent);
   border-radius: 26px;
   background: var(--card-surface);
   box-shadow: 0 12px 32px rgb(35 33 30 / 5%);
   transition:
     opacity 950ms cubic-bezier(0.22, 1, 0.36, 1),
-    translate 950ms cubic-bezier(0.22, 1, 0.36, 1);
+    translate 950ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
   will-change: translate, opacity;
 }
 
@@ -5011,15 +5041,24 @@ h2 {
 
 /* ─── Responsive adjustments ─── */
 @media (max-width: 768px) {
-  .cert-side-arrow-left {
-    left: 4px;
+  .cert-side-arrow {
+    display: none !important;
   }
-  .cert-side-arrow-right {
-    right: 4px;
+  .cert-carousel-wrapper {
+    padding: 0 4px;
+  }
+  .cert-carousel-scroll {
+    padding: 8px 4px 16px;
+    gap: 14px;
+    scroll-padding: 0 12px;
   }
   .cert-slide-card {
-    flex: 0 0 84vw;
-    padding: 18px;
+    flex: 0 0 calc(100vw - 44px);
+    max-width: 380px;
+    padding: 16px;
+  }
+  .cert-card-preview-frame {
+    height: 180px;
   }
   .cert-lightbox-arrow {
     display: none;
