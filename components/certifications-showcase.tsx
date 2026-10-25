@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import {
   certificationsData,
@@ -10,7 +11,12 @@ import {
 export default function CertificationsShowcase() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [lightboxCert, setLightboxCert] = useState<CertificationItem | null>(null);
+  const [mounted, setMounted] = useState<boolean>(false);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const categories = ["All", "Certifications", "Seminars", "Competitions"] as const;
 
@@ -46,6 +52,16 @@ export default function CertificationsShowcase() {
     const prevIndex = (currentIndex - 1 + filtered.length) % filtered.length;
     setLightboxCert(filtered[prevIndex]);
   }, [lightboxCert, filtered]);
+
+  useEffect(() => {
+    if (lightboxCert) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [lightboxCert]);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -229,8 +245,8 @@ export default function CertificationsShowcase() {
         </button>
       </div>
 
-      {/* ── High-Resolution Lightbox Modal ── */}
-      {lightboxCert && (
+      {/* ── High-Resolution Lightbox Modal rendered via Portal directly to body ── */}
+      {lightboxCert && mounted && typeof document !== "undefined" && createPortal(
         <div
           className="cert-lightbox-backdrop"
           onClick={handleCloseLightbox}
@@ -298,7 +314,8 @@ export default function CertificationsShowcase() {
               <p className="cert-lightbox-desc">{lightboxCert.description}</p>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );
