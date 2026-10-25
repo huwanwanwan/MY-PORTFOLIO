@@ -70,14 +70,22 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
   }, [activePage, pathname]);
 
   useEffect(() => {
-    const revealItems = document.querySelectorAll<HTMLElement>(
-      "[data-scroll-reveal]",
-    );
+    const observeElement = (item: HTMLElement, observer?: IntersectionObserver) => {
+      if (!("IntersectionObserver" in window) || !observer) {
+        item.dataset.revealReady = "true";
+        item.dataset.revealVisible = "true";
+        return;
+      }
+      if (item.dataset.revealObserved === "true") return;
+      item.dataset.revealObserved = "true";
+      item.dataset.revealReady = "true";
+      observer.observe(item);
+    };
 
     if (!("IntersectionObserver" in window)) {
-      revealItems.forEach((item) => {
-        item.dataset.revealVisible = "true";
-      });
+      document
+        .querySelectorAll<HTMLElement>("[data-scroll-reveal]")
+        .forEach((item) => observeElement(item));
       return;
     }
 
@@ -86,25 +94,39 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
         entries.forEach((entry) => {
           const item = entry.target as HTMLElement;
           if (!entry.isIntersecting) {
-            item.dataset.revealVisible = "false";
             return;
           }
-
           item.dataset.revealVisible = "true";
         });
       },
       {
-        threshold: 0.08,
-        rootMargin: "0px 0px -18% 0px",
+        threshold: 0.05,
+        rootMargin: "0px 0px -6% 0px",
       },
     );
 
-    revealItems.forEach((item) => {
-      item.dataset.revealReady = "true";
-      observer.observe(item);
+    const scanAndObserve = () => {
+      document
+        .querySelectorAll<HTMLElement>("[data-scroll-reveal]")
+        .forEach((item) => observeElement(item, observer));
+    };
+
+    scanAndObserve();
+
+    const mutationObserver = new MutationObserver(() => {
+      scanAndObserve();
     });
 
-    return () => observer.disconnect();
+    const pageContainer = document.querySelector(".page-content") || document.body;
+    mutationObserver.observe(pageContainer, {
+      childList: true,
+      subtree: true,
+    });
+
+    return () => {
+      observer.disconnect();
+      mutationObserver.disconnect();
+    };
   }, [pathname]);
 
   function toggleTheme() {

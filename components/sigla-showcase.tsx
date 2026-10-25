@@ -45,6 +45,7 @@ export default function SiglaShowcase() {
                   fill
                   sizes="260px"
                   className="phone-screen-img"
+                  unoptimized
                 />
               </div>
             </div>
@@ -63,6 +64,7 @@ export default function SiglaShowcase() {
                   sizes="280px"
                   className="phone-screen-img"
                   priority
+                  unoptimized
                 />
               </div>
             </div>
@@ -80,6 +82,7 @@ export default function SiglaShowcase() {
                   fill
                   sizes="260px"
                   className="phone-screen-img"
+                  unoptimized
                 />
               </div>
             </div>

@@ -78,15 +78,21 @@ export function AboutSection({
   if (projectPlaceholder) {
     return (
       <section
-        className="section-block content-section home-about-showcase"
+        className="section-block content-section home-about-showcase scroll-reveal"
         id="about"
         data-scroll-reveal
         aria-labelledby="about-heading"
       >
         <div className="home-about-reversed-grid">
-          {/* LEFT COLUMN: 2x2 Stats Matrix */}
+          {/* LEFT COLUMN: 2x2 Stats Matrix (Clickable Links) */}
           <div className="home-about-stats-matrix">
-            <div className="home-stat-cell">
+            <Link
+              href="/about#about-education-heading"
+              className="home-stat-cell scroll-reveal"
+              data-scroll-reveal
+              style={{ transitionDelay: "0ms" }}
+              title="View my educational background"
+            >
               <div className="home-stat-icon-box" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
@@ -99,9 +105,15 @@ export function AboutSection({
                 <strong>4+</strong>
                 <span>Years IT Study</span>
               </div>
-            </div>
+            </Link>
 
-            <div className="home-stat-cell">
+            <Link
+              href="/projects"
+              className="home-stat-cell scroll-reveal"
+              data-scroll-reveal
+              style={{ transitionDelay: "70ms" }}
+              title="Explore all 14+ projects"
+            >
               <div className="home-stat-icon-box" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="16 18 22 12 16 6" />
@@ -113,9 +125,15 @@ export function AboutSection({
                 <strong>14+</strong>
                 <span>Projects Completed</span>
               </div>
-            </div>
+            </Link>
 
-            <div className="home-stat-cell">
+            <Link
+              href="/experience#certifications"
+              className="home-stat-cell scroll-reveal"
+              data-scroll-reveal
+              style={{ transitionDelay: "140ms" }}
+              title="View verified certificates"
+            >
               <div className="home-stat-icon-box" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="8" r="6" />
@@ -126,9 +144,15 @@ export function AboutSection({
                 <strong>11+</strong>
                 <span>Verified Certificates</span>
               </div>
-            </div>
+            </Link>
 
-            <div className="home-stat-cell">
+            <Link
+              href="/about"
+              className="home-stat-cell scroll-reveal"
+              data-scroll-reveal
+              style={{ transitionDelay: "210ms" }}
+              title="Read more about me"
+            >
               <div className="home-stat-icon-box" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
@@ -143,11 +167,15 @@ export function AboutSection({
                 <strong>100%</strong>
                 <span>Dedication &amp; Craft</span>
               </div>
-            </div>
+            </Link>
           </div>
 
           {/* RIGHT COLUMN: Description & Learn More Button */}
-          <div className="home-about-copy-right">
+          <div
+            className="home-about-copy-right scroll-reveal"
+            data-scroll-reveal
+            style={{ transitionDelay: "120ms" }}
+          >
             <span className="home-about-pill-badge">ABOUT ME</span>
             <h2 id="about-heading" className="home-about-title">
               I&apos;m passionate about creating digital solutions
@@ -173,7 +201,7 @@ export function AboutSection({
   return (
     <>
       <section
-        className="section-block content-section about-hero"
+        className="section-block content-section about-hero scroll-reveal"
         id="about"
         data-scroll-reveal
         aria-labelledby="about-heading"
@@ -225,7 +253,7 @@ export function AboutSection({
       </section>
 
       <section
-        className="section-block content-section about-approach"
+        className="section-block content-section about-approach scroll-reveal"
         id="about-approach"
         data-scroll-reveal
         aria-labelledby="about-approach-heading"
@@ -267,7 +295,7 @@ export function AboutSection({
       </section>
 
       <section
-        className="section-block content-section about-life"
+        className="section-block content-section about-life scroll-reveal"
         id="about-life"
         data-scroll-reveal
         aria-labelledby="about-life-heading"
@@ -493,7 +521,7 @@ export function ProjectsSection({
 } = {}) {
   return (
     <section
-      className="section-block content-section"
+      className="section-block content-section scroll-reveal"
       id="projects"
       data-scroll-reveal
       aria-labelledby="projects-heading"
@@ -527,7 +555,7 @@ export function ProjectsSection({
 export function SkillsSection() {
   return (
     <section
-      className="section-block content-section"
+      className="section-block content-section scroll-reveal"
       id="skills"
       data-scroll-reveal
       aria-labelledby="skills-heading"
@@ -547,7 +575,7 @@ export function SkillsSection() {
 export function ExperienceSection() {
   return (
     <section
-      className="section-block content-section"
+      className="section-block content-section scroll-reveal"
       id="experience"
       data-scroll-reveal
       aria-labelledby="experience-heading"

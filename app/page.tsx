@@ -85,19 +85,26 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="hero-tech-strip" aria-label="Technologies I work with">
+          <div
+            className="hero-tech-strip scroll-reveal"
+            data-scroll-reveal
+            aria-label="Technologies I work with"
+          >
             <p className="hero-tech-heading">TECHNOLOGIES I WORK WITH</p>
             <div className="hero-tech-icons">
-              {heroTechnologies.map((tech) => (
-                <div
+              {heroTechnologies.map((tech, idx) => (
+                <Link
                   key={tech}
-                  className="hero-tech-badge"
-                  title={tech}
-                  aria-label={tech}
+                  href={`/skills?skill=${encodeURIComponent(tech === "React.js" ? "React" : tech)}#skills`}
+                  className="hero-tech-badge scroll-reveal"
+                  data-scroll-reveal
+                  style={{ transitionDelay: `${idx * 45}ms` }}
+                  title={`Explore ${tech} projects & skills`}
+                  aria-label={`Explore ${tech} projects & skills`}
                 >
                   <TechIcon name={tech} />
                   <span className="hero-tech-label">{tech}</span>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

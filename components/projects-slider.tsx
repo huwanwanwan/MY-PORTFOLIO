@@ -21,18 +21,31 @@ function ProjectSlideMedia({
   firstImage: string | null;
 }) {
   const [videoFailed, setVideoFailed] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   if (project.video && !videoFailed) {
     const encodedVideoSrc = encodeURI(project.video);
     const encodedPoster = firstImage ? encodeURI(firstImage) : undefined;
 
     return (
-      <div className="project-slide-video-wrap">
+      <div
+        className="project-slide-video-wrap"
+        onMouseEnter={() => {
+          if (videoRef.current && videoRef.current.paused) {
+            videoRef.current.play().catch(() => {});
+          }
+        }}
+        onMouseLeave={() => {
+          if (videoRef.current && !videoRef.current.paused) {
+            videoRef.current.pause();
+          }
+        }}
+      >
         <video
+          ref={videoRef}
           src={encodedVideoSrc}
           poster={encodedPoster}
           controls
-          autoPlay
           muted
           loop
           playsInline
@@ -43,7 +56,7 @@ function ProjectSlideMedia({
         >
           Your browser does not support the video tag.
         </video>
-        <div className="video-live-badge">
+        <div className="video-live-badge" style={{ pointerEvents: "none" }}>
           <span className="live-dot" />
           <span>DEMO VIDEO</span>
         </div>
@@ -53,24 +66,34 @@ function ProjectSlideMedia({
 
   if (firstImage) {
     return (
-      <div className="project-slide-img-wrap">
+      <Link
+        href={`/projects#project-${project.id}`}
+        className="project-slide-img-wrap"
+        style={{ display: "block" }}
+        title={`View ${project.title} details`}
+      >
         <Image
-          src={firstImage}
+          src={encodeURI(firstImage)}
           alt={`${project.title} preview`}
           fill
           sizes="(max-width: 768px) 100vw, 560px"
           className="project-slide-img"
           unoptimized
         />
-        <div className="video-live-badge project-preview-badge">
+        <div className="video-live-badge project-preview-badge" style={{ pointerEvents: "none" }}>
           <span>PROJECT PREVIEW</span>
         </div>
-      </div>
+      </Link>
     );
   }
 
   return (
-    <div className="project-slide-fallback">
+    <Link
+      href={`/projects#project-${project.id}`}
+      className="project-slide-fallback"
+      style={{ textDecoration: "none", color: "inherit" }}
+      title={`View ${project.title} details`}
+    >
       <div className="fallback-emblem-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" width="36" height="36">
           <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -80,7 +103,7 @@ function ProjectSlideMedia({
       </div>
       <span className="fallback-project-title">{project.title}</span>
       <span className="fallback-notice">Desktop / Web System</span>
-    </div>
+    </Link>
   );
 }
 
@@ -207,7 +230,14 @@ export default function ProjectsSlider() {
 
                 {/* Card Title & Type */}
                 <div className="project-slide-info">
-                  <h3 className="project-slide-title">{project.title}</h3>
+                  <h3 className="project-slide-title">
+                    <Link
+                      href={`/projects#project-${project.id}`}
+                      style={{ color: "inherit", textDecoration: "none" }}
+                    >
+                      {project.title}
+                    </Link>
+                  </h3>
                   <p className="project-slide-type">{project.type}</p>
 
                   {/* Short Description */}
@@ -222,10 +252,16 @@ export default function ProjectsSlider() {
                   {/* Tech Stack Pills */}
                   <div className="project-slide-tags">
                     {project.tags.map((tag) => (
-                      <span key={tag} className="tech-tag-pill">
+                      <Link
+                        key={tag}
+                        href={`/skills?skill=${encodeURIComponent(tag === "React.js" ? "React" : tag)}#skills`}
+                        className="tech-tag-pill"
+                        style={{ textDecoration: "none", color: "inherit" }}
+                        title={`See all projects using ${tag}`}
+                      >
                         <TechIcon name={tag} />
                         <span>{tag}</span>
-                      </span>
+                      </Link>
                     ))}
                   </div>
                 </div>

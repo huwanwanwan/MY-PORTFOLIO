@@ -148,11 +148,12 @@ export default function ProjectMediaStage({
               onClick={() => setSelectedLightbox(currentMedia)}
             >
               <Image
-                src={currentMedia.src}
+                src={encodeURI(currentMedia.src)}
                 alt={currentMedia.caption}
                 fill
                 sizes="(max-width: 900px) 100vw, 650px"
                 className="smart-main-img"
+                unoptimized
               />
             </div>
           )}
@@ -251,11 +252,12 @@ export default function ProjectMediaStage({
                         </div>
                       ) : (
                         <Image
-                          src={item.src}
+                          src={encodeURI(item.src)}
                           alt={item.caption}
                           fill
                           sizes="160px"
                           className="smart-thumb-img"
+                          unoptimized
                         />
                       )}
                     </div>
@@ -333,14 +335,14 @@ export default function ProjectMediaStage({
             <div className="project-lightbox-media-wrapper">
               {selectedLightbox.type === "video" ? (
                 <video
-                  src={selectedLightbox.src}
+                  src={encodeURI(selectedLightbox.src)}
                   controls
                   autoPlay
                   className="smart-lightbox-video"
                 />
               ) : (
                 <Image
-                  src={selectedLightbox.src}
+                  src={encodeURI(selectedLightbox.src)}
                   alt={selectedLightbox.caption}
                   width={1400}
                   height={900}

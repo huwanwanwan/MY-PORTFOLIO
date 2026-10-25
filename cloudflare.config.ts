@@ -9,11 +9,9 @@ export default defineConfig({
     assets: {
       htmlHandling: "none",
       notFoundHandling: "none",
-      runWorkerFirst: ["/*", "!/_next/static/*", "!/*/_next/static/*"],
     },
     env: {
       ASSETS: bindings.assets(),
-      IMAGES: bindings.images(),
     },
   }),
 });

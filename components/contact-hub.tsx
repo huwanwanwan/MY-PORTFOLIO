@@ -83,7 +83,7 @@ Phone: ${formState.phone || "Not provided"}`;
 
   return (
     <section
-      className="section-block content-section contact-signature-section"
+      className="section-block content-section contact-signature-section scroll-reveal"
       id="contact"
       data-scroll-reveal
       aria-labelledby="contact-heading"
@@ -332,7 +332,7 @@ Phone: ${formState.phone || "Not provided"}`;
         </div>
 
         {/* Centered Resume Highlight Card */}
-        <div className="contact-resume-card">
+        <div className="contact-resume-card scroll-reveal" data-scroll-reveal>
           <div className="resume-icon-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -345,15 +345,17 @@ Phone: ${formState.phone || "Not provided"}`;
           <div className="resume-text-content">
             <h4>Curriculum Vitae / Resume</h4>
             <p>
-              My complete professional CV with academic background, tech competencies, and project portfolio will be ready for instant PDF download soon.
+              My complete professional CV with academic background, tech competencies, and project portfolio is ready for instant download or printing.
             </p>
           </div>
           <div className="resume-btn-wrap">
-            <button
-              type="button"
-              className="resume-pill-btn"
-              title="Resume download available soon"
-              disabled
+            <a
+              href="/Juan_Militante_CV.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              download="Juan_Militante_CV.html"
+              className="resume-pill-btn resume-pill-btn-active"
+              title="Download Juan Militante CV"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -361,8 +363,8 @@ Phone: ${formState.phone || "Not provided"}`;
                 <line x1="12" x2="12" y1="15" y2="3" />
               </svg>
               <span>Download Resume</span>
-              <span className="status-badge">Coming Soon</span>
-            </button>
+              <span className="status-badge">Ready</span>
+            </a>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { skills, categoryColors, type Skill } from "../data/skills-data";
 import { projectsData, type ProjectItem } from "../data/projects-data";
@@ -520,6 +520,23 @@ export default function SkillsShowcase() {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const skillParam = params.get("skill");
+    if (!skillParam) return;
+    const normalized = skillParam.toLowerCase().trim();
+    const matched = skills.find(
+      (s) =>
+        s.name.toLowerCase() === normalized ||
+        (normalized === "react.js" && s.name === "React") ||
+        (normalized === "tailwind" && s.name === "Tailwind CSS") ||
+        (normalized === "c" && s.name === "C Language"),
+    );
+    if (matched) {
+      setSelectedSkill(matched.name);
+    }
+  }, []);
+
   const filtered = (
     activeCategory === "All"
       ? skills
@@ -660,7 +677,7 @@ export default function SkillsShowcase() {
                           </span>
                         ))}
                       </div>
-                      <Link href="/projects" className="skill-project-mini-link">
+                      <Link href={`/projects#project-${p.id}`} className="skill-project-mini-link">
                         View in Projects <span>→</span>
                       </Link>
                     </article>
@@ -824,7 +841,7 @@ export default function SkillsShowcase() {
                   ))}
                 </div>
                 <div className="skills-scroll-card-footer">
-                  <Link href="/projects" className="skills-scroll-card-link">
+                  <Link href={`/projects#project-${project.id}`} className="skills-scroll-card-link">
                     Read full case study <span>→</span>
                   </Link>
                 </div>
