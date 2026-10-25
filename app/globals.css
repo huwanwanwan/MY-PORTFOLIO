@@ -7600,15 +7600,133 @@ h2 {
   box-shadow: 0 8px 20px rgba(198, 83, 54, 0.2);
 }
 
-.cert-side-arrow,
 .cert-nav-arrow,
 .cert-pill-btn,
-.skills-side-arrow,
 .skills-nav-arrow {
   position: relative;
   z-index: 25;
   pointer-events: auto;
   cursor: pointer;
+}
+
+.cert-side-arrow,
+.skills-side-arrow {
+  position: absolute;
+  z-index: 25;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Top arrows removed: side arrows on the cards handle navigation */
+.cert-carousel-nav,
+.skills-carousel-nav {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  /* Portrait: no clipping, visible bottom line */
+  .home-portrait-frame {
+    width: min(100%, 360px);
+    margin: 0 auto;
+    border-bottom: 3px solid var(--portrait-outline);
+    overflow: visible;
+  }
+  .home-portrait-image {
+    transform: none;
+    object-position: center bottom;
+    padding-inline: 8px;
+  }
+
+  /* Category pills become a slider */
+  .cert-filter-pills {
+    display: flex !important;
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+  .cert-filter-pills::-webkit-scrollbar {
+    display: none;
+  }
+  .cert-pill-btn {
+    flex: 0 0 auto !important;
+    padding: 8px 14px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+    scroll-snap-align: start;
+  }
+
+  /* Cards fit exactly the carousel width on any device */
+  .project-slide-card,
+  .cert-slide-card,
+  .skills-scroll-card {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding: 16px !important;
+    box-sizing: border-box;
+  }
+  .cert-carousel-scroll,
+  .projects-slider-scroll,
+  .skills-projects-horizontal-scroll {
+    padding-inline: 0 !important;
+    gap: 12px;
+    scroll-snap-type: x mandatory;
+  }
+  .cert-carousel-wrapper,
+  .skills-projects-carousel-wrapper {
+    width: 100%;
+    overflow: hidden;
+  }
+  .cert-slide-desc,
+  .skills-scroll-card-desc {
+    overflow-wrap: anywhere;
+  }
+  .cert-slide-tags,
+  .skills-scroll-card-tech {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .cert-tech-pill {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  /* Arrows: always visible, no hover color swap on touch */
+  .cert-side-arrow,
+  .skills-side-arrow {
+    display: flex !important;
+    top: 50%;
+    width: 36px !important;
+    height: 36px !important;
+    background: var(--card-surface) !important;
+    color: var(--ink) !important;
+    border: 1px solid var(--card-border) !important;
+    opacity: 1 !important;
+    transform: translateY(-50%) !important;
+  }
+  .cert-side-arrow:hover,
+  .cert-side-arrow:active,
+  .cert-side-arrow:focus,
+  .skills-side-arrow:hover,
+  .skills-side-arrow:active,
+  .skills-side-arrow:focus {
+    background: var(--accent) !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    transform: translateY(-50%) !important;
+  }
+  .cert-side-arrow-left,
+  .skills-side-arrow-left {
+    left: 6px !important;
+  }
+  .cert-side-arrow-right,
+  .skills-side-arrow-right {
+    right: 6px !important;
+  }
 }
 
 
