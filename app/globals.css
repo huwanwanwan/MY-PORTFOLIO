@@ -256,15 +256,16 @@ button {
 
 .scroll-reveal {
   opacity: 1;
-  translate: 0 0;
+  transform: translateY(0);
   transition:
-    opacity 650ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    translate 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    opacity 650ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 .scroll-reveal[data-reveal-ready="true"]:not([data-reveal-visible="true"]) {
   opacity: 0;
-  translate: 0 24px;
+  transform: translateY(22px);
 }
 
 .project-grid > :nth-child(2),
@@ -332,11 +333,15 @@ button {
   transform: scale(1.12);
   transform-origin: center bottom;
   filter:
-    drop-shadow(2px 0 0 var(--portrait-outline))
-    drop-shadow(-2px 0 0 var(--portrait-outline))
-    drop-shadow(0 -2px 0 var(--portrait-outline))
-    drop-shadow(1.5px -1.5px 0 var(--portrait-outline))
-    drop-shadow(-1.5px -1.5px 0 var(--portrait-outline));
+    drop-shadow(0 -1.8px 0 var(--portrait-outline))
+    drop-shadow(1.27px -1.27px 0 var(--portrait-outline))
+    drop-shadow(1.8px 0 0 var(--portrait-outline))
+    drop-shadow(1.27px 1.27px 0 var(--portrait-outline))
+    drop-shadow(0 1.8px 0 var(--portrait-outline))
+    drop-shadow(-1.27px 1.27px 0 var(--portrait-outline))
+    drop-shadow(-1.8px 0 0 var(--portrait-outline))
+    drop-shadow(-1.27px -1.27px 0 var(--portrait-outline));
+  clip-path: inset(-30px -30px 1.5px -30px);
 }
 
 .about-project-placeholder {
@@ -586,11 +591,15 @@ h1 {
   object-fit: contain;
   object-position: center bottom;
   filter:
-    drop-shadow(2px 0 0 var(--portrait-outline))
-    drop-shadow(-2px 0 0 var(--portrait-outline))
-    drop-shadow(0 -2px 0 var(--portrait-outline))
-    drop-shadow(1.5px -1.5px 0 var(--portrait-outline))
-    drop-shadow(-1.5px -1.5px 0 var(--portrait-outline));
+    drop-shadow(0 -1.8px 0 var(--portrait-outline))
+    drop-shadow(1.27px -1.27px 0 var(--portrait-outline))
+    drop-shadow(1.8px 0 0 var(--portrait-outline))
+    drop-shadow(1.27px 1.27px 0 var(--portrait-outline))
+    drop-shadow(0 1.8px 0 var(--portrait-outline))
+    drop-shadow(-1.27px 1.27px 0 var(--portrait-outline))
+    drop-shadow(-1.8px 0 0 var(--portrait-outline))
+    drop-shadow(-1.27px -1.27px 0 var(--portrait-outline));
+  clip-path: inset(-30px -30px 1.5px -30px);
 }
 
 .about-portrait-fallback {
@@ -5898,7 +5907,8 @@ html.dark .cert-lightbox-desc {
 .smart-main-video {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background: #090c10;
   display: block;
 }
 
@@ -6044,6 +6054,7 @@ html.dark .cert-lightbox-desc {
   scrollbar-color: var(--line) transparent;
   width: 100%;
   flex: 1;
+  min-width: 0;
 }
 
 .smart-thumb-card {
@@ -7776,11 +7787,14 @@ html.dark .cert-lightbox-desc {
   transform: scale(1.05);
   transform-origin: center bottom;
   filter:
-    drop-shadow(1.5px 0 0 var(--portrait-outline))
-    drop-shadow(-1.5px 0 0 var(--portrait-outline))
-    drop-shadow(0 -1.5px 0 var(--portrait-outline))
-    drop-shadow(1.2px -1.2px 0 var(--portrait-outline))
-    drop-shadow(-1.2px -1.2px 0 var(--portrait-outline));
+    drop-shadow(0 -1.8px 0 var(--portrait-outline))
+    drop-shadow(1.27px -1.27px 0 var(--portrait-outline))
+    drop-shadow(1.8px 0 0 var(--portrait-outline))
+    drop-shadow(1.27px 1.27px 0 var(--portrait-outline))
+    drop-shadow(0 1.8px 0 var(--portrait-outline))
+    drop-shadow(-1.27px 1.27px 0 var(--portrait-outline))
+    drop-shadow(-1.8px 0 0 var(--portrait-outline))
+    drop-shadow(-1.27px -1.27px 0 var(--portrait-outline));
   clip-path: inset(-30px -30px 1.5px -30px);
 }
 
@@ -7851,7 +7865,16 @@ html.dark .cert-lightbox-desc {
     transform: none;
     object-position: center bottom;
     padding-inline: 8px;
-    clip-path: inset(-30px -30px 1px -30px);
+    filter:
+      drop-shadow(0 -1.8px 0 var(--portrait-outline))
+      drop-shadow(1.27px -1.27px 0 var(--portrait-outline))
+      drop-shadow(1.8px 0 0 var(--portrait-outline))
+      drop-shadow(1.27px 1.27px 0 var(--portrait-outline))
+      drop-shadow(0 1.8px 0 var(--portrait-outline))
+      drop-shadow(-1.27px 1.27px 0 var(--portrait-outline))
+      drop-shadow(-1.8px 0 0 var(--portrait-outline))
+      drop-shadow(-1.27px -1.27px 0 var(--portrait-outline));
+    clip-path: inset(-30px -30px 1.5px -30px);
   }
 
   /* Category pills become a slider */
@@ -7955,25 +7978,153 @@ html.dark .cert-lightbox-desc {
     right: 6px !important;
   }
 
-  /* CRITICAL: Guarantee all content on mobile is 100% visible and never blank */
-  .scroll-reveal,
-  .scroll-reveal[data-reveal-ready="true"]:not([data-reveal-visible="true"]),
-  .smart-project-row,
-  .smart-project-row[data-reveal-ready="true"]:not([data-reveal-visible="true"]),
+  /* ── Project Page Responsive Sizing on Mobile (Matches Image 2 requirements) ── */
+  .projects-showcase-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .smart-project-row {
+    padding-bottom: 32px !important;
+    gap: 18px !important;
+  }
+
+  .smart-hero-card {
+    border-radius: 14px !important;
+  }
+
+  .smart-hero-viewport {
+    aspect-ratio: 16 / 9 !important;
+    max-height: 250px !important;
+    width: 100% !important;
+  }
+
+  .smart-main-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    background: #090c10 !important;
+  }
+
+  .smart-main-img {
+    object-fit: contain !important;
+  }
+
+  .smart-hero-caption-bar {
+    padding: 10px 14px !important;
+  }
+
+  .smart-hero-caption-title {
+    font-size: 13px !important;
+  }
+
+  /* Endpoint arrows wrapper: Both arrows stay inside screen */
+  .smart-carousel-endpoint-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    gap: 6px !important;
+  }
+
+  .smart-arrow-endpoint-btn {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+  }
+
+  .smart-thumbs-scroll-strip {
+    min-width: 0 !important;
+    flex: 1 1 0 !important;
+    gap: 8px !important;
+    padding-bottom: 4px !important;
+  }
+
+  .smart-thumb-card {
+    flex: 0 0 92px !important;
+    width: 92px !important;
+    padding: 3px !important;
+  }
+
+  .smart-thumb-preview-box {
+    aspect-ratio: 16 / 10 !important;
+    border-radius: 5px !important;
+  }
+
+  .smart-thumb-caption-text {
+    font-size: 9.5px !important;
+  }
+
+  /* Right column info sizing on mobile */
+  .smart-info-title {
+    font-size: clamp(22px, 5.5vw, 28px) !important;
+    line-height: 1.2 !important;
+  }
+
+  .smart-info-subtitle {
+    font-size: 12.5px !important;
+  }
+
+  .smart-info-overview {
+    font-size: 13.5px !important;
+    line-height: 1.55 !important;
+  }
+
+  .smart-spec-row {
+    padding: 10px 0 !important;
+    gap: 16px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .smart-highlight-banner {
+    padding: 8px 14px !important;
+    font-size: 12px !important;
+    border-radius: 10px !important;
+  }
+
+  .smart-tech-tags {
+    gap: 6px !important;
+  }
+
+  .tech-tag-pill {
+    padding: 5px 10px !important;
+    font-size: 12px !important;
+  }
+
+  /* ── Smooth Looping Scroll Transition on Mobile (Responsive Animation) ── */
+  .scroll-reveal {
+    transition: opacity 650ms cubic-bezier(0.16, 1, 0.3, 1), transform 650ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+    will-change: opacity, transform;
+  }
+
+  .scroll-reveal[data-reveal-ready="true"]:not([data-reveal-visible="true"]) {
+    opacity: 0 !important;
+    transform: translateY(22px) !important;
+  }
+
+  .scroll-reveal[data-reveal-visible="true"] {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
   .smart-project-row .smart-col-media,
-  .smart-project-row .smart-col-info,
+  .smart-project-row .smart-col-info {
+    transition: opacity 650ms cubic-bezier(0.16, 1, 0.3, 1), transform 650ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
   .smart-project-row[data-reveal-ready="true"]:not([data-reveal-visible="true"]) .smart-col-media,
   .smart-project-row[data-reveal-ready="true"]:not([data-reveal-visible="true"]) .smart-col-info,
   .smart-project-row.row-reversed[data-reveal-ready="true"]:not([data-reveal-visible="true"]) .smart-col-info,
-  .smart-project-row.row-reversed[data-reveal-ready="true"]:not([data-reveal-visible="true"]) .smart-col-media,
-  .projects-showcase-container,
-  .project-detail-rows,
-  .content-section,
-  .section-block {
+  .smart-project-row.row-reversed[data-reveal-ready="true"]:not([data-reveal-visible="true"]) .smart-col-media {
+    opacity: 0 !important;
+    transform: translateY(22px) !important;
+  }
+
+  .smart-project-row[data-reveal-visible="true"] .smart-col-media,
+  .smart-project-row[data-reveal-visible="true"] .smart-col-info {
     opacity: 1 !important;
-    transform: none !important;
-    translate: none !important;
-    visibility: visible !important;
+    transform: translateY(0) !important;
   }
 
   .skills-projects-header {

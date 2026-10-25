@@ -180,7 +180,7 @@ export default function Home() {
                     href={`/skills?skill=${encodeURIComponent(tech === "React.js" ? "React" : tech)}#skills`}
                     className="hero-tech-badge scroll-reveal"
                     data-scroll-reveal
-                    style={{ transitionDelay: `${idx * 45}ms` }}
+                    style={{ transitionDelay: `${120 + idx * 75}ms` }}
                     title={`Explore ${tech} projects & skills`}
                     aria-label={`Explore ${tech} projects & skills`}
                   >

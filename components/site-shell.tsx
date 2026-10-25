@@ -119,13 +119,18 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
           const item = entry.target as HTMLElement;
           if (entry.isIntersecting) {
             item.dataset.revealVisible = "true";
-            observer.unobserve(item);
+          } else {
+            // Loop animation: when element is outside viewport, reset so it re-animates smoothly on re-entry
+            const rect = entry.boundingClientRect;
+            if (rect.bottom < -20 || rect.top > (window.innerHeight || document.documentElement.clientHeight) + 20) {
+              item.dataset.revealVisible = "false";
+            }
           }
         });
       },
       {
-        threshold: 0.01,
-        rootMargin: "60px 0px 60px 0px",
+        threshold: 0.04,
+        rootMargin: "0px 0px -30px 0px",
       },
     );
 
