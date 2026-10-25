@@ -94,65 +94,69 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
   }, [activePage, pathname]);
 
   useEffect(() => {
-    const observeElement = (item: HTMLElement, observer?: IntersectionObserver) => {
-      if (!("IntersectionObserver" in window) || !observer) {
-        item.dataset.revealReady = "true";
-        item.dataset.revealVisible = "true";
+    let ticking = false;
+
+    const checkElementVisibility = (item: HTMLElement) => {
+      const rect = item.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+      // When element is fully outside viewport (above or below), reset so it re-animates smoothly on re-entry
+      if (rect.bottom < -40 || rect.top > windowHeight + 40) {
+        if ((item as any)._revealTimer) {
+          clearTimeout((item as any)._revealTimer);
+          (item as any)._revealTimer = null;
+        }
+        item.dataset.revealVisible = "false";
         return;
       }
-      if (item.dataset.revealObserved === "true") return;
-      item.dataset.revealObserved = "true";
-      item.dataset.revealReady = "true";
-      observer.observe(item);
+
+      // Check if element is positioned so user actually sees it animate:
+      // When scrolling down (entering from bottom): rect.top <= windowHeight - 40
+      // When scrolling up (entering from top): rect.top >= -80 || rect.bottom >= Math.min(windowHeight * 0.45, 260)
+      const isEnteringFromTop = rect.top < 0;
+      const isReadyToAnimate = isEnteringFromTop
+        ? (rect.top >= -80 || rect.bottom >= Math.min(windowHeight * 0.45, 260))
+        : (rect.top <= windowHeight - 40);
+
+      if (isReadyToAnimate) {
+        if (item.dataset.revealVisible !== "true" && !(item as any)._revealTimer) {
+          // Intentional increased delay before entrance animation starts
+          const delayAttr = item.dataset.revealDelay;
+          const delayMs = delayAttr ? Math.max(parseInt(delayAttr, 10), 0) + 180 : 260;
+          (item as any)._revealTimer = window.setTimeout(() => {
+            item.dataset.revealVisible = "true";
+            (item as any)._revealTimer = null;
+          }, delayMs);
+        }
+      }
     };
 
-    if (!("IntersectionObserver" in window)) {
-      document
-        .querySelectorAll<HTMLElement>("[data-scroll-reveal]")
-        .forEach((item) => observeElement(item));
-      return;
-    }
+    const updateAllReveals = () => {
+      const items = document.querySelectorAll<HTMLElement>("[data-scroll-reveal]");
+      items.forEach((item) => {
+        item.dataset.revealReady = "true";
+        checkElementVisibility(item);
+      });
+    };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const item = entry.target as HTMLElement;
-          if (entry.isIntersecting) {
-            // Intentional little delay before popping up
-            const delayAttr = item.dataset.revealDelay;
-            const delayMs = delayAttr ? parseInt(delayAttr, 10) : 120;
-            const timer = window.setTimeout(() => {
-              item.dataset.revealVisible = "true";
-            }, delayMs);
-            (item as any)._revealTimer = timer;
-          } else {
-            // Loop animation: when element is outside viewport, reset so it re-animates smoothly on re-entry
-            if ((item as any)._revealTimer) {
-              clearTimeout((item as any)._revealTimer);
-            }
-            const rect = entry.boundingClientRect;
-            if (rect.bottom < -30 || rect.top > (window.innerHeight || document.documentElement.clientHeight) + 30) {
-              item.dataset.revealVisible = "false";
-            }
-          }
+    const onScrollOrResize = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateAllReveals();
+          ticking = false;
         });
-      },
-      {
-        threshold: 0.04,
-        rootMargin: "0px 0px -30px 0px",
-      },
-    );
-
-    const scanAndObserve = () => {
-      document
-        .querySelectorAll<HTMLElement>("[data-scroll-reveal]")
-        .forEach((item) => observeElement(item, observer));
+        ticking = true;
+      }
     };
 
-    scanAndObserve();
+    // Initial check on mount / navigation
+    updateAllReveals();
+
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize, { passive: true });
 
     const mutationObserver = new MutationObserver(() => {
-      scanAndObserve();
+      updateAllReveals();
     });
 
     const pageContainer = document.querySelector(".page-content") || document.body;
@@ -162,8 +166,15 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
     });
 
     return () => {
-      observer.disconnect();
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
       mutationObserver.disconnect();
+      document.querySelectorAll<HTMLElement>("[data-scroll-reveal]").forEach((item) => {
+        if ((item as any)._revealTimer) {
+          clearTimeout((item as any)._revealTimer);
+          (item as any)._revealTimer = null;
+        }
+      });
     };
   }, [pathname]);
 
