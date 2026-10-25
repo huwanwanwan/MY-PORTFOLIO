@@ -224,14 +224,19 @@ export function AboutSection({
                   I&apos;m actually clingy and not as serious as I seem. Once
                   people get to know me, they see a different side.
                 </p>
-                <p className="about-detail-highlight">
-                  <AboutIcon name="heart" />
-                  <span>
-                    The little things make me happy—especially when friends or
+                <div className="about-detail-highlight">
+                  <div className="about-highlight-header">
+                    <span className="about-highlight-icon-badge">
+                      <AboutIcon name="heart" />
+                    </span>
+                    <span className="about-highlight-kicker">PERSONAL NOTE</span>
+                  </div>
+                  <p className="about-highlight-quote">
+                    &ldquo;The little things make me happy—especially when friends or
                     others remember something about me. It makes me feel special
-                    and appreciated.
-                  </span>
-                </p>
+                    and appreciated.&rdquo;
+                  </p>
+                </div>
               </article>
               <article
                 className="about-detail-card"
