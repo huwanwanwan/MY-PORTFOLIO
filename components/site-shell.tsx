@@ -48,6 +48,8 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
     if (typeof document !== "undefined") {
       document.documentElement.classList.toggle("dark", darkMode);
       document.body.classList.toggle("dark", darkMode);
+      document.documentElement.setAttribute("data-theme", darkMode ? "dark" : "light");
+      document.body.setAttribute("data-theme", darkMode ? "dark" : "light");
     }
   }, [darkMode]);
 
@@ -115,16 +117,15 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
       (entries) => {
         entries.forEach((entry) => {
           const item = entry.target as HTMLElement;
-          if (!entry.isIntersecting) {
-            item.dataset.revealVisible = "false";
-            return;
+          if (entry.isIntersecting) {
+            item.dataset.revealVisible = "true";
+            observer.unobserve(item);
           }
-          item.dataset.revealVisible = "true";
         });
       },
       {
-        threshold: 0.08,
-        rootMargin: "0px 0px -4% 0px",
+        threshold: 0.01,
+        rootMargin: "60px 0px 60px 0px",
       },
     );
 

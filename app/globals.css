@@ -334,8 +334,9 @@ button {
   filter:
     drop-shadow(2px 0 0 var(--portrait-outline))
     drop-shadow(-2px 0 0 var(--portrait-outline))
-    drop-shadow(0 2px 0 var(--portrait-outline))
-    drop-shadow(0 -2px 0 var(--portrait-outline));
+    drop-shadow(0 -2px 0 var(--portrait-outline))
+    drop-shadow(1.5px -1.5px 0 var(--portrait-outline))
+    drop-shadow(-1.5px -1.5px 0 var(--portrait-outline));
 }
 
 .about-project-placeholder {
@@ -587,8 +588,9 @@ h1 {
   filter:
     drop-shadow(2px 0 0 var(--portrait-outline))
     drop-shadow(-2px 0 0 var(--portrait-outline))
-    drop-shadow(0 2px 0 var(--portrait-outline))
-    drop-shadow(0 -2px 0 var(--portrait-outline));
+    drop-shadow(0 -2px 0 var(--portrait-outline))
+    drop-shadow(1.5px -1.5px 0 var(--portrait-outline))
+    drop-shadow(-1.5px -1.5px 0 var(--portrait-outline));
 }
 
 .about-portrait-fallback {
@@ -5176,8 +5178,44 @@ h2 {
   color: #625e59;
 }
 
+/* Lightbox Modal: Light Theme Explicit */
+.cert-lightbox-backdrop:not(.dark) .cert-lightbox-container,
+[data-theme="light"] .cert-lightbox-container,
+body:not(.dark) .cert-lightbox-container {
+  background: #ffffff !important;
+  border-color: #e5d9ce !important;
+  color: #111418 !important;
+}
+
+.cert-lightbox-backdrop:not(.dark) .cert-lightbox-caption,
+[data-theme="light"] .cert-lightbox-caption,
+body:not(.dark) .cert-lightbox-caption {
+  background: #fbf9f6 !important;
+  border-top-color: #e5d9ce !important;
+  color: #111418 !important;
+}
+
+.cert-lightbox-backdrop:not(.dark) .cert-lightbox-title,
+[data-theme="light"] .cert-lightbox-title,
+body:not(.dark) .cert-lightbox-title {
+  color: #111418 !important;
+}
+
+.cert-lightbox-backdrop:not(.dark) .cert-lightbox-issuer,
+[data-theme="light"] .cert-lightbox-issuer,
+body:not(.dark) .cert-lightbox-issuer {
+  color: #55514c !important;
+}
+
+.cert-lightbox-backdrop:not(.dark) .cert-lightbox-desc,
+[data-theme="light"] .cert-lightbox-desc,
+body:not(.dark) .cert-lightbox-desc {
+  color: #433f3a !important;
+}
+
 /* Lightbox Modal: Dark Theme Overrides */
 .cert-lightbox-backdrop.dark .cert-lightbox-container,
+[data-theme="dark"] .cert-lightbox-container,
 body.dark .cert-lightbox-container,
 html.dark .cert-lightbox-container {
   background: #181716 !important;
@@ -5187,6 +5225,7 @@ html.dark .cert-lightbox-container {
 }
 
 .cert-lightbox-backdrop.dark .cert-lightbox-close,
+[data-theme="dark"] .cert-lightbox-close,
 body.dark .cert-lightbox-close,
 html.dark .cert-lightbox-close {
   background: rgba(26, 25, 24, 0.88);
@@ -5195,6 +5234,7 @@ html.dark .cert-lightbox-close {
 }
 
 .cert-lightbox-backdrop.dark .cert-lightbox-arrow,
+[data-theme="dark"] .cert-lightbox-arrow,
 body.dark .cert-lightbox-arrow,
 html.dark .cert-lightbox-arrow {
   background: rgba(26, 25, 24, 0.88);
@@ -5203,18 +5243,21 @@ html.dark .cert-lightbox-arrow {
 }
 
 .cert-lightbox-backdrop.dark .cert-lightbox-media-wrapper,
+[data-theme="dark"] .cert-lightbox-media-wrapper,
 body.dark .cert-lightbox-media-wrapper,
 html.dark .cert-lightbox-media-wrapper {
   background: #09090b !important;
 }
 
 .cert-lightbox-backdrop.dark .cert-lightbox-image,
+[data-theme="dark"] .cert-lightbox-image,
 body.dark .cert-lightbox-image,
 html.dark .cert-lightbox-image {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
 }
 
 .cert-lightbox-backdrop.dark .cert-lightbox-caption,
+[data-theme="dark"] .cert-lightbox-caption,
 body.dark .cert-lightbox-caption,
 html.dark .cert-lightbox-caption {
   background: #211f1d !important;
@@ -5223,24 +5266,28 @@ html.dark .cert-lightbox-caption {
 }
 
 .cert-lightbox-backdrop.dark .cert-lightbox-title,
+[data-theme="dark"] .cert-lightbox-title,
 body.dark .cert-lightbox-title,
 html.dark .cert-lightbox-title {
   color: #ffffff !important;
 }
 
 .cert-lightbox-backdrop.dark .cert-lightbox-issuer,
+[data-theme="dark"] .cert-lightbox-issuer,
 body.dark .cert-lightbox-issuer,
 html.dark .cert-lightbox-issuer {
   color: #b0aca5 !important;
 }
 
 .cert-lightbox-backdrop.dark .cert-lightbox-issuer strong,
+[data-theme="dark"] .cert-lightbox-issuer strong,
 body.dark .cert-lightbox-issuer strong,
 html.dark .cert-lightbox-issuer strong {
   color: #ffffff !important;
 }
 
 .cert-lightbox-backdrop.dark .cert-lightbox-desc,
+[data-theme="dark"] .cert-lightbox-desc,
 body.dark .cert-lightbox-desc,
 html.dark .cert-lightbox-desc {
   color: #c0bbb3 !important;
@@ -7732,10 +7779,8 @@ html.dark .cert-lightbox-desc {
     drop-shadow(1.5px 0 0 var(--portrait-outline))
     drop-shadow(-1.5px 0 0 var(--portrait-outline))
     drop-shadow(0 -1.5px 0 var(--portrait-outline))
-    drop-shadow(1.1px -1.1px 0 var(--portrait-outline))
-    drop-shadow(-1.1px -1.1px 0 var(--portrait-outline))
-    drop-shadow(1px 0.8px 0 var(--portrait-outline))
-    drop-shadow(-1px 0.8px 0 var(--portrait-outline));
+    drop-shadow(1.2px -1.2px 0 var(--portrait-outline))
+    drop-shadow(-1.2px -1.2px 0 var(--portrait-outline));
   clip-path: inset(-30px -30px 1.5px -30px);
 }
 
@@ -7908,6 +7953,32 @@ html.dark .cert-lightbox-desc {
   .cert-side-arrow-right,
   .skills-side-arrow-right {
     right: 6px !important;
+  }
+
+  /* CRITICAL: Guarantee all content on mobile is 100% visible and never blank */
+  .scroll-reveal,
+  .scroll-reveal[data-reveal-ready="true"]:not([data-reveal-visible="true"]),
+  .smart-project-row,
+  .smart-project-row[data-reveal-ready="true"]:not([data-reveal-visible="true"]),
+  .smart-project-row .smart-col-media,
+  .smart-project-row .smart-col-info,
+  .smart-project-row[data-reveal-ready="true"]:not([data-reveal-visible="true"]) .smart-col-media,
+  .smart-project-row[data-reveal-ready="true"]:not([data-reveal-visible="true"]) .smart-col-info,
+  .smart-project-row.row-reversed[data-reveal-ready="true"]:not([data-reveal-visible="true"]) .smart-col-info,
+  .smart-project-row.row-reversed[data-reveal-ready="true"]:not([data-reveal-visible="true"]) .smart-col-media,
+  .projects-showcase-container,
+  .project-detail-rows,
+  .content-section,
+  .section-block {
+    opacity: 1 !important;
+    transform: none !important;
+    translate: none !important;
+    visibility: visible !important;
+  }
+
+  .skills-projects-header {
+    margin-bottom: 28px !important;
+    gap: 16px !important;
   }
 }
 

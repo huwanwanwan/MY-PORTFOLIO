@@ -529,9 +529,8 @@ export function ProjectsSection({
 } = {}) {
   return (
     <section
-      className="section-block content-section scroll-reveal"
+      className="section-block content-section"
       id="projects"
-      data-scroll-reveal
       aria-labelledby="projects-heading"
     >
       <div className="content-section-heading editorial-heading">
@@ -563,9 +562,8 @@ export function ProjectsSection({
 export function SkillsSection() {
   return (
     <section
-      className="section-block content-section scroll-reveal"
+      className="section-block content-section"
       id="skills"
-      data-scroll-reveal
       aria-labelledby="skills-heading"
     >
       <div className="content-section-heading editorial-heading">
@@ -583,9 +581,8 @@ export function SkillsSection() {
 export function ExperienceSection() {
   return (
     <section
-      className="section-block content-section scroll-reveal"
+      className="section-block content-section"
       id="experience"
-      data-scroll-reveal
       aria-labelledby="experience-heading"
     >
       <div className="content-section-heading editorial-heading">
