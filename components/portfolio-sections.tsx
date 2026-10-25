@@ -85,13 +85,12 @@ export function AboutSection({
       >
         <div className="home-about-reversed-grid">
           {/* LEFT COLUMN: 2x2 Stats Matrix (Clickable Links) */}
-          <div
-            className="home-about-stats-matrix scroll-reveal"
-            data-scroll-reveal
-          >
+          <div className="home-about-stats-matrix">
             <Link
               href="/about#about-education-heading"
-              className="home-stat-cell"
+              className="home-stat-cell scroll-reveal"
+              data-scroll-reveal
+              style={{ transitionDelay: "0ms" }}
               title="View my educational background"
             >
               <div className="home-stat-icon-box" aria-hidden="true">
@@ -110,7 +109,9 @@ export function AboutSection({
 
             <Link
               href="/projects"
-              className="home-stat-cell"
+              className="home-stat-cell scroll-reveal"
+              data-scroll-reveal
+              style={{ transitionDelay: "70ms" }}
               title="Explore all 14+ projects"
             >
               <div className="home-stat-icon-box" aria-hidden="true">
@@ -128,7 +129,9 @@ export function AboutSection({
 
             <Link
               href="/experience#certifications"
-              className="home-stat-cell"
+              className="home-stat-cell scroll-reveal"
+              data-scroll-reveal
+              style={{ transitionDelay: "140ms" }}
               title="View verified certificates"
             >
               <div className="home-stat-icon-box" aria-hidden="true">
@@ -145,7 +148,9 @@ export function AboutSection({
 
             <Link
               href="/about"
-              className="home-stat-cell"
+              className="home-stat-cell scroll-reveal"
+              data-scroll-reveal
+              style={{ transitionDelay: "210ms" }}
               title="Read more about me"
             >
               <div className="home-stat-icon-box" aria-hidden="true">

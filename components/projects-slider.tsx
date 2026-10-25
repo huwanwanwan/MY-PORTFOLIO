@@ -71,11 +71,10 @@ function ProjectSlideMedia({
           src={encodedVideoSrc}
           poster={encodedPoster}
           controls
-          autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           onError={() => setVideoFailed(true)}
           className="project-slide-video"
           title={`${project.title} video demo`}

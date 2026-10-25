@@ -60,12 +60,15 @@ export default function ProjectMediaStage({
 
   const thumbStripRef = useRef<HTMLDivElement | null>(null);
 
+  const currentMedia = mediaList[activeIndex] || mediaList[0];
+
   useEffect(() => {
     setMounted(true);
   }, []);
 
   // Automatically play video when scrolled into view, pause when scrolled out
   useEffect(() => {
+    if (!currentMedia || currentMedia.type !== "video") return;
     const el = viewportRef.current;
     if (!el || !("IntersectionObserver" in window)) return;
 
@@ -85,7 +88,7 @@ export default function ProjectMediaStage({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [currentMedia.type, currentMedia.src]);
+  }, [currentMedia?.type, currentMedia?.src]);
 
   // Close lightbox on Escape key and lock page scroll while open
   useEffect(() => {
@@ -106,8 +109,6 @@ export default function ProjectMediaStage({
   if (mediaList.length === 0) {
     return <div className="card-emblem-stage">{fallbackEmblem}</div>;
   }
-
-  const currentMedia = mediaList[activeIndex] || mediaList[0];
 
   const handlePrev = () => {
     const nextIdx = activeIndex > 0 ? activeIndex - 1 : mediaList.length - 1;
@@ -143,11 +144,10 @@ export default function ProjectMediaStage({
                 src={encodeURI(currentMedia.src)}
                 poster={images[0] ? encodeURI(images[0]) : undefined}
                 controls
-                autoPlay
                 muted
                 loop
                 playsInline
-                preload="metadata"
+                preload="none"
                 onError={() => {
                   if (images.length > 0 && mediaList.length > 1) {
                     setActiveIndex(1);

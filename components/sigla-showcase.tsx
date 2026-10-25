@@ -37,12 +37,12 @@ export default function SiglaShowcase() {
           <video
             ref={videoRef}
             src="/SIGLA/mobile-demo.mp4"
+            poster="/SIGLA/home.jpg"
             controls
-            autoPlay
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="none"
             className="sigla-main-video"
             title="SigLa mobile app demo video"
           >
