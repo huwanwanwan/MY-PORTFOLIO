@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 
 const themeChangeEvent = "portfolio-theme-change";
 
@@ -37,11 +37,20 @@ type SiteShellProps = {
 export default function SiteShell({ activePage, children }: SiteShellProps) {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement | null>(null);
+  const [isPageSwitching, setIsPageSwitching] = useState(false);
   const darkMode = useSyncExternalStore(
     subscribeToTheme,
     getThemeSnapshot,
     () => false,
   );
+
+  useEffect(() => {
+    setIsPageSwitching(true);
+    const timer = setTimeout(() => {
+      setIsPageSwitching(false);
+    }, 450);
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
   useEffect(() => {
     const pageTitles: Record<string, string> = {
@@ -170,7 +179,7 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
           </div>
         </header>
 
-        <div className="dashboard-content page-content">{children}</div>
+        <div className={`dashboard-content page-content ${isPageSwitching ? "page-transitioning" : "page-entered"}`}>{children}</div>
 
         <footer className="site-mega-footer">
           <div className="site-mega-footer-content">

@@ -2110,6 +2110,28 @@ h1 {
   color: var(--ink);
 }
 
+.education-honor-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.education-honor-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.3px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  padding: 4px 10px;
+  border-radius: 999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
 .journey-entry .tag-row {
   margin-top: 12px;
 }
@@ -4546,6 +4568,14 @@ h2 {
   border: 1px solid var(--card-border);
   border-radius: 999px;
   background: var(--card-surface);
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.cert-filter-pills::-webkit-scrollbar {
+  display: none;
 }
 
 .cert-pill-btn {
@@ -4559,6 +4589,7 @@ h2 {
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .cert-pill-btn:hover {
@@ -4905,8 +4936,8 @@ h2 {
   display: flex !important;
   flex-direction: column !important;
   margin: auto !important;
-  background: #151517 !important;
-  border: 1px solid #2e2e33 !important;
+  background: var(--card-surface, #151517) !important;
+  border: 1px solid var(--card-border, #2e2e33) !important;
   border-radius: 18px !important;
   overflow: hidden !important;
   box-shadow: 0 24px 60px rgb(0 0 0 / 60%) !important;
@@ -5003,9 +5034,9 @@ h2 {
 
 .cert-lightbox-caption {
   padding: 18px 24px;
-  background: #141416;
-  border-top: 1px solid #27272a;
-  color: #f4f4f5;
+  background: var(--card-surface, #141416);
+  border-top: 1px solid var(--card-border, #27272a);
+  color: var(--ink, #f4f4f5);
 }
 
 .cert-lightbox-header {
@@ -5019,33 +5050,89 @@ h2 {
   margin: 0;
   font-size: clamp(16px, 1.5vw, 20px);
   font-weight: 800;
-  color: #ffffff;
+  color: var(--ink, #ffffff);
 }
 
 .cert-lightbox-issuer {
   margin: 4px 0 8px;
   font-size: 13px;
-  color: #a1a1aa;
+  color: var(--muted, #a1a1aa);
 }
 
 .cert-lightbox-issuer strong {
-  color: #ffffff;
+  color: var(--ink, #ffffff);
 }
 
 .cert-lightbox-desc {
   margin: 0;
   font-size: 13px;
   line-height: 1.6;
-  color: #d4d4d8;
+  color: var(--text-secondary, #d4d4d8);
+}
+
+/* Page transition animation between navigation */
+.page-content {
+  transition: opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1), transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.page-content.page-transitioning {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+.page-content.page-entered {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ─── Responsive adjustments ─── */
 @media (max-width: 768px) {
-  .cert-side-arrow {
+  .cert-gallery-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .cert-gallery-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .cert-filter-pills {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 3px;
+    gap: 4px;
+    box-sizing: border-box;
+  }
+  .cert-pill-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 7px 4px;
+    font-size: 11px;
+    text-align: center;
+    justify-content: center;
+  }
+  .cert-carousel-nav {
     display: none !important;
   }
+  .cert-side-arrow {
+    display: flex !important;
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 20px !important;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 35%) !important;
+  }
+  .cert-side-arrow-left {
+    left: -6px !important;
+  }
+  .cert-side-arrow-right {
+    right: -6px !important;
+  }
   .cert-carousel-wrapper {
-    padding: 0 4px;
+    padding: 0 16px;
   }
   .cert-carousel-scroll {
     padding: 8px 4px 16px;
@@ -5053,7 +5140,7 @@ h2 {
     scroll-padding: 0 12px;
   }
   .cert-slide-card {
-    flex: 0 0 calc(100vw - 44px);
+    flex: 0 0 calc(100vw - 72px);
     max-width: 380px;
     padding: 16px;
   }

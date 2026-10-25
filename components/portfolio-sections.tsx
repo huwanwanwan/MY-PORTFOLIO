@@ -459,12 +459,11 @@ export function AboutSection({
                     Assemblywoman Felicita&apos;s G. Bernardino Memorial Trade
                     School
                   </h4>
-                  <p>AFGBMTS</p>
-                  <ul>
-                    <li>Graduated from Senior High School</li>
-                    <li>With Honors</li>
-                    <li>Received a Conduct Award</li>
-                  </ul>
+                  <p>AFGBMTS · Graduated from Senior High School</p>
+                  <div className="education-honor-badges">
+                    <span className="education-honor-tag">★ With Honors</span>
+                    <span className="education-honor-tag">🏅 Conduct Award</span>
+                  </div>
                 </article>
                 <article
                   className="about-detail-card"
@@ -615,7 +614,11 @@ export function ExperienceSection() {
             <div>
               <p className="education-level">Junior &amp; Senior High School</p>
               <h4>Assemblywoman Felicita&apos;s G. Bernardino Memorial Trade School</h4>
-              <p className="journey-role">AFGBMTS · Graduated · With Honors · Conduct Award</p>
+              <p className="journey-role">AFGBMTS · Graduated</p>
+              <div className="education-honor-badges">
+                <span className="education-honor-tag">★ With Honors</span>
+                <span className="education-honor-tag">🏅 Conduct Award</span>
+              </div>
             </div>
           </article>
           <article className="journey-entry scroll-reveal" data-scroll-reveal>
