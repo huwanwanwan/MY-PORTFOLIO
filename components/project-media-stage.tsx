@@ -1,8 +1,21 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
+
+function subscribeToTheme(callback: () => void) {
+  window.addEventListener("storage", callback);
+  window.addEventListener("portfolio-theme-change", callback);
+  return () => {
+    window.removeEventListener("storage", callback);
+    window.removeEventListener("portfolio-theme-change", callback);
+  };
+}
+
+function getThemeSnapshot() {
+  return window.localStorage.getItem("portfolio-theme") === "dark";
+}
 
 interface ProjectMediaStageProps {
   title: string;
@@ -19,6 +32,11 @@ export default function ProjectMediaStage({
   images = [],
   fallbackEmblem,
 }: ProjectMediaStageProps) {
+  const isDarkMode = useSyncExternalStore(
+    subscribeToTheme,
+    getThemeSnapshot,
+    () => false
+  );
   // Collect all media items:
   // If video exists, it's item 0 ("Interactive Demo" or "Video Project").
   // Followed by all screenshots.
@@ -322,7 +340,7 @@ export default function ProjectMediaStage({
       {/* 3. LIGHTBOX MODAL PORTAL (Renders directly into document.body so it is perfectly centered on the screen) */}
       {selectedLightbox && mounted && createPortal(
         <div
-          className="cert-lightbox-backdrop smart-fullscreen-dim-backdrop"
+          className={`cert-lightbox-backdrop smart-fullscreen-dim-backdrop${isDarkMode ? " dark" : ""}`}
           onClick={() => setSelectedLightbox(null)}
           role="dialog"
           aria-modal="true"

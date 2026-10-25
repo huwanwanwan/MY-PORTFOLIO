@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import {
@@ -8,11 +8,29 @@ import {
   type CertificationItem,
 } from "../data/certifications-data";
 
+function subscribeToTheme(callback: () => void) {
+  window.addEventListener("storage", callback);
+  window.addEventListener("portfolio-theme-change", callback);
+  return () => {
+    window.removeEventListener("storage", callback);
+    window.removeEventListener("portfolio-theme-change", callback);
+  };
+}
+
+function getThemeSnapshot() {
+  return window.localStorage.getItem("portfolio-theme") === "dark";
+}
+
 export default function CertificationsShowcase() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [lightboxCert, setLightboxCert] = useState<CertificationItem | null>(null);
   const [mounted, setMounted] = useState<boolean>(false);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const isDarkMode = useSyncExternalStore(
+    subscribeToTheme,
+    getThemeSnapshot,
+    () => false
+  );
 
   useEffect(() => {
     setMounted(true);
@@ -251,7 +269,7 @@ export default function CertificationsShowcase() {
       {/* ── High-Resolution Lightbox Modal rendered via Portal directly to body ── */}
       {lightboxCert && mounted && typeof document !== "undefined" && createPortal(
         <div
-          className="cert-lightbox-backdrop"
+          className={`cert-lightbox-backdrop${isDarkMode ? " dark" : ""}`}
           onClick={handleCloseLightbox}
           role="dialog"
           aria-modal="true"

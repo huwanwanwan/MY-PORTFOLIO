@@ -4182,14 +4182,34 @@ h2 {
     display: grid;
     grid-template-columns: minmax(0, 640px) minmax(0, 560px);
     justify-content: center;
-    align-items: center;
+    align-items: end;
     gap: clamp(28px, 4vw, 64px);
     border-radius: 0 !important;
     text-align: left;
+    border-bottom: 2px solid var(--section-divider) !important;
+  }
+
+  .profile-copy {
+    align-self: center;
+    padding-bottom: 40px;
+  }
+
+  .home-portrait-column {
+    align-self: end !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    height: 100% !important;
+    margin-bottom: 0 !important;
   }
 
   .home-portrait-frame {
-    align-self: end;
+    align-self: end !important;
+    margin: 0 auto 0 !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    margin-bottom: -2px !important;
   }
 
   .profile-intro::after {
@@ -4994,7 +5014,7 @@ h2 {
   justify-content: center !important;
   padding: clamp(16px, 3vw, 40px) !important;
   box-sizing: border-box !important;
-  background: rgba(0, 0, 0, 0.88) !important;
+  background: rgba(0, 0, 0, 0.78) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
   animation: certFadeIn 0.2s ease;
@@ -5009,6 +5029,7 @@ h2 {
   }
 }
 
+/* Lightbox Modal: Light Theme Default */
 .cert-lightbox-container {
   position: relative !important;
   max-width: 900px !important;
@@ -5017,11 +5038,11 @@ h2 {
   display: flex !important;
   flex-direction: column !important;
   margin: auto !important;
-  background: var(--card-surface, #151517) !important;
-  border: 1px solid var(--card-border, #2e2e33) !important;
+  background: #ffffff !important;
+  border: 1px solid #e5d9ce !important;
   border-radius: 18px !important;
   overflow: hidden !important;
-  box-shadow: 0 24px 60px rgb(0 0 0 / 60%) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35) !important;
   animation: certScaleUp 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
@@ -5046,17 +5067,19 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgb(255 255 255 / 15%);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 999px;
-  background: rgb(20 20 22 / 85%);
-  color: #ffffff;
+  background: rgba(255, 255, 255, 0.92);
+  color: #1a1918;
   font-size: 16px;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   transition: all 0.2s ease;
 }
 
 .cert-lightbox-close:hover {
   background: #e53935;
+  color: #ffffff;
   border-color: #e53935;
 }
 
@@ -5069,18 +5092,20 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgb(255 255 255 / 15%);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 999px;
-  background: rgb(20 20 22 / 85%);
-  color: #ffffff;
+  background: rgba(255, 255, 255, 0.92);
+  color: #1a1918;
   font-size: 24px;
   line-height: 1;
   cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease;
 }
 
 .cert-lightbox-arrow:hover {
   background: var(--accent);
+  color: #ffffff;
   border-color: var(--accent);
 }
 
@@ -5099,7 +5124,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #09090b;
+  background: #f4efe9;
   padding: 16px;
 }
 
@@ -5110,14 +5135,14 @@ h2 {
   height: auto;
   object-fit: contain;
   border-radius: 8px;
-  box-shadow: 0 8px 30px rgb(0 0 0 / 45%);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
 }
 
 .cert-lightbox-caption {
   padding: 18px 24px;
-  background: var(--card-surface, #141416);
-  border-top: 1px solid var(--card-border, #27272a);
-  color: var(--ink, #f4f4f5);
+  background: #faf7f3;
+  border-top: 1px solid #e9e1d9;
+  color: #242422;
 }
 
 .cert-lightbox-header {
@@ -5131,24 +5156,94 @@ h2 {
   margin: 0;
   font-size: clamp(16px, 1.5vw, 20px);
   font-weight: 800;
-  color: var(--ink, #ffffff);
+  color: #242422;
 }
 
 .cert-lightbox-issuer {
   margin: 4px 0 8px;
   font-size: 13px;
-  color: var(--muted, #a1a1aa);
+  color: #625e59;
 }
 
 .cert-lightbox-issuer strong {
-  color: var(--ink, #ffffff);
+  color: #242422;
 }
 
 .cert-lightbox-desc {
   margin: 0;
   font-size: 13px;
   line-height: 1.6;
-  color: var(--text-secondary, #d4d4d8);
+  color: #625e59;
+}
+
+/* Lightbox Modal: Dark Theme Overrides */
+.cert-lightbox-backdrop.dark .cert-lightbox-container,
+body.dark .cert-lightbox-container,
+html.dark .cert-lightbox-container {
+  background: #181716 !important;
+  border-color: #383430 !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8) !important;
+  color: #f3f1ed !important;
+}
+
+.cert-lightbox-backdrop.dark .cert-lightbox-close,
+body.dark .cert-lightbox-close,
+html.dark .cert-lightbox-close {
+  background: rgba(26, 25, 24, 0.88);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.cert-lightbox-backdrop.dark .cert-lightbox-arrow,
+body.dark .cert-lightbox-arrow,
+html.dark .cert-lightbox-arrow {
+  background: rgba(26, 25, 24, 0.88);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.cert-lightbox-backdrop.dark .cert-lightbox-media-wrapper,
+body.dark .cert-lightbox-media-wrapper,
+html.dark .cert-lightbox-media-wrapper {
+  background: #09090b !important;
+}
+
+.cert-lightbox-backdrop.dark .cert-lightbox-image,
+body.dark .cert-lightbox-image,
+html.dark .cert-lightbox-image {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.cert-lightbox-backdrop.dark .cert-lightbox-caption,
+body.dark .cert-lightbox-caption,
+html.dark .cert-lightbox-caption {
+  background: #211f1d !important;
+  border-top-color: #383430 !important;
+  color: #f3f1ed !important;
+}
+
+.cert-lightbox-backdrop.dark .cert-lightbox-title,
+body.dark .cert-lightbox-title,
+html.dark .cert-lightbox-title {
+  color: #ffffff !important;
+}
+
+.cert-lightbox-backdrop.dark .cert-lightbox-issuer,
+body.dark .cert-lightbox-issuer,
+html.dark .cert-lightbox-issuer {
+  color: #b0aca5 !important;
+}
+
+.cert-lightbox-backdrop.dark .cert-lightbox-issuer strong,
+body.dark .cert-lightbox-issuer strong,
+html.dark .cert-lightbox-issuer strong {
+  color: #ffffff !important;
+}
+
+.cert-lightbox-backdrop.dark .cert-lightbox-desc,
+body.dark .cert-lightbox-desc,
+html.dark .cert-lightbox-desc {
+  color: #c0bbb3 !important;
 }
 
 /* Page transition animation between navigation */
@@ -7623,13 +7718,25 @@ h2 {
   display: none !important;
 }
 
-/* Portrait: bottom edge flush with the section divider line (all sizes) */
+/* Portrait: bottom edge flush with the orange section divider line */
 .profile-intro {
-  border-bottom: 1px solid var(--hero-divider);
+  border-bottom: 2px solid var(--section-divider) !important;
 }
 
 .home-portrait-image {
-  clip-path: inset(-12px -12px 0 -12px);
+  object-fit: contain;
+  object-position: center bottom;
+  transform: scale(1.05);
+  transform-origin: center bottom;
+  filter:
+    drop-shadow(1.5px 0 0 var(--portrait-outline))
+    drop-shadow(-1.5px 0 0 var(--portrait-outline))
+    drop-shadow(0 -1.5px 0 var(--portrait-outline))
+    drop-shadow(1.1px -1.1px 0 var(--portrait-outline))
+    drop-shadow(-1.1px -1.1px 0 var(--portrait-outline))
+    drop-shadow(1px 0.8px 0 var(--portrait-outline))
+    drop-shadow(-1px 0.8px 0 var(--portrait-outline));
+  clip-path: inset(-30px -30px 1.5px -30px);
 }
 
 /* Hero tech icons always visible in light and dark */
@@ -7653,33 +7760,53 @@ h2 {
   opacity: 1;
 }
 
-/* Carousels: one card per step, always snap back to a card */
+/* Carousels: wrapper overflow visible so top border line is never clipped */
+.cert-carousel-wrapper,
+.skills-projects-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: visible !important;
+}
+
 .cert-carousel-scroll,
 .projects-slider-scroll,
 .skills-projects-horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: visible !important;
   scroll-snap-type: x mandatory;
-  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 16px 0 20px !important;
+  margin-top: -6px;
+}
+
+.cert-carousel-scroll::-webkit-scrollbar,
+.projects-slider-scroll::-webkit-scrollbar,
+.skills-projects-horizontal-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 .project-slide-card,
 .cert-slide-card,
 .skills-scroll-card {
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
+  scroll-snap-align: start !important;
+  scroll-snap-stop: always !important;
 }
 
 @media (max-width: 768px) {
-  /* Portrait: thin grayish line matching the section divider */
+  /* Portrait on mobile: subtle minimal divider line */
   .home-portrait-frame {
     width: min(100%, 360px);
     margin: 0 auto;
-    border-bottom: 1px solid var(--hero-divider);
+    border-bottom: 1px solid rgba(140, 140, 140, 0.3) !important;
     overflow: visible;
   }
   .home-portrait-image {
     transform: none;
     object-position: center bottom;
     padding-inline: 8px;
+    clip-path: inset(-30px -30px 1px -30px);
   }
 
   /* Category pills become a slider */
@@ -7702,7 +7829,7 @@ h2 {
     scroll-snap-align: start;
   }
 
-  /* Cards fit exactly the carousel width on any device */
+  /* Cards fit exactly the carousel width on any mobile device */
   .project-slide-card,
   .cert-slide-card,
   .skills-scroll-card {
@@ -7711,15 +7838,19 @@ h2 {
     max-width: 100% !important;
     min-width: 0 !important;
     padding: 16px !important;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
+    scroll-snap-align: start !important;
+    scroll-snap-stop: always !important;
   }
   .cert-carousel-scroll,
   .projects-slider-scroll,
   .skills-projects-horizontal-scroll {
-    padding: 10px 1px 16px !important;
-    gap: 12px;
+    padding: 18px 0 22px !important;
+    gap: 16px;
     scroll-padding: 0 !important;
     scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    overflow-y: visible !important;
   }
   .project-slide-card:hover,
   .cert-slide-card:hover,
@@ -7729,7 +7860,7 @@ h2 {
   .cert-carousel-wrapper,
   .skills-projects-carousel-wrapper {
     width: 100%;
-    overflow: hidden;
+    overflow: visible !important;
   }
   .cert-slide-desc,
   .skills-scroll-card-desc {
@@ -7746,7 +7877,7 @@ h2 {
     white-space: nowrap;
   }
 
-  /* Arrows: always visible, no hover color swap on touch */
+  /* Arrows: always visible and responsive */
   .cert-side-arrow,
   .skills-side-arrow {
     display: flex !important;

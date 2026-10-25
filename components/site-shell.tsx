@@ -45,6 +45,13 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
   );
 
   useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.classList.toggle("dark", darkMode);
+      document.body.classList.toggle("dark", darkMode);
+    }
+  }, [darkMode]);
+
+  useEffect(() => {
     setIsPageSwitching(true);
     if (typeof window !== "undefined") {
       if ("scrollRestoration" in window.history) {
