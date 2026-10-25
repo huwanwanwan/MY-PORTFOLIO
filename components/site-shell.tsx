@@ -46,6 +46,12 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
 
   useEffect(() => {
     setIsPageSwitching(true);
+    if (typeof window !== "undefined") {
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+    }
     const timer = setTimeout(() => {
       setIsPageSwitching(false);
     }, 450);
@@ -186,7 +192,7 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
             {/* Column 1: Identity & Bio */}
             <div className="mega-footer-col brand-col">
               <Link href="/" className="mega-footer-logo">
-                juanmilitante.
+                Huwananan.
               </Link>
               <p className="mega-footer-tagline">
                 Information Technology student building practical web, mobile, game, and IoT projects.
