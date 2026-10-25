@@ -55,12 +55,37 @@ export default function ProjectMediaStage({
     caption: string;
   } | null>(null);
   const [mounted, setMounted] = useState(false);
+  const mainVideoRef = useRef<HTMLVideoElement | null>(null);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
 
   const thumbStripRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Automatically play video when scrolled into view, pause when scrolled out
+  useEffect(() => {
+    const el = viewportRef.current;
+    if (!el || !("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!mainVideoRef.current) return;
+          if (entry.isIntersecting) {
+            mainVideoRef.current.play().catch(() => {});
+          } else {
+            mainVideoRef.current.pause();
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [currentMedia.type, currentMedia.src]);
 
   // Close lightbox on Escape key and lock page scroll while open
   useEffect(() => {
@@ -108,11 +133,12 @@ export default function ProjectMediaStage({
   return (
     <div className="smart-pdm-media-column">
       {/* 1. TOP MAIN SHOWCASE CARD (Hero with Caption Footer and Enlarge Button) */}
-      <div className="smart-hero-card">
+      <div className="smart-hero-card" ref={viewportRef}>
         <div className="smart-hero-viewport">
           {currentMedia.type === "video" ? (
             <div className="smart-video-wrapper">
               <video
+                ref={mainVideoRef}
                 key={currentMedia.src}
                 src={encodeURI(currentMedia.src)}
                 poster={images[0] ? encodeURI(images[0]) : undefined}

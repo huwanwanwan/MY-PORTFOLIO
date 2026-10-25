@@ -94,14 +94,15 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
         entries.forEach((entry) => {
           const item = entry.target as HTMLElement;
           if (!entry.isIntersecting) {
+            item.dataset.revealVisible = "false";
             return;
           }
           item.dataset.revealVisible = "true";
         });
       },
       {
-        threshold: 0.05,
-        rootMargin: "0px 0px -6% 0px",
+        threshold: 0.08,
+        rootMargin: "0px 0px -4% 0px",
       },
     );
 

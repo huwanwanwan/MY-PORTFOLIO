@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { projectsData, type ProjectItem } from "../data/projects-data";
@@ -22,6 +22,32 @@ function ProjectSlideMedia({
 }) {
   const [videoFailed, setVideoFailed] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!project.video || videoFailed) return;
+    const el = wrapRef.current;
+    if (!el || !("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!videoRef.current) return;
+          if (entry.isIntersecting) {
+            videoRef.current.play().catch(() => {});
+          } else {
+            videoRef.current.pause();
+          }
+        });
+      },
+      {
+        threshold: 0.25,
+      }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [project.video, videoFailed]);
 
   if (project.video && !videoFailed) {
     const encodedVideoSrc = encodeURI(project.video);
@@ -29,6 +55,7 @@ function ProjectSlideMedia({
 
     return (
       <div
+        ref={wrapRef}
         className="project-slide-video-wrap"
         onMouseEnter={() => {
           if (videoRef.current && videoRef.current.paused) {
@@ -36,9 +63,7 @@ function ProjectSlideMedia({
           }
         }}
         onMouseLeave={() => {
-          if (videoRef.current && !videoRef.current.paused) {
-            videoRef.current.pause();
-          }
+          // Keep playing if still on screen
         }}
       >
         <video
@@ -46,6 +71,7 @@ function ProjectSlideMedia({
           src={encodedVideoSrc}
           poster={encodedPoster}
           controls
+          autoPlay
           muted
           loop
           playsInline
