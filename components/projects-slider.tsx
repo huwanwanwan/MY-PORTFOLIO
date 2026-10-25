@@ -155,7 +155,10 @@ export default function ProjectsSlider() {
 
   function scroll(direction: "left" | "right") {
     if (!scrollContainerRef.current) return;
-    const cardWidth = 520;
+    const track = scrollContainerRef.current;
+    const firstCard = track.firstElementChild as HTMLElement | null;
+    const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+    const cardWidth = (firstCard ? firstCard.getBoundingClientRect().width : 520) + gap;
     const scrollAmount = direction === "left" ? -cardWidth : cardWidth;
     scrollContainerRef.current.scrollBy({
       left: scrollAmount,

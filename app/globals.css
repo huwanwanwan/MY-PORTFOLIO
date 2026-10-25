@@ -7623,12 +7623,57 @@ h2 {
   display: none !important;
 }
 
+/* Portrait: bottom edge flush with the section divider line (all sizes) */
+.profile-intro {
+  border-bottom: 1px solid var(--hero-divider);
+}
+
+.home-portrait-image {
+  clip-path: inset(-12px -12px 0 -12px);
+}
+
+/* Hero tech icons always visible in light and dark */
+.hero-tech-badge {
+  color: var(--ink);
+  background: var(--tag-surface);
+  border: 1px solid var(--tag-border);
+}
+
+.hero-tech-badge svg,
+.hero-tech-badge img {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: block;
+  opacity: 1;
+}
+
+.hero-tech-label {
+  color: var(--ink);
+  opacity: 1;
+}
+
+/* Carousels: one card per step, always snap back to a card */
+.cert-carousel-scroll,
+.projects-slider-scroll,
+.skills-projects-horizontal-scroll {
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+}
+
+.project-slide-card,
+.cert-slide-card,
+.skills-scroll-card {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
 @media (max-width: 768px) {
-  /* Portrait: no clipping, visible bottom line */
+  /* Portrait: thin grayish line matching the section divider */
   .home-portrait-frame {
     width: min(100%, 360px);
     margin: 0 auto;
-    border-bottom: 3px solid var(--portrait-outline);
+    border-bottom: 1px solid var(--hero-divider);
     overflow: visible;
   }
   .home-portrait-image {
@@ -7671,9 +7716,15 @@ h2 {
   .cert-carousel-scroll,
   .projects-slider-scroll,
   .skills-projects-horizontal-scroll {
-    padding-inline: 0 !important;
+    padding: 10px 1px 16px !important;
     gap: 12px;
+    scroll-padding: 0 !important;
     scroll-snap-type: x mandatory;
+  }
+  .project-slide-card:hover,
+  .cert-slide-card:hover,
+  .skills-scroll-card:hover {
+    transform: none;
   }
   .cert-carousel-wrapper,
   .skills-projects-carousel-wrapper {

@@ -547,7 +547,10 @@ export default function SkillsShowcase() {
 
   function scrollGallery(direction: "left" | "right") {
     if (!scrollContainerRef.current) return;
-    const cardWidth = 360;
+    const track = scrollContainerRef.current;
+    const firstCard = track.firstElementChild as HTMLElement | null;
+    const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+    const cardWidth = (firstCard ? firstCard.getBoundingClientRect().width : 360) + gap;
     const scrollAmount = direction === "left" ? -cardWidth : cardWidth;
     scrollContainerRef.current.scrollBy({
       left: scrollAmount,
