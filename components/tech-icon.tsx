@@ -166,6 +166,18 @@ export function TechIcon({ name }: { name: string }) {
     );
   }
 
+  // Git
+  if (norm === "git" || norm.includes("git")) {
+    return (
+      <svg viewBox="0 0 24 24" className="tech-icon-svg" aria-hidden="true">
+        <path
+          fill="#F05032"
+          d="M21.6 11.1L12.9 2.4c-.5-.5-1.3-.5-1.8 0L9.2 4.3l2.3 2.3c.5-.2 1.1-.1 1.5.3.4.4.5 1 .3 1.5l2.2 2.2c.5-.2 1.1-.1 1.5.3.6.6.6 1.5 0 2.1-.6.6-1.5.6-2.1 0-.4-.4-.5-1-.3-1.6l-2.1-2.1v5.4c.1.1.3.2.4.3.6.6.6 1.5 0 2.1-.6.6-1.5.6-2.1 0-.6-.6-.6-1.5 0-2.1.2-.2.3-.3.5-.4V9.1c-.2-.1-.3-.2-.5-.4-.4-.4-.5-1-.3-1.5L8.2 4.9 2.4 10.7c-.5.5-.5 1.3 0 1.8l8.7 8.7c.5.5 1.3.5 1.8 0l8.7-8.7c.5-.5.5-1.3 0-1.4z"
+        />
+      </svg>
+    );
+  }
+
   // Fallback
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="tech-icon-svg" aria-hidden="true">

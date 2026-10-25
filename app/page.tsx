@@ -7,7 +7,18 @@ import {
   ProjectsSection,
   SkillsSection,
 } from "../components/portfolio-sections";
+import { TechIcon } from "../components/tech-icon";
 import SiteShell from "../components/site-shell";
+
+const heroTechnologies = [
+  "HTML",
+  "CSS",
+  "JavaScript",
+  "React.js",
+  "Kotlin",
+  "Node.js",
+  "Git",
+];
 
 export default function Home() {
   return (
@@ -27,17 +38,68 @@ export default function Home() {
             <span className="hero-name">Web &amp; Mobile Developer</span>
           </h1>
           <p className="intro-copy">
-            Skilled in React.js, Kotlin, JavaScript, PHP, HTML, CSS, Unity, and
-            Arduino. I build web applications, mobile apps, games, and IoT
-            systems—turning ideas into useful, easy-to-use digital experiences.
+            Web and Mobile Developer focused on building responsive websites,
+            functional mobile applications, and intuitive user interfaces.
           </p>
           <div className="intro-actions">
             <Link className="intro-link" href="/projects">
-              <span aria-hidden="true">▣</span> Explore my projects
+              <span>View My Work</span>
+              <svg
+                viewBox="0 0 24 24"
+                width="17"
+                height="17"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </svg>
             </Link>
-            <Link className="intro-link intro-link-secondary" href="/about">
-              About me
-            </Link>
+            <a
+              className="intro-link intro-link-secondary"
+              href="/Juan_Militante_CV.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              download="Juan_Militante_CV.html"
+            >
+              <span>Download CV</span>
+              <svg
+                viewBox="0 0 24 24"
+                width="17"
+                height="17"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+            </a>
+          </div>
+
+          <div className="hero-tech-strip" aria-label="Technologies I work with">
+            <p className="hero-tech-heading">TECHNOLOGIES I WORK WITH</p>
+            <div className="hero-tech-icons">
+              {heroTechnologies.map((tech) => (
+                <div
+                  key={tech}
+                  className="hero-tech-badge"
+                  title={tech}
+                  aria-label={tech}
+                >
+                  <TechIcon name={tech} />
+                  <span className="hero-tech-label">{tech}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         <figure className="home-portrait-frame">

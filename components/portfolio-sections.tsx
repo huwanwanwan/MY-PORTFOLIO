@@ -75,6 +75,101 @@ export function AboutSection({
 }: {
   projectPlaceholder?: boolean;
 }) {
+  if (projectPlaceholder) {
+    return (
+      <section
+        className="section-block content-section home-about-showcase"
+        id="about"
+        data-scroll-reveal
+        aria-labelledby="about-heading"
+      >
+        <div className="home-about-reversed-grid">
+          {/* LEFT COLUMN: 2x2 Stats Matrix */}
+          <div className="home-about-stats-matrix">
+            <div className="home-stat-cell">
+              <div className="home-stat-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+              </div>
+              <div className="home-stat-text">
+                <strong>4+</strong>
+                <span>Years IT Study</span>
+              </div>
+            </div>
+
+            <div className="home-stat-cell">
+              <div className="home-stat-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
+                  <line x1="14" y1="4" x2="10" y2="20" />
+                </svg>
+              </div>
+              <div className="home-stat-text">
+                <strong>14+</strong>
+                <span>Projects Completed</span>
+              </div>
+            </div>
+
+            <div className="home-stat-cell">
+              <div className="home-stat-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="8" r="6" />
+                  <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+                </svg>
+              </div>
+              <div className="home-stat-text">
+                <strong>11+</strong>
+                <span>Verified Certificates</span>
+              </div>
+            </div>
+
+            <div className="home-stat-cell">
+              <div className="home-stat-icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                  <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                  <path d="M4 22h16" />
+                  <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+                  <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+                  <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+                </svg>
+              </div>
+              <div className="home-stat-text">
+                <strong>100%</strong>
+                <span>Dedication &amp; Craft</span>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN: Description & Learn More Button */}
+          <div className="home-about-copy-right">
+            <span className="home-about-pill-badge">ABOUT ME</span>
+            <h2 id="about-heading" className="home-about-title">
+              I&apos;m passionate about creating digital solutions
+            </h2>
+            <p className="home-about-desc">
+              I&apos;m Juan Domanico Militante (Ikoy), a Web and Mobile Developer from Bulacan, Philippines. From building SIGLA—our offline-first mobile sign language translator capstone—to crafting POS systems, IoT hardware, and Unity games, I love turning ideas into clean, efficient, and user-friendly experiences.
+            </p>
+            <div className="home-about-action">
+              <Link className="home-about-outline-btn" href="/about">
+                <span>Learn More About Me</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <>
       <section

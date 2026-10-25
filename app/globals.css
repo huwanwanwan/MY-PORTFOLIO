@@ -6876,3 +6876,373 @@ h2 {
   font-weight: 800;
   letter-spacing: 0.06em;
 }
+
+/* ==========================================================================
+   HERO BUTTONS & BOTTOM TECH STACK STRIP (Light & Dark Mode High Contrast)
+   ========================================================================== */
+.hero-actions {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.hero-actions .intro-link,
+.hero-actions .secondary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 12px;
+  font-size: 14.5px;
+  font-weight: 750;
+  text-decoration: none;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease, color 0.22s ease;
+}
+
+.hero-actions .secondary-link {
+  border: 1.5px solid var(--card-border);
+  background: var(--card-surface);
+  color: var(--ink);
+}
+
+.dark .hero-actions .secondary-link,
+[data-theme="dark"] .hero-actions .secondary-link {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #f5f3ef;
+}
+
+.hero-actions .secondary-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.hero-btn-icon {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  transition: transform 0.22s ease;
+}
+
+.hero-actions .intro-link:hover .hero-btn-icon {
+  transform: translate(2px, -2px);
+}
+
+.hero-actions .secondary-link:hover .hero-btn-icon {
+  transform: translateY(2px);
+}
+
+.hero-tech-strip {
+  margin-top: 34px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.hero-tech-heading {
+  margin: 0 0 14px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.dark .hero-tech-heading,
+[data-theme="dark"] .hero-tech-heading {
+  color: rgba(245, 243, 239, 0.72);
+}
+
+.hero-tech-icons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 13px;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  background: var(--card-surface);
+  color: var(--ink);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.light .hero-tech-badge,
+[data-theme="light"] .hero-tech-badge {
+  background: #ffffff;
+  border-color: rgba(35, 33, 30, 0.14);
+  color: #1f1e1b;
+}
+
+.dark .hero-tech-badge,
+[data-theme="dark"] .hero-tech-badge {
+  background: #1e1d1a;
+  border-color: rgba(255, 255, 255, 0.16);
+  color: #f5f3ef;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+}
+
+.hero-tech-badge:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.hero-tech-badge .tech-icon-svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.hero-tech-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: inherit;
+}
+
+/* ==========================================================================
+   HOME REVERSED ABOUT SHOWCASE (2x2 Stats Matrix Left + Copy Right)
+   ========================================================================== */
+.home-about-showcase {
+  padding-top: clamp(48px, 7vw, 88px);
+  padding-bottom: clamp(48px, 7vw, 88px);
+}
+
+.home-about-reversed-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(36px, 6vw, 80px);
+}
+
+.home-about-stats-matrix {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.05);
+}
+
+.dark .home-about-stats-matrix,
+[data-theme="dark"] .home-about-stats-matrix {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.32);
+}
+
+.home-stat-cell {
+  background: var(--card-surface);
+  padding: clamp(24px, 3.2vw, 38px) clamp(20px, 2.6vw, 32px);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: background 0.22s ease;
+}
+
+.light .home-stat-cell,
+[data-theme="light"] .home-stat-cell {
+  background: #fdfbf8;
+}
+
+.dark .home-stat-cell,
+[data-theme="dark"] .home-stat-cell {
+  background: #1b1a17;
+}
+
+.home-stat-cell:hover {
+  background: var(--raised-surface);
+}
+
+.home-stat-icon-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: rgba(198, 83, 54, 0.12);
+  border: 1px solid rgba(198, 83, 54, 0.28);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.home-stat-icon-box svg {
+  width: 23px;
+  height: 23px;
+}
+
+.home-stat-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.home-stat-text strong {
+  font-size: clamp(24px, 2.6vw, 32px);
+  font-weight: 850;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.home-stat-text span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+.home-about-copy-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  text-align: left;
+}
+
+.home-about-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: rgba(198, 83, 54, 0.12);
+  border: 1px solid rgba(198, 83, 54, 0.26);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.home-about-title {
+  margin: 0;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1.14;
+  color: var(--ink);
+}
+
+.home-about-desc {
+  margin: 0;
+  font-size: clamp(15px, 1.25vw, 17px);
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.home-about-outline-btn {
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 22px;
+  border-radius: 12px;
+  border: 1.5px solid var(--card-border);
+  background: var(--card-surface);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 750;
+  text-decoration: none;
+  transition: transform 0.22s ease, border-color 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.dark .home-about-outline-btn,
+[data-theme="dark"] .home-about-outline-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #f5f3ef;
+}
+
+.home-about-outline-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(198, 83, 54, 0.14);
+}
+
+@media (max-width: 900px) {
+  .home-about-reversed-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 520px) {
+  .home-about-stats-matrix {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   EXPERIENCE & EDUCATION TIMELINE DOT-LINE DESIGN
+   ========================================================================== */
+.journey-entry {
+  position: relative;
+  display: block;
+  padding: 20px 0 22px 34px;
+  border-bottom: none;
+}
+
+/* Vertical connecting timeline line */
+.journey-entry::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 28px;
+  bottom: -22px;
+  width: 2px;
+  background: var(--line);
+}
+
+.dark .journey-entry::before,
+[data-theme="dark"] .journey-entry::before {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.light .journey-entry::before,
+[data-theme="light"] .journey-entry::before {
+  background: rgba(35, 33, 30, 0.15);
+}
+
+/* Stop connecting line after last timeline item in each list */
+.experience-list-container > .journey-entry:last-of-type::before,
+.journey-column > .journey-entry:last-of-type::before {
+  display: none;
+}
+
+/* Circular accent dot node */
+.journey-index {
+  position: absolute;
+  left: 1px;
+  top: 23px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3.5px solid var(--card-surface);
+  box-shadow: 0 0 0 2px rgba(198, 83, 54, 0.35), 0 0 12px rgba(198, 83, 54, 0.3);
+  color: transparent;
+  font-size: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.journey-index .info-icon {
+  display: none;
+}
+

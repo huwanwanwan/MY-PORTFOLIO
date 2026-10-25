@@ -114,13 +114,19 @@ export default function ProjectMediaStage({
             <div className="smart-video-wrapper">
               <video
                 key={currentMedia.src}
-                src={currentMedia.src}
+                src={encodeURI(currentMedia.src)}
+                poster={images[0] ? encodeURI(images[0]) : undefined}
                 controls
                 autoPlay
                 muted
                 loop
                 playsInline
                 preload="metadata"
+                onError={() => {
+                  if (images.length > 0 && mediaList.length > 1) {
+                    setActiveIndex(1);
+                  }
+                }}
                 className="smart-main-video"
                 title={title + " video preview"}
               >

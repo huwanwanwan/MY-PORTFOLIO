@@ -13,6 +13,77 @@ type CategoryFilter =
   | "Games & Animation"
   | "IoT & Hardware";
 
+function ProjectSlideMedia({
+  project,
+  firstImage,
+}: {
+  project: ProjectItem;
+  firstImage: string | null;
+}) {
+  const [videoFailed, setVideoFailed] = useState(false);
+
+  if (project.video && !videoFailed) {
+    const encodedVideoSrc = encodeURI(project.video);
+    const encodedPoster = firstImage ? encodeURI(firstImage) : undefined;
+
+    return (
+      <div className="project-slide-video-wrap">
+        <video
+          src={encodedVideoSrc}
+          poster={encodedPoster}
+          controls
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          onError={() => setVideoFailed(true)}
+          className="project-slide-video"
+          title={`${project.title} video demo`}
+        >
+          Your browser does not support the video tag.
+        </video>
+        <div className="video-live-badge">
+          <span className="live-dot" />
+          <span>DEMO VIDEO</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (firstImage) {
+    return (
+      <div className="project-slide-img-wrap">
+        <Image
+          src={firstImage}
+          alt={`${project.title} preview`}
+          fill
+          sizes="(max-width: 768px) 100vw, 560px"
+          className="project-slide-img"
+          unoptimized
+        />
+        <div className="video-live-badge project-preview-badge">
+          <span>PROJECT PREVIEW</span>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="project-slide-fallback">
+      <div className="fallback-emblem-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" width="36" height="36">
+          <rect x="2" y="3" width="20" height="14" rx="2" />
+          <line x1="8" y1="21" x2="16" y2="21" />
+          <line x1="12" y1="17" x2="12" y2="21" />
+        </svg>
+      </div>
+      <span className="fallback-project-title">{project.title}</span>
+      <span className="fallback-notice">Desktop / Web System</span>
+    </div>
+  );
+}
+
 export default function ProjectsSlider() {
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("All");
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
@@ -129,55 +200,9 @@ export default function ProjectsSlider() {
                   <span className="cert-card-index">{indexStr} / {String(filtered.length).padStart(2, "0")}</span>
                 </div>
 
-                {/* Media Showcase: Video Demo, or First Project Picture Preview */}
+                {/* Media Showcase: Video Demo (with poster & fallback) or First Project Picture Preview */}
                 <div className="project-slide-media-box">
-                  {project.video ? (
-                    <div className="project-slide-video-wrap">
-                      <video
-                        src={project.video}
-                        controls
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        preload="metadata"
-                        className="project-slide-video"
-                        title={`${project.title} video demo`}
-                      >
-                        Your browser does not support the video tag.
-                      </video>
-                      <div className="video-live-badge">
-                        <span className="live-dot" />
-                        <span>DEMO VIDEO</span>
-                      </div>
-                    </div>
-                  ) : firstImage ? (
-                    <div className="project-slide-img-wrap">
-                      <Image
-                        src={firstImage}
-                        alt={`${project.title} preview`}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 560px"
-                        className="project-slide-img"
-                        unoptimized
-                      />
-                      <div className="video-live-badge project-preview-badge">
-                        <span>PROJECT PREVIEW</span>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="project-slide-fallback">
-                      <div className="fallback-emblem-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" width="36" height="36">
-                          <rect x="2" y="3" width="20" height="14" rx="2" />
-                          <line x1="8" y1="21" x2="16" y2="21" />
-                          <line x1="12" y1="17" x2="12" y2="21" />
-                        </svg>
-                      </div>
-                      <span className="fallback-project-title">{project.title}</span>
-                      <span className="fallback-notice">Desktop / Web System</span>
-                    </div>
-                  )}
+                  <ProjectSlideMedia project={project} firstImage={firstImage} />
                 </div>
 
                 {/* Card Title & Type */}
