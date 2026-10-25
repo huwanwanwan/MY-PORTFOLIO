@@ -118,11 +118,20 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
         entries.forEach((entry) => {
           const item = entry.target as HTMLElement;
           if (entry.isIntersecting) {
-            item.dataset.revealVisible = "true";
+            // Intentional little delay before popping up
+            const delayAttr = item.dataset.revealDelay;
+            const delayMs = delayAttr ? parseInt(delayAttr, 10) : 120;
+            const timer = window.setTimeout(() => {
+              item.dataset.revealVisible = "true";
+            }, delayMs);
+            (item as any)._revealTimer = timer;
           } else {
             // Loop animation: when element is outside viewport, reset so it re-animates smoothly on re-entry
+            if ((item as any)._revealTimer) {
+              clearTimeout((item as any)._revealTimer);
+            }
             const rect = entry.boundingClientRect;
-            if (rect.bottom < -20 || rect.top > (window.innerHeight || document.documentElement.clientHeight) + 20) {
+            if (rect.bottom < -30 || rect.top > (window.innerHeight || document.documentElement.clientHeight) + 30) {
               item.dataset.revealVisible = "false";
             }
           }

@@ -303,6 +303,7 @@ export default function ProjectsShowcase({
               key={project.id}
               className={`smart-project-row scroll-reveal ${isReversed ? "row-reversed" : ""}`}
               data-scroll-reveal
+              data-reveal-delay={(index % 3) * 110 + 100}
               id={`project-${project.id}`}
             >
               {/* LEFT COLUMN: Media Hero + Screenshot Strip Below (Exact SMaRT-PDM reference mockup) */}

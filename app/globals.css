@@ -5737,89 +5737,70 @@ html.dark .cert-lightbox-desc {
 
 
 /* ==========================================================================
-   SMaRT-PDM BESPOKE SIDE-BY-SIDE ARCHITECTURE (Reference Mockup)
-   Left: Hero Media Card + Screenshot Carousel Strip Below
-   Right: Index/Category, Title, Overview Description, Role, Tech Stack
+   BENTO PROJECT CARD CONTAINER (Inspired by Daniel Zan Baltazar)
+   Self-contained, elevated card container with media showcase on left/top
+   and rich metadata/specs/tech stack on right/bottom.
    ========================================================================== */
 
 .project-detail-rows {
   display: flex;
   flex-direction: column;
-  gap: clamp(48px, 6vw, 76px);
+  gap: clamp(32px, 4.5vw, 56px);
   width: 100%;
 }
 
 .smart-project-row {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(320px, 1fr);
-  gap: clamp(28px, 4vw, 54px);
-  align-items: start;
-  padding-bottom: clamp(48px, 6vw, 72px);
+  gap: clamp(24px, 3.5vw, 44px);
+  align-items: stretch;
   position: relative;
-}
-
-/* Full-bleed edge-to-edge subtle hairline divider across the entire viewport width */
-.smart-project-row::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: 100vw;
-  height: 2px;
-  background: var(--line);
-  pointer-events: none;
-}
-
-[data-theme="light"] .smart-project-row::after {
-  background: rgba(0, 0, 0, 0.16);
-}
-
-[data-theme="dark"] .smart-project-row::after {
-  background: rgba(255, 255, 255, 0.16);
-}
-
-.smart-project-row:last-child::after {
-  display: none;
-}
-
-/* Converge / meet-in-the-center scroll animation */
-.smart-project-row .smart-col-media,
-.smart-project-row .smart-col-info {
-  transition: opacity 750ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 750ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
-}
-
-/* Normal row (Media Left, Info Right): Media slides from left, Info slides from right towards center */
-.smart-project-row[data-reveal-ready="true"]:not([data-reveal-visible="true"]) .smart-col-media {
-  opacity: 0;
-  transform: translateX(-40px);
-}
-.smart-project-row[data-reveal-ready="true"]:not([data-reveal-visible="true"]) .smart-col-info {
-  opacity: 0;
-  transform: translateX(40px);
-}
-
-/* Reversed row (Info Left, Media Right): Info slides from left, Media slides from right towards center */
-.smart-project-row.row-reversed[data-reveal-ready="true"]:not([data-reveal-visible="true"]) .smart-col-info {
-  opacity: 0;
-  transform: translateX(-40px);
-}
-.smart-project-row.row-reversed[data-reveal-ready="true"]:not([data-reveal-visible="true"]) .smart-col-media {
-  opacity: 0;
-  transform: translateX(40px);
-}
-
-.smart-project-row[data-reveal-visible="true"] .smart-col-media,
-.smart-project-row[data-reveal-visible="true"] .smart-col-info {
+  border-radius: clamp(18px, 2.5vw, 24px);
+  border: 1px solid var(--card-border);
+  background: var(--card-surface);
+  padding: clamp(20px, 3vw, 36px);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0) scale(1);
+  transition:
+    opacity 650ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 650ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+  will-change: opacity, transform;
+}
+
+[data-theme="light"] .smart-project-row {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.09);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .smart-project-row {
+  background: #181716;
+  border-color: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 8px 32px -6px rgba(0, 0, 0, 0.6);
+}
+
+.smart-project-row:hover {
+  border-color: var(--accent);
+  box-shadow: 0 12px 36px -6px rgba(0, 0, 0, 0.18);
+}
+
+/* Smooth Pop Up Animation when scrolled into view */
+.smart-project-row[data-reveal-ready="true"]:not([data-reveal-visible="true"]) {
+  opacity: 0;
+  transform: translateY(32px) scale(0.98);
+}
+
+.smart-project-row[data-reveal-visible="true"] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .smart-project-row .smart-col-media,
-  .smart-project-row .smart-col-info {
+  .smart-project-row {
     transition: none !important;
     transform: none !important;
     opacity: 1 !important;
@@ -5838,16 +5819,16 @@ html.dark .cert-lightbox-desc {
   order: 1;
 }
 
-.smart-project-row:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
 @media (max-width: 960px) {
   .smart-project-row,
   .smart-project-row.row-reversed {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 22px;
+    padding: clamp(16px, 4vw, 22px) !important;
+    border-radius: 18px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .smart-project-row.row-reversed .smart-col-media {
@@ -6000,10 +5981,12 @@ html.dark .cert-lightbox-desc {
 /* Endpoint Arrows Wrapper: Left arrow on far left, Right arrow on far right */
 .smart-carousel-endpoint-wrapper {
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 34px;
   align-items: center;
   gap: 8px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .smart-arrow-endpoint-btn {
@@ -8021,11 +8004,14 @@ html.dark .cert-lightbox-desc {
 
   /* Endpoint arrows wrapper: Both arrows stay inside screen */
   .smart-carousel-endpoint-wrapper {
+    display: grid !important;
+    grid-template-columns: 30px minmax(0, 1fr) 30px !important;
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
     overflow: hidden !important;
     gap: 6px !important;
+    box-sizing: border-box !important;
   }
 
   .smart-arrow-endpoint-btn {
