@@ -7,6 +7,7 @@ import emailjs from "@emailjs/browser";
 export default function ContactHub() {
   const [copied, setCopied] = useState(false);
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [sendProgress, setSendProgress] = useState(0);
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -156,30 +157,60 @@ export default function ContactHub() {
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus("submitting");
+    setSendProgress(8);
+
+    // Fast progress timer to animate up to 92% in ~300ms
+    const startTime = Date.now();
+    const progressInterval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      if (elapsed < 350) {
+        const p = Math.min(92, Math.round(8 + (elapsed / 350) * 84));
+        setSendProgress(p);
+      }
+    }, 20);
 
     const dispatchTask = async () => {
       let sent = false;
 
       // 1. Primary dispatch: Direct EmailJS with Wancorp branding, 'W' logo, and orange table
       try {
-        const res = await emailjs.send(
-          "service_azcv23s",
-          "es1ha4f",
-          {
-            from_name: formState.name,
-            from_email: formState.email,
-            phone: formState.phone || "Not provided",
-            subject: formState.subject || "General Project Discussion",
-            message: formState.message,
-          },
-          "kUDnhN5l63awEUq0y"
-        );
+        emailjs.init({ publicKey: "kUDnhN5l63awEUq0y" });
 
-        if (res.status === 200) {
+        let res;
+        try {
+          res = await emailjs.send(
+            "service_azcv23s",
+            "es1ha4f",
+            {
+              from_name: formState.name,
+              from_email: formState.email,
+              phone: formState.phone || "Not provided",
+              subject: formState.subject || "General Project Discussion",
+              message: formState.message,
+            },
+            { publicKey: "kUDnhN5l63awEUq0y" }
+          );
+        } catch {
+          // Retry with template_es1ha4f in case EmailJS assigned the template_ prefix
+          res = await emailjs.send(
+            "service_azcv23s",
+            "template_es1ha4f",
+            {
+              from_name: formState.name,
+              from_email: formState.email,
+              phone: formState.phone || "Not provided",
+              subject: formState.subject || "General Project Discussion",
+              message: formState.message,
+            },
+            { publicKey: "kUDnhN5l63awEUq0y" }
+          );
+        }
+
+        if (res && res.status === 200) {
           sent = true;
         }
       } catch (err) {
-        console.warn("EmailJS browser dispatch attempt:", err);
+        console.warn("EmailJS browser dispatch notice:", err);
       }
 
       // 2. Silent background fallback: Sends directly via Wancorp relay with autoresponse back to user
@@ -223,9 +254,15 @@ export default function ContactHub() {
       return sent;
     };
 
-    // Ensure the dispatch animation displays smoothly for at least 1100ms
-    const minDelay = new Promise((resolve) => setTimeout(resolve, 1100));
+    // Fast completion delay (~450ms) so users don't wait long
+    const minDelay = new Promise((resolve) => setTimeout(resolve, 450));
     const [sent] = await Promise.all([dispatchTask(), minDelay]);
+
+    clearInterval(progressInterval);
+    setSendProgress(100);
+
+    // Brief 120ms pause at 100% so user clearly sees full completion
+    await new Promise((resolve) => setTimeout(resolve, 140));
 
     if (sent) {
       setFormStatus("success");
@@ -396,8 +433,19 @@ export default function ContactHub() {
                 <p className="dispatching-subtitle">
                   Packaging your inquiry specifications and delivering directly to Juan&apos;s Gmail inbox...
                 </p>
-                <div className="dispatch-progress-track">
-                  <div className="dispatch-progress-fill" />
+                <div className="dispatch-progress-section">
+                  <div className="dispatch-progress-header">
+                    <span className="dispatch-progress-status">
+                      {sendProgress < 100 ? "Uploading & Dispatching..." : "Dispatched Successfully!"}
+                    </span>
+                    <span className="dispatch-progress-percent">{Math.round(sendProgress)}%</span>
+                  </div>
+                  <div className="dispatch-progress-track">
+                    <div
+                      className="dispatch-progress-fill"
+                      style={{ width: `${Math.min(100, Math.max(0, sendProgress))}%` }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -572,7 +620,7 @@ export default function ContactHub() {
                 className="submit-dispatch-btn"
                 disabled={formStatus === "submitting"}
               >
-                <span>{formStatus === "submitting" ? "Sending via Wancorp..." : "Send Message"}</span>
+                <span>{formStatus === "submitting" ? `Sending... ${Math.round(sendProgress)}%` : "Send Message"}</span>
                 <span className="dispatch-arrow" aria-hidden="true">↗</span>
               </button>
             </div>
