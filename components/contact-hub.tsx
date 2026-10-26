@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
+import { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 
 export default function ContactHub() {
@@ -14,7 +15,90 @@ export default function ContactHub() {
     message: "",
   });
 
+  // Email suggestions & autocomplete state
+  const [emailSuggestions, setEmailSuggestions] = useState<string[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1);
+  const emailInputRef = useRef<HTMLInputElement | null>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+  const emailDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "icloud.com"];
   const emailAddress = "militantejuanenricodomanico@gmail.com";
+
+  const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email.trim());
+
+  // Autocomplete suggestion generator
+  const handleEmailChange = (val: string) => {
+    setFormState((prev) => ({ ...prev, email: val }));
+    const trimmed = val.trim();
+    if (!trimmed) {
+      setEmailSuggestions([]);
+      setShowSuggestions(false);
+      return;
+    }
+
+    if (!trimmed.includes("@")) {
+      setEmailSuggestions(emailDomains.map((d) => `${trimmed}@${d}`));
+      setShowSuggestions(true);
+      setActiveSuggestionIndex(-1);
+    } else {
+      const [user, domainPart] = trimmed.split("@");
+      if (user && domainPart !== undefined) {
+        const filtered = emailDomains
+          .filter((d) => d.startsWith(domainPart.toLowerCase()) && d !== domainPart.toLowerCase())
+          .map((d) => `${user}@${d}`);
+        setEmailSuggestions(filtered);
+        setShowSuggestions(filtered.length > 0);
+        setActiveSuggestionIndex(-1);
+      } else {
+        setShowSuggestions(false);
+      }
+    }
+  };
+
+  const selectSuggestion = (suggestion: string) => {
+    setFormState((prev) => ({ ...prev, email: suggestion }));
+    setShowSuggestions(false);
+    setEmailSuggestions([]);
+    if (emailInputRef.current) {
+      emailInputRef.current.focus();
+    }
+  };
+
+  const handleKeyDownEmail = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!showSuggestions || emailSuggestions.length === 0) return;
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActiveSuggestionIndex((prev) => (prev + 1) % emailSuggestions.length);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActiveSuggestionIndex((prev) => (prev - 1 + emailSuggestions.length) % emailSuggestions.length);
+    } else if (e.key === "Enter" || e.key === "Tab") {
+      if (activeSuggestionIndex >= 0 && activeSuggestionIndex < emailSuggestions.length) {
+        e.preventDefault();
+        selectSuggestion(emailSuggestions[activeSuggestionIndex]);
+      }
+    } else if (e.key === "Escape") {
+      setShowSuggestions(false);
+    }
+  };
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node) &&
+        emailInputRef.current &&
+        !emailInputRef.current.contains(e.target as Node)
+      ) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const buildTemplateBody = (name?: string, email?: string, phone?: string, subject?: string, message?: string) => {
     return [
@@ -73,71 +157,80 @@ export default function ContactHub() {
     e.preventDefault();
     setFormStatus("submitting");
 
-    let sent = false;
+    const dispatchTask = async () => {
+      let sent = false;
 
-    // 1. First attempt: Direct EmailJS with Wancorp branding, 'W' logo, and orange table
-    try {
-      const res = await emailjs.send(
-        "service_azcv23s",
-        "es1ha4f",
-        {
-          from_name: formState.name,
-          from_email: formState.email,
-          phone: formState.phone || "Not provided",
-          subject: formState.subject || "General Project Discussion",
-          message: formState.message,
-        },
-        "kUDnhN5l63awEUq0y"
-      );
-
-      if (res.status === 200) {
-        sent = true;
-      }
-    } catch (err) {
-      console.warn("EmailJS browser dispatch attempt:", err);
-    }
-
-    // 2. Silent background fallback: Sends directly via Wancorp relay with autoresponse back to user
-    if (!sent) {
+      // 1. Primary dispatch: Direct EmailJS with Wancorp branding, 'W' logo, and orange table
       try {
-        const response = await fetch("https://formsubmit.co/ajax/militantejuanenricodomanico@gmail.com", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
+        const res = await emailjs.send(
+          "service_azcv23s",
+          "es1ha4f",
+          {
+            from_name: formState.name,
+            from_email: formState.email,
+            phone: formState.phone || "Not provided",
+            subject: formState.subject || "General Project Discussion",
+            message: formState.message,
           },
-          body: JSON.stringify({
-            name: `Wancorp (${formState.name})`,
-            email: formState.email,
-            _replyto: formState.email,
-            _subject: formState.subject
-              ? `[Wancorp] ${formState.subject} - from ${formState.name}`
-              : `[Wancorp] Project Inquiry from ${formState.name}`,
-            _template: "box",
-            _captcha: "false",
-            _autoresponse: `Hello ${formState.name},\n\nThank you for reaching out to Wancorp! We have received your project inquiry and will review your specifications promptly.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nWancorp (Wan Company)\nWeb & Mobile Software Development\nOfficial Logo: https://portfolio.juandomanicomilitante.workers.dev/tab-logo.png\nWebsite: https://portfolio.juandomanicomilitante.workers.dev\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
-            "Brand / Company": "Wancorp",
-            "Official Logo": "https://portfolio.juandomanicomilitante.workers.dev/tab-logo.png",
-            "Client Name": formState.name,
-            "Client Email": formState.email,
-            "Contact Phone": formState.phone || "Not provided",
-            "Inquiry Subject": formState.subject || "General Project Discussion",
-            "Message Details": formState.message,
-            "Platform Source": "Wancorp Portfolio Contact Hub",
-          }),
-        });
+          "kUDnhN5l63awEUq0y"
+        );
 
-        if (response.ok) {
+        if (res.status === 200) {
           sent = true;
         }
-      } catch (fallbackErr) {
-        console.error("Background dispatch fallback error:", fallbackErr);
+      } catch (err) {
+        console.warn("EmailJS browser dispatch attempt:", err);
       }
-    }
+
+      // 2. Silent background fallback: Sends directly via Wancorp relay with autoresponse back to user
+      if (!sent) {
+        try {
+          const response = await fetch("https://formsubmit.co/ajax/militantejuanenricodomanico@gmail.com", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              name: `Wancorp (${formState.name})`,
+              email: formState.email,
+              _replyto: formState.email,
+              _subject: formState.subject
+                ? `[Wancorp] ${formState.subject} - from ${formState.name}`
+                : `[Wancorp] Project Inquiry from ${formState.name}`,
+              _template: "box",
+              _captcha: "false",
+              _autoresponse: `Hello ${formState.name},\n\nThank you for reaching out to Wancorp! We have received your project inquiry and will review your specifications promptly.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nWancorp (Wan Company)\nWeb & Mobile Software Development\nOfficial Logo: https://portfolio.juandomanicomilitante.workers.dev/tab-logo.png\nWebsite: https://portfolio.juandomanicomilitante.workers.dev\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+              "Brand / Company": "Wancorp",
+              "Official Logo": "https://portfolio.juandomanicomilitante.workers.dev/tab-logo.png",
+              "Client Name": formState.name,
+              "Client Email": formState.email,
+              "Contact Phone": formState.phone || "Not provided",
+              "Inquiry Subject": formState.subject || "General Project Discussion",
+              "Message Details": formState.message,
+              "Platform Source": "Wancorp Portfolio Contact Hub",
+            }),
+          });
+
+          if (response.ok) {
+            sent = true;
+          }
+        } catch (fallbackErr) {
+          console.error("Background dispatch fallback error:", fallbackErr);
+        }
+      }
+
+      return sent;
+    };
+
+    // Ensure the dispatch animation displays smoothly for at least 1100ms
+    const minDelay = new Promise((resolve) => setTimeout(resolve, 1100));
+    const [sent] = await Promise.all([dispatchTask(), minDelay]);
 
     if (sent) {
       setFormStatus("success");
       setFormState({ name: "", email: "", phone: "", subject: "", message: "" });
+      setShowSuggestions(false);
     } else {
       setFormStatus("error");
     }
@@ -283,8 +376,33 @@ export default function ContactHub() {
           </div>
         </div>
 
-        {/* Centered Message Card */}
+        {/* Centered Message Card with Loading Overlay */}
         <div className="contact-main-card">
+          {/* Loading Animation Overlay */}
+          {formStatus === "submitting" && (
+            <div className="form-dispatching-overlay" role="status" aria-live="polite">
+              <div className="dispatching-card">
+                <div className="dispatching-spinner-wrap">
+                  <div className="dispatching-spinner-ring" />
+                  <Image
+                    src="/tab-logo.png"
+                    alt="Wancorp Logo"
+                    width={48}
+                    height={48}
+                    className="dispatch-logo-img"
+                  />
+                </div>
+                <h4 className="dispatching-title">Sending Message to Wancorp</h4>
+                <p className="dispatching-subtitle">
+                  Packaging your inquiry specifications and delivering directly to Juan&apos;s Gmail inbox...
+                </p>
+                <div className="dispatch-progress-track">
+                  <div className="dispatch-progress-fill" />
+                </div>
+              </div>
+            </div>
+          )}
+
           <div className="card-top-decoration" aria-hidden="true">
             <span className="card-corner-line" />
             <span className="card-badge">DIRECT INQUIRY DISPATCH (WANCORP)</span>
@@ -315,19 +433,65 @@ export default function ContactHub() {
                 />
               </div>
 
-              <div className="form-group">
+              <div className="form-group email-input-container">
                 <label htmlFor="contact-sender-email">
                   Your Email <span className="req-star">*</span>
                 </label>
-                <input
-                  id="contact-sender-email"
-                  type="email"
-                  required
-                  placeholder="e.g. maria@example.com"
-                  value={formState.email}
-                  onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                  className="styled-input"
-                />
+                <div style={{ position: "relative" }}>
+                  <input
+                    ref={emailInputRef}
+                    id="contact-sender-email"
+                    type="email"
+                    required
+                    placeholder="e.g. maria@example.com"
+                    value={formState.email}
+                    onChange={(e) => handleEmailChange(e.target.value)}
+                    onKeyDown={handleKeyDownEmail}
+                    onFocus={() => {
+                      if (formState.email.trim() && emailSuggestions.length > 0) {
+                        setShowSuggestions(true);
+                      }
+                    }}
+                    autoComplete="off"
+                    className="styled-input"
+                    style={{ paddingRight: isEmailValid ? "38px" : "14px" }}
+                  />
+
+                  {/* Valid Email Format Indicator */}
+                  {isEmailValid && (
+                    <svg className="email-valid-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-label="Valid email format">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  )}
+
+                  {/* Autocomplete Email Suggestions Dropdown */}
+                  {showSuggestions && emailSuggestions.length > 0 && (
+                    <div ref={dropdownRef} className="email-suggestions-dropdown" role="listbox">
+                      {emailSuggestions.map((suggestion, index) => {
+                        const [userPart, domainPart] = suggestion.split("@");
+                        const isSelected = index === activeSuggestionIndex;
+                        return (
+                          <button
+                            key={suggestion}
+                            type="button"
+                            role="option"
+                            aria-selected={isSelected}
+                            className={`email-suggestion-item ${isSelected ? "active" : ""}`}
+                            onMouseDown={(e) => {
+                              e.preventDefault();
+                              selectSuggestion(suggestion);
+                            }}
+                          >
+                            <span>
+                              {userPart}@<span className="suggestion-domain">{domainPart}</span>
+                            </span>
+                            <span className="suggestion-hint">Select ↵</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
