@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import EditorialContactBanner from "./editorial-contact-banner";
 import FaqChatbot from "./faq-chatbot";
+import ThemeTutorial from "./theme-tutorial";
 
 const themeChangeEvent = "portfolio-theme-change";
 
@@ -227,7 +228,8 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
           </nav>
           <div className="topbar-actions">
             <button
-              className="theme-toggle"
+              id="topbar-theme-toggle"
+              className="theme-toggle theme-toggle-spotlight"
               type="button"
               aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
               aria-pressed={darkMode}
@@ -327,6 +329,9 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
             </button>
           </div>
         </footer>
+
+        {/* Guided Theme Tutorial for New Visitors */}
+        <ThemeTutorial darkMode={darkMode} onToggleTheme={toggleTheme} />
 
         {/* Floating Circle FAQ Chatbot on bottom-right */}
         <FaqChatbot />

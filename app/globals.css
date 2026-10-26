@@ -19402,3 +19402,262 @@ html.dark .cert-lightbox-desc {
     bottom: 66px;
   }
 }
+
+
+/* ==========================================================================
+   THEME SWITCH TUTORIAL & SPOTLIGHT ONBOARDING
+   ========================================================================== */
+.theme-tutorial-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(10, 9, 8, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 68px 32px 24px 24px;
+  animation: backdropFadeIn 0.35s ease-out;
+}
+
+[data-theme="light"] .theme-tutorial-backdrop {
+  background: rgba(15, 14, 12, 0.65);
+}
+
+@keyframes backdropFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Elevate the actual theme toggle in topbar above the dimmed backdrop */
+.theme-toggle.theme-toggle-spotlight {
+  position: relative !important;
+  z-index: 10002 !important;
+}
+
+/* Pulsing Spotlight Ring around the topbar button */
+.theme-spotlight-pulse {
+  position: fixed;
+  top: 14px;
+  right: 28px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10001;
+  box-shadow: 0 0 0 3px var(--accent), 0 0 28px var(--accent);
+  animation: spotlightPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes spotlightPulse {
+  0%, 100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 3px var(--accent), 0 0 20px rgba(198, 83, 54, 0.6);
+  }
+  50% {
+    transform: scale(1.18);
+    box-shadow: 0 0 0 6px var(--accent), 0 0 38px rgba(198, 83, 54, 0.9);
+  }
+}
+
+/* Tutorial Floating Guidance Card */
+.theme-tutorial-card {
+  position: relative;
+  max-width: 430px;
+  width: 100%;
+  margin-top: 10px;
+  background: rgba(22, 20, 18, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.65), 0 0 30px rgba(198, 83, 54, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: cardSlideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10003;
+}
+
+[data-theme="light"] .theme-tutorial-card {
+  background: rgba(255, 255, 255, 0.97);
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2), 0 0 30px rgba(198, 83, 54, 0.1);
+}
+
+@keyframes cardSlideDown {
+  from { opacity: 0; transform: translateY(-16px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Pointer Arrow */
+.tutorial-pointer-arrow {
+  position: absolute;
+  top: -30px;
+  right: 28px;
+  color: var(--accent);
+  animation: arrowBounce 1.5s infinite ease-in-out;
+}
+
+@keyframes arrowBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.tutorial-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tutorial-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  background: rgba(198, 83, 54, 0.15);
+  border: 1px solid rgba(198, 83, 54, 0.35);
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-family: var(--font-geist-mono, monospace);
+}
+
+.tutorial-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: dotFlash 1.5s infinite ease-in-out;
+}
+
+@keyframes dotFlash {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.tutorial-skip-btn {
+  background: transparent;
+  border: none;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: color 0.2s ease;
+}
+
+.tutorial-skip-btn:hover {
+  color: var(--ink-strong);
+}
+
+.tutorial-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--ink-strong);
+  letter-spacing: -0.01em;
+}
+
+.tutorial-desc {
+  margin: 0;
+  font-size: 0.90rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+/* Actions Row */
+.tutorial-actions-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.tutorial-toggle-btn {
+  width: 100%;
+  padding: 13px 18px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent, #c65336), #e56a4b);
+  color: #ffffff;
+  border: none;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 18px rgba(198, 83, 54, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tutorial-toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(198, 83, 54, 0.55);
+}
+
+.toggle-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  font-size: 14px;
+}
+
+.tutorial-continue-btn {
+  width: 100%;
+  padding: 11px 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--ink-strong);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+[data-theme="light"] .tutorial-continue-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.tutorial-continue-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+[data-theme="light"] .tutorial-continue-btn:hover {
+  background: rgba(0, 0, 0, 0.09);
+}
+
+.tutorial-footer-note {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  text-align: center;
+  opacity: 0.8;
+  font-family: var(--font-geist-mono, monospace);
+}
+
+@media (max-width: 600px) {
+  .theme-tutorial-backdrop {
+    padding: 65px 16px 20px 16px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .theme-spotlight-pulse {
+    right: 18px;
+    top: 12px;
+  }
+  .tutorial-pointer-arrow {
+    right: 22px;
+  }
+}
