@@ -17,9 +17,9 @@ export default function ContactHub() {
 
   const buildTemplateBody = (name?: string, email?: string, phone?: string, subject?: string, message?: string) => {
     return [
-      "Hello Juan (WANCOR),",
+      "Hello Juan (Wancorp),",
       "",
-      "I would like to discuss a project / inquiry with WANCOR:",
+      "I would like to discuss a project / inquiry with Wancorp:",
       "",
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
       "PROJECT / INQUIRY DETAILS:",
@@ -33,15 +33,15 @@ export default function ContactHub() {
       `• Email Address: ${email?.trim() || "[Your Email]"}`,
       `• Contact Phone: ${phone?.trim() || "[Your Phone / WhatsApp]"}`,
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "Dispatched via WANCOR Portfolio Contact Hub (Wan Company)",
+      "Dispatched via Wancorp Portfolio Contact Hub",
     ].join("\n");
   };
 
   const getGmailComposeUrl = (name?: string, email?: string, phone?: string, subject?: string, message?: string) => {
     const su = encodeURIComponent(
       subject?.trim()
-        ? `[WANCOR] ${subject.trim()} - from ${name?.trim() || "Client"}`
-        : "[WANCOR] Project Inquiry / Collaboration"
+        ? `[Wancorp] ${subject.trim()} - from ${name?.trim() || "Client"}`
+        : "[Wancorp] Project Inquiry / Collaboration"
     );
     const body = encodeURIComponent(buildTemplateBody(name, email, phone, subject, message));
     return `https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}&su=${su}&body=${body}`;
@@ -50,8 +50,8 @@ export default function ContactHub() {
   const getMailtoUrl = (name?: string, email?: string, phone?: string, subject?: string, message?: string) => {
     const su = encodeURIComponent(
       subject?.trim()
-        ? `[WANCOR] ${subject.trim()} - from ${name?.trim() || "Client"}`
-        : "[WANCOR] Project Inquiry / Collaboration"
+        ? `[Wancorp] ${subject.trim()} - from ${name?.trim() || "Client"}`
+        : "[Wancorp] Project Inquiry / Collaboration"
     );
     const body = encodeURIComponent(buildTemplateBody(name, email, phone, subject, message));
     return `mailto:${emailAddress}?subject=${su}&body=${body}`;
@@ -73,7 +73,7 @@ export default function ContactHub() {
     setFormStatus("submitting");
 
     try {
-      // Send directly to militantejuanenricodomanico@gmail.com via FormSubmit AJAX endpoint with WANCOR sender branding
+      // Send directly to militantejuanenricodomanico@gmail.com via FormSubmit AJAX endpoint with Wancorp sender branding
       const response = await fetch("https://formsubmit.co/ajax/militantejuanenricodomanico@gmail.com", {
         method: "POST",
         headers: {
@@ -81,20 +81,21 @@ export default function ContactHub() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          _sender_name: "WANCOR",
+          name: formState.name ? `Wancorp (${formState.name})` : "Wancorp",
           _replyto: formState.email,
           _subject: formState.subject
-            ? `[WANCOR] ${formState.subject} - from ${formState.name}`
-            : `[WANCOR] Project Inquiry from ${formState.name}`,
+            ? `[Wancorp] ${formState.subject} - from ${formState.name}`
+            : `[Wancorp] Project Inquiry from ${formState.name}`,
           _template: "table",
           _captcha: "false",
-          "Company / Brand": "WANCOR (Wan Company)",
-          "Sender Name": formState.name,
-          "Sender Email": formState.email,
+          "Brand / Organization": "Wancorp",
+          "Brand Logo": "W (https://portfolio.juandomanicomilitante.workers.dev/tab-logo.png)",
+          "Client Name": formState.name,
+          "Client Email": formState.email,
           "Contact Phone": formState.phone || "Not provided",
           "Inquiry Subject": formState.subject || "General Project Discussion",
           "Message Content": formState.message,
-          "Dispatched From": "WANCOR Portfolio Contact Hub",
+          "Dispatched From": "Wancorp Portfolio Contact Hub",
         }),
       });
 
@@ -155,7 +156,7 @@ export default function ContactHub() {
               </svg>
             </div>
             <div className="channel-info">
-              <span className="channel-label">Direct Email (WANCOR)</span>
+              <span className="channel-label">Direct Email (Wancorp)</span>
               <a
                 href={getGmailComposeUrl()}
                 target="_blank"
@@ -264,14 +265,14 @@ export default function ContactHub() {
         <div className="contact-main-card">
           <div className="card-top-decoration" aria-hidden="true">
             <span className="card-corner-line" />
-            <span className="card-badge">DIRECT INQUIRY DISPATCH (WANCOR)</span>
+            <span className="card-badge">DIRECT INQUIRY DISPATCH (WANCORP)</span>
             <span className="card-corner-line" />
           </div>
 
           <div className="card-intro-text">
             <h3>Send a Message</h3>
             <p>
-              Send directly to my Gmail inbox via WANCOR or open your formatted template immediately in Gmail compose.
+              Send directly to my Gmail inbox via Wancorp or open your formatted template immediately in Gmail compose.
             </p>
           </div>
 
@@ -362,7 +363,7 @@ export default function ContactHub() {
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20 6L9 17l-5-5" />
                 </svg>
-                <span>Thank you! Your message was sent directly to my Gmail inbox via WANCOR. I will reply soon.</span>
+                <span>Thank you! Your message was sent directly to my Gmail inbox via Wancorp. I will reply soon.</span>
               </div>
             )}
 
@@ -377,7 +378,7 @@ export default function ContactHub() {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
-                <span>Directly sends to militantejuanenricodomanico@gmail.com via WANCOR</span>
+                <span>Directly sends to militantejuanenricodomanico@gmail.com via Wancorp</span>
               </div>
 
               <div className="form-btn-group">
@@ -405,7 +406,7 @@ export default function ContactHub() {
                   className="submit-dispatch-btn"
                   disabled={formStatus === "submitting"}
                 >
-                  <span>{formStatus === "submitting" ? "Sending via WANCOR..." : "Send Message"}</span>
+                  <span>{formStatus === "submitting" ? "Sending via Wancorp..." : "Send Message"}</span>
                   <span className="dispatch-arrow" aria-hidden="true">↗</span>
                 </button>
               </div>
