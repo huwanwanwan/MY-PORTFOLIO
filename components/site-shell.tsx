@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
@@ -196,10 +198,20 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
       <article className="portfolio-shell">
         <header className="topbar">
           <div className="brand-block">
-            <Link className="brand-name" href="/">
-              Juan Domanico Militante
+            <Link className="brand-link" href="/" aria-label="Juan Domanico Militante Home">
+              <Image
+                src="/logo-of-me.png"
+                alt="Juan Domanico Militante Logo"
+                width={48}
+                height={48}
+                className="brand-logo-img"
+                priority
+              />
+              <div className="brand-text">
+                <span className="brand-name">Juan Domanico Militante</span>
+                <p className="active-mode">Web &amp; Mobile Developer</p>
+              </div>
             </Link>
-            <p className="active-mode">Web &amp; Mobile Developer</p>
           </div>
           <nav className="primary-nav" aria-label="Main navigation" ref={navRef}>
             {navigationItems.map(({ label, href, key }) => (
@@ -233,8 +245,15 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
           <div className="site-mega-footer-content">
             {/* Column 1: Identity & Bio */}
             <div className="mega-footer-col brand-col">
-              <Link href="/" className="mega-footer-logo">
-                Huwananan
+              <Link href="/" className="mega-footer-logo-link">
+                <Image
+                  src="/logo-of-me.png"
+                  alt="Logo"
+                  width={34}
+                  height={34}
+                  className="mega-footer-logo-img"
+                />
+                <span className="mega-footer-logo">Huwananan</span>
               </Link>
               <p className="mega-footer-tagline">
                 Information Technology student building practical web, mobile, game, and IoT projects.
