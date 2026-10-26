@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="100%" height="100%">
+  <defs>
+    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="rgba(0,0,0,0.18)"/>
+    </filter>
+    <clipPath id="headerClip">
+      <path d="M 0 16 Q 0 0 16 0 L 784 0 Q 800 0 800 16 L 800 132 L 0 132 Z"/>
+    </clipPath>
+    <clipPath id="footerClip">
+      <path d="M 0 470 L 800 470 L 800 504 Q 800 520 784 520 L 16 520 Q 0 520 0 504 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Outer Card Frame with subtle shadow and border -->
+  <rect x="0" y="0" width="800" height="520" rx="16" fill="#FFFFFF" stroke="#E7E5E4" stroke-width="1.5" filter="url(#cardShadow)"/>
+
+  <!-- Top Dark Header -->
+  <path d="M 0 16 Q 0 0 16 0 L 784 0 Q 800 0 800 16 L 800 132 L 0 132 Z" fill="#181513"/>
+
+  <!-- White Logo Box in Header -->
+  <rect x="368" y="16" width="64" height="64" rx="14" fill="#FFFFFF" stroke="#ECEAE6" stroke-width="1"/>
+  <!-- Stylized W Logo -->
+  <path d="M 383 33 L 392 63 L 400 45 L 408 63 L 417 33" fill="none" stroke="#FD4F3C" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Header Titles -->
+  <text x="400" y="103" text-anchor="middle" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="900" letter-spacing="2">WANCOR</text>
+  <text x="400" y="121" text-anchor="middle" fill="#D95338" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0.5">Developer Profile &amp; Technical Directory</text>
+
+  <!-- Terracotta Orange Separator Line -->
+  <rect x="0" y="132" width="800" height="4" fill="#BF4B2F"/>
+
+  <!-- Table Header Bar -->
+  <rect x="28" y="154" width="744" height="40" rx="6" fill="#BF4B2F"/>
+  <text x="48" y="179" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12.5" font-weight="800" letter-spacing="1">FIELD</text>
+  <text x="250" y="179" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12.5" font-weight="800" letter-spacing="1">DETAILS</text>
+
+  <!-- Table Rows (Alternating White and Warm Cream) -->
+  <!-- Row 1: White -->
+  <rect x="28" y="196" width="744" height="38" fill="#FFFFFF"/>
+  <text x="48" y="220" fill="#1C1917" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">Developer Name</text>
+  <text x="250" y="220" fill="#33312E" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500">Juan Domanico Militante (WANCOR)</text>
+  <line x1="28" y1="234" x2="772" y2="234" stroke="#F0EDE8" stroke-width="1"/>
+
+  <!-- Row 2: Warm Cream -->
+  <rect x="28" y="235" width="744" height="38" fill="#F8F6F2"/>
+  <text x="48" y="259" fill="#1C1917" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">Degree &amp; Program</text>
+  <text x="250" y="259" fill="#33312E" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500">Bachelor of Science in Information Technology (BSIT)</text>
+  <line x1="28" y1="273" x2="772" y2="273" stroke="#F0EDE8" stroke-width="1"/>
+
+  <!-- Row 3: White -->
+  <rect x="28" y="274" width="744" height="38" fill="#FFFFFF"/>
+  <text x="48" y="298" fill="#1C1917" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">Institution</text>
+  <text x="250" y="298" fill="#33312E" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500">Pambayang Dalubhasaan ng Marilao (PDM)</text>
+  <line x1="28" y1="312" x2="772" y2="312" stroke="#F0EDE8" stroke-width="1"/>
+
+  <!-- Row 4: Warm Cream -->
+  <rect x="28" y="313" width="744" height="38" fill="#F8F6F2"/>
+  <text x="48" y="337" fill="#1C1917" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">Location Base</text>
+  <text x="250" y="337" fill="#33312E" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500">Marilao, Bulacan, Philippines</text>
+  <line x1="28" y1="351" x2="772" y2="351" stroke="#F0EDE8" stroke-width="1"/>
+
+  <!-- Row 5: White -->
+  <rect x="28" y="352" width="744" height="38" fill="#FFFFFF"/>
+  <text x="48" y="376" fill="#1C1917" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">Core Disciplines</text>
+  <text x="250" y="376" fill="#33312E" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500">Offline-First Android, Full-Stack Edge Web, AR Gaming, IoT Sensors</text>
+  <line x1="28" y1="390" x2="772" y2="390" stroke="#F0EDE8" stroke-width="1"/>
+
+  <!-- Row 6: Warm Cream -->
+  <rect x="28" y="391" width="744" height="38" fill="#F8F6F2"/>
+  <text x="48" y="415" fill="#1C1917" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">Live Portfolio</text>
+  <text x="250" y="415" fill="#BF4B2F" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">portfolio.juandomanicomilitante.workers.dev</text>
+  <line x1="28" y1="429" x2="772" y2="429" stroke="#F0EDE8" stroke-width="1"/>
+
+  <!-- Row 7: White -->
+  <rect x="28" y="430" width="744" height="38" fill="#FFFFFF"/>
+  <text x="48" y="454" fill="#1C1917" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">Direct Email</text>
+  <text x="250" y="454" fill="#BF4B2F" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700">militantejuanenricodomanico@gmail.com</text>
+
+  <!-- Bottom Card Footer Bar -->
+  <path d="M 0 472 L 800 472 L 800 504 Q 800 520 784 520 L 16 520 Q 0 520 0 504 Z" fill="#F9F8F6"/>
+  <line x1="0" y1="472" x2="800" y2="472" stroke="#ECEAE6" stroke-width="1"/>
+  <text x="400" y="500" text-anchor="middle" fill="#78716C" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="500">
+    Maintained via <tspan font-weight="bold" fill="#1C1917">WANCOR Portfolio</tspan> • Direct Inquiries &amp; Project Dispatch
+  </text>
+</svg>

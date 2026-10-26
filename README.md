@@ -10,13 +10,14 @@
 
   <br /><br />
 
-  [![Live Portfolio](https://img.shields.io/badge/🌐_LIVE_PORTFOLIO-Cloudflare_Workers-FD4F3C?style=for-the-badge&logo=cloudflare&logoColor=white)](https://portfolio.juandomanicomilitante.workers.dev)
+  [![Live Portfolio](https://img.shields.io/badge/🌐_LIVE_PORTFOLIO-Cloudflare_Workers-BF4B2F?style=for-the-badge&logo=cloudflare&logoColor=white)](https://portfolio.juandomanicomilitante.workers.dev)
   [![Projects](https://img.shields.io/badge/🚀_14+_PROJECTS-COMPLETED-1F2428?style=for-the-badge&logo=github&logoColor=white)](https://portfolio.juandomanicomilitante.workers.dev/projects)
   [![Institution](https://img.shields.io/badge/🏛️_INSTITUTION-PDM_MARILAO-24292e?style=for-the-badge)](https://portfolio.juandomanicomilitante.workers.dev)
   [![Status](https://img.shields.io/badge/💼_STATUS-OPEN_TO_OPPORTUNITIES-34A853?style=for-the-badge)](mailto:militantejuanenricodomanico@gmail.com)
 
   <p align="center">
     <a href="#-about-me"><b>About Me</b></a> &nbsp;•&nbsp;
+    <a href="#-developer-directory"><b>Directory Card</b></a> &nbsp;•&nbsp;
     <a href="#-tech-stack--tools"><b>Tech Stack</b></a> &nbsp;•&nbsp;
     <a href="#-flagship-projects"><b>Featured Projects</b></a> &nbsp;•&nbsp;
     <a href="#-portfolio-architecture"><b>Architecture</b></a> &nbsp;•&nbsp;
@@ -36,16 +37,23 @@ Hi! I'm **Juan Domanico Militante**, also known as **WANCOR**. I am an Informati
 
 Throughout my 4+ years of IT study and 14+ finished systems, my engineering mindset centers around **offline-first mobile architecture**, **modern edge web platforms**, and **interactive engineering** (Augmented Reality & IoT). I focus on software that solves real-world challenges—from assistive communication tools for the hearing-impaired to automated acoustic flood alert devices.
 
-### ⚡ Quick Overview
+---
 
-| Attribute | Details |
+## 📋 Developer Directory
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/huwanwanwan/MY-PORTFOLIO/main/public/wancor-table-card.svg" alt="WANCOR Developer Directory Table Card" width="100%" />
+</p>
+
+| FIELD | DETAILS |
 | :--- | :--- |
-| 🎓 **Degree** | Bachelor of Science in Information Technology (BSIT) |
-| 🏛️ **College** | Pambayang Dalubhasaan ng Marilao (PDM) |
-| 📍 **Base** | Marilao, Bulacan, Philippines |
-| 📱 **Core Disciplines** | Offline-First Android, Full-Stack Web, AR Gaming, IoT Hardware |
-| 🌐 **Live URL** | [portfolio.juandomanicomilitante.workers.dev](https://portfolio.juandomanicomilitante.workers.dev) |
-| 📬 **Inquiries** | [militantejuanenricodomanico@gmail.com](mailto:militantejuanenricodomanico@gmail.com) |
+| **Developer Name** | **Juan Domanico Militante (WANCOR)** |
+| **Degree & Program** | Bachelor of Science in Information Technology (BSIT) |
+| **Institution** | Pambayang Dalubhasaan ng Marilao (PDM) |
+| **Location Base** | Marilao, Bulacan, Philippines |
+| **Core Disciplines** | Offline-First Android, Full-Stack Edge Web, AR Gaming, IoT Sensors |
+| **Live Portfolio** | [portfolio.juandomanicomilitante.workers.dev](https://portfolio.juandomanicomilitante.workers.dev) |
+| **Direct Email** | [militantejuanenricodomanico@gmail.com](mailto:militantejuanenricodomanico@gmail.com) |
 
 ---
 
@@ -68,7 +76,7 @@ Throughout my 4+ years of IT study and 14+ finished systems, my engineering mind
   <img src="https://img.shields.io/badge/Android_SDK-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android" />
   <img src="https://img.shields.io/badge/Unity_3D-100000?style=for-the-badge&logo=unity&logoColor=white" alt="Unity" />
   <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" alt="C#" />
-  <img src="https://img.shields.io/badge/AR_Foundation-FD4F3C?style=for-the-badge&logo=google-cloud&logoColor=white" alt="Augmented Reality" />
+  <img src="https://img.shields.io/badge/AR_Foundation-BF4B2F?style=for-the-badge&logo=google-cloud&logoColor=white" alt="Augmented Reality" />
   <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white" alt="Java" />
 </p>
 
@@ -158,9 +166,9 @@ The live portfolio website is powered by cutting-edge edge infrastructure:
 ## 📊 GitHub Metrics
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=huwanwanwan&show_icons=true&title_color=FD4F3C&text_color=E0DDD5&icon_color=FD4F3C&bg_color=141210&border_color=2A2624" alt="Juan's GitHub Stats" />
+  <img src="https://github-readme-stats.vercel.app/api?username=huwanwanwan&show_icons=true&title_color=BF4B2F&text_color=E0DDD5&icon_color=BF4B2F&bg_color=141210&border_color=2A2624" alt="Juan's GitHub Stats" />
   &nbsp;
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=huwanwanwan&layout=compact&title_color=FD4F3C&text_color=E0DDD5&bg_color=141210&border_color=2A2624" alt="Top Languages" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=huwanwanwan&layout=compact&title_color=BF4B2F&text_color=E0DDD5&bg_color=141210&border_color=2A2624" alt="Top Languages" />
 </div>
 
 ---
@@ -169,7 +177,7 @@ The live portfolio website is powered by cutting-edge edge infrastructure:
 
 <div align="center">
 
-  [![Live Website](https://img.shields.io/badge/🌐_Website-portfolio.juandomanicomilitante.workers.dev-FD4F3C?style=for-the-badge&logo=cloudflare&logoColor=white)](https://portfolio.juandomanicomilitante.workers.dev)
+  [![Live Website](https://img.shields.io/badge/🌐_Website-portfolio.juandomanicomilitante.workers.dev-BF4B2F?style=for-the-badge&logo=cloudflare&logoColor=white)](https://portfolio.juandomanicomilitante.workers.dev)
   [![Email](https://img.shields.io/badge/✉️_Email-militantejuanenricodomanico@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:militantejuanenricodomanico@gmail.com)
   [![LinkedIn](https://img.shields.io/badge/💼_LinkedIn-Juan_Domanico_Militante-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/juan-domanico-militante-b0972b363/)
   [![Facebook](https://img.shields.io/badge/📘_Facebook-Juan_Domanico_Militante-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/huwananan)
