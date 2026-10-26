@@ -15,6 +15,15 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Juan Domanico Militante | Portfolio",
   description: "The personal and professional portfolio of Juan Domanico Militante.",
+  icons: {
+    icon: [
+      { url: "/logo-of-me.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/logo-of-me.png", type: "image/png" },
+    ],
+    shortcut: "/logo-of-me.png",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -23,6 +32,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="icon" type="image/png" href="/logo-of-me.png" />
+        <link rel="apple-touch-icon" href="/logo-of-me.png" />
+        <link rel="shortcut icon" type="image/png" href="/logo-of-me.png" />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
