@@ -103,9 +103,9 @@ export default function ContactHub() {
 
   const buildTemplateBody = (name?: string, email?: string, phone?: string, subject?: string, message?: string) => {
     return [
-      "Hello Juan (Wancorp),",
+      "Hello Juan (Wancor),",
       "",
-      "I would like to discuss a project / inquiry with Wancorp:",
+      "I would like to discuss a project / inquiry with Wancor:",
       "",
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
       "PROJECT / INQUIRY DETAILS:",
@@ -119,15 +119,15 @@ export default function ContactHub() {
       `• Email Address: ${email?.trim() || "[Your Email]"}`,
       `• Contact Phone: ${phone?.trim() || "[Your Phone / WhatsApp]"}`,
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "Dispatched via Wancorp Portfolio Contact Hub",
+      "Dispatched via Wancor Portfolio Contact Hub",
     ].join("\n");
   };
 
   const getGmailComposeUrl = (name?: string, email?: string, phone?: string, subject?: string, message?: string) => {
     const su = encodeURIComponent(
       subject?.trim()
-        ? `[Wancorp] ${subject.trim()} - from ${name?.trim() || "Client"}`
-        : "[Wancorp] Project Inquiry / Collaboration"
+        ? `[Wancor] ${subject.trim()} - from ${name?.trim() || "Client"}`
+        : "[Wancor] Project Inquiry / Collaboration"
     );
     const body = encodeURIComponent(buildTemplateBody(name, email, phone, subject, message));
     return `https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}&su=${su}&body=${body}`;
@@ -136,8 +136,8 @@ export default function ContactHub() {
   const getMailtoUrl = (name?: string, email?: string, phone?: string, subject?: string, message?: string) => {
     const su = encodeURIComponent(
       subject?.trim()
-        ? `[Wancorp] ${subject.trim()} - from ${name?.trim() || "Client"}`
-        : "[Wancorp] Project Inquiry / Collaboration"
+        ? `[Wancor] ${subject.trim()} - from ${name?.trim() || "Client"}`
+        : "[Wancor] Project Inquiry / Collaboration"
     );
     const body = encodeURIComponent(buildTemplateBody(name, email, phone, subject, message));
     return `mailto:${emailAddress}?subject=${su}&body=${body}`;
@@ -172,7 +172,7 @@ export default function ContactHub() {
     const dispatchTask = async () => {
       let sent = false;
 
-      // 1. Primary dispatch: Direct EmailJS with Wancorp branding, 'W' logo, and orange table
+      // 1. Primary dispatch: Direct EmailJS with Wancor branding, 'W' logo, and orange table
       try {
         emailjs.init({ publicKey: "kUDnhN5l63awEUq0y" });
 
@@ -214,7 +214,7 @@ export default function ContactHub() {
         console.warn("EmailJS browser dispatch notice:", err);
       }
 
-      // 2. Silent background fallback: Sends directly via Wancorp relay with autoresponse back to user
+      // 2. Silent background fallback: Sends directly via Wancor relay with autoresponse back to user
       if (!sent) {
         try {
           const response = await fetch("https://formsubmit.co/ajax/militantejuanenricodomanico@gmail.com", {
@@ -224,23 +224,23 @@ export default function ContactHub() {
               Accept: "application/json",
             },
             body: JSON.stringify({
-              name: `Wancorp (${formState.name})`,
+              name: `Wancor (${formState.name})`,
               email: formState.email,
               _replyto: formState.email,
               _subject: formState.subject
-                ? `[Wancorp] ${formState.subject} - from ${formState.name}`
-                : `[Wancorp] Project Inquiry from ${formState.name}`,
+                ? `[Wancor] ${formState.subject} - from ${formState.name}`
+                : `[Wancor] Project Inquiry from ${formState.name}`,
               _template: "box",
               _captcha: "false",
-              _autoresponse: `Hello ${formState.name},\n\nThank you for reaching out to Wancorp! We have received your project inquiry and will review your specifications promptly.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nWancorp (Wan Company)\nWeb & Mobile Software Development\nOfficial Logo: https://portfolio.juandomanicomilitante.workers.dev/tab-logo.png\nWebsite: https://portfolio.juandomanicomilitante.workers.dev\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
-              "Brand / Company": "Wancorp",
+              _autoresponse: `Hello ${formState.name},\n\nThank you for reaching out to Wancor! We have received your project inquiry and will review your specifications promptly.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nWancor (Wan Company)\nWeb & Mobile Software Development\nOfficial Logo: https://portfolio.juandomanicomilitante.workers.dev/tab-logo.png\nWebsite: https://portfolio.juandomanicomilitante.workers.dev\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+              "Brand / Company": "Wancor",
               "Official Logo": "https://portfolio.juandomanicomilitante.workers.dev/tab-logo.png",
               "Client Name": formState.name,
               "Client Email": formState.email,
               "Contact Phone": formState.phone || "Not provided",
               "Inquiry Subject": formState.subject || "General Project Discussion",
               "Message Details": formState.message,
-              "Platform Source": "Wancorp Portfolio Contact Hub",
+              "Platform Source": "Wancor Portfolio Contact Hub",
             }),
           });
 
@@ -309,7 +309,7 @@ export default function ContactHub() {
               </svg>
             </div>
             <div className="channel-info">
-              <span className="channel-label">Direct Email (Wancorp)</span>
+              <span className="channel-label">Direct Email (Wancor)</span>
               <a
                 href={getGmailComposeUrl()}
                 target="_blank"
@@ -424,13 +424,13 @@ export default function ContactHub() {
                   <div className="dispatching-spinner-ring" />
                   <Image
                     src="/tab-logo.png"
-                    alt="Wancorp Logo"
+                    alt="Wancor Logo"
                     width={48}
                     height={48}
                     className="dispatch-logo-img"
                   />
                 </div>
-                <h4 className="dispatching-title">Sending Message to Wancorp</h4>
+                <h4 className="dispatching-title">Sending Message to Wancor</h4>
                 <p className="dispatching-subtitle">
                   Packaging your inquiry specifications and delivering directly to Juan&apos;s Gmail inbox...
                 </p>
@@ -454,14 +454,14 @@ export default function ContactHub() {
 
           <div className="card-top-decoration" aria-hidden="true">
             <span className="card-corner-line" />
-            <span className="card-badge">DIRECT INQUIRY DISPATCH (WANCORP)</span>
+            <span className="card-badge">DIRECT INQUIRY DISPATCH (WANCOR)</span>
             <span className="card-corner-line" />
           </div>
 
           <div className="card-intro-text">
             <h3>Send a Message</h3>
             <p>
-              Send directly to Wancorp right here on this page. You will receive an immediate confirmation.
+              Send directly to Wancor right here on this page. You will receive an immediate confirmation.
             </p>
           </div>
 
@@ -598,7 +598,7 @@ export default function ContactHub() {
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20 6L9 17l-5-5" />
                 </svg>
-                <span>Thank you! Your message was sent directly to Wancorp. A confirmation has been dispatched to your email.</span>
+                <span>Thank you! Your message was sent directly to Wancor. A confirmation has been dispatched to your email.</span>
               </div>
             )}
 
@@ -613,7 +613,7 @@ export default function ContactHub() {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
-                <span>Directly delivers to Wancorp with instant email confirmation</span>
+                <span>Directly delivers to Wancor with instant email confirmation</span>
               </div>
 
               <button
