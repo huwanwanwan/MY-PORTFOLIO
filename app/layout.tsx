@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/logo-of-me.png", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
     ],
     apple: [
       { url: "/logo-of-me.png", type: "image/png" },
@@ -34,8 +35,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <link rel="icon" type="image/png" href="/logo-of-me.png" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/logo-of-me.png" />
-        <link rel="shortcut icon" type="image/png" href="/logo-of-me.png" />
+        <link rel="shortcut icon" href="/logo-of-me.png" />
       </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
