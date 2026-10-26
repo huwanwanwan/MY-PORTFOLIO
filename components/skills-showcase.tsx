@@ -550,10 +550,11 @@ export default function SkillsShowcase() {
     if (!scrollContainerRef.current) return;
     const track = scrollContainerRef.current;
     const firstCard = track.firstElementChild as HTMLElement | null;
-    const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
-    const cardWidth = (firstCard ? firstCard.getBoundingClientRect().width : 360) + gap;
+    const cs = typeof window !== "undefined" ? window.getComputedStyle(track) : null;
+    const gap = cs ? (parseFloat(cs.columnGap) || parseFloat(cs.gap) || 12) : 12;
+    const cardWidth = (firstCard ? firstCard.getBoundingClientRect().width : track.clientWidth) + gap;
     const scrollAmount = direction === "left" ? -cardWidth : cardWidth;
-    scrollContainerRef.current.scrollBy({
+    track.scrollBy({
       left: scrollAmount,
       behavior: "smooth",
     });

@@ -94,12 +94,17 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
 
   useEffect(() => {
     if (!navRef.current) return;
+    const nav = navRef.current;
     if (activePage === "home") {
-      navRef.current.scrollTo({ left: 0, behavior: "smooth" });
+      nav.scrollTo({ left: 0, behavior: "smooth" });
     } else {
-      const activeEl = navRef.current.querySelector<HTMLElement>('[aria-current="page"]');
+      const activeEl = nav.querySelector<HTMLElement>('[aria-current="page"]');
       if (activeEl) {
-        activeEl.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+        const navRect = nav.getBoundingClientRect();
+        const elRect = activeEl.getBoundingClientRect();
+        const offsetLeft = elRect.left - navRect.left;
+        const targetScrollLeft = nav.scrollLeft + offsetLeft - (navRect.width / 2) + (elRect.width / 2);
+        nav.scrollTo({ left: Math.max(0, targetScrollLeft), behavior: "smooth" });
       }
     }
   }, [activePage, pathname]);
