@@ -1,8 +1,14 @@
-<p align="center">
-  <img src="./header-banner.svg" alt="Juan Domanico Militante (WANCOR) - Banner" width="100%" />
-</p>
-
 <div align="center">
+
+  <a href="https://portfolio.juandomanicomilitante.workers.dev" target="_blank">
+    <img src="https://raw.githubusercontent.com/huwanwanwan/MY-PORTFOLIO/main/public/tab-logo.png" alt="WANCOR Logo" width="88" height="88" style="border-radius: 18px;" />
+  </a>
+
+  <br />
+
+  <img src="https://raw.githubusercontent.com/huwanwanwan/MY-PORTFOLIO/main/header-banner.svg" alt="Juan Domanico Militante (WANCOR)" width="100%" />
+
+  <br /><br />
 
   [![Live Portfolio](https://img.shields.io/badge/🌐_LIVE_PORTFOLIO-Cloudflare_Workers-FD4F3C?style=for-the-badge&logo=cloudflare&logoColor=white)](https://portfolio.juandomanicomilitante.workers.dev)
   [![Projects](https://img.shields.io/badge/🚀_14+_PROJECTS-COMPLETED-1F2428?style=for-the-badge&logo=github&logoColor=white)](https://portfolio.juandomanicomilitante.workers.dev/projects)
@@ -152,7 +158,7 @@ The live portfolio website is powered by cutting-edge edge infrastructure:
 ## 📊 GitHub Metrics
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=huwanwanwan&show_icons=true&title_color=FD4F3C&text_color=E0DDD5&icon_color=FD4F3C&bg_color=141210&border_color=2A2624&count_private=true" alt="Juan's GitHub Stats" />
+  <img src="https://github-readme-stats.vercel.app/api?username=huwanwanwan&show_icons=true&title_color=FD4F3C&text_color=E0DDD5&icon_color=FD4F3C&bg_color=141210&border_color=2A2624" alt="Juan's GitHub Stats" />
   &nbsp;
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=huwanwanwan&layout=compact&title_color=FD4F3C&text_color=E0DDD5&bg_color=141210&border_color=2A2624" alt="Top Languages" />
 </div>
