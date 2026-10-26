@@ -1,7 +1,7 @@
 <div align="center">
 
   <a href="https://portfolio.juandomanicomilitante.workers.dev" target="_blank">
-    <img src="https://raw.githubusercontent.com/huwanwanwan/MY-PORTFOLIO/main/public/wancor-table-card.svg" alt="Juan Domanico Militante (WANCOR) - Profile Card" width="100%" />
+    <img src="https://raw.githubusercontent.com/huwanwanwan/MY-PORTFOLIO/main/public/wancor-table-card.svg" alt="Juan Domanico Militante (WANCOR) - Profile Card" width="100%" style="max-width: 100%; height: auto;" />
   </a>
 
   <br /><br />
@@ -145,9 +145,9 @@ The live portfolio website is powered by cutting-edge edge infrastructure:
 ## 📊 GitHub Metrics
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=huwanwanwan&show_icons=true&title_color=BF4B2F&text_color=E0DDD5&icon_color=BF4B2F&bg_color=141210&border_color=2A2624" alt="Juan's GitHub Stats" />
-  &nbsp;
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=huwanwanwan&layout=compact&title_color=BF4B2F&text_color=E0DDD5&bg_color=141210&border_color=2A2624" alt="Top Languages" />
+  <img src="https://github-readme-stats.vercel.app/api?username=huwanwanwan&show_icons=true&title_color=BF4B2F&text_color=E0DDD5&icon_color=BF4B2F&bg_color=141210&border_color=2A2624" alt="Juan's GitHub Stats" width="460" style="max-width: 100%; height: auto;" />
+  <br /><br />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=huwanwanwan&layout=compact&title_color=BF4B2F&text_color=E0DDD5&bg_color=141210&border_color=2A2624" alt="Top Languages" width="360" style="max-width: 100%; height: auto;" />
 </div>
 
 ---
