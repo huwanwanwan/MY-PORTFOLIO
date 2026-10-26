@@ -73,9 +73,11 @@ export default function ContactHub() {
     e.preventDefault();
     setFormStatus("submitting");
 
+    let sent = false;
+
+    // 1. First attempt: Direct EmailJS with Wancorp branding, 'W' logo, and orange table
     try {
-      // Send directly via EmailJS with Wancorp branding, logo 'W', and orange header table
-      await emailjs.send(
+      const res = await emailjs.send(
         "service_azcv23s",
         "es1ha4f",
         {
@@ -88,22 +90,56 @@ export default function ContactHub() {
         "kUDnhN5l63awEUq0y"
       );
 
+      if (res.status === 200) {
+        sent = true;
+      }
+    } catch (err) {
+      console.warn("EmailJS browser dispatch attempt:", err);
+    }
+
+    // 2. Silent background fallback: Sends directly via Wancorp relay with autoresponse back to user
+    if (!sent) {
+      try {
+        const response = await fetch("https://formsubmit.co/ajax/militantejuanenricodomanico@gmail.com", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            name: `Wancorp (${formState.name})`,
+            email: formState.email,
+            _replyto: formState.email,
+            _subject: formState.subject
+              ? `[Wancorp] ${formState.subject} - from ${formState.name}`
+              : `[Wancorp] Project Inquiry from ${formState.name}`,
+            _template: "box",
+            _captcha: "false",
+            _autoresponse: `Hello ${formState.name},\n\nThank you for reaching out to Wancorp! We have received your project inquiry and will review your specifications promptly.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nWancorp (Wan Company)\nWeb & Mobile Software Development\nOfficial Logo: https://portfolio.juandomanicomilitante.workers.dev/tab-logo.png\nWebsite: https://portfolio.juandomanicomilitante.workers.dev\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+            "Brand / Company": "Wancorp",
+            "Official Logo": "https://portfolio.juandomanicomilitante.workers.dev/tab-logo.png",
+            "Client Name": formState.name,
+            "Client Email": formState.email,
+            "Contact Phone": formState.phone || "Not provided",
+            "Inquiry Subject": formState.subject || "General Project Discussion",
+            "Message Details": formState.message,
+            "Platform Source": "Wancorp Portfolio Contact Hub",
+          }),
+        });
+
+        if (response.ok) {
+          sent = true;
+        }
+      } catch (fallbackErr) {
+        console.error("Background dispatch fallback error:", fallbackErr);
+      }
+    }
+
+    if (sent) {
       setFormStatus("success");
       setFormState({ name: "", email: "", phone: "", subject: "", message: "" });
-    } catch (err) {
-      console.error("Email dispatch error:", err);
-      // Fallback: open user's Gmail compose directly with pre-templated details
+    } else {
       setFormStatus("error");
-      const fallbackUrl = getGmailComposeUrl(
-        formState.name,
-        formState.email,
-        formState.phone,
-        formState.subject,
-        formState.message
-      );
-      if (typeof window !== "undefined") {
-        window.open(fallbackUrl, "_blank");
-      }
     }
   };
 
@@ -258,7 +294,7 @@ export default function ContactHub() {
           <div className="card-intro-text">
             <h3>Send a Message</h3>
             <p>
-              Send directly to my Gmail inbox via Wancorp or open your formatted template immediately in Gmail compose.
+              Send directly to Wancorp right here on this page. You will receive an immediate confirmation.
             </p>
           </div>
 
@@ -349,13 +385,13 @@ export default function ContactHub() {
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20 6L9 17l-5-5" />
                 </svg>
-                <span>Thank you! Your message was sent directly to my Gmail inbox via Wancorp. I will reply soon.</span>
+                <span>Thank you! Your message was sent directly to Wancorp. A confirmation has been dispatched to your email.</span>
               </div>
             )}
 
             {formStatus === "error" && (
-              <div className="contact-status-banner info">
-                <span>Opening your templated inquiry directly in Gmail compose...</span>
+              <div className="contact-status-banner error" style={{ background: "rgba(239, 68, 68, 0.1)", border: "1px solid rgba(239, 68, 68, 0.3)", color: "#ef4444", padding: "12px 16px", borderRadius: "10px", display: "flex", alignItems: "center", gap: "10px" }}>
+                <span>Unable to send message right now. Please check your internet connection and try again.</span>
               </div>
             )}
 
@@ -364,38 +400,17 @@ export default function ContactHub() {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
-                <span>Directly sends to militantejuanenricodomanico@gmail.com via Wancorp</span>
+                <span>Directly delivers to Wancorp with instant email confirmation</span>
               </div>
 
-              <div className="form-btn-group">
-                <a
-                  href={getGmailComposeUrl(
-                    formState.name,
-                    formState.email,
-                    formState.phone,
-                    formState.subject,
-                    formState.message
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="open-gmail-form-btn"
-                  title="Open pre-formatted template in Gmail compose"
-                >
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
-                    <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.272H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
-                  </svg>
-                  <span>Open in Gmail</span>
-                </a>
-
-                <button
-                  type="submit"
-                  className="submit-dispatch-btn"
-                  disabled={formStatus === "submitting"}
-                >
-                  <span>{formStatus === "submitting" ? "Sending via Wancorp..." : "Send Message"}</span>
-                  <span className="dispatch-arrow" aria-hidden="true">↗</span>
-                </button>
-              </div>
+              <button
+                type="submit"
+                className="submit-dispatch-btn"
+                disabled={formStatus === "submitting"}
+              >
+                <span>{formStatus === "submitting" ? "Sending via Wancorp..." : "Send Message"}</span>
+                <span className="dispatch-arrow" aria-hidden="true">↗</span>
+              </button>
             </div>
           </form>
         </div>
