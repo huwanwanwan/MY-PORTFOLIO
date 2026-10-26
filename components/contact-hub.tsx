@@ -180,7 +180,7 @@ export default function ContactHub() {
         try {
           res = await emailjs.send(
             "service_azcv23s",
-            "es1ha4f",
+            "template_3zl7lsk",
             {
               from_name: formState.name,
               from_email: formState.email,
@@ -190,11 +190,12 @@ export default function ContactHub() {
             },
             { publicKey: "kUDnhN5l63awEUq0y" }
           );
-        } catch {
-          // Retry with template_es1ha4f in case EmailJS assigned the template_ prefix
+        } catch (errPrimary) {
+          console.warn("EmailJS primary template attempt notice:", errPrimary);
+          // Fallback to secondary template ID if configured
           res = await emailjs.send(
             "service_azcv23s",
-            "template_es1ha4f",
+            "es1ha4f",
             {
               from_name: formState.name,
               from_email: formState.email,
