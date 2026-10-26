@@ -156,23 +156,8 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
       }
     };
 
-    // On page navigation / route entrance:
-    // First initialize elements tucked in while the page glides down from above
-    const initialItems = document.querySelectorAll<HTMLElement>("[data-scroll-reveal]");
-    initialItems.forEach((item) => {
-      if ((item as any)._revealTimer) {
-        clearTimeout((item as any)._revealTimer);
-        (item as any)._revealTimer = null;
-      }
-      item.dataset.revealReady = "true";
-      item.dataset.revealVisible = "false";
-    });
-
-    // Deliberate delay so the page container completes its smooth downward scroll glide
-    // before the headings, cards, and sections pop up into view!
-    const entranceTimer = window.setTimeout(() => {
-      updateAllReveals();
-    }, 280);
+    // Initial check on mount / navigation: reveal elements as content slides up smoothly
+    updateAllReveals();
 
     window.addEventListener("scroll", onScrollOrResize, { passive: true });
     window.addEventListener("resize", onScrollOrResize, { passive: true });
@@ -188,7 +173,6 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
     });
 
     return () => {
-      window.clearTimeout(entranceTimer);
       window.removeEventListener("scroll", onScrollOrResize);
       window.removeEventListener("resize", onScrollOrResize);
       mutationObserver.disconnect();
@@ -241,7 +225,7 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
           </div>
         </header>
 
-        <div key={pathname} className={`dashboard-content page-content page-scroll-down-enter ${isPageSwitching ? "page-transitioning" : "page-entered"}`}>{children}</div>
+        <div key={pathname} className={`dashboard-content page-content page-enter-up ${isPageSwitching ? "page-transitioning" : "page-entered"}`}>{children}</div>
 
         <EditorialContactBanner activePage={activePage} />
 
