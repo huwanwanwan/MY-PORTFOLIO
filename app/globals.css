@@ -5302,20 +5302,75 @@ html.dark .cert-lightbox-desc {
   color: #c0bbb3 !important;
 }
 
-/* Page transition animation between navigation */
+/* Page transition animation between navigation: smooth scroll-down glide before pop up */
+@keyframes pageContentScrollDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-56px);
+    filter: blur(2.5px);
+  }
+  45% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes pageContentScrollDownMobile {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px);
+    filter: blur(1.5px);
+  }
+  45% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
 .page-content {
-  transition: opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1), transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity, filter;
+}
+
+.page-content.page-scroll-down-enter,
+.page-content.page-entered {
+  animation: pageContentScrollDown 620ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .page-content.page-transitioning {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(-56px);
+  filter: blur(2.5px);
   pointer-events: none;
 }
 
-.page-content.page-entered {
-  opacity: 1;
-  transform: translateY(0);
+@media (max-width: 768px) {
+  .page-content.page-scroll-down-enter,
+  .page-content.page-entered {
+    animation: pageContentScrollDownMobile 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .page-content.page-transitioning {
+    transform: translateY(-40px);
+    filter: blur(1.5px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-content.page-scroll-down-enter,
+  .page-content.page-entered {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
 }
 
 /* ─── Responsive adjustments ─── */
