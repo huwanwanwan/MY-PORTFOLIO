@@ -716,173 +716,87 @@ export default function SkillsShowcase() {
 
         <div className="capabilities-cards-grid">
           {/* Card 01: Web & System Development */}
-          <article className="capability-card scroll-reveal" data-scroll-reveal data-reveal-side="left">
-            <div className="capability-image-container">
+          <article className="capability-card capability-card-colonized scroll-reveal" data-scroll-reveal data-reveal-side="left">
+            <div className="capability-card-bg" aria-hidden="true">
               <Image
                 src="/v1.jpg"
                 alt="Web & System Development Showcase"
-                width={700}
-                height={420}
-                className="capability-card-image"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="capability-bg-img"
               />
-              <div className="capability-image-vignette" />
+              <div className="capability-bg-overlay" />
             </div>
-            <div className="capability-bg-watermark" aria-hidden="true">
-              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="8" y="14" width="104" height="74" rx="8" />
-                <line x1="8" y1="32" x2="112" y2="32" />
-                <circle cx="20" cy="23" r="2.5" fill="currentColor" />
-                <circle cx="28" cy="23" r="2.5" fill="currentColor" />
-                <circle cx="36" cy="23" r="2.5" fill="currentColor" />
-                <path d="M26 52l-8 7 8 7" />
-                <path d="M46 52l8 7-8 7" />
-                <line x1="39" y1="48" x2="33" y2="72" />
-                <rect x="62" y="44" width="40" height="12" rx="3" strokeDasharray="2 2" />
-                <rect x="62" y="62" width="40" height="16" rx="3" />
-                <ellipse cx="88" cy="94" rx="20" ry="6" />
-                <path d="M68 94v12c0 3.3 9 6 20 6s20-2.7 20-6V94" />
-                <path d="M68 100c0 3.3 9 6 20 6s20-2.7 20-6" />
-              </svg>
+            <div className="capability-content-layer">
+              <span className="capability-num">01</span>
+              <h3>Web &amp; System Development</h3>
+              <p>
+                Designing and building responsive web applications, document management platforms (DocuLink), and inventory POS systems (InventoPOS) using React, JavaScript, PHP, HTML/CSS, and relational database systems.
+              </p>
             </div>
-            <span className="capability-num">01</span>
-            <div className="capability-icon-wrap">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="2" y="3" width="20" height="14" rx="2" />
-                <line x1="8" y1="21" x2="16" y2="21" />
-                <line x1="12" y1="17" x2="12" y2="21" />
-              </svg>
-            </div>
-            <h3>Web &amp; System Development</h3>
-            <p>
-              Designing and building responsive web applications, document management platforms (DocuLink), and inventory POS systems (InventoPOS) using React, JavaScript, PHP, HTML/CSS, and relational database systems.
-            </p>
           </article>
 
           {/* Card 02: Mobile & Accessibility Solutions */}
-          <article className="capability-card scroll-reveal" data-scroll-reveal data-reveal-side="right">
-            <div className="capability-image-container">
+          <article className="capability-card capability-card-colonized scroll-reveal" data-scroll-reveal data-reveal-side="right">
+            <div className="capability-card-bg" aria-hidden="true">
               <Image
                 src="/v2.jpg"
                 alt="Mobile & Accessibility Solutions Showcase"
-                width={700}
-                height={420}
-                className="capability-card-image"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="capability-bg-img"
               />
-              <div className="capability-image-vignette" />
+              <div className="capability-bg-overlay" />
             </div>
-            <div className="capability-bg-watermark" aria-hidden="true">
-              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="34" y="10" width="52" height="96" rx="12" />
-                <line x1="50" y1="18" x2="70" y2="18" />
-                <circle cx="60" cy="96" r="3.5" />
-                <path d="M48 42c0-4 3-7 6-7s5 3 5 8v16" />
-                <path d="M59 45c0-3 2.5-5 5-5s5 2 5 7v14" />
-                <path d="M69 49c0-3 2-4 4.5-4s4.5 2 4.5 6v12c0 9-7 14-16 14-6 0-11-4-13-8l-5-10c-1.5-3 1-6 4-5l6 4" />
-                <path d="M96 36c6 7 9 16 9 24s-3 17-9 24" strokeDasharray="3 3" />
-                <path d="M106 28c9 9 14 20 14 32s-5 23-14 32" opacity="0.6" />
-                <path d="M24 44c-4 5-6 11-6 16s2 11 6 16" strokeDasharray="2 2" />
-              </svg>
+            <div className="capability-content-layer">
+              <span className="capability-num">02</span>
+              <h3>Mobile &amp; Accessibility Solutions</h3>
+              <p>
+                Crafting mobile applications like <strong>SigLa</strong> (Sign Language Translator for hearing and speech-impaired communities) using Kotlin and mobile front-end frameworks, with offline translation and intuitive touch interactions.
+              </p>
             </div>
-            <span className="capability-num">02</span>
-            <div className="capability-icon-wrap">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="5" y="2" width="14" height="20" rx="3" />
-                <line x1="12" y1="18" x2="12.01" y2="18" strokeWidth="3" />
-              </svg>
-            </div>
-            <h3>Mobile &amp; Accessibility Solutions</h3>
-            <p>
-              Crafting mobile applications like <strong>SigLa</strong> (Sign Language Translator for hearing and speech-impaired communities) using Kotlin and mobile front-end frameworks, with offline translation and intuitive touch interactions.
-            </p>
           </article>
 
           {/* Card 03: Game Development & AR */}
-          <article className="capability-card scroll-reveal" data-scroll-reveal data-reveal-side="left">
-            <div className="capability-image-container">
+          <article className="capability-card capability-card-colonized scroll-reveal" data-scroll-reveal data-reveal-side="left">
+            <div className="capability-card-bg" aria-hidden="true">
               <Image
                 src="/v3.jpg"
                 alt="Game Development & AR Showcase"
-                width={700}
-                height={420}
-                className="capability-card-image"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="capability-bg-img"
               />
-              <div className="capability-image-vignette" />
+              <div className="capability-bg-overlay" />
             </div>
-            <div className="capability-bg-watermark" aria-hidden="true">
-              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="14" y="44" width="92" height="52" rx="26" />
-                <path d="M38 60v16M30 68h16" />
-                <circle cx="80" cy="62" r="3" fill="currentColor" />
-                <circle cx="90" cy="70" r="3" fill="currentColor" />
-                <circle cx="72" cy="70" r="3" fill="currentColor" />
-                <circle cx="82" cy="78" r="3" fill="currentColor" />
-                <path d="M60 12l26 15v30l-26 15-26-15V27L60 12z" strokeDasharray="3 2" />
-                <line x1="60" y1="12" x2="60" y2="42" />
-                <line x1="60" y1="42" x2="86" y2="27" />
-                <line x1="60" y1="42" x2="34" y2="27" />
-                <circle cx="60" cy="27" r="14" strokeDasharray="2 3" />
-              </svg>
+            <div className="capability-content-layer">
+              <span className="capability-num">03</span>
+              <h3>Game Development &amp; AR</h3>
+              <p>
+                Developing augmented-reality mobile games (Attack on PDM) and interactive combat action games (Force X, Almighty Jungle) with Unity, C#, 2D animation (Marilao Fantasy), and character AI behaviors.
+              </p>
             </div>
-            <span className="capability-num">03</span>
-            <div className="capability-icon-wrap">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M6 11h4M8 9v4M15 12h.01M18 10h.01" />
-                <rect x="2" y="6" width="20" height="12" rx="6" />
-              </svg>
-            </div>
-            <h3>Game Development &amp; AR</h3>
-            <p>
-              Developing augmented-reality mobile games (Attack on PDM) and interactive combat action games (Force X, Almighty Jungle) with Unity, C#, 2D animation (Marilao Fantasy), and character AI behaviors.
-            </p>
           </article>
 
           {/* Card 04: Hardware, IoT & Sensors */}
-          <article className="capability-card scroll-reveal" data-scroll-reveal data-reveal-side="right">
-            <div className="capability-image-container">
+          <article className="capability-card capability-card-colonized scroll-reveal" data-scroll-reveal data-reveal-side="right">
+            <div className="capability-card-bg" aria-hidden="true">
               <Image
                 src="/LA NINA DETECTOR/1.png"
                 alt="Hardware, IoT & Sensors Showcase"
-                width={700}
-                height={420}
-                className="capability-card-image"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="capability-bg-img"
               />
-              <div className="capability-image-vignette" />
+              <div className="capability-bg-overlay" />
             </div>
-            <div className="capability-bg-watermark" aria-hidden="true">
-              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="32" y="32" width="56" height="56" rx="8" />
-                <rect x="44" y="44" width="32" height="32" rx="4" fill="currentColor" fillOpacity="0.1" />
-                <path d="M42 16v16M52 16v16M68 16v16M78 16v16" />
-                <path d="M42 88v16M52 88v16M68 88v16M78 88v16" />
-                <path d="M16 42h16M16 52h16M16 68h16M16 78h16" />
-                <path d="M88 42h16M88 52h16M88 68h16M88 78h16" />
-                <circle cx="42" cy="14" r="2.5" fill="currentColor" />
-                <circle cx="78" cy="14" r="2.5" fill="currentColor" />
-                <circle cx="42" cy="106" r="2.5" fill="currentColor" />
-                <circle cx="78" cy="106" r="2.5" fill="currentColor" />
-                <path d="M96 22c8 8 12 18 12 28s-4 20-12 28" strokeDasharray="3 3" />
-                <path d="M106 14c11 11 16 24 16 36s-5 25-16 36" opacity="0.6" />
-              </svg>
+            <div className="capability-content-layer">
+              <span className="capability-num">04</span>
+              <h3>Hardware, IoT &amp; Sensors</h3>
+              <p>
+                Integrating physical microcontrollers with software workflows: automated attendance gates with RFID readers and camera face recognition (RecogniZarenus), and acoustic rainfall alert triggers (La Niña Detector) with Arduino.
+              </p>
             </div>
-            <span className="capability-num">04</span>
-            <div className="capability-icon-wrap">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="4" y="4" width="16" height="16" rx="2" />
-                <rect x="9" y="9" width="6" height="6" />
-                <line x1="9" y1="1" x2="9" y2="4" />
-                <line x1="15" y1="1" x2="15" y2="4" />
-                <line x1="9" y1="20" x2="9" y2="23" />
-                <line x1="15" y1="20" x2="15" y2="23" />
-                <line x1="20" y1="9" x2="23" y2="9" />
-                <line x1="20" y1="14" x2="23" y2="14" />
-                <line x1="1" y1="9" x2="4" y2="9" />
-                <line x1="1" y1="14" x2="4" y2="14" />
-              </svg>
-            </div>
-            <h3>Hardware, IoT &amp; Sensors</h3>
-            <p>
-              Integrating physical microcontrollers with software workflows: automated attendance gates with RFID readers and camera face recognition (RecogniZarenus), and acoustic rainfall alert triggers (La Niña Detector) with Arduino.
-            </p>
           </article>
         </div>
       </section>

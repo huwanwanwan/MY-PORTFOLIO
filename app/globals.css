@@ -18702,3 +18702,134 @@ html.dark .cert-lightbox-desc {
 [data-theme="light"] .suggestion-provider-pill {
   background: rgba(0, 0, 0, 0.05);
 }
+
+
+/* ==========================================================================
+   COLONIZED CAPABILITY CARDS: Edge-to-Edge Vivid Background Picture
+   ========================================================================== */
+.capability-card.capability-card-colonized {
+  position: relative !important;
+  overflow: hidden !important;
+  min-height: 290px !important;
+  padding: 0 !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  background: #141210 !important;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.35) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.4s ease !important;
+}
+
+[data-theme="light"] .capability-card.capability-card-colonized {
+  background: #f8f6f2 !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.08) !important;
+}
+
+.capability-card.capability-card-colonized:hover {
+  transform: translateY(-6px) scale(1.01) !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45), 0 0 25px rgba(198, 83, 54, 0.18) !important;
+}
+
+/* Background image colonizing the entire card */
+.capability-card-bg {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}
+
+.capability-card-bg .capability-bg-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center 25% !important;
+  opacity: 0.72 !important; /* Decreased transparency so picture is clearly visible */
+  transform: scale(1.0) !important;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease !important;
+}
+
+.capability-card.capability-card-colonized:hover .capability-card-bg .capability-bg-img {
+  transform: scale(1.05) !important;
+  opacity: 0.88 !important; /* Even more vivid and visible on hover */
+}
+
+/* Contrast protective gradient overlay so text is 100% readable */
+.capability-bg-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 14, 12, 0.25) 0%,
+    rgba(16, 14, 12, 0.60) 40%,
+    rgba(14, 12, 10, 0.88) 75%,
+    rgba(14, 12, 10, 0.96) 100%
+  ) !important;
+  transition: background 0.4s ease !important;
+}
+
+[data-theme="light"] .capability-bg-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.30) 0%,
+    rgba(255, 255, 255, 0.65) 40%,
+    rgba(255, 255, 255, 0.92) 80%,
+    rgba(255, 255, 255, 0.98) 100%
+  ) !important;
+}
+
+/* Text layer overlapping cleanly on top */
+.capability-content-layer {
+  position: relative !important;
+  z-index: 2 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  padding: clamp(24px, 3.5vw, 32px) !important;
+}
+
+.capability-card.capability-card-colonized .capability-num {
+  align-self: flex-start !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  color: var(--accent) !important;
+  background: rgba(198, 83, 54, 0.22) !important;
+  border: 1px solid rgba(198, 83, 54, 0.45) !important;
+  border-radius: 8px !important;
+  padding: 3px 10px !important;
+  letter-spacing: 0.08em !important;
+  backdrop-filter: blur(6px) !important;
+}
+
+.capability-card.capability-card-colonized h3 {
+  font-size: 1.35rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  margin: 0 !important;
+  letter-spacing: -0.01em !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7) !important;
+}
+
+[data-theme="light"] .capability-card.capability-card-colonized h3 {
+  color: #1a1816 !important;
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.8) !important;
+}
+
+.capability-card.capability-card-colonized p {
+  font-size: 0.92rem !important;
+  line-height: 1.6 !important;
+  color: rgba(245, 240, 235, 0.92) !important;
+  margin: 0 !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+[data-theme="light"] .capability-card.capability-card-colonized p {
+  color: #383430 !important;
+  text-shadow: none !important;
+}
