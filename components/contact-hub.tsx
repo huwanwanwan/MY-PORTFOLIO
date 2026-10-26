@@ -4,10 +4,50 @@ import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 
+
+const MAX_DAILY_MESSAGES = 2;
+const ROLLING_WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+const getValidSubmissions = (): number[] => {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem("wancor_contact_daily_submissions");
+    if (!raw) return [];
+    const list: number[] = JSON.parse(raw);
+    const now = Date.now();
+    return list.filter((t) => typeof t === "number" && now - t < ROLLING_WINDOW_MS);
+  } catch {
+    return [];
+  }
+};
+
 export default function ContactHub() {
   const [copied, setCopied] = useState(false);
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [sendProgress, setSendProgress] = useState(0);
+  // 2-per-day rate limiting & honeypot security
+  const [dailyRemaining, setDailyRemaining] = useState<number>(MAX_DAILY_MESSAGES);
+  const [nextResetHours, setNextResetHours] = useState<number>(24);
+  const [honeypot, setHoneypot] = useState("");
+
+  const refreshQuota = () => {
+    const valid = getValidSubmissions();
+    const rem = Math.max(0, MAX_DAILY_MESSAGES - valid.length);
+    setDailyRemaining(rem);
+    if (valid.length > 0) {
+      const oldest = Math.min(...valid);
+      const msLeft = ROLLING_WINDOW_MS - (Date.now() - oldest);
+      const hrs = Math.max(1, Math.ceil(msLeft / (1000 * 60 * 60)));
+      setNextResetHours(hrs);
+    } else {
+      setNextResetHours(24);
+    }
+  };
+
+  useEffect(() => {
+    refreshQuota();
+  }, []);
+
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -253,8 +293,23 @@ export default function ContactHub() {
     }
   };
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
+    const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // 1. Honeypot trap check (catches automated spambots silently)
+    if (honeypot.trim()) {
+      setFormStatus("success");
+      return;
+    }
+
+    // 2. Strict Rate Limiter: Max 2 messages per rolling 24 hours
+    const validSubmissions = getValidSubmissions();
+    if (validSubmissions.length >= MAX_DAILY_MESSAGES) {
+      setFormStatus("error");
+      refreshQuota();
+      return;
+    }
+
     setFormStatus("submitting");
     setSendProgress(8);
 
@@ -380,7 +435,16 @@ export default function ContactHub() {
     // Brief 120ms pause at 100% so user clearly sees full completion
     await new Promise((resolve) => setTimeout(resolve, 140));
 
-    if (sent) {
+        if (sent) {
+      // Record submission timestamp for 2-per-day rate limiting
+      try {
+        const currentList = getValidSubmissions();
+        const updated = [...currentList, Date.now()];
+        localStorage.setItem("wancor_contact_daily_submissions", JSON.stringify(updated));
+      } catch {
+        // localStorage not available
+      }
+      refreshQuota();
       setFormStatus("success");
       setFormState({ name: "", email: "", phone: "", subject: "", message: "" });
       setShowSuggestions(false);
@@ -580,7 +644,50 @@ export default function ContactHub() {
             </p>
           </div>
 
-          <form onSubmit={handleFormSubmit} className="contact-styled-form">
+                    <form onSubmit={handleFormSubmit} className="contact-styled-form">
+            {/* Honeypot trap field (hidden from real users, caught by spambots) */}
+            <input
+              type="text"
+              name="_wancor_security_hp"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+              style={{ position: "absolute", opacity: 0, zIndex: -1, pointerEvents: "none", width: 0, height: 0 }}
+              aria-hidden="true"
+            />
+
+            {/* Daily Security Quota Indicator */}
+            <div className="contact-security-badge-row">
+              <div className="contact-security-pill">
+                <span className={`contact-security-dot ${dailyRemaining === 0 ? "exhausted" : ""}`} aria-hidden="true" />
+                <span>Anti-Spam Security: <strong>{dailyRemaining} of {MAX_DAILY_MESSAGES}</strong> messages remaining today</span>
+              </div>
+              <span className="security-reset-hint">
+                {dailyRemaining === 0
+                  ? `Refreshes in ~${nextResetHours} hour${nextResetHours > 1 ? "s" : ""}`
+                  : "24-hour protected limit"}
+              </span>
+            </div>
+
+            {/* Quota Exhausted Warning Card */}
+            {dailyRemaining === 0 && (
+              <div className="contact-rate-limit-banner" role="alert">
+                <div className="rate-limit-icon">🛡️</div>
+                <div className="rate-limit-content">
+                  <h4>Daily Quota Reached (2 / 2 Messages)</h4>
+                  <p>
+                    To prevent spam bots and ensure every inquiry receives personal attention, visitor messages are limited to 2 per 24 hours. Your quota will refresh in <strong>~{nextResetHours} hour{nextResetHours > 1 ? "s" : ""}</strong>.
+                  </p>
+                  <p>
+                    Have an urgent inquiry or project deadline? Email Juan directly at{" "}
+                    <a href="mailto:militantejuanenricodomanico@gmail.com" className="rate-limit-mail-link">
+                      militantejuanenricodomanico@gmail.com
+                    </a>
+                  </p>
+                </div>
+              </div>
+            )}
             <div className="form-grid-row">
               <div className="form-group">
                 <label htmlFor="contact-sender-name">
@@ -780,9 +887,9 @@ export default function ContactHub() {
               <button
                 type="submit"
                 className="submit-dispatch-btn"
-                disabled={formStatus === "submitting"}
+                disabled={formStatus === "submitting" || dailyRemaining === 0}
               >
-                <span>{formStatus === "submitting" ? `Sending... ${Math.round(sendProgress)}%` : "Send Message"}</span>
+                <span>{dailyRemaining === 0 ? "Daily Limit Reached (2/2 today)" : formStatus === "submitting" ? `Sending... ${Math.round(sendProgress)}%` : "Send Message"}</span>
                 <span className="dispatch-arrow" aria-hidden="true">↗</span>
               </button>
             </div>

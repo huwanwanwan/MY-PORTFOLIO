@@ -65,6 +65,25 @@ const FAQ_PRESETS = [
   },
 ];
 
+
+const CHATBOT_DAILY_LIMIT = 20;
+const BURST_LIMIT = 5;
+const BURST_WINDOW_MS = 60 * 1000; // 60s
+const COOLDOWN_MS = 2000; // 2s
+
+const getDailyChatTimestamps = (): number[] => {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem("wancor_chatbot_timestamps");
+    if (!raw) return [];
+    const list: number[] = JSON.parse(raw);
+    const now = Date.now();
+    return list.filter((t) => typeof t === "number" && now - t < 24 * 60 * 60 * 1000);
+  } catch {
+    return [];
+  }
+};
+
 export default function FaqChatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -83,6 +102,19 @@ export default function FaqChatbot() {
   const [inputVal, setInputVal] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [unreadBadge, setUnreadBadge] = useState(true);
+  // Anti-Spam & Rate Limiting state
+  const [cooldownSec, setCooldownSec] = useState(0);
+  const lastQueryRef = useRef<string>("");
+  const lastSendTimeRef = useRef<number>(0);
+  const burstTimesRef = useRef<number[]>([]);
+
+  useEffect(() => {
+    if (cooldownSec > 0) {
+      const timer = setTimeout(() => setCooldownSec((s) => s - 1), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [cooldownSec]);
+
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -127,14 +159,83 @@ export default function FaqChatbot() {
     }, 400);
   };
 
-  // Freeform user query handling
+    // Freeform user query handling with Rate Limiting & Anti-Spam Security
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
-    const query = inputVal.trim();
-    if (!query) return;
+    if (cooldownSec > 0 || isTyping) return;
 
+    // Sanitize and trim input (max 250 chars)
+    const sanitized = inputVal.replace(/<[^>]*>?/gm, "").trim();
+    if (!sanitized) return;
+    if (sanitized.length < 2) return;
+
+    const now = Date.now();
+
+    // Rate Limit 1: 2-second cooldown between messages
+    if (now - lastSendTimeRef.current < COOLDOWN_MS) {
+      const warnMsg: ChatMessage = {
+        id: "b-" + now,
+        sender: "bot",
+        text: "⏳ **Please wait a moment**: To protect against spam, please pause at least 2 seconds between questions.",
+        timestamp: "Just now",
+      };
+      setMessages((prev) => [...prev, warnMsg]);
+      return;
+    }
+
+    // Rate Limit 2: Duplicate message filter
+    if (sanitized.toLowerCase() === lastQueryRef.current.toLowerCase()) {
+      const dupMsg: ChatMessage = {
+        id: "b-" + now,
+        sender: "bot",
+        text: "💡 You just asked this exact question! Feel free to ask something else or explore the quick FAQ buttons above.",
+        timestamp: "Just now",
+      };
+      setMessages((prev) => [...prev, dupMsg]);
+      return;
+    }
+
+    // Rate Limit 3: Burst rate limiter (max 5 queries per minute)
+    burstTimesRef.current = burstTimesRef.current.filter((t) => now - t < BURST_WINDOW_MS);
+    if (burstTimesRef.current.length >= BURST_LIMIT) {
+      setCooldownSec(20);
+      const burstMsg: ChatMessage = {
+        id: "b-" + now,
+        sender: "bot",
+        text: "🛡️ **Anti-Spam Rate Limiter**: You've asked 5 questions in under a minute! Please pause for 20 seconds to keep system resources responsive.",
+        timestamp: "Just now",
+      };
+      setMessages((prev) => [...prev, burstMsg]);
+      return;
+    }
+
+    // Rate Limit 4: Daily quota (max 20 queries per 24 hours)
+    const dailyList = getDailyChatTimestamps();
+    if (dailyList.length >= CHATBOT_DAILY_LIMIT) {
+      const quotaMsg: ChatMessage = {
+        id: "b-" + now,
+        sender: "bot",
+        text: "🛡️ **Daily Limit Reached (20/20)**: To keep Juan's portfolio assistant protected from automated spam bots, questions are limited to 20 per day. For further details, please reach out directly via the [Contact Hub](/contact) or email militantejuanenricodomanico@gmail.com!",
+        timestamp: "Just now",
+        quickLinks: [{ label: "Open Contact Hub ↗", href: "/contact" }],
+      };
+      setMessages((prev) => [...prev, quotaMsg]);
+      return;
+    }
+
+    // Record valid send
+    lastSendTimeRef.current = now;
+    lastQueryRef.current = sanitized;
+    burstTimesRef.current.push(now);
+    try {
+      localStorage.setItem("wancor_chatbot_timestamps", JSON.stringify([...dailyList, now]));
+    } catch {
+      // ignore
+    }
+
+    const query = sanitized;
     const userMsg: ChatMessage = {
-      id: "u-" + Date.now(),
+      id: "u-" + now,
       sender: "user",
       text: query,
       timestamp: "Just now",
@@ -413,11 +514,16 @@ export default function FaqChatbot() {
           </div>
 
           {/* Input Form Bar */}
+          <div className="chatbot-security-footer">
+            <span>🛡️ Anti-Spam Protected • Rate Limited (Max 20/day)</span>
+          </div>
           <form onSubmit={handleSendMessage} className="chatbot-input-bar">
             <input
               ref={inputRef}
               type="text"
-              placeholder="Ask a question (e.g. skills, projects)..."
+              placeholder={cooldownSec > 0 ? `Anti-spam cooldown (${cooldownSec}s)...` : "Ask a question (e.g. skills, projects)..."}
+              maxLength={250}
+              disabled={cooldownSec > 0 || isTyping}
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
               className="chatbot-input-field"
@@ -425,7 +531,7 @@ export default function FaqChatbot() {
             />
             <button
               type="submit"
-              disabled={!inputVal.trim() || isTyping}
+              disabled={!inputVal.trim() || isTyping || cooldownSec > 0}
               className="chatbot-send-btn"
               aria-label="Send message"
             >
