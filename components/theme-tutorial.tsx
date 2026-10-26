@@ -1,44 +1,91 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 interface ThemeTutorialProps {
   darkMode: boolean;
   onToggleTheme: () => void;
 }
 
+interface TargetRect {
+  top: number;
+  left: number;
+  width: number;
+  height: number;
+}
+
 export default function ThemeTutorial({ darkMode, onToggleTheme }: ThemeTutorialProps) {
   const [isActive, setIsActive] = useState(false);
   const [hasToggled, setHasToggled] = useState(false);
   const [initialMode, setInitialMode] = useState<boolean | null>(null);
+  const [targetRect, setTargetRect] = useState<TargetRect | null>(null);
+
+  const measureTarget = useCallback(() => {
+    const btn = document.getElementById("topbar-theme-toggle");
+    if (btn) {
+      const rect = btn.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        setTargetRect({
+          top: rect.top,
+          left: rect.left,
+          width: rect.width,
+          height: rect.height,
+        });
+      }
+    }
+  }, []);
 
   useEffect(() => {
-    // Check if user has already completed or dismissed the theme tutorial in this session
     try {
       const completed = sessionStorage.getItem("wancor_theme_tutorial_done");
       if (!completed) {
-        // Small 400ms delay for page elements to mount cleanly
         const timer = setTimeout(() => {
           setIsActive(true);
           setInitialMode(darkMode);
-        }, 500);
+          measureTarget();
+        }, 450);
         return () => clearTimeout(timer);
       }
     } catch {
       // sessionStorage unavailable, do not block
     }
-  }, []);
+  }, [darkMode, measureTarget]);
 
-  // Lock scrolling before they try the theme
+  // Lock scrolling before they try the theme & measure button on window events
   useEffect(() => {
     if (isActive) {
       const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = "hidden";
+
+      // Elevate the topbar theme toggle above the dimmed backdrop
+      const btn = document.getElementById("topbar-theme-toggle");
+      if (btn) {
+        btn.classList.add("theme-toggle-spotlight");
+      }
+
+      measureTarget();
+
+      const handleResizeOrScroll = () => {
+        measureTarget();
+      };
+
+      window.addEventListener("resize", handleResizeOrScroll, { passive: true });
+      window.addEventListener("scroll", handleResizeOrScroll, { passive: true });
+
+      // Run quick periodic measurements to catch font/CSS settle
+      const interval = setInterval(measureTarget, 200);
+
       return () => {
         document.body.style.overflow = originalOverflow;
+        if (btn) {
+          btn.classList.remove("theme-toggle-spotlight");
+        }
+        window.removeEventListener("resize", handleResizeOrScroll);
+        window.removeEventListener("scroll", handleResizeOrScroll);
+        clearInterval(interval);
       };
     }
-  }, [isActive]);
+  }, [isActive, measureTarget]);
 
   const handleToggle = () => {
     onToggleTheme();
@@ -47,6 +94,10 @@ export default function ThemeTutorial({ darkMode, onToggleTheme }: ThemeTutorial
 
   const handleFinish = () => {
     setIsActive(false);
+    const btn = document.getElementById("topbar-theme-toggle");
+    if (btn) {
+      btn.classList.remove("theme-toggle-spotlight");
+    }
     try {
       sessionStorage.setItem("wancor_theme_tutorial_done", "true");
     } catch {
@@ -56,15 +107,78 @@ export default function ThemeTutorial({ darkMode, onToggleTheme }: ThemeTutorial
 
   if (!isActive) return null;
 
+  // Calculate dynamic card & arrow position based on measured targetRect
+  let cardStyle: React.CSSProperties | undefined = undefined;
+  let arrowStyle: React.CSSProperties | undefined = undefined;
+
+  if (targetRect && typeof window !== "undefined") {
+    const winW = window.innerWidth;
+    const buttonCenterX = targetRect.left + targetRect.width / 2;
+    const buttonCenterFromRight = winW - buttonCenterX;
+
+    // Position card right below the button
+    const cardTop = Math.round(targetRect.top + targetRect.height + 14);
+
+    if (winW > 600) {
+      // Align card right edge comfortably near the button
+      const cardRight = Math.max(16, Math.min(winW - 420, Math.round(winW - (targetRect.left + targetRect.width) - 16)));
+      cardStyle = {
+        position: "fixed",
+        top: `${cardTop}px`,
+        right: `${cardRight}px`,
+        maxWidth: "420px",
+        margin: 0,
+      };
+
+      // Arrow position pointing directly to button center
+      const arrowRight = Math.max(22, Math.min(380, Math.round(buttonCenterFromRight - cardRight - 11)));
+      arrowStyle = {
+        right: `${arrowRight}px`,
+      };
+    } else {
+      // Mobile screen: center card horizontally
+      cardStyle = {
+        position: "fixed",
+        top: `${Math.max(68, cardTop)}px`,
+        left: "16px",
+        right: "16px",
+        maxWidth: "calc(100vw - 32px)",
+        margin: "0 auto",
+      };
+
+      const arrowRight = Math.max(20, Math.min(winW - 50, Math.round(buttonCenterFromRight - 27)));
+      arrowStyle = {
+        right: `${arrowRight}px`,
+      };
+    }
+  }
+
   return (
     <div className="theme-tutorial-backdrop" role="dialog" aria-modal="true" aria-labelledby="tutorial-title">
       {/* Target Spotlight Halo around Topbar button */}
-      <div className="theme-spotlight-pulse" aria-hidden="true" />
+      <div
+        className="theme-spotlight-pulse"
+        style={
+          targetRect
+            ? {
+                position: "fixed",
+                top: `${Math.round(targetRect.top - 6)}px`,
+                left: `${Math.round(targetRect.left - 6)}px`,
+                width: `${Math.round(targetRect.width + 12)}px`,
+                height: `${Math.round(targetRect.height + 12)}px`,
+                right: "auto",
+                bottom: "auto",
+                margin: 0,
+              }
+            : undefined
+        }
+        aria-hidden="true"
+      />
 
       {/* Floating Tutorial Card */}
-      <div className="theme-tutorial-card">
+      <div className="theme-tutorial-card" style={cardStyle}>
         {/* Pointer Arrow pointing to the topbar theme toggle */}
-        <div className="tutorial-pointer-arrow" aria-hidden="true">
+        <div className="tutorial-pointer-arrow" style={arrowStyle} aria-hidden="true">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <line x1="12" y1="19" x2="12" y2="5" />
             <polyline points="5 12 12 5 19 12" />

@@ -57,7 +57,7 @@ const FAQ_PRESETS = [
     id: "bio",
     query: "Tell me about Juan's background & education",
     answer:
-      "Juan Domanico Militante is an Information Technology student at **Pamantasan ng Lungsod ng Marilao (PLMAR)** in the Philippines.\n\nWith 4+ years of dedicated academic and practical software engineering study, he focuses on user-centric usability, high-performance architecture, and purposeful digital tools under the WANCOR brand.",
+      "**Juan Domanico Militante** is studying **Bachelor of Science in Information Technology** (BSIT) at **Pambayang Dalubhasaan ng Marilao** (PDM) in the Philippines.\n\nWith 4+ years of dedicated academic and practical software engineering study, he focuses on user-centric usability, high-performance architecture, and purposeful digital tools under the WANCOR brand.",
     links: [
       { label: "Read Full Bio ↗", href: "/about" },
       { label: "View Certifications ↗", href: "/experience#credentials" },
@@ -166,7 +166,7 @@ export default function FaqChatbot() {
         const c = FAQ_PRESETS.find((f) => f.id === "contact")!;
         answerText = c.answer;
         links = c.links;
-      } else if (q.includes("who") || q.includes("about") || q.includes("education") || q.includes("school") || q.includes("plmar") || q.includes("marilao")) {
+      } else if (q.includes("who") || q.includes("about") || q.includes("education") || q.includes("school") || q.includes("plmar") || q.includes("pdm") || q.includes("dalubhasaan") || q.includes("bsit") || q.includes("marilao")) {
         const b = FAQ_PRESETS.find((f) => f.id === "bio")!;
         answerText = b.answer;
         links = b.links;

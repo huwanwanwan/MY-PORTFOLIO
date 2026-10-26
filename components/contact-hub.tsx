@@ -282,10 +282,18 @@ export default function ContactHub() {
             "template_3zl7lsk",
             {
               from_name: formState.name,
+              name: formState.name,
+              user_name: formState.name,
               from_email: formState.email,
+              email: formState.email,
+              user_email: formState.email,
+              reply_to: formState.email,
               phone: formState.phone || "Not provided",
+              contact_number: formState.phone || "Not provided",
               subject: formState.subject || "General Project Discussion",
+              title: formState.subject || "General Project Discussion",
               message: formState.message,
+              message_html: formState.message,
             },
             { publicKey: "kUDnhN5l63awEUq0y" }
           );
@@ -297,10 +305,18 @@ export default function ContactHub() {
             "es1ha4f",
             {
               from_name: formState.name,
+              name: formState.name,
+              user_name: formState.name,
               from_email: formState.email,
+              email: formState.email,
+              user_email: formState.email,
+              reply_to: formState.email,
               phone: formState.phone || "Not provided",
+              contact_number: formState.phone || "Not provided",
               subject: formState.subject || "General Project Discussion",
+              title: formState.subject || "General Project Discussion",
               message: formState.message,
+              message_html: formState.message,
             },
             { publicKey: "kUDnhN5l63awEUq0y" }
           );
