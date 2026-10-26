@@ -1,12 +1,8 @@
 <div align="center">
 
   <a href="https://portfolio.juandomanicomilitante.workers.dev" target="_blank">
-    <img src="https://raw.githubusercontent.com/huwanwanwan/MY-PORTFOLIO/main/public/tab-logo.png" alt="WANCOR Logo" width="88" height="88" style="border-radius: 18px;" />
+    <img src="https://raw.githubusercontent.com/huwanwanwan/MY-PORTFOLIO/main/public/wancor-table-card.svg" alt="Juan Domanico Militante (WANCOR) - Profile Card" width="100%" />
   </a>
-
-  <br />
-
-  <img src="https://raw.githubusercontent.com/huwanwanwan/MY-PORTFOLIO/main/header-banner.svg" alt="Juan Domanico Militante (WANCOR)" width="100%" />
 
   <br /><br />
 
@@ -15,9 +11,10 @@
   [![Institution](https://img.shields.io/badge/🏛️_INSTITUTION-PDM_MARILAO-24292e?style=for-the-badge)](https://portfolio.juandomanicomilitante.workers.dev)
   [![Status](https://img.shields.io/badge/💼_STATUS-OPEN_TO_OPPORTUNITIES-34A853?style=for-the-badge)](mailto:militantejuanenricodomanico@gmail.com)
 
+  <br /><br />
+
   <p align="center">
     <a href="#-about-me"><b>About Me</b></a> &nbsp;•&nbsp;
-    <a href="#-developer-directory"><b>Directory Card</b></a> &nbsp;•&nbsp;
     <a href="#-tech-stack--tools"><b>Tech Stack</b></a> &nbsp;•&nbsp;
     <a href="#-flagship-projects"><b>Featured Projects</b></a> &nbsp;•&nbsp;
     <a href="#-portfolio-architecture"><b>Architecture</b></a> &nbsp;•&nbsp;
@@ -36,24 +33,6 @@
 Hi! I'm **Juan Domanico Militante**, also known as **WANCOR**. I am an Information Technology student at **Pambayang Dalubhasaan ng Marilao (PDM)** specializing in **Web & Mobile Development**.
 
 Throughout my 4+ years of IT study and 14+ finished systems, my engineering mindset centers around **offline-first mobile architecture**, **modern edge web platforms**, and **interactive engineering** (Augmented Reality & IoT). I focus on software that solves real-world challenges—from assistive communication tools for the hearing-impaired to automated acoustic flood alert devices.
-
----
-
-## 📋 Developer Directory
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/huwanwanwan/MY-PORTFOLIO/main/public/wancor-table-card.svg" alt="WANCOR Developer Directory Table Card" width="100%" />
-</p>
-
-| FIELD | DETAILS |
-| :--- | :--- |
-| **Developer Name** | **Juan Domanico Militante (WANCOR)** |
-| **Degree & Program** | Bachelor of Science in Information Technology (BSIT) |
-| **Institution** | Pambayang Dalubhasaan ng Marilao (PDM) |
-| **Location Base** | Marilao, Bulacan, Philippines |
-| **Core Disciplines** | Offline-First Android, Full-Stack Edge Web, AR Gaming, IoT Sensors |
-| **Live Portfolio** | [portfolio.juandomanicomilitante.workers.dev](https://portfolio.juandomanicomilitante.workers.dev) |
-| **Direct Email** | [militantejuanenricodomanico@gmail.com](mailto:militantejuanenricodomanico@gmail.com) |
 
 ---
 
