@@ -360,11 +360,20 @@ export default function FaqChatbot() {
         </div>
       )}
 
+      {/* Mobile Dimmed Backdrop to Highlight Chatbot */}
+      {isOpen && (
+        <div
+          className="chatbot-mobile-backdrop"
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Chatbot Window */}
       {isOpen && (
         <section
           id="wancor-faq-chat-window"
-          className="chatbot-window"
+          className="chatbot-window chatbot-window-highlighted"
           role="dialog"
           aria-labelledby="chatbot-header-title"
         >
@@ -382,9 +391,12 @@ export default function FaqChatbot() {
                 <span className="chatbot-online-indicator" aria-hidden="true" />
               </div>
               <div>
-                <h3 id="chatbot-header-title" className="chatbot-title">
-                  WANCOR Assistant
-                </h3>
+                <div className="chatbot-title-row">
+                  <h3 id="chatbot-header-title" className="chatbot-title">
+                    WANCOR Assistant
+                  </h3>
+                  <span className="chatbot-highlight-badge">✦ Active</span>
+                </div>
                 <p className="chatbot-status">Juan&apos;s Portfolio AI &amp; FAQ • Online</p>
               </div>
             </div>

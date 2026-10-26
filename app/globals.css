@@ -19778,3 +19778,197 @@ html.dark .cert-lightbox-desc {
   justify-content: center;
   gap: 6px;
 }
+
+/* ==========================================================================
+   ENHANCED MOBILE RESPONSIVENESS & HIGHLIGHTED CHATBOX
+   ========================================================================== */
+
+/* 1. Highlighted Chatbot Window & Backdrop */
+.chatbot-window-highlighted {
+  border: 1.5px solid rgba(253, 79, 60, 0.4) !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6), 0 0 28px rgba(253, 79, 60, 0.22) !important;
+}
+
+[data-theme="light"] .chatbot-window-highlighted {
+  border-color: rgba(253, 79, 60, 0.45) !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.16), 0 0 24px rgba(253, 79, 60, 0.2) !important;
+}
+
+.chatbot-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chatbot-highlight-badge {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--accent);
+  background: rgba(253, 79, 60, 0.15);
+  border: 1px solid rgba(253, 79, 60, 0.4);
+  padding: 2px 7px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: inline-flex;
+  align-items: center;
+  animation: pulseHighlight 2s infinite ease-in-out;
+}
+
+@keyframes pulseHighlight {
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+
+/* 2. Mobile Strict Rules (<= 768px): Hide floating side arrows so they NEVER overlap cards */
+@media (max-width: 768px) {
+  .skills-side-arrow,
+  .cert-side-arrow,
+  .projects-slider-arrow {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .skills-projects-carousel-wrapper,
+  .cert-carousel-wrapper {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Chatbot Mobile Overlay & Highlight */
+  .chatbot-mobile-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 9, 8, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 9998;
+    animation: backdropFadeIn 0.25s ease-out;
+  }
+
+  [data-theme="light"] .chatbot-mobile-backdrop {
+    background: rgba(18, 16, 14, 0.55);
+  }
+
+  .chatbot-window {
+    position: fixed !important;
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    width: calc(100vw - 24px) !important;
+    height: min(600px, calc(100dvh - 28px)) !important;
+    max-height: calc(100dvh - 28px) !important;
+    border-radius: 22px !important;
+    z-index: 10001 !important;
+    border: 2px solid var(--accent) !important;
+    box-shadow: 0 0 35px rgba(253, 79, 60, 0.4), 0 20px 60px rgba(0, 0, 0, 0.85) !important;
+    animation: chatbotMobilePop 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  @keyframes chatbotMobilePop {
+    from { opacity: 0; transform: translateY(24px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .chatbot-action-icon {
+    width: 36px !important;
+    height: 36px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .chatbot-input-field {
+    font-size: 16px !important; /* Prevents auto-zoom on iOS */
+  }
+
+  /* Section 03 Cards on Mobile: Full readable card per snap */
+  .skills-timeline-column {
+    flex: 0 0 calc(100vw - 36px) !important;
+    width: calc(100vw - 36px) !important;
+    max-width: calc(100vw - 36px) !important;
+    scroll-snap-align: center !important;
+  }
+
+  .skills-timeline-card {
+    padding: 18px 16px !important;
+  }
+
+  .skills-scroll-card-desc {
+    font-size: 0.88rem !important;
+    line-height: 1.55 !important;
+    -webkit-line-clamp: 4 !important;
+  }
+
+  /* Section 02 Capability Cards on Mobile */
+  .capabilities-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .capability-card.capability-card-colonized {
+    min-height: 240px !important;
+    border-radius: 18px !important;
+  }
+
+  .capability-content-layer {
+    padding: 20px 18px !important;
+  }
+
+  .capability-card.capability-card-colonized h3 {
+    font-size: 1.22rem !important;
+  }
+
+  /* Topbar on Mobile */
+  .topbar {
+    padding: 10px 14px !important;
+  }
+
+  .brand-logo-img {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .brand-name {
+    font-size: 0.95rem !important;
+  }
+
+  .primary-nav {
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 4px !important;
+    padding: 4px 6px !important;
+    max-width: calc(100vw - 120px) !important;
+  }
+
+  .primary-nav::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .primary-nav a {
+    font-size: 0.80rem !important;
+    padding: 6px 9px !important;
+    white-space: nowrap !important;
+  }
+
+  /* Contact page adjustments for mobile */
+  .contact-security-badge-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+  }
+
+  .styled-input,
+  .styled-textarea {
+    font-size: 16px !important; /* Prevents auto-zoom on mobile browsers */
+  }
+
+  /* Headings size scaling on mobile */
+  .editorial-title {
+    font-size: clamp(1.75rem, 6.5vw, 2.4rem) !important;
+    line-height: 1.2 !important;
+  }
+}
