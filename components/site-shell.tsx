@@ -200,10 +200,10 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
           <div className="brand-block">
             <Link className="brand-link" href="/" aria-label="Juan Domanico Militante Home">
               <Image
-                src="/logo-of-me.png"
-                alt="Juan Domanico Militante Logo"
-                width={48}
-                height={48}
+                src="/tab-logo.png"
+                alt="WANCOR Logo"
+                width={56}
+                height={56}
                 className="brand-logo-img"
                 priority
               />
@@ -247,10 +247,10 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
             <div className="mega-footer-col brand-col">
               <Link href="/" className="mega-footer-logo-link">
                 <Image
-                  src="/logo-of-me.png"
-                  alt="Logo"
-                  width={34}
-                  height={34}
+                  src="/tab-logo.png"
+                  alt="WANCOR Logo"
+                  width={38}
+                  height={38}
                   className="mega-footer-logo-img"
                 />
                 <span className="mega-footer-logo">Huwananan</span>
@@ -293,7 +293,11 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
                   </a>
                 </li>
                 <li>
-                  <a href="mailto:militantejuanenricodomanico@gmail.com">
+                  <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=militantejuanenricodomanico@gmail.com&su=%5BWANCOR%5D%20Project%20Inquiry%20%2F%20Collaboration&body=Hello%20Juan%20%28WANCOR%29%2C%0A%0AI%20would%20like%20to%20discuss%20a%20project%20%2F%20opportunity%20with%20WANCOR%3A%0A%0A%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%0APROJECT%20SPECIFICATIONS%3A%0A%E2%80%A2%20Project%20Type%3A%20%5BWeb%20Development%20%2F%20Mobile%20App%20%2F%20Other%5D%0A%E2%80%A2%20Target%20Timeline%3A%20%5Be.g.%202-4%20weeks%20%2F%20Flexible%5D%0A%E2%80%A2%20Overview%20%26%20Scope%3A%20%0A%0ACLIENT%20DETAILS%3A%0A%E2%80%A2%20Name%3A%20%0A%E2%80%A2%20Company%20%2F%20Organization%3A%20%0A%E2%80%A2%20Phone%20%2F%20WhatsApp%3A%20%0A%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%0ASent%20via%20WANCOR%20Portfolio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Email ↗
                   </a>
                 </li>

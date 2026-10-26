@@ -108,8 +108,10 @@ export default function EditorialContactBanner({ activePage }: { activePage: Pag
           <li>
             <a
               className="editorial-contact-link"
-              href="mailto:militantejuanenricodomanico@gmail.com"
-              aria-label="Send email to Juan Enrico Militante"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=militantejuanenricodomanico@gmail.com&su=%5BWANCOR%5D%20Project%20Inquiry%20%2F%20Collaboration&body=Hello%20Juan%20%28WANCOR%29%2C%0A%0AI%20would%20like%20to%20discuss%20a%20project%20%2F%20opportunity%20with%20WANCOR%3A%0A%0A%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%0APROJECT%20SPECIFICATIONS%3A%0A%E2%80%A2%20Project%20Type%3A%20%5BWeb%20Development%20%2F%20Mobile%20App%20%2F%20Other%5D%0A%E2%80%A2%20Target%20Timeline%3A%20%5Be.g.%202-4%20weeks%20%2F%20Flexible%5D%0A%E2%80%A2%20Overview%20%26%20Scope%3A%20%0A%0ACLIENT%20DETAILS%3A%0A%E2%80%A2%20Name%3A%20%0A%E2%80%A2%20Company%20%2F%20Organization%3A%20%0A%E2%80%A2%20Phone%20%2F%20WhatsApp%3A%20%0A%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%E2%94%81%0ASent%20via%20WANCOR%20Portfolio"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Send email to Juan Enrico Militante (WANCOR)"
             >
               <span className="editorial-index-num">01</span>
               <span className="editorial-index-ico" aria-hidden="true">

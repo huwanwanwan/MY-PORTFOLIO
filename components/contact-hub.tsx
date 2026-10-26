@@ -15,6 +15,48 @@ export default function ContactHub() {
 
   const emailAddress = "militantejuanenricodomanico@gmail.com";
 
+  const buildTemplateBody = (name?: string, email?: string, phone?: string, subject?: string, message?: string) => {
+    return [
+      "Hello Juan (WANCOR),",
+      "",
+      "I would like to discuss a project / inquiry with WANCOR:",
+      "",
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "PROJECT / INQUIRY DETAILS:",
+      `• Inquiry Subject: ${subject?.trim() || "[Web Development / Mobile App / Consultation]"}`,
+      "• Target Timeline: [e.g. 2-4 weeks / Flexible]",
+      "• Approximate Scope / Goals:",
+      `${message?.trim() || "[Please outline what you would like to build or discuss]"}`,
+      "",
+      "CLIENT / SENDER INFORMATION:",
+      `• Full Name: ${name?.trim() || "[Your Name]"}`,
+      `• Email Address: ${email?.trim() || "[Your Email]"}`,
+      `• Contact Phone: ${phone?.trim() || "[Your Phone / WhatsApp]"}`,
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "Dispatched via WANCOR Portfolio Contact Hub (Wan Company)",
+    ].join("\n");
+  };
+
+  const getGmailComposeUrl = (name?: string, email?: string, phone?: string, subject?: string, message?: string) => {
+    const su = encodeURIComponent(
+      subject?.trim()
+        ? `[WANCOR] ${subject.trim()} - from ${name?.trim() || "Client"}`
+        : "[WANCOR] Project Inquiry / Collaboration"
+    );
+    const body = encodeURIComponent(buildTemplateBody(name, email, phone, subject, message));
+    return `https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}&su=${su}&body=${body}`;
+  };
+
+  const getMailtoUrl = (name?: string, email?: string, phone?: string, subject?: string, message?: string) => {
+    const su = encodeURIComponent(
+      subject?.trim()
+        ? `[WANCOR] ${subject.trim()} - from ${name?.trim() || "Client"}`
+        : "[WANCOR] Project Inquiry / Collaboration"
+    );
+    const body = encodeURIComponent(buildTemplateBody(name, email, phone, subject, message));
+    return `mailto:${emailAddress}?subject=${su}&body=${body}`;
+  };
+
   const handleCopyEmail = async () => {
     try {
       await navigator.clipboard.writeText(emailAddress);
@@ -31,7 +73,7 @@ export default function ContactHub() {
     setFormStatus("submitting");
 
     try {
-      // Send directly to militantejuanenricodomanico@gmail.com via FormSubmit AJAX endpoint
+      // Send directly to militantejuanenricodomanico@gmail.com via FormSubmit AJAX endpoint with WANCOR sender branding
       const response = await fetch("https://formsubmit.co/ajax/militantejuanenricodomanico@gmail.com", {
         method: "POST",
         headers: {
@@ -39,15 +81,20 @@ export default function ContactHub() {
           Accept: "application/json",
         },
         body: JSON.stringify({
+          _sender_name: "WANCOR",
+          _replyto: formState.email,
           _subject: formState.subject
-            ? `[Portfolio Contact] ${formState.subject} - from ${formState.name}`
-            : `New Portfolio Message from ${formState.name}`,
-          name: formState.name,
-          email: formState.email,
-          phone: formState.phone || "Not provided",
-          subject: formState.subject || "General Inquiry",
-          message: formState.message,
+            ? `[WANCOR] ${formState.subject} - from ${formState.name}`
+            : `[WANCOR] Project Inquiry from ${formState.name}`,
           _template: "table",
+          _captcha: "false",
+          "Company / Brand": "WANCOR (Wan Company)",
+          "Sender Name": formState.name,
+          "Sender Email": formState.email,
+          "Contact Phone": formState.phone || "Not provided",
+          "Inquiry Subject": formState.subject || "General Project Discussion",
+          "Message Content": formState.message,
+          "Dispatched From": "WANCOR Portfolio Contact Hub",
         }),
       });
 
@@ -58,26 +105,18 @@ export default function ContactHub() {
         throw new Error("Form submission error");
       }
     } catch {
-      // Fallback: open user's mail client directly with all prefilled details
+      // Fallback: open user's Gmail compose directly with pre-templated details
       setFormStatus("error");
-      const mailSubject = encodeURIComponent(
-        formState.subject
-          ? `[Portfolio] ${formState.subject} - from ${formState.name}`
-          : `Portfolio Inquiry from ${formState.name || "Visitor"}`
+      const fallbackUrl = getGmailComposeUrl(
+        formState.name,
+        formState.email,
+        formState.phone,
+        formState.subject,
+        formState.message
       );
-      const bodyContent = `Hi Juan,
-
-${formState.message}
-
---
-Sender Details:
-Name: ${formState.name}
-Email: ${formState.email}
-Phone: ${formState.phone || "Not provided"}`;
-
-      window.location.href = `mailto:${emailAddress}?subject=${mailSubject}&body=${encodeURIComponent(
-        bodyContent
-      )}`;
+      if (typeof window !== "undefined") {
+        window.open(fallbackUrl, "_blank");
+      }
     }
   };
 
@@ -116,23 +155,37 @@ Phone: ${formState.phone || "Not provided"}`;
               </svg>
             </div>
             <div className="channel-info">
-              <span className="channel-label">Direct Email</span>
+              <span className="channel-label">Direct Email (WANCOR)</span>
               <a
-                href={`mailto:${emailAddress}`}
+                href={getGmailComposeUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="channel-value email-value"
-                title="Send an email via Gmail"
+                title="Open formatted request template in Gmail"
               >
                 {emailAddress}
               </a>
             </div>
             <div className="channel-actions">
               <a
-                href={`mailto:${emailAddress}`}
+                href={getGmailComposeUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="channel-action-btn email-send-btn"
-                title="Open Gmail to email me"
+                title="Open pre-formatted template in Gmail"
               >
-                <span>Email me</span>
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+                  <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.272H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                </svg>
+                <span>Open in Gmail</span>
                 <span className="btn-arrow" aria-hidden="true">↗</span>
+              </a>
+              <a
+                href={getMailtoUrl()}
+                className="channel-action-btn mail-client-btn"
+                title="Open in default mail client with template"
+              >
+                <span>Mail App</span>
               </a>
               <button
                 type="button"
@@ -211,14 +264,14 @@ Phone: ${formState.phone || "Not provided"}`;
         <div className="contact-main-card">
           <div className="card-top-decoration" aria-hidden="true">
             <span className="card-corner-line" />
-            <span className="card-badge">DIRECT MESSAGE DISPATCH</span>
+            <span className="card-badge">DIRECT INQUIRY DISPATCH (WANCOR)</span>
             <span className="card-corner-line" />
           </div>
 
           <div className="card-intro-text">
             <h3>Send a Message</h3>
             <p>
-              Fill out this form and click send—it prepares a clean email in your default mail app ready to dispatch straight to my Gmail inbox.
+              Send directly to my Gmail inbox via WANCOR or open your formatted template immediately in Gmail compose.
             </p>
           </div>
 
@@ -309,13 +362,13 @@ Phone: ${formState.phone || "Not provided"}`;
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20 6L9 17l-5-5" />
                 </svg>
-                <span>Thank you! Your message was sent directly to my Gmail inbox. I will reply soon.</span>
+                <span>Thank you! Your message was sent directly to my Gmail inbox via WANCOR. I will reply soon.</span>
               </div>
             )}
 
             {formStatus === "error" && (
               <div className="contact-status-banner info">
-                <span>Opening your email app to send directly to militantejuanenricodomanico@gmail.com...</span>
+                <span>Opening your templated inquiry directly in Gmail compose...</span>
               </div>
             )}
 
@@ -324,16 +377,38 @@ Phone: ${formState.phone || "Not provided"}`;
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
-                <span>Directly sends to militantejuanenricodomanico@gmail.com</span>
+                <span>Directly sends to militantejuanenricodomanico@gmail.com via WANCOR</span>
               </div>
-              <button
-                type="submit"
-                className="submit-dispatch-btn"
-                disabled={formStatus === "submitting"}
-              >
-                <span>{formStatus === "submitting" ? "Sending Message..." : "Send Message"}</span>
-                <span className="dispatch-arrow" aria-hidden="true">↗</span>
-              </button>
+
+              <div className="form-btn-group">
+                <a
+                  href={getGmailComposeUrl(
+                    formState.name,
+                    formState.email,
+                    formState.phone,
+                    formState.subject,
+                    formState.message
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="open-gmail-form-btn"
+                  title="Open pre-formatted template in Gmail compose"
+                >
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+                    <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.272H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                  </svg>
+                  <span>Open in Gmail</span>
+                </a>
+
+                <button
+                  type="submit"
+                  className="submit-dispatch-btn"
+                  disabled={formStatus === "submitting"}
+                >
+                  <span>{formStatus === "submitting" ? "Sending via WANCOR..." : "Send Message"}</span>
+                  <span className="dispatch-arrow" aria-hidden="true">↗</span>
+                </button>
+              </div>
             </div>
           </form>
         </div>
