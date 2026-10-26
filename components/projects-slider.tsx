@@ -176,9 +176,9 @@ export default function ProjectsSlider() {
             INTERACTIVE PROJECT CAROUSEL
           </p>
           <h2 className="editorial-title">
-            Work that ships,
+            Applications &amp; experiments,
             <br />
-            <span className="text-muted">and works.</span>
+            <span className="text-muted">built across college and self-study.</span>
           </h2>
           <p className="cert-gallery-subtitle">
             Browse video demos, stack, and roles across every college project. Use the arrows to explore.

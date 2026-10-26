@@ -181,9 +181,9 @@ export function AboutSection({
               ABOUT ME · PHILIPPINES
             </p>
             <h2 id="about-heading" className="editorial-title">
-              Building digital solutions,
+              Engineering web &amp; mobile solutions,
               <br />
-              <span className="text-muted">with purpose and craft.</span>
+              <span className="text-muted">focused on usability and purpose.</span>
             </h2>
             <p className="home-about-desc">
               I&apos;m <strong className="editorial-highlight">Juan Domanico Militante (Ikoy)</strong>, a Web and Mobile Developer from Bulacan, Philippines. From building <strong className="editorial-highlight">SIGLA</strong>—our offline-first mobile sign language translator capstone—to crafting POS systems, IoT hardware, and Unity games, I love turning ideas into clean, efficient, and user-friendly experiences.
@@ -218,9 +218,9 @@ export function AboutSection({
               ABOUT ME · BULACAN, PHILIPPINES
             </p>
             <h1 id="about-heading" className="editorial-title">
-              The whole story,
+              My story and path,
               <br />
-              <span className="text-muted">told properly.</span>
+              <span className="text-muted">as an aspiring software developer.</span>
             </h1>
             <p className="about-lead">
               I&apos;m <strong className="editorial-highlight">Juan Domanico Militante (known as Ikoy)</strong>—a Web &amp; Mobile
@@ -269,12 +269,12 @@ export function AboutSection({
         <div className="content-section-heading editorial-heading">
           <p className="editorial-eyebrow">
             <span className="editorial-eyebrow-dot" aria-hidden="true" />
-            01 — HOW I LIKE TO BUILD
+            01 — MY DEVELOPMENT PRINCIPLES
           </p>
           <h2 id="about-approach-heading" className="editorial-title">
-            Thoughtful work,
+            How I approach every build,
             <br />
-            <span className="text-muted">useful results.</span>
+            <span className="text-muted">practicality, clarity, and growth.</span>
           </h2>
           <p>
             I like making digital experiences <strong className="editorial-highlight">clear, approachable, and purposeful</strong>.
@@ -326,12 +326,12 @@ export function AboutSection({
         <div className="content-section-heading editorial-heading">
           <p className="editorial-eyebrow">
             <span className="editorial-eyebrow-dot" aria-hidden="true" />
-            02 — OUTSIDE DEVELOPMENT
+            02 — OUTSIDE THE CODE EDITOR
           </p>
           <h2 id="about-life-heading" className="editorial-title">
-            Life beyond
+            Life and interests,
             <br />
-            <span className="text-muted">the screen.</span>
+            <span className="text-muted">outside daily development.</span>
           </h2>
           <p>
             {projectPlaceholder
@@ -557,12 +557,12 @@ export function ProjectsSection({
       <div className="content-section-heading editorial-heading">
         <p className="editorial-eyebrow">
           <span className="editorial-eyebrow-dot" aria-hidden="true" />
-          SELECTED WORK &amp; CASE STUDIES
+          SELECTED ACADEMIC &amp; PERSONAL WORK
         </p>
         <h1 id="projects-heading" className="editorial-title">
-          Work that ships,
+          Featured project portfolio,
           <br />
-          <span className="text-muted">and works.</span>
+          <span className="text-muted">from concepts to practical applications.</span>
         </h1>
         <p>
           Ideas and systems I&apos;ve built across <strong className="editorial-highlight">Mobile &amp; AR</strong>, <strong className="editorial-highlight">Web &amp; Systems</strong>, Game Development, and IoT hardware.
@@ -600,9 +600,9 @@ export function SkillsSection() {
           TECHNICAL TOOLKIT &amp; ARCHITECTURE
         </p>
         <h1 id="skills-heading" className="editorial-title">
-          Tools I use to
+          Technologies I build with,
           <br />
-          <span className="text-muted">ship great products.</span>
+          <span className="text-muted">tested through hands-on projects.</span>
         </h1>
         <p>
           The languages, frameworks, platforms, and tools I&apos;ve explored through my projects and studies. Select any technology below to see which projects use it in their stack.
@@ -623,12 +623,12 @@ export function ExperienceSection() {
       <div className="content-section-heading editorial-heading">
         <p className="editorial-eyebrow">
           <span className="editorial-eyebrow-dot" aria-hidden="true" />
-          TRACK RECORD &amp; JOURNEY
+          EDUCATION &amp; MILESTONES
         </p>
         <h1 id="experience-heading" className="editorial-title">
-          Where I&apos;ve built
+          My development journey,
           <br />
-          <span className="text-muted">and shipped.</span>
+          <span className="text-muted">education, growth, and milestones.</span>
         </h1>
         <p>Projects, systems, and academic milestones from my development journey.</p>
       </div>

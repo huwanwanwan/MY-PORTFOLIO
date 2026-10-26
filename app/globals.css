@@ -8534,3 +8534,325 @@ html.dark .cert-lightbox-desc {
     transform-origin: center center;
   }
 }
+
+
+/* ==========================================================================
+   CAPABILITY WATERMARK ART (Image 3)
+   Minimalist transparent vector artwork visible in both light & dark mode
+   ========================================================================== */
+
+.capability-card {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.capability-bg-watermark {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 120px;
+  height: 120px;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 350ms ease, transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .capability-bg-watermark {
+  color: var(--accent);
+  opacity: 0.12;
+}
+
+[data-theme="dark"] .capability-bg-watermark {
+  color: var(--accent);
+  opacity: 0.20;
+}
+
+.capability-card:hover .capability-bg-watermark {
+  transform: scale(1.08) rotate(2deg);
+}
+
+[data-theme="light"] .capability-card:hover .capability-bg-watermark {
+  opacity: 0.20;
+}
+
+[data-theme="dark"] .capability-card:hover .capability-bg-watermark {
+  opacity: 0.30;
+}
+
+.capability-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   HORIZONTAL TIMELINE PROJECT GALLERY CAROUSEL (Image 1 & Image 2)
+   Horizontal continuous line with glowing nodes along the top,
+   and clean structured card below with small project picture.
+   ========================================================================== */
+
+.skills-projects-horizontal-scroll {
+  display: flex !important;
+  gap: 22px !important;
+  overflow-x: auto !important;
+  scroll-behavior: smooth !important;
+  scroll-snap-type: x mandatory !important;
+  padding: 12px 6px 28px 6px !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  position: relative !important;
+}
+
+.skills-projects-horizontal-scroll::-webkit-scrollbar {
+  display: none !important;
+}
+
+.skills-timeline-column {
+  flex: 0 0 clamp(320px, 32vw, 400px) !important;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+
+/* Horizontal Timeline Track: Line and Dot along the top of each card */
+.skills-timeline-node-track {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  height: 20px;
+}
+
+.skills-timeline-line-before,
+.skills-timeline-line-after {
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  transition: background 300ms ease;
+}
+
+[data-theme="light"] .skills-timeline-line-before,
+[data-theme="light"] .skills-timeline-line-after {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.skills-timeline-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms ease;
+}
+
+.skills-timeline-dot-inner {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.skills-timeline-column:hover .skills-timeline-dot {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+.skills-timeline-column:hover .skills-timeline-line-before,
+.skills-timeline-column:hover .skills-timeline-line-after {
+  background: var(--accent);
+}
+
+/* Timeline Card */
+.skills-timeline-card {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 20px 22px !important;
+  border-radius: 18px !important;
+  border: 1px solid var(--card-border) !important;
+  background: var(--card-surface) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08) !important;
+  transition: border-color 300ms ease, box-shadow 300ms ease, transform 300ms ease !important;
+}
+
+.skills-timeline-card:hover {
+  border-color: var(--accent) !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.28) !important;
+}
+
+/* Card Header: Small Project Picture on Left, Title/Metadata on Right */
+.skills-timeline-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.skills-timeline-thumb-box {
+  width: 58px;
+  height: 58px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid var(--card-border);
+  background: #0d0f12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.skills-timeline-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 350ms ease;
+}
+
+.skills-timeline-card:hover .skills-timeline-thumb-img {
+  transform: scale(1.08);
+}
+
+.skills-timeline-thumb-fallback {
+  font-family: var(--font-display, monospace);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.skills-timeline-header-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.skills-timeline-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3px;
+}
+
+.skills-timeline-num {
+  font-family: var(--font-display, monospace);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.skills-scroll-card-title {
+  font-size: 1.12rem !important;
+  font-weight: 700 !important;
+  line-height: 1.25 !important;
+  margin-bottom: 2px !important;
+  color: var(--ink-strong) !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.skills-scroll-card-role {
+  font-size: 0.82rem !important;
+  color: var(--muted) !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.skills-scroll-card-desc {
+  font-size: 0.90rem !important;
+  line-height: 1.5 !important;
+  color: var(--muted) !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 14px !important;
+}
+
+.skills-scroll-card-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+  margin-bottom: 14px;
+}
+
+.skills-scroll-card-footer {
+  border-top: 1px solid var(--card-border);
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.skills-scroll-card-link {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: transform 200ms ease, color 200ms ease;
+}
+
+.skills-scroll-card-link:hover {
+  transform: translateX(4px);
+}
+
+/* Floating carousel side navigation arrows (clean, prominent, non-overlapping) */
+.skills-projects-carousel-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.skills-side-arrow {
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--card-surface) !important;
+  border: 1px solid var(--card-border) !important;
+  color: var(--ink-strong) !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: background 250ms ease, color 250ms ease, transform 200ms ease;
+}
+
+.skills-side-arrow:hover {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.skills-side-arrow-left {
+  left: -14px;
+}
+
+.skills-side-arrow-right {
+  right: -14px;
+}
+
+@media (max-width: 768px) {
+  .skills-timeline-column {
+    flex: 0 0 290px !important;
+  }
+  .skills-side-arrow {
+    display: none !important;
+  }
+}

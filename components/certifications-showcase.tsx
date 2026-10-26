@@ -102,12 +102,12 @@ export default function CertificationsShowcase() {
         <div className="cert-gallery-intro">
           <p className="editorial-eyebrow">
             <span className="editorial-eyebrow-dot" aria-hidden="true" />
-            CREDENTIALS &amp; HONORS
+            VERIFIED CREDENTIALS &amp; SEMINARS
           </p>
           <h2 className="editorial-title">
-            Recognition along
+            Certificates &amp; recognitions,
             <br />
-            <span className="text-muted">the way.</span>
+            <span className="text-muted">earned through learning and competing.</span>
           </h2>
           <p className="cert-gallery-subtitle">
             Browse official certificates, technical seminars, and verified academic competition entries.

@@ -701,20 +701,38 @@ export default function SkillsShowcase() {
         <div className="editorial-heading" data-scroll-reveal>
           <p className="editorial-eyebrow">
             <span className="editorial-eyebrow-dot" aria-hidden="true" />
-            02 — WHAT I BRING TO TEAMS
+            02 — CORE TECHNICAL STRENGTHS
           </p>
           <h2 id="capabilities-heading" className="editorial-title">
-            Core capabilities,
+            Key areas of focus,
             <br />
-            <span className="text-muted">from concept to code.</span>
+            <span className="text-muted">from interface design to backend logic.</span>
           </h2>
           <p>
-            Hands-on disciplines grounded in <strong className="editorial-highlight">offline-first mobile architecture</strong>, responsive full-stack systems, and intuitive UI design.
+            Disciplines developed through <strong className="editorial-highlight">offline-first mobile architecture</strong>, full-stack web platforms, and interactive engineering.
           </p>
         </div>
 
         <div className="capabilities-cards-grid">
+          {/* Card 01: Web & System Development */}
           <article className="capability-card scroll-reveal" data-scroll-reveal data-reveal-side="left">
+            <div className="capability-bg-watermark" aria-hidden="true">
+              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="8" y="14" width="104" height="74" rx="8" />
+                <line x1="8" y1="32" x2="112" y2="32" />
+                <circle cx="20" cy="23" r="2.5" fill="currentColor" />
+                <circle cx="28" cy="23" r="2.5" fill="currentColor" />
+                <circle cx="36" cy="23" r="2.5" fill="currentColor" />
+                <path d="M26 52l-8 7 8 7" />
+                <path d="M46 52l8 7-8 7" />
+                <line x1="39" y1="48" x2="33" y2="72" />
+                <rect x="62" y="44" width="40" height="12" rx="3" strokeDasharray="2 2" />
+                <rect x="62" y="62" width="40" height="16" rx="3" />
+                <ellipse cx="88" cy="94" rx="20" ry="6" />
+                <path d="M68 94v12c0 3.3 9 6 20 6s20-2.7 20-6V94" />
+                <path d="M68 100c0 3.3 9 6 20 6s20-2.7 20-6" />
+              </svg>
+            </div>
             <span className="capability-num">01</span>
             <div className="capability-icon-wrap">
               <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2">
@@ -729,7 +747,21 @@ export default function SkillsShowcase() {
             </p>
           </article>
 
+          {/* Card 02: Mobile & Accessibility Solutions */}
           <article className="capability-card scroll-reveal" data-scroll-reveal data-reveal-side="right">
+            <div className="capability-bg-watermark" aria-hidden="true">
+              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="34" y="10" width="52" height="96" rx="12" />
+                <line x1="50" y1="18" x2="70" y2="18" />
+                <circle cx="60" cy="96" r="3.5" />
+                <path d="M48 42c0-4 3-7 6-7s5 3 5 8v16" />
+                <path d="M59 45c0-3 2.5-5 5-5s5 2 5 7v14" />
+                <path d="M69 49c0-3 2-4 4.5-4s4.5 2 4.5 6v12c0 9-7 14-16 14-6 0-11-4-13-8l-5-10c-1.5-3 1-6 4-5l6 4" />
+                <path d="M96 36c6 7 9 16 9 24s-3 17-9 24" strokeDasharray="3 3" />
+                <path d="M106 28c9 9 14 20 14 32s-5 23-14 32" opacity="0.6" />
+                <path d="M24 44c-4 5-6 11-6 16s2 11 6 16" strokeDasharray="2 2" />
+              </svg>
+            </div>
             <span className="capability-num">02</span>
             <div className="capability-icon-wrap">
               <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2">
@@ -743,7 +775,23 @@ export default function SkillsShowcase() {
             </p>
           </article>
 
+          {/* Card 03: Game Development & AR */}
           <article className="capability-card scroll-reveal" data-scroll-reveal data-reveal-side="left">
+            <div className="capability-bg-watermark" aria-hidden="true">
+              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="14" y="44" width="92" height="52" rx="26" />
+                <path d="M38 60v16M30 68h16" />
+                <circle cx="80" cy="62" r="3" fill="currentColor" />
+                <circle cx="90" cy="70" r="3" fill="currentColor" />
+                <circle cx="72" cy="70" r="3" fill="currentColor" />
+                <circle cx="82" cy="78" r="3" fill="currentColor" />
+                <path d="M60 12l26 15v30l-26 15-26-15V27L60 12z" strokeDasharray="3 2" />
+                <line x1="60" y1="12" x2="60" y2="42" />
+                <line x1="60" y1="42" x2="86" y2="27" />
+                <line x1="60" y1="42" x2="34" y2="27" />
+                <circle cx="60" cy="27" r="14" strokeDasharray="2 3" />
+              </svg>
+            </div>
             <span className="capability-num">03</span>
             <div className="capability-icon-wrap">
               <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2">
@@ -757,7 +805,24 @@ export default function SkillsShowcase() {
             </p>
           </article>
 
+          {/* Card 04: Hardware, IoT & Sensors */}
           <article className="capability-card scroll-reveal" data-scroll-reveal data-reveal-side="right">
+            <div className="capability-bg-watermark" aria-hidden="true">
+              <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="32" y="32" width="56" height="56" rx="8" />
+                <rect x="44" y="44" width="32" height="32" rx="4" fill="currentColor" fillOpacity="0.1" />
+                <path d="M42 16v16M52 16v16M68 16v16M78 16v16" />
+                <path d="M42 88v16M52 88v16M68 88v16M78 88v16" />
+                <path d="M16 42h16M16 52h16M16 68h16M16 78h16" />
+                <path d="M88 42h16M88 52h16M88 68h16M88 78h16" />
+                <circle cx="42" cy="14" r="2.5" fill="currentColor" />
+                <circle cx="78" cy="14" r="2.5" fill="currentColor" />
+                <circle cx="42" cy="106" r="2.5" fill="currentColor" />
+                <circle cx="78" cy="106" r="2.5" fill="currentColor" />
+                <path d="M96 22c8 8 12 18 12 28s-4 20-12 28" strokeDasharray="3 3" />
+                <path d="M106 14c11 11 16 24 16 36s-5 25-16 36" opacity="0.6" />
+              </svg>
+            </div>
             <span className="capability-num">04</span>
             <div className="capability-icon-wrap">
               <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2">
@@ -781,21 +846,21 @@ export default function SkillsShowcase() {
         </div>
       </section>
 
-      {/* ── Scrollable Projects Showcase Strip ── */}
+      {/* ── Scrollable Projects Showcase Strip with Horizontal Timeline & Dot on top ── */}
       <section className="skills-projects-scroll-section" aria-labelledby="projects-strip-heading" data-scroll-reveal>
         <div className="skills-projects-header" data-scroll-reveal>
           <div>
             <p className="editorial-eyebrow">
               <span className="editorial-eyebrow-dot" aria-hidden="true" />
-              03 — PROJECT GALLERY
+              03 — EXPLORE BY TECHNOLOGY
             </p>
             <h2 id="projects-strip-heading" className="editorial-title">
-              Built with purpose,
+              Projects built with these tools,
               <br />
-              <span className="text-muted">powered by these tools.</span>
+              <span className="text-muted">across four years of IT study.</span>
             </h2>
             <p>
-              Use the arrows to browse applications and experiments built with this tech stack.
+              Browse individual project summaries, roles, and technical stacks developed at Pambayang Dalubhasaan ng Marilao.
             </p>
           </div>
           <div className="skills-gallery-actions">
@@ -839,31 +904,81 @@ export default function SkillsShowcase() {
             tabIndex={0}
             aria-label="Projects gallery carousel"
           >
-            {projectsData.map((project, i) => (
-              <article key={project.id} className="skills-scroll-card scroll-reveal" data-scroll-reveal>
-                <div className="skills-scroll-card-header">
-                  <span className="skills-scroll-badge">{project.category}</span>
-                  <span className="skills-scroll-num">0{i + 1}</span>
+            {projectsData.map((project, i) => {
+              const displayNumber = String(i + 1).padStart(2, "0");
+              const thumbnailSrc =
+                project.images && project.images.length > 0 ? project.images[0] : null;
+
+              return (
+                <div key={project.id} className="skills-timeline-column">
+                  {/* Horizontal Timeline Connector & Dot at the top */}
+                  <div className="skills-timeline-node-track" aria-hidden="true">
+                    <span className="skills-timeline-line-before" />
+                    <div className="skills-timeline-dot">
+                      <span className="skills-timeline-dot-inner" />
+                    </div>
+                    <span className="skills-timeline-line-after" />
+                  </div>
+
+                  {/* Card designed like Image 2 */}
+                  <article
+                    className="skills-scroll-card skills-timeline-card scroll-reveal"
+                    data-scroll-reveal
+                  >
+                    {/* Top Row: Small Picture + Title & Subtitle */}
+                    <div className="skills-timeline-card-header">
+                      {/* Small Project Picture */}
+                      <div className="skills-timeline-thumb-box">
+                        {thumbnailSrc ? (
+                          <img
+                            src={thumbnailSrc}
+                            alt={`${project.title} preview`}
+                            className="skills-timeline-thumb-img"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="skills-timeline-thumb-fallback">
+                            <span>{displayNumber}</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Header Info next to picture */}
+                      <div className="skills-timeline-header-info">
+                        <div className="skills-timeline-badge-row">
+                          <span className="skills-scroll-badge">{project.category}</span>
+                          <span className="skills-timeline-num">{displayNumber}</span>
+                        </div>
+                        <h3 className="skills-scroll-card-title">{project.title}</h3>
+                        <p className="skills-scroll-card-role">{project.role}</p>
+                      </div>
+                    </div>
+
+                    {/* Middle: Description */}
+                    <p className="skills-scroll-card-desc">{project.paragraphs[0]}</p>
+
+                    {/* Tech Pills */}
+                    <div className="skills-scroll-card-tech">
+                      {project.tags.map((t) => (
+                        <span key={t} className="skills-scroll-tech-pill">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Bottom: Action Link */}
+                    <div className="skills-scroll-card-footer">
+                      <Link
+                        href={`/projects#project-${project.id}`}
+                        className="skills-scroll-card-link"
+                      >
+                        View project details <span aria-hidden="true">↗</span>
+                      </Link>
+                    </div>
+                  </article>
                 </div>
-                <h3 className="skills-scroll-card-title">{project.title}</h3>
-                <p className="skills-scroll-card-role">{project.role}</p>
-                <p className="skills-scroll-card-desc">
-                  {project.paragraphs[0]}
-                </p>
-                <div className="skills-scroll-card-tech">
-                  {project.tags.map((t) => (
-                    <span key={t} className="skills-scroll-tech-pill">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                <div className="skills-scroll-card-footer">
-                  <Link href={`/projects#project-${project.id}`} className="skills-scroll-card-link">
-                    Read full case study <span>→</span>
-                  </Link>
-                </div>
-              </article>
-            ))}
+              );
+            })}
           </div>
 
           <button

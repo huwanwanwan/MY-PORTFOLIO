@@ -95,9 +95,9 @@ Phone: ${formState.phone || "Not provided"}`;
           LET&apos;S CONNECT &amp; BUILD
         </p>
         <h1 id="contact-heading" className="editorial-title">
-          Let&apos;s build something
+          Let&apos;s start a conversation,
           <br />
-          <span className="contact-statement-outline">amazing</span> together.
+          <span className="contact-statement-outline">open for opportunities</span> &amp; projects.
         </h1>
         <p className="contact-subtitle">
           Have an exciting project, collaboration inquiry, or question? Feel free to reach out directly through any channel or send a message below.
