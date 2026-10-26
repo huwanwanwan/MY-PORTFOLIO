@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import EditorialContactBanner from "./editorial-contact-banner";
+import FaqChatbot from "./faq-chatbot";
 
 const themeChangeEvent = "portfolio-theme-change";
 
@@ -326,6 +327,9 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
             </button>
           </div>
         </footer>
+
+        {/* Floating Circle FAQ Chatbot on bottom-right */}
+        <FaqChatbot />
       </article>
     </main>
   );
