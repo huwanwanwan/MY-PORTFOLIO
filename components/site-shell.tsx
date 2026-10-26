@@ -234,7 +234,7 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
           <div className="topbar-actions">
             <button
               id="topbar-theme-toggle"
-              className="theme-toggle theme-toggle-spotlight"
+              className="theme-toggle"
               type="button"
               aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
               aria-pressed={darkMode}

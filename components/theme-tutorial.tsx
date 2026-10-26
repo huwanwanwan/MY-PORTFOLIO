@@ -37,8 +37,10 @@ export default function ThemeTutorial({ darkMode, onToggleTheme }: ThemeTutorial
 
   useEffect(() => {
     try {
+      const urlParams = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
+      const forceTutorial = urlParams?.has("tutorial") || urlParams?.has("theme");
       const completed = sessionStorage.getItem("wancor_theme_tutorial_done");
-      if (!completed) {
+      if (!completed || forceTutorial) {
         const timer = setTimeout(() => {
           setIsActive(true);
           setInitialMode(darkMode);
@@ -107,21 +109,28 @@ export default function ThemeTutorial({ darkMode, onToggleTheme }: ThemeTutorial
 
   if (!isActive) return null;
 
-  // Calculate dynamic card & arrow position based on measured targetRect
+  const safeTarget = targetRect || (typeof window !== "undefined" ? {
+    top: 14,
+    left: Math.max(16, window.innerWidth - 56),
+    width: 38,
+    height: 38,
+  } : null);
+
+  // Calculate dynamic card & arrow position based on measured safeTarget
   let cardStyle: React.CSSProperties | undefined = undefined;
   let arrowStyle: React.CSSProperties | undefined = undefined;
 
-  if (targetRect && typeof window !== "undefined") {
+  if (safeTarget && typeof window !== "undefined") {
     const winW = window.innerWidth;
-    const buttonCenterX = targetRect.left + targetRect.width / 2;
+    const buttonCenterX = safeTarget.left + safeTarget.width / 2;
     const buttonCenterFromRight = winW - buttonCenterX;
 
     // Position card right below the button
-    const cardTop = Math.round(targetRect.top + targetRect.height + 14);
+    const cardTop = Math.round(safeTarget.top + safeTarget.height + 14);
 
     if (winW > 600) {
       // Align card right edge comfortably near the button
-      const cardRight = Math.max(16, Math.min(winW - 420, Math.round(winW - (targetRect.left + targetRect.width) - 16)));
+      const cardRight = Math.max(16, Math.min(winW - 420, Math.round(winW - (safeTarget.left + safeTarget.width) - 16)));
       cardStyle = {
         position: "fixed",
         top: `${cardTop}px`,
@@ -159,21 +168,49 @@ export default function ThemeTutorial({ darkMode, onToggleTheme }: ThemeTutorial
       <div
         className="theme-spotlight-pulse"
         style={
-          targetRect
+          safeTarget
             ? {
                 position: "fixed",
-                top: `${Math.round(targetRect.top - 6)}px`,
-                left: `${Math.round(targetRect.left - 6)}px`,
-                width: `${Math.round(targetRect.width + 12)}px`,
-                height: `${Math.round(targetRect.height + 12)}px`,
+                top: `${Math.round(safeTarget.top - 7)}px`,
+                left: `${Math.round(safeTarget.left - 7)}px`,
+                width: `${Math.round(safeTarget.width + 14)}px`,
+                height: `${Math.round(safeTarget.height + 14)}px`,
                 right: "auto",
                 bottom: "auto",
                 margin: 0,
+                pointerEvents: "none",
+                zIndex: 10002,
               }
             : undefined
         }
         aria-hidden="true"
       />
+
+      {/* Prominently visible interactive Light / Dark Button positioned right inside the circle recommendation */}
+      <button
+        type="button"
+        id="spotlight-active-theme-btn"
+        className="spotlight-interactive-toggle-btn"
+        onClick={handleToggle}
+        aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+        title={darkMode ? "Click to switch to Light Mode" : "Click to switch to Dark Mode"}
+        style={
+          safeTarget
+            ? {
+                position: "fixed",
+                top: `${Math.round(safeTarget.top)}px`,
+                left: `${Math.round(safeTarget.left)}px`,
+                width: `${Math.round(safeTarget.width)}px`,
+                height: `${Math.round(safeTarget.height)}px`,
+                zIndex: 10004,
+              }
+            : undefined
+        }
+      >
+        <span aria-hidden="true" className="spotlight-theme-icon">
+          {darkMode ? "☀" : "☾"}
+        </span>
+      </button>
 
       {/* Floating Tutorial Card */}
       <div className="theme-tutorial-card" style={cardStyle}>
