@@ -176,12 +176,17 @@ export function AboutSection({
             data-scroll-reveal
             style={{ transitionDelay: "120ms" }}
           >
-            <span className="home-about-pill-badge">ABOUT ME</span>
-            <h2 id="about-heading" className="home-about-title">
-              I&apos;m passionate about creating digital solutions
+            <p className="editorial-eyebrow">
+              <span className="editorial-eyebrow-dot" aria-hidden="true" />
+              ABOUT ME · PHILIPPINES
+            </p>
+            <h2 id="about-heading" className="editorial-title">
+              Building digital solutions,
+              <br />
+              <span className="text-muted">with purpose and craft.</span>
             </h2>
             <p className="home-about-desc">
-              I&apos;m Juan Domanico Militante (Ikoy), a Web and Mobile Developer from Bulacan, Philippines. From building SIGLA—our offline-first mobile sign language translator capstone—to crafting POS systems, IoT hardware, and Unity games, I love turning ideas into clean, efficient, and user-friendly experiences.
+              I&apos;m <strong className="editorial-highlight">Juan Domanico Militante (Ikoy)</strong>, a Web and Mobile Developer from Bulacan, Philippines. From building <strong className="editorial-highlight">SIGLA</strong>—our offline-first mobile sign language translator capstone—to crafting POS systems, IoT hardware, and Unity games, I love turning ideas into clean, efficient, and user-friendly experiences.
             </p>
             <div className="home-about-action">
               <Link className="home-about-outline-btn" href="/about">
@@ -208,20 +213,23 @@ export function AboutSection({
       >
         <div className="about-hero-grid">
           <div className="about-hero-copy">
-            <p className="section-kicker">ABOUT ME · BULACAN, PHILIPPINES</p>
-            <h1 id="about-heading">
-              Designing with precision.
+            <p className="editorial-eyebrow">
+              <span className="editorial-eyebrow-dot" aria-hidden="true" />
+              ABOUT ME · BULACAN, PHILIPPINES
+            </p>
+            <h1 id="about-heading" className="editorial-title">
+              The whole story,
               <br />
-              Engineering with <em>impact.</em>
+              <span className="text-muted">told properly.</span>
             </h1>
             <p className="about-lead">
-              I&apos;m Juan Domanico Militante (known as Ikoy)—a Web &amp; Mobile
+              I&apos;m <strong className="editorial-highlight">Juan Domanico Militante (known as Ikoy)</strong>—a Web &amp; Mobile
               Developer dedicated to crafting responsive digital products,
               intuitive interfaces, and performant user experiences.
             </p>
             <p className="about-supporting-copy">
               From clean front-end architecture to offline-first engineering in
-              projects like SIGLA (a mobile sign language translator app), I build
+              projects like <strong className="editorial-highlight">SIGLA</strong> (a mobile sign language translator app), I build
               purposeful software that connects ideas with real-world accessibility.
             </p>
             <div className="intro-actions about-actions">
@@ -259,11 +267,17 @@ export function AboutSection({
         aria-labelledby="about-approach-heading"
       >
         <div className="content-section-heading editorial-heading">
-          <p className="section-kicker">01 — HOW I LIKE TO BUILD</p>
-          <h2 id="about-approach-heading">Thoughtful work, useful results.</h2>
+          <p className="editorial-eyebrow">
+            <span className="editorial-eyebrow-dot" aria-hidden="true" />
+            01 — HOW I LIKE TO BUILD
+          </p>
+          <h2 id="about-approach-heading" className="editorial-title">
+            Thoughtful work,
+            <br />
+            <span className="text-muted">useful results.</span>
+          </h2>
           <p>
-            I like making digital experiences clear, approachable, and
-            purposeful.
+            I like making digital experiences <strong className="editorial-highlight">clear, approachable, and purposeful</strong>.
           </p>
         </div>
         <div className="about-principles-grid">
@@ -310,8 +324,15 @@ export function AboutSection({
         aria-labelledby="about-life-heading"
       >
         <div className="content-section-heading editorial-heading">
-          <p className="section-kicker">02 — OUTSIDE DEVELOPMENT</p>
-          <h2 id="about-life-heading">Life beyond the screen.</h2>
+          <p className="editorial-eyebrow">
+            <span className="editorial-eyebrow-dot" aria-hidden="true" />
+            02 — OUTSIDE DEVELOPMENT
+          </p>
+          <h2 id="about-life-heading" className="editorial-title">
+            Life beyond
+            <br />
+            <span className="text-muted">the screen.</span>
+          </h2>
           <p>
             {projectPlaceholder
               ? "A little about who I am beyond the work I do."
@@ -534,10 +555,17 @@ export function ProjectsSection({
       aria-labelledby="projects-heading"
     >
       <div className="content-section-heading editorial-heading">
-        <p className="section-kicker">SELECTED WORK &amp; CASE STUDIES</p>
-        <h1 id="projects-heading">Projects</h1>
+        <p className="editorial-eyebrow">
+          <span className="editorial-eyebrow-dot" aria-hidden="true" />
+          SELECTED WORK &amp; CASE STUDIES
+        </p>
+        <h1 id="projects-heading" className="editorial-title">
+          Work that ships,
+          <br />
+          <span className="text-muted">and works.</span>
+        </h1>
         <p>
-          Ideas and systems I&apos;ve built across mobile applications, web systems, game development, and IoT hardware.
+          Ideas and systems I&apos;ve built across <strong className="editorial-highlight">Mobile &amp; AR</strong>, <strong className="editorial-highlight">Web &amp; Systems</strong>, Game Development, and IoT hardware.
         </p>
       </div>
       {slider ? (
@@ -567,8 +595,15 @@ export function SkillsSection() {
       aria-labelledby="skills-heading"
     >
       <div className="content-section-heading editorial-heading">
-        <p className="section-kicker">01 — TECHNICAL TOOLKIT</p>
-        <h1 id="skills-heading">Skills &amp; Technologies</h1>
+        <p className="editorial-eyebrow">
+          <span className="editorial-eyebrow-dot" aria-hidden="true" />
+          TECHNICAL TOOLKIT &amp; ARCHITECTURE
+        </p>
+        <h1 id="skills-heading" className="editorial-title">
+          Tools I use to
+          <br />
+          <span className="text-muted">ship great products.</span>
+        </h1>
         <p>
           The languages, frameworks, platforms, and tools I&apos;ve explored through my projects and studies. Select any technology below to see which projects use it in their stack.
         </p>
@@ -586,9 +621,16 @@ export function ExperienceSection() {
       aria-labelledby="experience-heading"
     >
       <div className="content-section-heading editorial-heading">
-        <p className="section-kicker">LEARNING THROUGH BUILDING</p>
-        <h1 id="experience-heading">Experience</h1>
-        <p>Projects, systems, and work milestones from my development journey.</p>
+        <p className="editorial-eyebrow">
+          <span className="editorial-eyebrow-dot" aria-hidden="true" />
+          TRACK RECORD &amp; JOURNEY
+        </p>
+        <h1 id="experience-heading" className="editorial-title">
+          Where I&apos;ve built
+          <br />
+          <span className="text-muted">and shipped.</span>
+        </h1>
+        <p>Projects, systems, and academic milestones from my development journey.</p>
       </div>
       <div className="experience-education-grid">
         <div className="journey-column">

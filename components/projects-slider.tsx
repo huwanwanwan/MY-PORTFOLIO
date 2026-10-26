@@ -171,8 +171,15 @@ export default function ProjectsSlider() {
       {/* ── Top Header Controls with Category Pills & Arrows (identical pattern to Certifications) ── */}
       <div className="cert-gallery-header projects-slider-header" data-scroll-reveal>
         <div className="cert-gallery-intro">
-          <p className="section-kicker">INTERACTIVE PROJECT CAROUSEL</p>
-          <h2 className="cert-gallery-title">Slide through all 14 projects</h2>
+          <p className="editorial-eyebrow">
+            <span className="editorial-eyebrow-dot" aria-hidden="true" />
+            INTERACTIVE PROJECT CAROUSEL
+          </p>
+          <h2 className="editorial-title">
+            Work that ships,
+            <br />
+            <span className="text-muted">and works.</span>
+          </h2>
           <p className="cert-gallery-subtitle">
             Browse video demos, stack, and roles across every college project. Use the arrows to explore.
           </p>

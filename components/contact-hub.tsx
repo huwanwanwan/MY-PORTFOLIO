@@ -90,8 +90,15 @@ Phone: ${formState.phone || "Not provided"}`;
     >
       {/* Centered Editorial Header */}
       <div className="contact-hero-header">
-        <p className="section-kicker">LET&apos;S CONNECT &amp; BUILD</p>
-        <h1 id="contact-heading" className="contact-hero-title">Get in Touch</h1>
+        <p className="editorial-eyebrow">
+          <span className="editorial-eyebrow-dot" aria-hidden="true" />
+          LET&apos;S CONNECT &amp; BUILD
+        </p>
+        <h1 id="contact-heading" className="editorial-title">
+          Let&apos;s build something
+          <br />
+          <span className="contact-statement-outline">amazing</span> together.
+        </h1>
         <p className="contact-subtitle">
           Have an exciting project, collaboration inquiry, or question? Feel free to reach out directly through any channel or send a message below.
         </p>

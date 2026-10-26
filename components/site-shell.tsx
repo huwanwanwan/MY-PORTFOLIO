@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import EditorialContactBanner from "./editorial-contact-banner";
 
 const themeChangeEvent = "portfolio-theme-change";
 
@@ -219,6 +220,8 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
         </header>
 
         <div className={`dashboard-content page-content ${isPageSwitching ? "page-transitioning" : "page-entered"}`}>{children}</div>
+
+        <EditorialContactBanner activePage={activePage} />
 
         <footer className="site-mega-footer">
           <div className="site-mega-footer-content">

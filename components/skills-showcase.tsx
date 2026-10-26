@@ -699,10 +699,17 @@ export default function SkillsShowcase() {
       {/* ── Capabilities Section with Cards & Explanations ── */}
       <section className="skills-capabilities-section" aria-labelledby="capabilities-heading" data-scroll-reveal>
         <div className="editorial-heading" data-scroll-reveal>
-          <p className="section-kicker">02 — WHAT I BRING TO TEAMS</p>
-          <h2 id="capabilities-heading">Core Capabilities</h2>
+          <p className="editorial-eyebrow">
+            <span className="editorial-eyebrow-dot" aria-hidden="true" />
+            02 — WHAT I BRING TO TEAMS
+          </p>
+          <h2 id="capabilities-heading" className="editorial-title">
+            Core capabilities,
+            <br />
+            <span className="text-muted">from concept to code.</span>
+          </h2>
           <p>
-            Hands-on disciplines grounded in real academic and collaborative software development.
+            Hands-on disciplines grounded in <strong className="editorial-highlight">offline-first mobile architecture</strong>, responsive full-stack systems, and intuitive UI design.
           </p>
         </div>
 
@@ -778,8 +785,15 @@ export default function SkillsShowcase() {
       <section className="skills-projects-scroll-section" aria-labelledby="projects-strip-heading" data-scroll-reveal>
         <div className="skills-projects-header" data-scroll-reveal>
           <div>
-            <p className="section-kicker">03 — PROJECT GALLERY</p>
-            <h2 id="projects-strip-heading">Projects Powered by These Tools</h2>
+            <p className="editorial-eyebrow">
+              <span className="editorial-eyebrow-dot" aria-hidden="true" />
+              03 — PROJECT GALLERY
+            </p>
+            <h2 id="projects-strip-heading" className="editorial-title">
+              Built with purpose,
+              <br />
+              <span className="text-muted">powered by these tools.</span>
+            </h2>
             <p>
               Use the arrows to browse applications and experiments built with this tech stack.
             </p>

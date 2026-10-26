@@ -100,10 +100,17 @@ export default function CertificationsShowcase() {
       {/* ── Top Header Row with Arrows ── */}
       <div className="cert-gallery-header" data-scroll-reveal>
         <div className="cert-gallery-intro">
-          <p className="section-kicker">04 — CERTIFICATION GALLERY</p>
-          <h2 className="cert-gallery-title">Verified Credentials &amp; Achievements</h2>
+          <p className="editorial-eyebrow">
+            <span className="editorial-eyebrow-dot" aria-hidden="true" />
+            CREDENTIALS &amp; HONORS
+          </p>
+          <h2 className="editorial-title">
+            Recognition along
+            <br />
+            <span className="text-muted">the way.</span>
+          </h2>
           <p className="cert-gallery-subtitle">
-            Use the arrows to browse official certificates, technical seminars, and competition entries.
+            Browse official certificates, technical seminars, and verified academic competition entries.
           </p>
         </div>
 
