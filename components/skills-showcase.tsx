@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { skills, categoryColors, type Skill } from "../data/skills-data";
 import { projectsData, type ProjectItem } from "../data/projects-data";
 
@@ -716,6 +717,16 @@ export default function SkillsShowcase() {
         <div className="capabilities-cards-grid">
           {/* Card 01: Web & System Development */}
           <article className="capability-card scroll-reveal" data-scroll-reveal data-reveal-side="left">
+            <div className="capability-image-container">
+              <Image
+                src="/v1.jpg"
+                alt="Web & System Development Showcase"
+                width={700}
+                height={420}
+                className="capability-card-image"
+              />
+              <div className="capability-image-vignette" />
+            </div>
             <div className="capability-bg-watermark" aria-hidden="true">
               <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="8" y="14" width="104" height="74" rx="8" />
@@ -749,6 +760,16 @@ export default function SkillsShowcase() {
 
           {/* Card 02: Mobile & Accessibility Solutions */}
           <article className="capability-card scroll-reveal" data-scroll-reveal data-reveal-side="right">
+            <div className="capability-image-container">
+              <Image
+                src="/v2.jpg"
+                alt="Mobile & Accessibility Solutions Showcase"
+                width={700}
+                height={420}
+                className="capability-card-image"
+              />
+              <div className="capability-image-vignette" />
+            </div>
             <div className="capability-bg-watermark" aria-hidden="true">
               <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="34" y="10" width="52" height="96" rx="12" />
@@ -777,6 +798,16 @@ export default function SkillsShowcase() {
 
           {/* Card 03: Game Development & AR */}
           <article className="capability-card scroll-reveal" data-scroll-reveal data-reveal-side="left">
+            <div className="capability-image-container">
+              <Image
+                src="/v3.jpg"
+                alt="Game Development & AR Showcase"
+                width={700}
+                height={420}
+                className="capability-card-image"
+              />
+              <div className="capability-image-vignette" />
+            </div>
             <div className="capability-bg-watermark" aria-hidden="true">
               <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="14" y="44" width="92" height="52" rx="26" />
@@ -807,6 +838,16 @@ export default function SkillsShowcase() {
 
           {/* Card 04: Hardware, IoT & Sensors */}
           <article className="capability-card scroll-reveal" data-scroll-reveal data-reveal-side="right">
+            <div className="capability-image-container">
+              <Image
+                src="/LA NINA DETECTOR/1.png"
+                alt="Hardware, IoT & Sensors Showcase"
+                width={700}
+                height={420}
+                className="capability-card-image"
+              />
+              <div className="capability-image-vignette" />
+            </div>
             <div className="capability-bg-watermark" aria-hidden="true">
               <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="32" y="32" width="56" height="56" rx="8" />
