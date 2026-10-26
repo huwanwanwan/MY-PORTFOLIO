@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 export default function ContactHub() {
   const [copied, setCopied] = useState(false);
@@ -73,39 +74,24 @@ export default function ContactHub() {
     setFormStatus("submitting");
 
     try {
-      // Send directly to militantejuanenricodomanico@gmail.com via FormSubmit AJAX endpoint with Wancorp sender branding
-      const response = await fetch("https://formsubmit.co/ajax/militantejuanenricodomanico@gmail.com", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+      // Send directly via EmailJS with Wancorp branding, logo 'W', and orange header table
+      await emailjs.send(
+        "service_azcv23s",
+        "es1ha4f",
+        {
+          from_name: formState.name,
+          from_email: formState.email,
+          phone: formState.phone || "Not provided",
+          subject: formState.subject || "General Project Discussion",
+          message: formState.message,
         },
-        body: JSON.stringify({
-          name: formState.name ? `Wancorp (${formState.name})` : "Wancorp",
-          _replyto: formState.email,
-          _subject: formState.subject
-            ? `[Wancorp] ${formState.subject} - from ${formState.name}`
-            : `[Wancorp] Project Inquiry from ${formState.name}`,
-          _template: "table",
-          _captcha: "false",
-          "Brand / Organization": "Wancorp",
-          "Brand Logo": "W (https://portfolio.juandomanicomilitante.workers.dev/tab-logo.png)",
-          "Client Name": formState.name,
-          "Client Email": formState.email,
-          "Contact Phone": formState.phone || "Not provided",
-          "Inquiry Subject": formState.subject || "General Project Discussion",
-          "Message Content": formState.message,
-          "Dispatched From": "Wancorp Portfolio Contact Hub",
-        }),
-      });
+        "kUDnhN5l63awEUq0y"
+      );
 
-      if (response.ok) {
-        setFormStatus("success");
-        setFormState({ name: "", email: "", phone: "", subject: "", message: "" });
-      } else {
-        throw new Error("Form submission error");
-      }
-    } catch {
+      setFormStatus("success");
+      setFormState({ name: "", email: "", phone: "", subject: "", message: "" });
+    } catch (err) {
+      console.error("Email dispatch error:", err);
       // Fallback: open user's Gmail compose directly with pre-templated details
       setFormStatus("error");
       const fallbackUrl = getGmailComposeUrl(
