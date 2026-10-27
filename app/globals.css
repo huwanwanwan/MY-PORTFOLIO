@@ -19767,7 +19767,13 @@ html.dark .cert-lightbox-desc {
 
 @media (max-width: 640px) {
   .skills-projects-carousel-wrapper {
-    padding: 0 46px !important;
+    position: relative !important;
+    width: calc(100% + 2 * var(--content-gutter, 20px)) !important;
+    max-width: calc(100% + 2 * var(--content-gutter, 20px)) !important;
+    margin-left: calc(-1 * var(--content-gutter, 20px)) !important;
+    margin-right: calc(-1 * var(--content-gutter, 20px)) !important;
+    padding: 0 42px !important;
+    box-sizing: border-box !important;
   }
   .skills-timeline-column {
     flex: 0 0 100% !important;
@@ -20144,14 +20150,15 @@ html, body {
     transform: scale(0.96) !important;
   }
 
-  /* 2. ARROWS ON MOBILE (Dedicated 46px gutters so arrows NEVER overlap cards) */
+  /* 2. CAROUSEL WRAPPERS & ARROWS ON MOBILE (Expanding to screen edges so cards are wider without overlapping arrows) */
   .skills-projects-carousel-wrapper,
   .cert-carousel-wrapper {
     position: relative !important;
-    padding: 0 46px !important;
-    margin: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
+    width: calc(100% + 2 * var(--content-gutter, 20px)) !important;
+    max-width: calc(100% + 2 * var(--content-gutter, 20px)) !important;
+    margin-left: calc(-1 * var(--content-gutter, 20px)) !important;
+    margin-right: calc(-1 * var(--content-gutter, 20px)) !important;
+    padding: 0 42px !important;
     box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
@@ -20169,16 +20176,16 @@ html, body {
     top: 50% !important;
     transform: translateY(-50%) !important;
     z-index: 50 !important;
-    width: 38px !important;
-    height: 38px !important;
-    min-width: 38px !important;
-    min-height: 38px !important;
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
     border-radius: 50% !important;
     background: rgba(26, 23, 21, 0.95) !important;
     border: 2px solid var(--accent, #fd4f3c) !important;
     color: #ffffff !important;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5) !important;
-    font-size: 20px !important;
+    font-size: 18px !important;
     line-height: 1 !important;
     align-items: center !important;
     justify-content: center !important;
@@ -20203,13 +20210,13 @@ html, body {
   .skills-side-arrow-left,
   .cert-side-arrow-left,
   .projects-slider-arrow-left {
-    left: 4px !important;
+    left: 5px !important;
   }
 
   .skills-side-arrow-right,
   .cert-side-arrow-right,
   .projects-slider-arrow-right {
-    right: 4px !important;
+    right: 5px !important;
   }
 
   .skills-nav-arrows {
@@ -20219,15 +20226,15 @@ html, body {
 
   .skills-nav-arrow {
     display: flex !important;
-    width: 36px !important;
-    height: 36px !important;
+    width: 34px !important;
+    height: 34px !important;
     border-radius: 50% !important;
     align-items: center !important;
     justify-content: center !important;
     cursor: pointer !important;
   }
 
-  /* 3. CARD SIZES ON MOBILE (iPhone X 375px & All Phones) */
+  /* 3. CARD SIZES ON MOBILE (iPhone X 375px & All Mobile Screens) */
   .cert-carousel-scroll,
   .projects-slider-scroll,
   .skills-projects-horizontal-scroll {
@@ -20240,8 +20247,8 @@ html, body {
     -webkit-overflow-scrolling: touch !important;
     scroll-snap-type: x mandatory !important;
     scrollbar-width: none !important;
-    gap: 12px !important;
-    padding: 12px 2px !important;
+    gap: 14px !important;
+    padding: 12px 0 !important;
     margin: 0 !important;
     box-sizing: border-box !important;
   }
@@ -20252,7 +20259,7 @@ html, body {
     display: none !important;
   }
 
-  /* Perfect 100% fit between the 46px arrow gutters - ZERO clipping, ZERO overlap! */
+  /* Cards are comfortably wider (~291px on 375px iPhone X) with 5px breathing gap next to 32px arrows */
   .project-slide-card,
   .skills-timeline-column,
   .cert-slide-card,
@@ -20264,15 +20271,15 @@ html, body {
     scroll-snap-align: center !important;
     scroll-snap-stop: always !important;
     box-sizing: border-box !important;
-    border-radius: 16px !important;
-    padding: 16px 14px !important;
+    border-radius: 18px !important;
+    padding: 18px 16px !important;
   }
 
   .skills-timeline-card {
     width: 100% !important;
     box-sizing: border-box !important;
-    padding: 16px 14px !important;
-    border-radius: 16px !important;
+    padding: 18px 16px !important;
+    border-radius: 18px !important;
   }
 
   .project-slide-title {

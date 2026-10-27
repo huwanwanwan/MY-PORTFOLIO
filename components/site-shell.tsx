@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import EditorialContactBanner from "./editorial-contact-banner";
 import FaqChatbot from "./faq-chatbot";
-import ThemeTutorial from "./theme-tutorial";
 
 const themeChangeEvent = "portfolio-theme-change";
 
@@ -335,9 +334,7 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
           </div>
         </footer>
 
-        {/* Guided Theme Tutorial for New Visitors */}
-        <ThemeTutorial darkMode={darkMode} onToggleTheme={toggleTheme} />
-
+        
         {/* Floating Circle FAQ Chatbot on bottom-right */}
         <FaqChatbot />
       </article>
