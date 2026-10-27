@@ -156,13 +156,35 @@ export default function ProjectsSlider() {
   function scroll(direction: "left" | "right") {
     if (!scrollContainerRef.current) return;
     const track = scrollContainerRef.current;
-    const firstCard = track.firstElementChild as HTMLElement | null;
-    const cs = typeof window !== "undefined" ? window.getComputedStyle(track) : null;
-    const gap = cs ? (parseFloat(cs.columnGap) || parseFloat(cs.gap) || 12) : 12;
-    const cardWidth = (firstCard ? firstCard.getBoundingClientRect().width : track.clientWidth) + gap;
-    const scrollAmount = direction === "left" ? -cardWidth : cardWidth;
-    track.scrollBy({
-      left: scrollAmount,
+    const cards = Array.from(track.children).filter((el): el is HTMLElement => el instanceof HTMLElement);
+    if (cards.length === 0) return;
+
+    const viewportCenter = track.scrollLeft + track.clientWidth / 2;
+    let activeIndex = 0;
+    let minDistance = Infinity;
+
+    for (let i = 0; i < cards.length; i++) {
+      const card = cards[i];
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const distance = Math.abs(cardCenter - viewportCenter);
+      if (distance < minDistance) {
+        minDistance = distance;
+        activeIndex = i;
+      }
+    }
+
+    const targetIndex = direction === "left"
+      ? Math.max(0, activeIndex - 1)
+      : Math.min(cards.length - 1, activeIndex + 1);
+
+    if (targetIndex === activeIndex) return;
+
+    const targetCard = cards[targetIndex];
+    if (!targetCard) return;
+
+    const targetLeft = targetCard.offsetLeft - (track.clientWidth - targetCard.offsetWidth) / 2;
+    track.scrollTo({
+      left: Math.max(0, targetLeft),
       behavior: "smooth",
     });
   }
@@ -206,7 +228,7 @@ export default function ProjectsSlider() {
             <button
               type="button"
               className="cert-nav-arrow"
-              onClick={() => scroll("left")}
+              onClick={(e) => { e.currentTarget.blur(); scroll("left"); }}
               aria-label="Previous project"
             >
               ←
@@ -214,7 +236,7 @@ export default function ProjectsSlider() {
             <button
               type="button"
               className="cert-nav-arrow"
-              onClick={() => scroll("right")}
+              onClick={(e) => { e.currentTarget.blur(); scroll("right"); }}
               aria-label="Next project"
             >
               →
@@ -228,7 +250,7 @@ export default function ProjectsSlider() {
         <button
           type="button"
           className="cert-side-arrow cert-side-arrow-left"
-          onClick={() => scroll("left")}
+          onClick={(e) => { e.currentTarget.blur(); scroll("left"); }}
           aria-label="Previous project"
         >
           ‹
@@ -320,7 +342,7 @@ export default function ProjectsSlider() {
         <button
           type="button"
           className="cert-side-arrow cert-side-arrow-right"
-          onClick={() => scroll("right")}
+          onClick={(e) => { e.currentTarget.blur(); scroll("right"); }}
           aria-label="Next project"
         >
           ›

@@ -16217,26 +16217,20 @@ html.dark .cert-lightbox-desc {
 
   }
 
-  .cert-side-arrow:hover,
+  @media (hover: hover) and (pointer: fine) {
+    .cert-side-arrow:hover,
+    .skills-side-arrow:hover {
+      background: var(--accent) !important;
+      color: #ffffff !important;
+    }
+  }
 
   .cert-side-arrow:active,
-
-  .cert-side-arrow:focus,
-
-  .skills-side-arrow:hover,
-
-  .skills-side-arrow:active,
-
-  .skills-side-arrow:focus {
-
+  .skills-side-arrow:active {
     background: var(--accent) !important;
-
     color: #ffffff !important;
-
     opacity: 1 !important;
-
-    transform: translateY(-50%) !important;
-
+    transform: translateY(-50%) scale(0.92) !important;
   }
 
   .cert-side-arrow-left,
@@ -20190,6 +20184,35 @@ html, body {
     align-items: center !important;
     justify-content: center !important;
     cursor: pointer !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+  }
+
+  /* Expand hit target without changing visual size so thumb taps register effortlessly on 1st tap */
+  .skills-side-arrow::after,
+  .cert-side-arrow::after,
+  .projects-slider-arrow::after,
+  .skills-nav-arrow::after,
+  .cert-nav-arrow::after {
+    content: "" !important;
+    position: absolute !important;
+    top: -10px !important;
+    bottom: -10px !important;
+    left: -10px !important;
+    right: -10px !important;
+    cursor: pointer !important;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .skills-side-arrow:hover,
+    .cert-side-arrow:hover,
+    .projects-slider-arrow:hover {
+      background: var(--accent) !important;
+      color: #ffffff !important;
+      border-color: var(--accent) !important;
+    }
   }
 
   [data-theme="light"] .skills-side-arrow,
