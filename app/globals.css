@@ -9743,6 +9743,61 @@ h2 {
 
 
 
+/* ─── Scrollable Grid for Experience Page (No arrows, natural page-scroll animation) ─── */
+.cert-scrollable-grid-wrapper {
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.cert-scrollable-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 0 32px;
+}
+
+.cert-grid-card {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: none !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: none !important;
+  scroll-snap-stop: normal !important;
+}
+
+.cert-grid-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
+}
+
+@media (max-width: 1024px) {
+  .cert-scrollable-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .cert-scrollable-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 6px 0 24px;
+  }
+
+  .cert-grid-card {
+    border-radius: 18px !important;
+    padding: 18px 16px !important;
+  }
+}
+
 /* ─── Carousel Wrapper & Floating Side Arrows ─── */
 
 .cert-carousel-wrapper {

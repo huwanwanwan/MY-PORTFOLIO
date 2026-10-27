@@ -613,7 +613,11 @@ export function SkillsSection() {
   );
 }
 
-export function ExperienceSection() {
+export function ExperienceSection({
+  slider = false,
+}: {
+  slider?: boolean;
+} = {}) {
   return (
     <section
       className="section-block content-section"
@@ -721,7 +725,7 @@ export function ExperienceSection() {
         </article>
       </div>
 
-      <CertificationsShowcase />
+      <CertificationsShowcase variant={slider ? "carousel" : "scrollable"} />
     </section>
   );
 }

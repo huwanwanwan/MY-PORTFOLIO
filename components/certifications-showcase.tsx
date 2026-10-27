@@ -21,7 +21,13 @@ function getThemeSnapshot() {
   return window.localStorage.getItem("portfolio-theme") === "dark";
 }
 
-export default function CertificationsShowcase() {
+type CertificationsShowcaseProps = {
+  variant?: "carousel" | "scrollable";
+};
+
+export default function CertificationsShowcase({
+  variant = "carousel",
+}: CertificationsShowcaseProps) {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [lightboxCert, setLightboxCert] = useState<CertificationItem | null>(null);
   const [mounted, setMounted] = useState<boolean>(false);
@@ -42,6 +48,13 @@ export default function CertificationsShowcase() {
     activeCategory === "All"
       ? certificationsData
       : certificationsData.filter((c) => c.category === activeCategory);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event("scroll"));
+    }, 60);
+    return () => clearTimeout(timer);
+  }, [activeCategory]);
 
   function scrollCertificates(direction: "left" | "right") {
     if (!scrollContainerRef.current) return;
@@ -120,7 +133,7 @@ export default function CertificationsShowcase() {
 
   return (
     <section className="cert-gallery-section" id="certifications" data-scroll-reveal>
-      {/* ── Top Header Row with Arrows ── */}
+      {/* ── Top Header Row ── */}
       <div className="cert-gallery-header" data-scroll-reveal>
         <div className="cert-gallery-intro">
           <p className="editorial-eyebrow">
@@ -152,149 +165,240 @@ export default function CertificationsShowcase() {
             ))}
           </div>
 
-          {/* Top-Right Arrow Buttons */}
-          <div className="cert-carousel-nav" aria-label="Certificate carousel navigation">
-            <button
-              type="button"
-              className="cert-nav-arrow"
-              onClick={(e) => { e.currentTarget.blur(); scrollCertificates("left"); }}
-              aria-label="Previous certificate"
-            >
-              ←
-            </button>
-            <button
-              type="button"
-              className="cert-nav-arrow"
-              onClick={(e) => { e.currentTarget.blur(); scrollCertificates("right"); }}
-              aria-label="Next certificate"
-            >
-              →
-            </button>
+          {/* Top-Right Arrow Buttons (Home Page Carousel Only) */}
+          {variant === "carousel" && (
+            <div className="cert-carousel-nav" aria-label="Certificate carousel navigation">
+              <button
+                type="button"
+                className="cert-nav-arrow"
+                onClick={(e) => { e.currentTarget.blur(); scrollCertificates("left"); }}
+                aria-label="Previous certificate"
+              >
+                ←
+              </button>
+              <button
+                type="button"
+                className="cert-nav-arrow"
+                onClick={(e) => { e.currentTarget.blur(); scrollCertificates("right"); }}
+                aria-label="Next certificate"
+              >
+                →
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* ── Content View: Arrow-type Carousel for Home, Scrollable Animated Grid for Experience Page ── */}
+      {variant === "carousel" ? (
+        <div className="cert-carousel-wrapper" data-scroll-reveal>
+          <button
+            type="button"
+            className="cert-side-arrow cert-side-arrow-left"
+            onClick={(e) => { e.currentTarget.blur(); scrollCertificates("left"); }}
+            aria-label="Previous certificate"
+          >
+            ‹
+          </button>
+
+          <div
+            ref={scrollContainerRef}
+            className="cert-carousel-scroll"
+            tabIndex={0}
+            aria-label="Certificates sliding gallery"
+          >
+            {filtered.map((cert, index) => {
+              const indexStr = String(index + 1).padStart(2, "0");
+              return (
+                <article
+                  key={cert.id}
+                  className="cert-slide-card scroll-reveal"
+                  data-scroll-reveal
+                  data-reveal-delay={(index % 4) * 80}
+                >
+                  <div className="cert-card-topbar">
+                    <span className={`cert-card-badge cert-badge-${cert.category.toLowerCase()}`}>
+                      {cert.category}
+                    </span>
+                    <span className="cert-card-index">{indexStr}</span>
+                  </div>
+
+                  <div
+                    className="cert-card-image-box"
+                    onClick={() => setLightboxCert(cert)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setLightboxCert(cert);
+                      }
+                    }}
+                    aria-label={`View full certificate: ${cert.title}`}
+                  >
+                    <Image
+                      src={cert.image}
+                      alt={cert.alt}
+                      fill
+                      sizes="(min-width: 1024px) 380px, 90vw"
+                      className="cert-card-img"
+                      unoptimized
+                    />
+                    <div className="cert-card-overlay">
+                      <span className="cert-zoom-tag">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="cert-zoom-svg"
+                          aria-hidden="true"
+                        >
+                          <circle cx="11" cy="11" r="8" />
+                          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                          <line x1="11" y1="8" x2="11" y2="14" />
+                          <line x1="8" y1="11" x2="14" y2="11" />
+                        </svg>
+                        <span>Expand</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <h3 className="cert-slide-title">{cert.title}</h3>
+                  <p className="cert-slide-issuer">
+                    {cert.issuer} · <time>{cert.date}</time>
+                  </p>
+
+                  <p className="cert-slide-desc">{cert.description}</p>
+
+                  <div className="cert-slide-tags">
+                    {cert.tags.map((tag) => (
+                      <span key={tag} className="cert-tech-pill">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="cert-card-footer">
+                    <button
+                      type="button"
+                      className="cert-card-link-btn"
+                      onClick={() => setLightboxCert(cert)}
+                    >
+                      <span>View full certificate</span>
+                      <span aria-hidden="true" className="cert-link-arrow">→</span>
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          <button
+            type="button"
+            className="cert-side-arrow cert-side-arrow-right"
+            onClick={(e) => { e.currentTarget.blur(); scrollCertificates("right"); }}
+            aria-label="Next certificate"
+          >
+            ›
+          </button>
+        </div>
+      ) : (
+        /* Scrollable Grid Mode: No arrows, cards revealed with animation as user scrolls down */
+        <div className="cert-scrollable-grid-wrapper" data-scroll-reveal>
+          <div key={activeCategory} className="cert-scrollable-grid" role="region" aria-label="Certificates directory">
+            {filtered.map((cert, index) => {
+              const indexStr = String(index + 1).padStart(2, "0");
+              return (
+                <article
+                  key={cert.id}
+                  className="cert-slide-card cert-grid-card scroll-reveal"
+                  data-scroll-reveal
+                  data-reveal-delay={(index % 3) * 90}
+                >
+                  <div className="cert-card-topbar">
+                    <span className={`cert-card-badge cert-badge-${cert.category.toLowerCase()}`}>
+                      {cert.category}
+                    </span>
+                    <span className="cert-card-index">{indexStr}</span>
+                  </div>
+
+                  <div
+                    className="cert-card-image-box"
+                    onClick={() => setLightboxCert(cert)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setLightboxCert(cert);
+                      }
+                    }}
+                    aria-label={`View full certificate: ${cert.title}`}
+                  >
+                    <Image
+                      src={cert.image}
+                      alt={cert.alt}
+                      fill
+                      sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 90vw"
+                      className="cert-card-img"
+                      unoptimized
+                    />
+                    <div className="cert-card-overlay">
+                      <span className="cert-zoom-tag">
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="cert-zoom-svg"
+                          aria-hidden="true"
+                        >
+                          <circle cx="11" cy="11" r="8" />
+                          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                          <line x1="11" y1="8" x2="11" y2="14" />
+                          <line x1="8" y1="11" x2="14" y2="11" />
+                        </svg>
+                        <span>Expand</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <h3 className="cert-slide-title">{cert.title}</h3>
+                  <p className="cert-slide-issuer">
+                    {cert.issuer} · <time>{cert.date}</time>
+                  </p>
+
+                  <p className="cert-slide-desc">{cert.description}</p>
+
+                  <div className="cert-slide-tags">
+                    {cert.tags.map((tag) => (
+                      <span key={tag} className="cert-tech-pill">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="cert-card-footer">
+                    <button
+                      type="button"
+                      className="cert-card-link-btn"
+                      onClick={() => setLightboxCert(cert)}
+                    >
+                      <span>View full certificate</span>
+                      <span aria-hidden="true" className="cert-link-arrow">→</span>
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
-      </div>
-
-      {/* ── Sliding Carousel Wrapper with Floating Arrows ── */}
-      <div className="cert-carousel-wrapper" data-scroll-reveal>
-        <button
-          type="button"
-          className="cert-side-arrow cert-side-arrow-left"
-          onClick={(e) => { e.currentTarget.blur(); scrollCertificates("left"); }}
-          aria-label="Previous certificate"
-        >
-          ‹
-        </button>
-
-        <div
-          ref={scrollContainerRef}
-          className="cert-carousel-scroll"
-          tabIndex={0}
-          aria-label="Certificates sliding gallery"
-        >
-          {filtered.map((cert, index) => {
-            const indexStr = String(index + 1).padStart(2, "0");
-            return (
-              <article
-                key={cert.id}
-                className="cert-slide-card scroll-reveal"
-                data-scroll-reveal
-                data-reveal-delay={(index % 4) * 80}
-              >
-                {/* Header: Category Badge + Index Number */}
-                <div className="cert-card-topbar">
-                  <span className={`cert-card-badge cert-badge-${cert.category.toLowerCase()}`}>
-                    {cert.category}
-                  </span>
-                  <span className="cert-card-index">{indexStr}</span>
-                </div>
-
-                {/* Landscape Certificate Picture: Fitted to Card */}
-                <div
-                  className="cert-card-image-box"
-                  onClick={() => setLightboxCert(cert)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setLightboxCert(cert);
-                    }
-                  }}
-                  aria-label={`View full certificate: ${cert.title}`}
-                >
-                  <Image
-                    src={cert.image}
-                    alt={cert.alt}
-                    fill
-                    sizes="(min-width: 1024px) 380px, 90vw"
-                    className="cert-card-img"
-                    unoptimized
-                  />
-                  <div className="cert-card-overlay">
-                    <span className="cert-zoom-tag">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="cert-zoom-svg"
-                        aria-hidden="true"
-                      >
-                        <circle cx="11" cy="11" r="8" />
-                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                        <line x1="11" y1="8" x2="11" y2="14" />
-                        <line x1="8" y1="11" x2="14" y2="11" />
-                      </svg>
-                      <span>Expand</span>
-                    </span>
-                  </div>
-                </div>
-
-                {/* Card Title & Issuer */}
-                <h3 className="cert-slide-title">{cert.title}</h3>
-                <p className="cert-slide-issuer">
-                  {cert.issuer} · <time>{cert.date}</time>
-                </p>
-
-                {/* Description */}
-                <p className="cert-slide-desc">{cert.description}</p>
-
-                {/* Tag Pills */}
-                <div className="cert-slide-tags">
-                  {cert.tags.map((tag) => (
-                    <span key={tag} className="cert-tech-pill">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Footer Link to View Full */}
-                <div className="cert-card-footer">
-                  <button
-                    type="button"
-                    className="cert-card-link-btn"
-                    onClick={() => setLightboxCert(cert)}
-                  >
-                    <span>View full certificate</span>
-                    <span aria-hidden="true" className="cert-link-arrow">→</span>
-                  </button>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-
-        <button
-          type="button"
-          className="cert-side-arrow cert-side-arrow-right"
-          onClick={(e) => { e.currentTarget.blur(); scrollCertificates("right"); }}
-          aria-label="Next certificate"
-        >
-          ›
-        </button>
-      </div>
+      )}
 
       {/* ── High-Resolution Lightbox Modal rendered via Portal directly to body ── */}
       {lightboxCert && mounted && typeof document !== "undefined" && createPortal(

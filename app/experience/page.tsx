@@ -4,7 +4,7 @@ import { ExperienceSection } from "../../components/portfolio-sections";
 export default function ExperiencePage() {
   return (
     <SiteShell activePage="experience">
-      <ExperienceSection />
+      <ExperienceSection slider={false} />
     </SiteShell>
   );
 }

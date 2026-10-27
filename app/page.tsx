@@ -196,7 +196,7 @@ export default function Home() {
       <AboutSection projectPlaceholder />
       <ProjectsSection slider={true} />
       <SkillsSection />
-      <ExperienceSection />
+      <ExperienceSection slider={true} />
       <ContactSection />
     </SiteShell>
   );
