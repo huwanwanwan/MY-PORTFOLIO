@@ -297,7 +297,21 @@ export default function ProjectMediaStage({
                   >
                     <div className="smart-thumb-preview-box">
                       {item.type === "video" ? (
-                        <div className="smart-thumb-video-icon">
+                        <div className={`smart-thumb-video-icon${images.length ? " has-poster" : ""}`}>
+                          {images.length > 0 && (
+                            <Image
+                              src={encodeURI(
+                                item.src.includes("admin-demo")
+                                  ? images.find((image) => image.includes("admin-login")) || images[0]
+                                  : images[0]
+                              )}
+                              alt={`${item.caption} thumbnail`}
+                              fill
+                              sizes="160px"
+                              className="smart-thumb-video-poster"
+                              unoptimized
+                            />
+                          )}
                           <svg
                             viewBox="0 0 24 24"
                             width="18"
