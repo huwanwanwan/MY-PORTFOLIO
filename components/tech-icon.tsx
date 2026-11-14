@@ -1,6 +1,21 @@
 export function TechIcon({ name }: { name: string }) {
   const norm = name.toLowerCase().trim();
 
+  const logoFiles: Record<string, string> = {
+    dart: "dart", flutter: "flutter", riverpod: "riverpod",
+    typescript: "typescript", "next.js": "nextjs", nextjs: "nextjs",
+    supabase: "supabase", "maplibre gl": "maplibre", maplibre: "maplibre",
+    tailwind: "tailwindcss", "tailwind css": "tailwindcss", tailwindcss: "tailwindcss",
+  };
+  const logo = logoFiles[norm];
+  if (logo) {
+    return (
+      <svg viewBox="0 0 24 24" className="tech-icon-svg" aria-hidden="true">
+        <image href={`/tech/${logo}.svg`} width="24" height="24" />
+      </svg>
+    );
+  }
+
   // Java Programming
   if (norm.includes("java") && !norm.includes("script")) {
     return (
