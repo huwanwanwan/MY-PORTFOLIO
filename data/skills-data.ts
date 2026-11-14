@@ -28,12 +28,9 @@ export const skills: Skill[] = [
   { name: "Node.js", category: "Backend" },
   { name: "PHP", category: "Backend" },
   { name: "Python", category: "Backend" },
-  { name: "Socket.IO", category: "Backend" },
 
   // Game Dev
-  { name: "AR Development", category: "Game Dev" },
   { name: "Unity", category: "Game Dev" },
-  { name: "WebAR", category: "Game Dev" },
 
   // Database
   { name: "Firebase", category: "Database" },
@@ -45,8 +42,6 @@ export const skills: Skill[] = [
 
   // IoT / Hardware
   { name: "Arduino", category: "IoT" },
-  { name: "Raspberry Pi", category: "IoT" },
-  { name: "Tesseract OCR", category: "IoT" },
 
   // AI
   { name: "Canva", category: "AI" },

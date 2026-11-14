@@ -216,31 +216,12 @@ function SkillIcon({ name }: { name: string }) {
       </svg>
     );
 
-  // AR Development / WebAR
-  if (n === "ar development" || n === "webar")
-    return (
-      <svg viewBox="0 0 24 24" className="skill-card-icon" aria-hidden="true">
-        <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="12" cy="12" r="3" fill="none" stroke="#4CAF50" strokeWidth="1.5" />
-        <path d="M12 6v2M12 16v2M6 12h2M16 12h2" stroke="#4CAF50" strokeWidth="1" strokeLinecap="round" />
-      </svg>
-    );
-
   // Three.js
   if (n === "three.js")
     return (
       <svg viewBox="0 0 24 24" className="skill-card-icon" aria-hidden="true">
         <path fill="none" stroke="currentColor" strokeWidth="1.3" d="M3 20L12 4l9 16H3z" />
         <path fill="none" stroke="currentColor" strokeWidth="1" d="M7.5 12L12 4l4.5 8H7.5z" opacity="0.6" />
-      </svg>
-    );
-
-  // Socket.IO
-  if (n === "socket.io")
-    return (
-      <svg viewBox="0 0 24 24" className="skill-card-icon" aria-hidden="true">
-        <circle cx="12" cy="12" r="10" fill="#010101" />
-        <path fill="#FFFFFF" d="M12 6c-1 3-3 5-5 7h3c1-3 3-5 5-7h-3z" />
       </svg>
     );
 
@@ -260,29 +241,6 @@ function SkillIcon({ name }: { name: string }) {
       <svg viewBox="0 0 24 24" className="skill-card-icon" aria-hidden="true">
         <path fill="#00979C" d="M7 6A5.5 5.5 0 0 0 1.5 11.5 5.5 5.5 0 0 0 7 17c2.2 0 4.1-1.3 5.5-3.5 1.4 2.2 3.3 3.5 5.5 3.5a5.5 5.5 0 0 0 5.5-5.5A5.5 5.5 0 0 0 18 6c-2.2 0-4.1 1.3-5.5 3.5C11.1 7.3 9.2 6 7 6z" />
         <path stroke="#FFFFFF" strokeWidth="1.6" strokeLinecap="round" d="M5.5 11.5h3M16.5 11.5h3m-1.5-1.5v3" />
-      </svg>
-    );
-
-  // Raspberry Pi
-  if (n === "raspberry pi")
-    return (
-      <svg viewBox="0 0 24 24" className="skill-card-icon" aria-hidden="true">
-        <path fill="#C51A4A" d="M12 3C9 3 7 5.5 7 8v8c0 2.5 2 5 5 5s5-2.5 5-5V8c0-2.5-2-5-5-5z" />
-        <circle cx="10" cy="10" r="1.2" fill="#FFFFFF" />
-        <circle cx="14" cy="10" r="1.2" fill="#FFFFFF" />
-        <rect x="10" y="14" width="4" height="1" rx="0.5" fill="#FFFFFF" />
-        <path d="M7 10H5M19 10h-2M7 14H5M19 14h-2" stroke="#3E863D" strokeWidth="1" strokeLinecap="round" />
-      </svg>
-    );
-
-  // Tesseract OCR
-  if (n === "tesseract ocr")
-    return (
-      <svg viewBox="0 0 24 24" className="skill-card-icon" aria-hidden="true">
-        <rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M7 8h10M7 12h6M7 16h8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-        <circle cx="17" cy="15" r="3" fill="none" stroke="#4CAF50" strokeWidth="1.2" />
-        <path d="M19 17l2 2" stroke="#4CAF50" strokeWidth="1.2" strokeLinecap="round" />
       </svg>
     );
 

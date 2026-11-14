@@ -4,9 +4,8 @@ import Image from "next/image";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useRef, useSyncExternalStore, type ReactNode } from "react";
 import EditorialContactBanner from "./editorial-contact-banner";
-import FaqChatbot from "./faq-chatbot";
 
 const themeChangeEvent = "portfolio-theme-change";
 
@@ -41,7 +40,6 @@ type SiteShellProps = {
 export default function SiteShell({ activePage, children }: SiteShellProps) {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement | null>(null);
-  const [isPageSwitching, setIsPageSwitching] = useState(false);
   const darkMode = useSyncExternalStore(
     subscribeToTheme,
     getThemeSnapshot,
@@ -57,25 +55,6 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
     }
   }, [darkMode]);
 
-  useEffect(() => {
-    setIsPageSwitching(true);
-    if (typeof window !== "undefined") {
-      if ("scrollRestoration" in window.history) {
-        window.history.scrollRestoration = "manual";
-      }
-      try {
-        document.documentElement.style.scrollBehavior = "auto";
-        window.scrollTo(0, 0);
-        document.documentElement.style.scrollBehavior = "";
-      } catch {
-        window.scrollTo(0, 0);
-      }
-    }
-    const timer = setTimeout(() => {
-      setIsPageSwitching(false);
-    }, 550);
-    return () => clearTimeout(timer);
-  }, [pathname]);
 
   useEffect(() => {
     const pageTitles: Record<string, string> = {
@@ -109,87 +88,54 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
   }, [activePage, pathname]);
 
   useEffect(() => {
-    let ticking = false;
+    const container = document.querySelector(".page-content");
+    if (!container) return;
 
-    const checkElementVisibility = (item: HTMLElement) => {
-      const rect = item.getBoundingClientRect();
-      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-
-      // When element is fully outside viewport (above or below), reset so it re-animates smoothly on re-entry
-      if (rect.bottom < -40 || rect.top > windowHeight + 40) {
-        if ((item as any)._revealTimer) {
-          clearTimeout((item as any)._revealTimer);
-          (item as any)._revealTimer = null;
-        }
-        item.dataset.revealVisible = "false";
-        return;
-      }
-
-      // Check if element is positioned so user actually sees it animate:
-      // When scrolling down (entering from bottom): rect.top <= windowHeight - 40
-      // When scrolling up (entering from top): rect.top >= -80 || rect.bottom >= Math.min(windowHeight * 0.45, 260)
-      const isEnteringFromTop = rect.top < 0;
-      const isReadyToAnimate = isEnteringFromTop
-        ? (rect.top >= -80 || rect.bottom >= Math.min(windowHeight * 0.45, 260))
-        : (rect.top <= windowHeight - 40);
-
-      if (isReadyToAnimate) {
-        if (item.dataset.revealVisible !== "true" && !(item as any)._revealTimer) {
-          // Intentional increased delay before entrance animation starts
-          const delayAttr = item.dataset.revealDelay;
-          const delayMs = delayAttr ? Math.max(parseInt(delayAttr, 10), 0) + 180 : 260;
-          (item as any)._revealTimer = window.setTimeout(() => {
-            item.dataset.revealVisible = "true";
-            (item as any)._revealTimer = null;
-          }, delayMs);
-        }
-      }
+    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const observed = new Set<HTMLElement>();
+    const reveal = (item: HTMLElement) => {
+      item.dataset.revealVisible = "true";
+      observer?.unobserve(item);
     };
+    const observer = "IntersectionObserver" in window
+      ? new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) reveal(entry.target as HTMLElement);
+          });
+        }, { threshold: 0 })
+      : null;
 
-    const updateAllReveals = () => {
-      const items = document.querySelectorAll<HTMLElement>("[data-scroll-reveal]");
-      items.forEach((item) => {
-        item.dataset.revealReady = "true";
-        checkElementVisibility(item);
+    const observeItems = () => {
+      container.querySelectorAll<HTMLElement>("[data-scroll-reveal]").forEach((item) => {
+        if (motionPreference.matches || !observer) {
+          reveal(item);
+          return;
+        }
+        if (observed.has(item)) return;
+        observed.add(item);
+
+        // Keep already visible content visible during hydration and navigation.
+        const rect = item.getBoundingClientRect();
+        if (item.dataset.revealVisible === "true" ||
+            (rect.top < window.innerHeight && rect.bottom > 0 &&
+             rect.left < window.innerWidth && rect.right > 0)) {
+          reveal(item);
+        } else {
+          item.dataset.revealReady = "true";
+          observer.observe(item);
+        }
       });
     };
 
-    const onScrollOrResize = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateAllReveals();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    // Initial check on mount / navigation: reveal elements as content slides up smoothly
-    updateAllReveals();
-
-    window.addEventListener("scroll", onScrollOrResize, { passive: true });
-    window.addEventListener("resize", onScrollOrResize, { passive: true });
-
-    const mutationObserver = new MutationObserver(() => {
-      updateAllReveals();
-    });
-
-    const pageContainer = document.querySelector(".page-content") || document.body;
-    mutationObserver.observe(pageContainer, {
-      childList: true,
-      subtree: true,
-    });
+    observeItems();
+    const mutations = new MutationObserver(observeItems);
+    mutations.observe(container, { childList: true, subtree: true });
+    motionPreference.addEventListener("change", observeItems);
 
     return () => {
-      window.removeEventListener("scroll", onScrollOrResize);
-      window.removeEventListener("resize", onScrollOrResize);
-      mutationObserver.disconnect();
-      document.querySelectorAll<HTMLElement>("[data-scroll-reveal]").forEach((item) => {
-        if ((item as any)._revealTimer) {
-          clearTimeout((item as any)._revealTimer);
-          (item as any)._revealTimer = null;
-        }
-      });
+      observer?.disconnect();
+      mutations.disconnect();
+      motionPreference.removeEventListener("change", observeItems);
     };
   }, [pathname]);
 
@@ -244,7 +190,7 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
           </div>
         </header>
 
-        <div key={pathname} className={`dashboard-content page-content page-enter-up ${isPageSwitching ? "page-transitioning" : "page-entered"}`}>{children}</div>
+        <div key={pathname} className="dashboard-content page-content page-enter-up">{children}</div>
 
         <EditorialContactBanner activePage={activePage} />
 
@@ -335,8 +281,6 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
         </footer>
 
         
-        {/* Floating Circle FAQ Chatbot on bottom-right */}
-        <FaqChatbot />
       </article>
     </main>
   );
