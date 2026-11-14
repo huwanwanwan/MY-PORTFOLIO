@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, useSyncExternalStore, type ReactNode } from "react";
 import EditorialContactBanner from "./editorial-contact-banner";
 
 const themeChangeEvent = "portfolio-theme-change";
@@ -45,6 +45,14 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
     getThemeSnapshot,
     () => false,
   );
+
+  useLayoutEffect(() => {
+    // Reset before painting the destination so only its entrance animation plays.
+    // Let project and certification anchor links keep their intended destination.
+    if (!window.location.hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
+  }, [pathname]);
 
   useEffect(() => {
     if (typeof document !== "undefined") {
