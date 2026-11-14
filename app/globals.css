@@ -19890,3 +19890,16 @@ html, body {
 @media (max-width: 600px) {
   .bahalerto-videos { grid-template-columns: minmax(0, 1fr); }
 }
+
+.bahalerto-new-caption {
+  display: inline-block;
+  margin: 0 0 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #166534;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.about-sigla-standalone-wrapper > .bahalerto-showcase { margin-top: 0; margin-bottom: 32px; }

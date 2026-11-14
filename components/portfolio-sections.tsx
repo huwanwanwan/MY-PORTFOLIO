@@ -244,8 +244,8 @@ export function AboutSection({
           </div>
           {projectPlaceholder ? (
             <div className="about-sigla-standalone-wrapper">
-              <SiglaShowcase />
               <BahalertoShowcase />
+              <SiglaShowcase />
             </div>
           ) : (
             <aside className="about-profile-card" aria-label="About Juan">
