@@ -1,5 +1,7 @@
 "use client";
 
+import SeekableVideo from "./seekable-video";
+
 import React, { useState, useRef, useEffect, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
@@ -169,7 +171,7 @@ export default function ProjectMediaStage({
         <div className="smart-hero-viewport">
           {currentMedia.type === "video" ? (
             <div className="smart-video-wrapper">
-              <video
+              <SeekableVideo
                 ref={mainVideoRef}
                 key={currentMedia.src}
                 src={encodeURI(currentMedia.src)}
@@ -188,7 +190,7 @@ export default function ProjectMediaStage({
                 title={title + " video preview"}
               >
                 Your browser does not support the video tag.
-              </video>
+              </SeekableVideo>
               <div className="video-live-badge">
                 <span className="live-dot" />
                 <span>LOOPING DEMO</span>
@@ -391,7 +393,7 @@ export default function ProjectMediaStage({
 
             <div className="project-lightbox-media-wrapper">
               {selectedLightbox.type === "video" ? (
-                <video
+                <SeekableVideo
                   src={encodeURI(selectedLightbox.src)}
                   controls
                   autoPlay

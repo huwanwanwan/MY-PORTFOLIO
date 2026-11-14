@@ -1,5 +1,7 @@
 "use client";
 
+import SeekableVideo from "./seekable-video";
+
 import { useState, useRef, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -66,7 +68,7 @@ function ProjectSlideMedia({
           // Keep playing if still on screen
         }}
       >
-        <video
+        <SeekableVideo
           ref={videoRef}
           src={encodedVideoSrc}
           poster={encodedPoster}
@@ -80,7 +82,7 @@ function ProjectSlideMedia({
           title={`${project.title} video demo`}
         >
           Your browser does not support the video tag.
-        </video>
+        </SeekableVideo>
         <div className="video-live-badge" style={{ pointerEvents: "none" }}>
           <span className="live-dot" />
           <span>DEMO VIDEO</span>

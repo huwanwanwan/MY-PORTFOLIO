@@ -1,5 +1,7 @@
 "use client";
 
+import SeekableVideo from "./seekable-video";
+
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 
@@ -31,9 +33,9 @@ export default function BahalertoShowcase() {
         ].map((demo) => (
           <figure key={demo.src} className="sigla-video-col">
             <div className="sigla-video-container bahalerto-video-container">
-              <video src={`/BAHALERTO/${demo.src}`} poster={`/BAHALERTO/${demo.poster}`} controls muted loop playsInline preload="metadata" className="sigla-main-video" title={`BAHAlerto ${demo.label}`}>
+              <SeekableVideo src={`/BAHALERTO/${demo.src}`} poster={`/BAHALERTO/${demo.poster}`} controls muted loop playsInline preload="metadata" className="sigla-main-video" title={`BAHAlerto ${demo.label}`}>
                 Your browser does not support the video tag.
-              </video>
+              </SeekableVideo>
               <div className="video-live-badge"><span className="live-dot" /><span>DEMO VIDEO</span></div>
             </div>
             <figcaption className="sigla-video-caption">{demo.label}</figcaption>
