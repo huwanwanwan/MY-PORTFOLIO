@@ -1,4 +1,4 @@
-﻿const { test } = require('node:test');
+const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const ts = require('typescript');
@@ -48,9 +48,9 @@ test('rate limits verified senders before mail delivery', async () => {
 });
 test('accepts verified legitimate message and sends only once', async () => {
   const calls = [];
-  const response = await handleContact(request(), env(), async (url, options) => { calls.push({url, options}); return Response.json(calls.length === 1 ? verified : { success: 'true' }); });
+  const response = await handleContact(request(), env(), async (url, options) => { calls.push({url, options}); return calls.length === 1 ? Response.json(verified) : new Response('OK'); });
   assert.equal(response.status, 200); assert.equal(calls.length, 2);
-  assert.equal(JSON.parse(calls[1].options.body)._replyto, fields.email);
+  assert.equal(JSON.parse(calls[1].options.body).template_params.reply_to, fields.email);
 });
 test('does not report success when mail provider rejects delivery', async () => {
   let count = 0;
@@ -59,4 +59,38 @@ test('does not report success when mail provider rejects delivery', async () => 
 });
 test('fails closed when bot secret is unavailable', async () => {
   assert.equal((await handleContact(request(), { ...env(), TURNSTILE_SECRET_KEY: '' }, noFetch)).status, 503);
+});
+
+test('uses fallback after a definite EmailJS rejection', async () => {
+  let count = 0;
+  const response = await handleContact(request(), env(), async () => {
+    count++;
+    if (count === 1) return Response.json(verified);
+    if (count === 2) return new Response('Server API disabled', { status: 403 });
+    return Response.json({ success: 'true' });
+  });
+  assert.equal(response.status, 200); assert.equal(count, 3);
+});
+test('reports a fallback activation requirement clearly', async () => {
+  let count = 0;
+  const response = await handleContact(request(), env(), async () => {
+    count++;
+    if (count === 1) return Response.json(verified);
+    if (count === 2) return new Response('Not found', { status: 404 });
+    return Response.json({ success: 'false', message: 'This form needs Activation.' });
+  });
+  assert.equal(response.status, 502); assert.match((await response.json()).error, /activation/);
+});
+test('does not send twice after ambiguous provider failures', async () => {
+  let count = 0;
+  const response = await handleContact(request(), env(), async () => ++count === 1 ? Response.json(verified) : new Response('Error', { status: 503 }));
+  assert.equal(response.status, 502); assert.equal(count, 2);
+});
+test('escapes HTML before inserting message into HTML mail templates', async () => {
+  let count = 0;
+  await handleContact(request({ ...fields, message: '<script>alert(1)</script>' }), env(), async (_url, options) => {
+    if (++count === 1) return Response.json(verified);
+    assert.equal(JSON.parse(options.body).template_params.message_html, '&lt;script&gt;alert(1)&lt;/script&gt;');
+    return new Response('OK');
+  });
 });

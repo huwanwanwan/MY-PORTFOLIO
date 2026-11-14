@@ -73,13 +73,40 @@ export async function handleContact(request: Request, env: ContactEnvironment, s
     const emailKey = Array.from(new Uint8Array(digest), (value) => value.toString(16).padStart(2, "0")).join("");
     if (!(await env.CONTACT_SEND_LIMIT.limit({ key: `ip:${ip}` })).success || !(await env.CONTACT_SEND_LIMIT.limit({ key: `email:${emailKey}` })).success) return reply("Please wait a minute before sending another message.", 429);
 
+    // Keep the original configured EmailJS service behind server validation.
+    // Its public key selects the account; no credentials are sent to browsers.
+    const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]!);
+    const primary = await sendRequest("https://api.emailjs.com/api/v1.0/email/send", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        service_id: "service_azcv23s", template_id: "template_3zl7lsk", user_id: "kUDnhN5l63awEUq0y",
+        template_params: {
+          from_name: name, name, user_name: name,
+          from_email: email, email, user_email: email, reply_to: email,
+          phone: phone || "Not provided", contact_number: phone || "Not provided",
+          subject: subject || "General Project Discussion", title: subject || "General Project Discussion",
+          message, message_html: escapeHtml(message),
+        },
+      }),
+      signal: AbortSignal.timeout(20000),
+    });
+    if (primary.ok && (await primary.text()).trim() === "OK") return Response.json({ success: true }, { headers: { "Cache-Control": "no-store" } });
+    // Avoid a second delivery if the first provider has an ambiguous failure.
+    if (primary.ok || primary.status >= 500) return reply("The email service could not confirm delivery. Please try again later or email me directly.", 502);
+
     const delivery = await sendRequest("https://formsubmit.co/ajax/militantejuanenricodomanico@gmail.com", {
       method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json", Origin: origin, Referer: `${origin}/contact` },
       body: JSON.stringify({ name, email, phone: phone || "Not provided", message, _replyto: email, _subject: `[Wancor] ${subject || "Project inquiry"} - ${name}`, _template: "box", _captcha: "false" }),
       signal: AbortSignal.timeout(20000),
     });
-    const delivered = await delivery.json() as { success?: boolean | string };
-    if (!delivery.ok || (delivered.success !== true && delivered.success !== "true")) return reply("Unable to deliver your message right now. Please try again later or email me directly.", 502);
+    const delivered = await delivery.json() as { success?: boolean | string; message?: string };
+    if (!delivery.ok || (delivered.success !== true && delivered.success !== "true")) {
+      const needsActivation = typeof delivered.message === "string" && /needs activation|activate form/i.test(delivered.message);
+      console.error("Contact delivery rejected", { primaryStatus: primary.status, fallbackStatus: delivery.status, needsActivation });
+      return reply(needsActivation
+        ? "The contact form's email service needs activation by the site owner. Please email me directly for now."
+        : "Unable to deliver your message right now. Please try again later or email me directly.", 502);
+    }
     return Response.json({ success: true }, { headers: { "Cache-Control": "no-store" } });
   } catch { return reply("Unable to send right now. Please try again later or email me directly.", 502); }
 }
