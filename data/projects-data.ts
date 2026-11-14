@@ -28,10 +28,9 @@ export const projectsData: ProjectItem[] = [
     chronologicalIndex: 15,
     featuredIndex: 1,
     isFeatured: true,
-    video: "/BAHALERTO/community-demo.mp4",
-    additionalVideos: ["/BAHALERTO/admin-demo.mp4"],
-    imageFirst: true,
-    images: ["/BAHALERTO/admin-login.png", "/BAHALERTO/website-home.png", "/BAHALERTO/mobile-home.png", "/BAHALERTO/mobile-login.png"],
+    video: "/BAHALERTO/community-demo-cropped.mp4",
+    additionalVideos: ["/BAHALERTO/admin-demo-cropped.mp4"],
+    images: ["/BAHALERTO/website-home.png", "/BAHALERTO/admin-login.png", "/BAHALERTO/mobile-home.png", "/BAHALERTO/mobile-login.png"],
     paragraphs: [
       "BAHAlerto brings community flood awareness and preparedness together through a mobile app, a public website, and an administration portal.",
       "The mobile experience includes local flood information, vehicle passability guidance, flood reporting, location sharing, emergency SOS, and active alerts and advisories. The companion website introduces the platform and helps the community get started.",
@@ -39,8 +38,11 @@ export const projectsData: ProjectItem[] = [
     highlights: [
       { label: "Community Tools", value: "Flood Maps, Reports & Active Advisories" },
       { label: "Platform", value: "Mobile App / Community Website / Admin Portal" },
+      { label: "Mobile Stack", value: "Flutter / Dart / Riverpod" },
+      { label: "Admin Stack", value: "Next.js / React / TypeScript / Tailwind CSS" },
+      { label: "Backend & Maps", value: "Supabase / PostgreSQL / MapLibre GL / Flutter Map" },
     ],
-    tags: ["Web Development", "Mobile Development", "UI/UX"],
+    tags: ["Dart", "Flutter", "Riverpod", "TypeScript", "Next.js", "React.js", "Tailwind CSS", "Supabase", "PostgreSQL", "MapLibre GL"],
   },
   {
     id: "milktaste",

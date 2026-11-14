@@ -74,7 +74,7 @@ function ProjectSlideMedia({
           muted
           loop
           playsInline
-          preload="none"
+          preload="metadata"
           onError={() => setVideoFailed(true)}
           className="project-slide-video"
           title={`${project.title} video demo`}

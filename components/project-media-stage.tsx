@@ -178,7 +178,7 @@ export default function ProjectMediaStage({
                 muted
                 loop
                 playsInline
-                preload="none"
+                preload="metadata"
                 onError={() => {
                   if (images.length > 0 && mediaList.length > 1) {
                     setActiveIndex(mediaList.findIndex((item) => item.type === "image"));

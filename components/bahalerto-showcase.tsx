@@ -26,12 +26,12 @@ export default function BahalertoShowcase() {
       <h3 id="bahalerto-demo-heading">BAHAlerto — A More Prepared Community</h3>
       <div className="bahalerto-videos">
         {[
-          { src: "community-demo.mp4", poster: "website-home.png", label: "Community website demo" },
-          { src: "admin-demo.mp4", poster: "admin-login.png", label: "Administration portal demo" },
+          { src: "community-demo-cropped.mp4", poster: "website-home.png", label: "Mobile app download website demo" },
+          { src: "admin-demo-cropped.mp4", poster: "admin-login.png", label: "Administration portal demo" },
         ].map((demo) => (
           <figure key={demo.src} className="sigla-video-col">
             <div className="sigla-video-container bahalerto-video-container">
-              <video src={`/BAHALERTO/${demo.src}`} poster={`/BAHALERTO/${demo.poster}`} controls muted loop playsInline preload="none" className="sigla-main-video" title={`BAHAlerto ${demo.label}`}>
+              <video src={`/BAHALERTO/${demo.src}`} poster={`/BAHALERTO/${demo.poster}`} controls muted loop playsInline preload="metadata" className="sigla-main-video" title={`BAHAlerto ${demo.label}`}>
                 Your browser does not support the video tag.
               </video>
               <div className="video-live-badge"><span className="live-dot" /><span>DEMO VIDEO</span></div>
