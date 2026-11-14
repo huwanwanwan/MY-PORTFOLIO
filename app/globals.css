@@ -19847,3 +19847,46 @@ html, body {
     animation: none !important;
   }
 }
+.bahalerto-showcase {
+  width: 100%;
+  min-width: 0;
+  margin-top: 32px;
+  padding: clamp(12px, 2vw, 24px);
+  box-sizing: border-box;
+  background: var(--card-surface);
+}
+
+.bahalerto-showcase h3 { margin: 0 0 20px; }
+.bahalerto-videos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.bahalerto-showcase figure { margin: 0; min-width: 0; }
+.bahalerto-showcase .bahalerto-video-container {
+  aspect-ratio: 16 / 9;
+  max-height: none;
+  box-sizing: border-box;
+  border-radius: 16px;
+}
+.bahalerto-showcase .sigla-main-video { object-fit: contain; }
+.bahalerto-phone-previews {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 240px));
+  justify-content: center;
+  gap: clamp(12px, 3vw, 32px);
+  margin-top: 24px;
+}
+.bahalerto-phone-previews img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 480px;
+  object-fit: contain;
+}
+#project-bahalerto .smart-main-img,
+#project-bahalerto .smart-thumb-img { object-fit: contain; }
+#project-bahalerto .is-portrait-preview .smart-main-img { max-width: 100%; }
+@media (max-width: 600px) {
+  .bahalerto-videos { grid-template-columns: minmax(0, 1fr); }
+}

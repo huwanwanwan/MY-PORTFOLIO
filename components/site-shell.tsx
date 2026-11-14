@@ -30,10 +30,12 @@ const navigationItems = [
   { label: "Skills", href: "/skills", key: "skills" },
   { label: "Experience", href: "/experience", key: "experience" },
   { label: "Contact", href: "/contact", key: "contact" },
-];
+] as const;
+
+export type PageId = (typeof navigationItems)[number]["key"];
 
 type SiteShellProps = {
-  activePage: (typeof navigationItems)[number]["key"];
+  activePage: PageId;
   children: ReactNode;
 };
 

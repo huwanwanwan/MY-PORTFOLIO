@@ -21,6 +21,8 @@ interface ProjectMediaStageProps {
   title: string;
   category: string;
   video?: string;
+  additionalVideos?: string[];
+  imageFirst?: boolean;
   images?: string[];
   fallbackEmblem: React.ReactNode;
 }
@@ -30,6 +32,8 @@ export default function ProjectMediaStage({
   category,
   video,
   images = [],
+  additionalVideos = [],
+  imageFirst = false,
   fallbackEmblem,
 }: ProjectMediaStageProps) {
   const isDarkMode = useSyncExternalStore(
@@ -52,7 +56,8 @@ export default function ProjectMediaStage({
 
   images.forEach((img, idx) => {
     let caption = "Screenshot " + String(idx + 1).padStart(2, "0");
-    if (img.toLowerCase().includes("home")) caption = "Home Interface";
+    if (img.toLowerCase().includes("mobile")) caption = img.includes("login") ? "Mobile Login Screen" : "Mobile Home Screen";
+    else if (img.toLowerCase().includes("home")) caption = "Home Interface";
     else if (img.toLowerCase().includes("login")) caption = "Login Screen";
     else if (img.toLowerCase().includes("dashboard")) caption = "Dashboard View";
     else if (img.toLowerCase().includes("admin")) caption = "Admin Workspace";
@@ -65,6 +70,14 @@ export default function ProjectMediaStage({
       caption,
     });
   });
+
+  additionalVideos.forEach((src, idx) => {
+    mediaList.push({ type: "video", src, caption: `${title} Admin Demo ${idx + 1}` });
+  });
+  if (imageFirst && images.length > 0) {
+    const firstImageIndex = mediaList.findIndex((item) => item.type === "image");
+    mediaList.unshift(...mediaList.splice(firstImageIndex, 1));
+  }
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedLightbox, setSelectedLightbox] = useState<{
@@ -168,7 +181,7 @@ export default function ProjectMediaStage({
                 preload="none"
                 onError={() => {
                   if (images.length > 0 && mediaList.length > 1) {
-                    setActiveIndex(1);
+                    setActiveIndex(mediaList.findIndex((item) => item.type === "image"));
                   }
                 }}
                 className="smart-main-video"
@@ -239,7 +252,7 @@ export default function ProjectMediaStage({
           <div className="smart-thumbnails-nav-row">
             <span className="smart-counter-label">
               {currentMedia.type === "video"
-                ? "MEDIA DEMO 01 / " + String(mediaList.length).padStart(2, "0")
+                ? "MEDIA DEMO " + String(activeIndex + 1).padStart(2, "0") + " / " + String(mediaList.length).padStart(2, "0")
                 : "SCREENSHOT " +
                   String(activeIndex + 1).padStart(2, "0") +
                   " / " +

@@ -265,7 +265,6 @@ export default function ContactHub() {
       refreshQuota();
       setFormStatus("success");
       setFormState({ name: "", email: "", phone: "", subject: "", message: "" });
-      setShowSuggestions(false);
     } else {
       setFormStatus("error");
     }

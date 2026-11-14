@@ -12,10 +12,36 @@ export interface ProjectItem {
   highlights?: { label: string; value: string }[];
   tags: string[];
   video?: string;
+  additionalVideos?: string[];
+  imageFirst?: boolean;
   images?: string[];
 }
 
 export const projectsData: ProjectItem[] = [
+  {
+    id: "bahalerto",
+    title: "BAHAlerto",
+    category: "Mobile & AR",
+    type: "Community Flood Preparedness / Mobile App & Web Platform",
+    role: "Web & Mobile Developer",
+    period: "2026",
+    chronologicalIndex: 15,
+    featuredIndex: 15,
+    isFeatured: true,
+    video: "/BAHALERTO/community-demo.mp4",
+    additionalVideos: ["/BAHALERTO/admin-demo.mp4"],
+    imageFirst: true,
+    images: ["/BAHALERTO/admin-login.png", "/BAHALERTO/website-home.png", "/BAHALERTO/mobile-home.png", "/BAHALERTO/mobile-login.png"],
+    paragraphs: [
+      "BAHAlerto brings community flood awareness and preparedness together through a mobile app, a public website, and an administration portal.",
+      "The mobile experience includes local flood information, vehicle passability guidance, flood reporting, location sharing, emergency SOS, and active alerts and advisories. The companion website introduces the platform and helps the community get started.",
+    ],
+    highlights: [
+      { label: "Community Tools", value: "Flood Maps, Reports & Active Advisories" },
+      { label: "Platform", value: "Mobile App / Community Website / Admin Portal" },
+    ],
+    tags: ["Web Development", "Mobile Development", "UI/UX"],
+  },
   {
     id: "milktaste",
     images: ["/MILKTASTE/Milktaste POS Dashboard.png","/MILKTASTE/Milktaste POS Sales Dashboard.png","/MILKTASTE/Milktaste POS_ Good Drinks, Better Days.png"],

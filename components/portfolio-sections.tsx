@@ -1,3 +1,4 @@
+import BahalertoShowcase from "./bahalerto-showcase";
 import SiglaShowcase from "./sigla-showcase";
 import ProjectsSlider from "./projects-slider";
 import Link from "next/link";
@@ -244,6 +245,7 @@ export function AboutSection({
           {projectPlaceholder ? (
             <div className="about-sigla-standalone-wrapper">
               <SiglaShowcase />
+              <BahalertoShowcase />
             </div>
           ) : (
             <aside className="about-profile-card" aria-label="About Juan">

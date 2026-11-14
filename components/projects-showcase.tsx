@@ -311,6 +311,8 @@ export default function ProjectsShowcase({
                   title={project.title}
                   category={project.category}
                   video={project.video}
+                  additionalVideos={project.additionalVideos}
+                  imageFirst={project.imageFirst}
                   images={project.images}
                   fallbackEmblem={
                     <div className="card-emblem-stage">
