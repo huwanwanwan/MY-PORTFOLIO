@@ -15,3 +15,5 @@ Run `node --test tests/contact-security.test.cjs`, then `npm run build`. Tests m
 These checks protect this website form. They cannot filter mail sent directly to the published email address or prevent all spam; mailbox-level spam filtering is separate.
 
 References: [Turnstile server validation](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/), [FormSubmit AJAX API](https://formsubmit.co/ajax-documentation). Domain-list license: `data/DISPOSABLE-EMAIL-LICENSE.txt`.
+
+EmailJS recipient fields (`to_email`, `recipient_email`, and legacy `email`/`user_email`) are fixed to the portfolio owner. Visitor addresses are used only in explicit sender and Reply-To fields and included in the message. In the EmailJS template, keep To Email set to the owner address or `{{to_email}}`; use `{{reply_to}}` for replies.

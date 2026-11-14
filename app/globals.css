@@ -19918,3 +19918,19 @@ html, body {
 
 .contact-bot-verification { margin: 16px 0; min-width: 0; }
 .contact-bot-verification p { font-size: 0.85rem; color: var(--muted); margin-bottom: 12px; }
+
+/* Rendered in document.body so form transforms cannot shift the sending card. */
+.form-dispatching-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 4vw, 32px);
+  box-sizing: border-box;
+  border-radius: 0;
+  overflow-y: auto;
+  animation: contactDispatchFadeIn 0.2s ease;
+}
+.dispatching-card { margin: auto; max-height: 100%; }
+@keyframes contactDispatchFadeIn { from { opacity: 0; } to { opacity: 1; } }

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import BotVerification from "./bot-verification";
 
 
@@ -32,6 +33,13 @@ export default function ContactHub() {
   const [dailyRemaining, setDailyRemaining] = useState<number>(MAX_DAILY_MESSAGES);
   const [nextResetHours, setNextResetHours] = useState<number>(24);
   const [honeypot, setHoneypot] = useState("");
+
+  useEffect(() => {
+    if (formStatus !== "submitting") return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previousOverflow; };
+  }, [formStatus]);
 
   const refreshQuota = () => {
     const valid = getValidSubmissions();
@@ -298,7 +306,7 @@ export default function ContactHub() {
         {/* Centered Message Card with Loading Overlay */}
         <div className="contact-main-card">
           {/* Loading Animation Overlay */}
-          {formStatus === "submitting" && (
+          {formStatus === "submitting" && createPortal(
             <div className="form-dispatching-overlay" role="status" aria-live="polite">
               <div className="dispatching-card">
                 <div className="dispatching-spinner-wrap">
@@ -330,7 +338,7 @@ export default function ContactHub() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div>, document.body
           )}
 
           <div className="card-top-decoration" aria-hidden="true">

@@ -90,7 +90,25 @@ test('escapes HTML before inserting message into HTML mail templates', async () 
   let count = 0;
   await handleContact(request({ ...fields, message: '<script>alert(1)</script>' }), env(), async (_url, options) => {
     if (++count === 1) return Response.json(verified);
-    assert.equal(JSON.parse(options.body).template_params.message_html, '&lt;script&gt;alert(1)&lt;/script&gt;');
+    assert.ok(JSON.parse(options.body).template_params.message_html.endsWith('&lt;script&gt;alert(1)&lt;/script&gt;'));
     return new Response('OK');
   });
 });
+
+for (const sender of ['visitor@gmail.com', 'visitor@yahoo.com', 'visitor@outlook.com']) {
+  test(`routes inquiries from ${sender} to the owner while preserving Reply-To`, async () => {
+    let count = 0;
+    const response = await handleContact(request({ ...fields, email: sender }), env(), async (_url, options) => {
+      if (++count === 1) return Response.json(verified);
+      const params = JSON.parse(options.body).template_params;
+      for (const field of ['to_email', 'recipient_email', 'email', 'user_email']) {
+        assert.equal(params[field], 'militantejuanenricodomanico@gmail.com');
+      }
+      assert.equal(params.reply_to, sender);
+      assert.equal(params.from_email, sender);
+      assert.ok(params.message.includes(`Reply to: ${sender}`));
+      return new Response('OK');
+    });
+    assert.equal(response.status, 200);
+  });
+}

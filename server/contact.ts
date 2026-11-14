@@ -2,6 +2,7 @@ import disposableDomains from "../data/disposable-email-domains.json";
 import { CONTACT_HOSTNAME } from "../data/contact-config";
 
 const blockedDomains = new Set(disposableDomains);
+const CONTACT_RECIPIENT = "militantejuanenricodomanico@gmail.com";
 export function isDisposableEmail(email: string) {
   const parts = email.toLowerCase().split("@").pop()!.split(".");
   while (parts.length > 1) {
@@ -76,16 +77,21 @@ export async function handleContact(request: Request, env: ContactEnvironment, s
     // Keep the original configured EmailJS service behind server validation.
     // Its public key selects the account; no credentials are sent to browsers.
     const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]!);
+    const inquiry = `From: ${name}\nReply to: ${email}\nPhone: ${phone || "Not provided"}\n\n${message}`;
     const primary = await sendRequest("https://api.emailjs.com/api/v1.0/email/send", {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         service_id: "service_azcv23s", template_id: "template_3zl7lsk", user_id: "kUDnhN5l63awEUq0y",
         template_params: {
           from_name: name, name, user_name: name,
-          from_email: email, email, user_email: email, reply_to: email,
+          // Legacy templates may use email/user_email for their To field.
+          // Only explicit sender/Reply-To fields may contain the visitor address.
+          email: CONTACT_RECIPIENT, user_email: CONTACT_RECIPIENT,
+          to_email: CONTACT_RECIPIENT, recipient_email: CONTACT_RECIPIENT, to_name: "Juan Militante",
+          from_email: email, sender_email: email, contact_email: email, reply_to: email,
           phone: phone || "Not provided", contact_number: phone || "Not provided",
           subject: subject || "General Project Discussion", title: subject || "General Project Discussion",
-          message, message_html: escapeHtml(message),
+          message: inquiry, message_html: escapeHtml(inquiry),
         },
       }),
       signal: AbortSignal.timeout(20000),
