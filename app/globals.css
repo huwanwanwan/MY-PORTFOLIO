@@ -19915,3 +19915,6 @@ html, body {
 }
 .smart-thumb-video-icon.has-poster svg { filter: drop-shadow(0 1px 3px #000); }
 .smart-thumb-video-icon.has-poster .smart-thumb-video-text { color: #fff; text-shadow: 0 1px 3px #000; }
+
+.contact-bot-verification { margin: 16px 0; min-width: 0; }
+.contact-bot-verification p { font-size: 0.85rem; color: var(--muted); margin-bottom: 12px; }

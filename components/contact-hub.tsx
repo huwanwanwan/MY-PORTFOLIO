@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
-import emailjs from "@emailjs/browser";
+import { useState, useEffect } from "react";
+import BotVerification from "./bot-verification";
 
 
 const MAX_DAILY_MESSAGES = 2;
@@ -25,6 +25,9 @@ export default function ContactHub() {
   const [copied, setCopied] = useState(false);
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [sendProgress, setSendProgress] = useState(0);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [verificationReset, setVerificationReset] = useState(0);
+  const [formError, setFormError] = useState("");
   // 2-per-day rate limiting & honeypot security
   const [dailyRemaining, setDailyRemaining] = useState<number>(MAX_DAILY_MESSAGES);
   const [nextResetHours, setNextResetHours] = useState<number>(24);
@@ -111,162 +114,44 @@ export default function ContactHub() {
     }
   };
 
-    const handleFormSubmit = async (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // 1. Honeypot trap check (catches automated spambots silently)
-    if (honeypot.trim()) {
-      setFormStatus("success");
+    if (formStatus === "submitting") return;
+    setFormError("");
+    if (!turnstileToken) {
+      setFormError("Please complete the bot verification before sending.");
+      setFormStatus("error");
       return;
     }
-
-    // 2. Strict Rate Limiter: Max 2 messages per rolling 24 hours
-    const validSubmissions = getValidSubmissions();
-    if (validSubmissions.length >= MAX_DAILY_MESSAGES) {
+    if (getValidSubmissions().length >= MAX_DAILY_MESSAGES) {
+      setFormError("You have reached the daily message limit. Please try again tomorrow.");
       setFormStatus("error");
       refreshQuota();
       return;
     }
-
     setFormStatus("submitting");
-    setSendProgress(8);
-
-    // Fast progress timer to animate up to 92% in ~300ms
-    const startTime = Date.now();
-    const progressInterval = setInterval(() => {
-      const elapsed = Date.now() - startTime;
-      if (elapsed < 350) {
-        const p = Math.min(92, Math.round(8 + (elapsed / 350) * 84));
-        setSendProgress(p);
-      }
-    }, 20);
-
-    const dispatchTask = async () => {
-      let sent = false;
-
-      // 1. Primary dispatch: Direct EmailJS with Wancor branding, 'W' logo, and orange table
+    setSendProgress(20);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formState, honeypot, token: turnstileToken }),
+      });
+      const result = await response.json() as { success?: boolean; error?: string };
+      if (!response.ok || result.success !== true) throw new Error(result.error || "Unable to send your message. Please try again later.");
       try {
-        emailjs.init({ publicKey: "kUDnhN5l63awEUq0y" });
-
-        let res;
-        try {
-          res = await emailjs.send(
-            "service_azcv23s",
-            "template_3zl7lsk",
-            {
-              from_name: formState.name,
-              name: formState.name,
-              user_name: formState.name,
-              from_email: formState.email,
-              email: formState.email,
-              user_email: formState.email,
-              reply_to: formState.email,
-              phone: formState.phone || "Not provided",
-              contact_number: formState.phone || "Not provided",
-              subject: formState.subject || "General Project Discussion",
-              title: formState.subject || "General Project Discussion",
-              message: formState.message,
-              message_html: formState.message,
-            },
-            { publicKey: "kUDnhN5l63awEUq0y" }
-          );
-        } catch (errPrimary) {
-          console.warn("EmailJS primary template attempt notice:", errPrimary);
-          // Fallback to secondary template ID if configured
-          res = await emailjs.send(
-            "service_azcv23s",
-            "es1ha4f",
-            {
-              from_name: formState.name,
-              name: formState.name,
-              user_name: formState.name,
-              from_email: formState.email,
-              email: formState.email,
-              user_email: formState.email,
-              reply_to: formState.email,
-              phone: formState.phone || "Not provided",
-              contact_number: formState.phone || "Not provided",
-              subject: formState.subject || "General Project Discussion",
-              title: formState.subject || "General Project Discussion",
-              message: formState.message,
-              message_html: formState.message,
-            },
-            { publicKey: "kUDnhN5l63awEUq0y" }
-          );
-        }
-
-        if (res && res.status === 200) {
-          sent = true;
-        }
-      } catch (err) {
-        console.warn("EmailJS browser dispatch notice:", err);
-      }
-
-      // 2. Silent background fallback: Sends directly via Wancor relay with autoresponse back to user
-      if (!sent) {
-        try {
-          const response = await fetch("https://formsubmit.co/ajax/militantejuanenricodomanico@gmail.com", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-            body: JSON.stringify({
-              name: `Wancor (${formState.name})`,
-              email: formState.email,
-              _replyto: formState.email,
-              _subject: formState.subject
-                ? `[Wancor] ${formState.subject} - from ${formState.name}`
-                : `[Wancor] Project Inquiry from ${formState.name}`,
-              _template: "box",
-              _captcha: "false",
-              _autoresponse: `Hello ${formState.name},\n\nThank you for reaching out to Wancor! We have received your project inquiry and will review your specifications promptly.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nWancor (Wan Company)\nWeb & Mobile Software Development\nOfficial Logo: https://portfolio.juandomanicomilitante.workers.dev/tab-logo.png\nWebsite: https://portfolio.juandomanicomilitante.workers.dev\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
-              "Brand / Company": "Wancor",
-              "Official Logo": "https://portfolio.juandomanicomilitante.workers.dev/tab-logo.png",
-              "Client Name": formState.name,
-              "Client Email": formState.email,
-              "Contact Phone": formState.phone || "Not provided",
-              "Inquiry Subject": formState.subject || "General Project Discussion",
-              "Message Details": formState.message,
-              "Platform Source": "Wancor Portfolio Contact Hub",
-            }),
-          });
-
-          if (response.ok) {
-            sent = true;
-          }
-        } catch (fallbackErr) {
-          console.error("Background dispatch fallback error:", fallbackErr);
-        }
-      }
-
-      return sent;
-    };
-
-    // Fast completion delay (~450ms) so users don't wait long
-    const minDelay = new Promise((resolve) => setTimeout(resolve, 450));
-    const [sent] = await Promise.all([dispatchTask(), minDelay]);
-
-    clearInterval(progressInterval);
-    setSendProgress(100);
-
-    // Brief 120ms pause at 100% so user clearly sees full completion
-    await new Promise((resolve) => setTimeout(resolve, 140));
-
-        if (sent) {
-      // Record submission timestamp for 2-per-day rate limiting
-      try {
-        const currentList = getValidSubmissions();
-        const updated = [...currentList, Date.now()];
-        localStorage.setItem("wancor_contact_daily_submissions", JSON.stringify(updated));
-      } catch {
-        // localStorage not available
-      }
+        localStorage.setItem("wancor_contact_daily_submissions", JSON.stringify([...getValidSubmissions(), Date.now()]));
+      } catch { /* Browser storage is optional; server checks still apply. */ }
       refreshQuota();
+      setSendProgress(100);
       setFormStatus("success");
       setFormState({ name: "", email: "", phone: "", subject: "", message: "" });
-    } else {
+    } catch (error) {
+      setFormError(error instanceof Error ? error.message : "Unable to send. Please try again later.");
       setFormStatus("error");
+    } finally {
+      setTurnstileToken("");
+      setVerificationReset((value) => value + 1);
     }
   };
 
@@ -457,7 +342,7 @@ export default function ContactHub() {
           <div className="card-intro-text">
             <h3>Send a Message</h3>
             <p>
-              Send directly to Wancor right here on this page. You will receive an immediate confirmation.
+              Send your inquiry using a regular email address. Please complete the bot verification below.
             </p>
           </div>
 
@@ -512,6 +397,8 @@ export default function ContactHub() {
                 </label>
                 <input
                   id="contact-sender-name"
+                  minLength={2}
+                  maxLength={100}
                   type="text"
                   required
                   placeholder="e.g. Maria Santos"
@@ -527,6 +414,7 @@ export default function ContactHub() {
                 </label>
                 <input
                   id="contact-sender-email"
+                  maxLength={254}
                   type="email"
                   required
                   placeholder="e.g. maria@example.com"
@@ -544,6 +432,7 @@ export default function ContactHub() {
                 </label>
                 <input
                   id="contact-sender-phone"
+                  maxLength={40}
                   type="tel"
                   placeholder="e.g. +63 912 345 6789"
                   value={formState.phone}
@@ -558,6 +447,7 @@ export default function ContactHub() {
                 </label>
                 <input
                   id="contact-sender-subject"
+                  maxLength={160}
                   type="text"
                   placeholder="e.g. Collaboration on a new web app"
                   value={formState.subject}
@@ -576,6 +466,7 @@ export default function ContactHub() {
               </div>
               <textarea
                 id="contact-sender-message"
+                minLength={10}
                 required
                 rows={5}
                 maxLength={1000}
@@ -586,18 +477,20 @@ export default function ContactHub() {
               />
             </div>
 
+            <BotVerification onToken={setTurnstileToken} resetVersion={verificationReset} />
+
             {formStatus === "success" && (
               <div className="contact-status-banner success">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20 6L9 17l-5-5" />
                 </svg>
-                <span>Thank you! Your message was sent directly to Wancor. A confirmation has been dispatched to your email.</span>
+                <span>Thank you! Your message was sent to Wancor.</span>
               </div>
             )}
 
             {formStatus === "error" && (
               <div className="contact-status-banner error" style={{ background: "rgba(239, 68, 68, 0.1)", border: "1px solid rgba(239, 68, 68, 0.3)", color: "#ef4444", padding: "12px 16px", borderRadius: "10px", display: "flex", alignItems: "center", gap: "10px" }}>
-                <span>Unable to send message right now. Please check your internet connection and try again.</span>
+                <span>{formError || "Unable to send your message right now. Please try again later."}</span>
               </div>
             )}
 
@@ -606,13 +499,13 @@ export default function ContactHub() {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
-                <span>Directly delivers to Wancor with instant email confirmation</span>
+                <span>Protected by bot verification and disposable-email screening</span>
               </div>
 
               <button
                 type="submit"
                 className="submit-dispatch-btn"
-                disabled={formStatus === "submitting" || dailyRemaining === 0}
+                disabled={formStatus === "submitting" || dailyRemaining === 0 || !turnstileToken}
               >
                 <span>{dailyRemaining === 0 ? "Daily Limit Reached (2/2 today)" : formStatus === "submitting" ? `Sending... ${Math.round(sendProgress)}%` : "Send Message"}</span>
                 <span className="dispatch-arrow" aria-hidden="true">↗</span>
