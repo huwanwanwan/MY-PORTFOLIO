@@ -94,7 +94,7 @@ export default function EditorialContactBanner({ activePage }: { activePage: Pag
 
         {/* Big Statement Typography */}
         <h2 className="editorial-contact-statement editorial-title">
-          {content.titleLine1}
+          <span className="heading-highlight">{content.titleLine1}</span>
           <br />
           <span className="contact-statement-outline">{content.titleHighlight}</span>{" "}
           {content.titleLine2}

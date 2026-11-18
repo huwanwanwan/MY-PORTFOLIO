@@ -182,7 +182,7 @@ export function AboutSection({
               ABOUT ME · PHILIPPINES
             </p>
             <h2 id="about-heading" className="editorial-title">
-              Engineering web &amp; mobile solutions,
+              <span className="heading-highlight">Engineering web &amp; mobile solutions,</span>
               <br />
               <span className="text-muted">focused on usability and purpose.</span>
             </h2>
@@ -219,7 +219,7 @@ export function AboutSection({
               ABOUT ME · BULACAN, PHILIPPINES
             </p>
             <h1 id="about-heading" className="editorial-title">
-              My story and path,
+              <span className="heading-highlight">My story and path,</span>
               <br />
               <span className="text-muted">as an aspiring software developer.</span>
             </h1>
@@ -274,7 +274,7 @@ export function AboutSection({
             01 — MY DEVELOPMENT PRINCIPLES
           </p>
           <h2 id="about-approach-heading" className="editorial-title">
-            How I approach every build,
+            <span className="heading-highlight">How I approach every build,</span>
             <br />
             <span className="text-muted">practicality, clarity, and growth.</span>
           </h2>
@@ -331,7 +331,7 @@ export function AboutSection({
             02 — OUTSIDE THE CODE EDITOR
           </p>
           <h2 id="about-life-heading" className="editorial-title">
-            Life and interests,
+            <span className="heading-highlight">Life and interests,</span>
             <br />
             <span className="text-muted">outside daily development.</span>
           </h2>
@@ -563,7 +563,7 @@ export function ProjectsSection({
           SELECTED ACADEMIC &amp; PERSONAL WORK
         </p>
         <h1 id="projects-heading" className="editorial-title">
-          Featured project portfolio,
+          <span className="heading-highlight">Featured project portfolio,</span>
           <br />
           <span className="text-muted">from concepts to practical applications.</span>
         </h1>
@@ -604,7 +604,7 @@ export function SkillsSection({ compact = false }: { compact?: boolean } = {}) {
           TECHNICAL TOOLKIT &amp; ARCHITECTURE
         </p>
         <Heading id="skills-heading" className="editorial-title">
-          Technologies I build with,
+          <span className="heading-highlight">Technologies I build with,</span>
           <br />
           <span className="text-muted">tested through hands-on projects.</span>
         </Heading>
@@ -635,7 +635,7 @@ export function ExperienceSection({
           EDUCATION &amp; MILESTONES
         </p>
         <Heading id="experience-heading" className="editorial-title">
-          My development journey,
+          <span className="heading-highlight">My development journey,</span>
           <br />
           <span className="text-muted">education, growth, and milestones.</span>
         </Heading>

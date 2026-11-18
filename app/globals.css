@@ -20570,3 +20570,27 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
 @media(prefers-reduced-motion:reduce) {
  .page .skills-project-timeline-card,.page .skills-project-timeline-thumbnail img,.page .skills-project-timeline-marker { transition: none; transform: none !important; }
 }
+
+/* Reference heading highlights, with theme-specific readable colors. */
+.page .heading-highlight {
+  display: inline;
+  padding: .015em .10em .045em;
+  background: #ffdccd;
+  color: #541a2e;
+  -webkit-text-fill-color: #541a2e;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  text-shadow: none;
+}
+.page.dark .heading-highlight { background: #541a2e; color: #fff5ef; -webkit-text-fill-color: #fff5ef; }
+html[data-theme="dark"] body .page .profile-intro .hero-name {
+  background-image: linear-gradient(180deg,#ffa586 0%,#ff8678 35%,#ef3e45 72%,#ef3e45 100%) !important;
+}
+.page .skill-icon-category { color: var(--text-secondary) !important; }
+.page .skill-card-icon { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; }
+.page .skill-card-icon .tech-icon-svg { width: 36px; height: 36px; }
+.page.dark .tech-icon-svg:has(image:is([href="/tech/express.svg"],[href="/tech/github.svg"],[href="/tech/flask.svg"],[href="/tech/chatgpt.svg"],[href="/tech/grok.svg"],[href="/tech/threejs.svg"],[href="/tech/vercel.svg"])) { filter: brightness(0) invert(1); }
+
+/* Keep descenders visible when highlighted headings wrap onto another line. */
+.page .editorial-title:has(> .heading-highlight) { line-height: 1.35 !important; overflow: visible; }
+.page .heading-highlight { padding: .015em .10em .08em; }

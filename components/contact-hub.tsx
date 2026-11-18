@@ -178,7 +178,7 @@ export default function ContactHub({ compact = false }: { compact?: boolean } = 
           LET&apos;S CONNECT &amp; BUILD
         </p>
         <Heading id="contact-heading" className="editorial-title">
-          Let&apos;s start a conversation,
+          <span className="heading-highlight">Let&apos;s start a conversation,</span>
           <br />
           <span className="contact-statement-outline">open for opportunities</span> &amp; projects.
         </Heading>

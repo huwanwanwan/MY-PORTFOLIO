@@ -182,7 +182,7 @@ function CertificationCategoryGallery({
             <>
               <p className="editorial-eyebrow"><span className="editorial-eyebrow-dot" aria-hidden="true" />{categoryIntroductions[category].eyebrow}</p>
               <h3 className="editorial-title cert-category-editorial-title" id={`cert-category-${category.toLowerCase()}`}>
-                {categoryIntroductions[category].lead}<br />
+                <span className="heading-highlight">{categoryIntroductions[category].lead}</span><br />
                 <span className="text-muted">{categoryIntroductions[category].detail}</span>
               </h3>
               <p className="cert-gallery-subtitle">{categoryIntroductions[category].description}</p>

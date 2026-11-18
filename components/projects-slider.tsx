@@ -156,39 +156,17 @@ export default function ProjectsSlider() {
   }, [activeCategory]);
 
   function scroll(direction: "left" | "right") {
-    if (!scrollContainerRef.current) return;
     const track = scrollContainerRef.current;
-    const cards = Array.from(track.children).filter((el): el is HTMLElement => el instanceof HTMLElement);
-    if (cards.length === 0) return;
-
-    const viewportCenter = track.scrollLeft + track.clientWidth / 2;
-    let activeIndex = 0;
-    let minDistance = Infinity;
-
-    for (let i = 0; i < cards.length; i++) {
-      const card = cards[i];
-      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-      const distance = Math.abs(cardCenter - viewportCenter);
-      if (distance < minDistance) {
-        minDistance = distance;
-        activeIndex = i;
-      }
-    }
-
-    const targetIndex = direction === "left"
-      ? Math.max(0, activeIndex - 1)
-      : Math.min(cards.length - 1, activeIndex + 1);
-
-    if (targetIndex === activeIndex) return;
-
-    const targetCard = cards[targetIndex];
-    if (!targetCard) return;
-
-    const targetLeft = targetCard.offsetLeft - (track.clientWidth - targetCard.offsetWidth) / 2;
-    track.scrollTo({
-      left: Math.max(0, targetLeft),
-      behavior: "smooth",
-    });
+    if (!track || !track.firstElementChild) return;
+    const max = track.scrollWidth - track.clientWidth;
+    if (max <= 1) return;
+    const card = track.firstElementChild as HTMLElement;
+    const step = card.offsetWidth + (parseFloat(getComputedStyle(track).columnGap) || 0);
+    const wrapping = direction === "left" ? track.scrollLeft <= 2 : track.scrollLeft >= max - 2;
+    const left = direction === "left"
+      ? (track.scrollLeft <= 2 ? max : Math.max(0, track.scrollLeft - step))
+      : (track.scrollLeft >= max - 2 ? 0 : Math.min(max, track.scrollLeft + step));
+    track.scrollTo({ left, behavior: wrapping || window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   }
 
   return (
@@ -201,7 +179,7 @@ export default function ProjectsSlider() {
             INTERACTIVE PROJECT CAROUSEL
           </p>
           <h2 className="editorial-title">
-            Applications &amp; experiments,
+            <span className="heading-highlight">Applications &amp; experiments,</span>
             <br />
             <span className="text-muted">built across college and self-study.</span>
           </h2>
@@ -218,7 +196,7 @@ export default function ProjectsSlider() {
                 key={cat}
                 type="button"
                 className={`cert-pill-btn${activeCategory === cat ? " active" : ""}`}
-                onClick={() => setActiveCategory(cat)}
+                onClick={() => { setActiveCategory(cat); scrollContainerRef.current?.scrollTo({ left: 0, behavior: "instant" }); }}
               >
                 {cat}
               </button>
