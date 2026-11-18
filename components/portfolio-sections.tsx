@@ -226,7 +226,6 @@ export function AboutSection({
   return (
     <>
       <section className="section-block content-section about-life about-personal-hero" id="about" aria-labelledby="about-heading">
-        <svg className="about-personal-ribbon about-personal-ribbon-top" viewBox="0 0 800 160" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="personal-ribbon-top"><stop stopColor="#ef3653" /><stop offset=".65" stopColor="#ffa586" /><stop offset="1" stopColor="#ef3653" /></linearGradient></defs><path d="M0 140C300 172 570 26 800 0V85C530 5 330 190 0 140Z" fill="url(#personal-ribbon-top)" /></svg>
         <header className="about-personal-heading">
           <div><p className="editorial-eyebrow"><span className="editorial-eyebrow-dot" aria-hidden="true" />02 &#8212; OUTSIDE THE CODE EDITOR</p>
           <h1 id="about-heading" className="editorial-title"><span className="heading-highlight">Life and interests,</span><br /><span className="text-muted">outside daily development.</span></h1></div>
