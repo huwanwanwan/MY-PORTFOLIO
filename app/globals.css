@@ -21088,3 +21088,8 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
 
 /* Match the About portrait's white outer rim and red inner rim in light mode. */
 .page:not(.dark) .home-portrait-image { filter: url(#home-portrait-outline) !important; }
+
+/* Plain quote panel without gradients or decorative corner shapes. */
+.page .about-personal-quote { background: #242f49; }
+.page:not(.dark) .about-personal-quote { background: #f2e6ea; }
+.page .about-personal-quote::after { content: none; }
