@@ -29,7 +29,15 @@ export default function Home() {
         data-scroll-reveal
         aria-labelledby="home-heading"
       >
-        <svg className="hero-waves" viewBox="0 0 1600 180" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="hero-wave"><stop stopColor="#FFA586"/><stop offset=".4" stopColor="#384358"/><stop offset="1" stopColor="#B51A2B"/></linearGradient></defs><path d="M0 42C210 36 266 188 620 140S1000 232 1250 80S1500 -6 1600 0V180H0Z" fill="url(#hero-wave)"/><path d="M0 146C300 180 440 122 710 151S1060 208 1320 110S1510 33 1600 36V180H0Z" fill="#541A2E" opacity=".74"/></svg>
+        <svg className="hero-waves" viewBox="0 0 1600 180" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="hero-wave" x1="0%" y1="0%" x2="100%" y2="0%"><stop stopColor="#FFA586"/><stop offset=".25" stopColor="#B51A2B"/><stop offset=".52" stopColor="#384358"/><stop offset="1" stopColor="#B51A2B"/></linearGradient>
+            <linearGradient id="hero-wave-shadow"><stop stopColor="#384358" stopOpacity=".5"/><stop offset=".5" stopColor="#161B2F" stopOpacity=".1"/><stop offset="1" stopColor="#541A2E"/></linearGradient>
+          </defs>
+          <path d="M0 12C150 42 165 153 385 179C650 146 715 183 905 180C1200 185 1320 74 1455 48C1520 35 1560 35 1600 38V180H0Z" fill="url(#hero-wave-shadow)"/>
+          <path d="M0 112C145 114 245 169 385 180C650 160 720 177 905 180C1235 198 1330 55 1475 42C1535 35 1575 38 1600 41V180H0Z" fill="url(#hero-wave)"/>
+          <path d="M0 179C410 180 520 165 710 174S1035 202 1220 161C1390 128 1460 83 1600 91V180H0Z" fill="url(#hero-wave-shadow)"/>
+        </svg>
         <div className="profile-copy">
           <p className="eyebrow">
             <span className="availability-dot" aria-hidden="true" />

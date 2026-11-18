@@ -2,6 +2,12 @@ export function TechIcon({ name }: { name: string }) {
   const norm = name.toLowerCase().trim();
 
   const logoFiles: Record<string, string> = {
+    html: "html5", html5: "html5", css: "css3", css3: "css3",
+    javascript: "javascript", js: "javascript", react: "react", "react.js": "react",
+    kotlin: "kotlin", "node.js": "nodejs", nodejs: "nodejs", git: "git",
+    java: "java", "java programming": "java", unity: "unity", "c#": "csharp",
+    arduino: "arduino", "arduino ide": "arduino", mysql: "mysql", php: "php",
+    python: "python", postgresql: "postgresql", plpgsql: "postgresql",
     dart: "dart", flutter: "flutter", riverpod: "riverpod",
     typescript: "typescript", "next.js": "nextjs", nextjs: "nextjs",
     supabase: "supabase", "maplibre gl": "maplibre", maplibre: "maplibre",

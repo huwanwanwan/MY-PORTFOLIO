@@ -20440,3 +20440,133 @@ body .cert-lightbox-backdrop .cert-lightbox-container :is(.cert-lightbox-arrow, 
  .page .profile-intro .intro-link { min-height: 42px; padding: 10px 24px; }
  .page .profile-intro .hero-tech-badge { min-height: 30px; padding: 5px 12px; }
 }
+
+/* Quiet surface boundaries: sections are separated by tone and spacing. */
+:root {
+  --line: #161b2f0d;
+  --card-border: #161b2f12;
+  --tag-border: #161b2f12;
+  --section-divider: transparent;
+  --hero-divider: transparent;
+}
+:root[data-theme="dark"], body.dark, .page.dark {
+  --line: #f4f6fc0a;
+  --card-border: #f4f6fc0f;
+  --tag-border: #f4f6fc0f;
+  --section-divider: transparent;
+  --hero-divider: transparent;
+}
+.page .topbar { border-color: transparent !important; box-shadow: none !important; }
+.page :is(.profile-intro,.content-section,.editorial-contact-band,.site-mega-footer,.skills-project-timeline-section,.cert-category-group) {
+  border-top-color: transparent !important;
+  border-bottom-color: transparent !important;
+}
+.page :is(.github-calendar-card,.skills-project-timeline-card,.capability-card.capability-card-colonized) {
+  border-color: var(--card-border) !important;
+}
+.page .topbar .primary-nav a:not([aria-current="page"]) { border-color: transparent !important; }
+
+/* Reference hero: layered waves, translucent disc and a visible gradient seam. */
+.page .profile-intro { background: radial-gradient(ellipse at 100% 86%,#ffa586 0%,#ffd4c2 23%,transparent 60%),linear-gradient(112deg,#f7f8fc 33%,#f4dce0 73%,#b51a2b); }
+.page.dark .profile-intro { background: radial-gradient(ellipse at 100% 88%,#ffa586 0%,#d22b3c 26%,#7c172d 42%,transparent 67%),linear-gradient(112deg,#161b2f 27%,#1e2439 53%,#541a2e); }
+.page .hero-waves { height: 180px; }
+.page .profile-intro::after { content: ""; position: absolute; inset: auto 0 0; z-index: 5; height: 1px; background: linear-gradient(90deg,#38435888,#ffa586aa 28%,#b51a2b 66%,#ffa586aa); }
+.page .home-portrait-frame::before { width: 138%; left: -19%; bottom: -63%; background: linear-gradient(150deg,#b51a2b88,#e65a6077 60%,#ffa58622); }
+.page .topbar { box-shadow: 0 1px 0 color-mix(in srgb,var(--ink) 6%,transparent) !important; }
+
+.page .profile-intro .hero-tech-icons { max-width: 450px; gap: 7px; }
+.page .profile-intro .hero-tech-badge { border-color: color-mix(in srgb,var(--ink) 35%,transparent); }
+.page .github-calendar-card { border-color: color-mix(in srgb,var(--ink) 16%,transparent) !important; }
+
+@media(max-width:1099px) { .page .hero-waves { height: 140px; } }
+
+.page .profile-intro .intro-link:not(.intro-link-secondary) { color: #fff !important; background: #b51a2b !important; border-color: #b51a2b !important; }
+.page .profile-intro .intro-link-secondary { background: transparent !important; color: var(--ink); border-color: color-mix(in srgb,var(--ink) 36%,transparent); }
+
+
+/* Original content scale, crisp brand icons, and no rule under the navigation. */
+.page .topbar { border-bottom: 0 !important; box-shadow: none !important; }
+.page .topbar::after { content: none !important; }
+.page .home-portrait-image {
+  filter: drop-shadow(0 -2px 0 #b51a2b) drop-shadow(1.5px -1.5px 0 #b51a2b) drop-shadow(2px 0 0 #b51a2b) drop-shadow(1.5px 1.5px 0 #b51a2b) drop-shadow(0 2px 0 #b51a2b) drop-shadow(-1.5px 1.5px 0 #b51a2b) drop-shadow(-2px 0 0 #b51a2b) drop-shadow(-1.5px -1.5px 0 #b51a2b) !important;
+}
+.page.dark .home-portrait-image {
+  filter: drop-shadow(0 -2px 0 #ffa586) drop-shadow(2px 0 0 #ffa586) drop-shadow(0 2px 0 #ffa586) drop-shadow(-2px 0 0 #ffa586) !important;
+}
+.page .profile-intro .hero-tech-badge .tech-icon-svg { width: 20px; height: 20px; flex: 0 0 20px; }
+.page .brand-tech-badge .tech-icon-svg { width: 18px; height: 18px; flex: 0 0 18px; }
+.page.dark .tech-icon-svg:has(image[href="/tech/nextjs.svg"]),
+.page.dark .tech-icon-svg:has(image[href="/tech/unity.svg"]) { background: #fff; border-radius: 4px; padding: 1px; }
+@media(min-width:1024px) {
+ .page .profile-intro { min-height: 570px; padding-top: 56px; grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+ .page .home-portrait-frame { width: min(100%,500px); max-width: 500px; min-height: 450px; height: auto; aspect-ratio: .95; }
+ .page .github-activity-heading,.page .github-calendar-card { max-width: 1200px; }
+}
+
+html[data-theme] body .page .topbar { border-bottom: 0 !important; box-shadow: none !important; }
+
+/* Continuous surfaces remove dark bands and highlighted section joins. */
+html[data-theme] body .page .topbar {
+  background: var(--canvas) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+html[data-theme] body .page .content-section {
+  background: var(--canvas) !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  border-image: none !important;
+  box-shadow: none !important;
+}
+.page .profile-intro::after { content: none !important; }
+.page .profile-intro { border-bottom: 0 !important; }
+html[data-theme] body .page .profile-intro .hero-name {
+  background: linear-gradient(90deg,#b51a2b 0%,#c3334a 100%) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: #b51a2b !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+html[data-theme="dark"] body .page .profile-intro .hero-name {
+  background-image: linear-gradient(90deg,#ffa586 0%,#ff8984 100%) !important;
+  color: #ffa586 !important;
+}
+/* Cards retain a quiet edge without heavy shadows or accent hover outlines. */
+html[data-theme] body .page :is(
+ .cert-grid-card,.cert-slide-card,.project-slide-card,.skills-scroll-card,
+ .skills-project-timeline-card,.skills-timeline-card,.github-calendar-card,
+ .capability-card,.capability-card.capability-card-colonized,
+ .home-summary-card,.contact-channel-card,.contact-main-card,
+ .info-panel,.experience-card,.contact-panel,.work-card,.education-card,
+ .quest-card,.smart-hero-card,.smart-thumb-card
+) {
+  border-color: color-mix(in srgb,var(--ink) 7%,transparent) !important;
+  box-shadow: none !important;
+}
+
+/* Remove the empty panel-colored spacer above the shared contact banner. */
+html[data-theme] body .page .portfolio-shell { background: var(--canvas); padding-bottom: 0; }
+html[data-theme] body .page .editorial-contact-band { margin-top: 0 !important; border-top: 0 !important; box-shadow: none !important; }
+/* A vertical light-to-dark gradient stays consistent across wrapped title lines. */
+html[data-theme] body .page .profile-intro .hero-name {
+  background-image: linear-gradient(180deg,color-mix(in srgb,#ffa586 55%,#541a2e) 0%,#b51a2b 58%,#541a2e 100%) !important;
+}
+html[data-theme="dark"] body .page .profile-intro .hero-name {
+  background-image: linear-gradient(180deg,#ffa586 0%,color-mix(in srgb,#ffa586 80%,#b51a2b) 48%,color-mix(in srgb,#ffa586 45%,#b51a2b) 100%) !important;
+}
+.page .skills-project-timeline-card { transition: transform 240ms ease,background-color 240ms ease; }
+.page .skills-project-timeline-thumbnail img { transition: transform 280ms ease; }
+.page .skills-project-timeline-marker { transition: transform 240ms ease; }
+@media(hover:hover) and (pointer:fine) {
+ .page .skills-project-timeline-card:hover { transform: translate(6px,-4px); background-color: color-mix(in srgb,var(--accent) 5%,var(--card-surface)); }
+ .page .skills-project-timeline-card:hover .skills-project-timeline-thumbnail img { transform: scale(1.07); }
+ .page .skills-project-timeline-entry:hover .skills-project-timeline-marker { transform: scale(1.15); }
+}
+.page .skills-project-timeline-card:focus-within { transform: translate(6px,-4px); background-color: color-mix(in srgb,var(--accent) 5%,var(--card-surface)); }
+@media(prefers-reduced-motion:reduce) {
+ .page .skills-project-timeline-card,.page .skills-project-timeline-thumbnail img,.page .skills-project-timeline-marker { transition: none; transform: none !important; }
+}
