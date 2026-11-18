@@ -38,3 +38,28 @@ export function parseContributionCalendar(html: string): ContributionCalendar {
     updatedAt: new Date().toISOString(),
   };
 }
+
+export function rollingContributionCalendar(
+  calendars: ContributionCalendar[],
+  now = new Date(),
+): ContributionCalendar {
+  const end = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+  const start = new Date(end);
+  start.setUTCDate(start.getUTCDate() - 364);
+  const firstDate = start.toISOString().slice(0, 10);
+  const lastDate = end.toISOString().slice(0, 10);
+  const byDate = new Map<string, ContributionDay>();
+  for (const calendar of calendars) {
+    for (const day of calendar.days) {
+      if (day.date >= firstDate && day.date <= lastDate) byDate.set(day.date, day);
+    }
+  }
+  const days = [...byDate.values()].sort((a, b) => a.date.localeCompare(b.date));
+  if (days.length !== 365) throw new Error("Incomplete rolling contribution calendar");
+  return {
+    username: "huwanwanwan",
+    total: days.reduce((sum, day) => sum + day.count, 0),
+    days,
+    updatedAt: now.toISOString(),
+  };
+}
