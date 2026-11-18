@@ -271,7 +271,6 @@ export function AboutSection({
             </article>
           </div>
         </div>
-        <svg className="about-personal-ribbon about-personal-ribbon-bottom" viewBox="0 0 800 160" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="personal-ribbon-bottom"><stop stopColor="#ef3653" /><stop offset=".35" stopColor="#ffa586" /><stop offset="1" stopColor="#b51a2b" /></linearGradient></defs><path d="M0 32C260-8 420 150 800 145C420 180 240 15 0 128Z" fill="url(#personal-ribbon-bottom)" /></svg>
       </section>
       <section
         className="section-block content-section about-approach about-reference-approach scroll-reveal"
@@ -303,7 +302,7 @@ export function AboutSection({
             <p>
               I take time to understand the goals and requirements before writing code.
             </p>
-            
+
           </article>
           <article className="about-principle scroll-reveal" data-scroll-reveal>
             <div className="about-principle-top">
@@ -314,7 +313,7 @@ export function AboutSection({
             <p>
               I break the idea into smaller, practical steps and build it with intention.
             </p>
-            
+
           </article>
           <article className="about-principle scroll-reveal" data-scroll-reveal>
             <div className="about-principle-top">
@@ -325,7 +324,7 @@ export function AboutSection({
             <p>
               I revisit, refine, and explore new tools and ideas to make each project better.
             </p>
-            
+
           </article>
         </div>
       </section>
