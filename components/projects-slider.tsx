@@ -2,7 +2,7 @@
 
 import SeekableVideo from "./seekable-video";
 
-import { useState, useRef, useMemo, useEffect } from "react";
+import { useState, useRef, useMemo, useEffect, useLayoutEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { projectsData, type ProjectItem } from "../data/projects-data";
@@ -155,18 +155,53 @@ export default function ProjectsSlider() {
     return list;
   }, [activeCategory]);
 
+  const cloneCount = filtered.length > 1 ? Math.min(2, filtered.length) : 0;
+  const slides = cloneCount
+    ? [...filtered.slice(-cloneCount), ...filtered, ...filtered.slice(0, cloneCount)]
+    : filtered;
+
+  useLayoutEffect(() => {
+    const track = scrollContainerRef.current;
+    if (!track) return;
+    const positionAtStart = () => {
+      const cards = track.children;
+      if (!cards.length) return;
+      const first = cards[0] as HTMLElement;
+      const start = cards[cloneCount] as HTMLElement;
+      track.scrollTo({ left: start.offsetLeft - first.offsetLeft, behavior: "instant" });
+    };
+    positionAtStart();
+    const resize = new ResizeObserver(positionAtStart);
+    resize.observe(track);
+    let timer: ReturnType<typeof setTimeout>;
+    const normalize = () => {
+      if (!cloneCount || track.children.length < 2) return;
+      const first = track.children[0] as HTMLElement;
+      const second = track.children[1] as HTMLElement;
+      const step = second.offsetLeft - first.offsetLeft;
+      const start = cloneCount * step;
+      const cycle = filtered.length * step;
+      if (track.scrollLeft < start - step / 2) {
+        track.scrollTo({ left: track.scrollLeft + cycle, behavior: "instant" });
+      } else if (track.scrollLeft >= start + cycle - step / 2) {
+        track.scrollTo({ left: track.scrollLeft - cycle, behavior: "instant" });
+      }
+    };
+    const onScroll = () => { clearTimeout(timer); timer = setTimeout(normalize, 140); };
+    track.addEventListener("scroll", onScroll, { passive: true });
+    return () => { clearTimeout(timer); resize.disconnect(); track.removeEventListener("scroll", onScroll); };
+  }, [filtered, cloneCount]);
+
   function scroll(direction: "left" | "right") {
     const track = scrollContainerRef.current;
-    if (!track || !track.firstElementChild) return;
-    const max = track.scrollWidth - track.clientWidth;
-    if (max <= 1) return;
-    const card = track.firstElementChild as HTMLElement;
-    const step = card.offsetWidth + (parseFloat(getComputedStyle(track).columnGap) || 0);
-    const wrapping = direction === "left" ? track.scrollLeft <= 2 : track.scrollLeft >= max - 2;
-    const left = direction === "left"
-      ? (track.scrollLeft <= 2 ? max : Math.max(0, track.scrollLeft - step))
-      : (track.scrollLeft >= max - 2 ? 0 : Math.min(max, track.scrollLeft + step));
-    track.scrollTo({ left, behavior: wrapping || window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+    if (!track || filtered.length < 2 || track.children.length < 2) return;
+    const first = track.children[0] as HTMLElement;
+    const second = track.children[1] as HTMLElement;
+    const step = second.offsetLeft - first.offsetLeft;
+    track.scrollBy({
+      left: direction === "left" ? -step : step,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+    });
   }
 
   return (
@@ -196,7 +231,7 @@ export default function ProjectsSlider() {
                 key={cat}
                 type="button"
                 className={`cert-pill-btn${activeCategory === cat ? " active" : ""}`}
-                onClick={() => { setActiveCategory(cat); scrollContainerRef.current?.scrollTo({ left: 0, behavior: "instant" }); }}
+                onClick={() => setActiveCategory(cat)}
               >
                 {cat}
               </button>
@@ -242,13 +277,17 @@ export default function ProjectsSlider() {
           tabIndex={0}
           aria-label="Projects sliding track"
         >
-          {filtered.map((project: ProjectItem, index) => {
-            const indexStr = String(index + 1).padStart(2, "0");
+          {slides.map((project: ProjectItem, index) => {
+            const logicalIndex = (index - cloneCount + filtered.length) % filtered.length;
+            const indexStr = String(logicalIndex + 1).padStart(2, "0");
+            const isClone = index < cloneCount || index >= cloneCount + filtered.length;
             const firstImage = project.images && project.images.length > 0 ? project.images[0] : null;
 
             return (
               <article
-                key={project.id}
+                key={`${project.id}-${index}`}
+                aria-hidden={isClone || undefined}
+                inert={isClone || undefined}
                 className="project-slide-card scroll-reveal"
                 data-scroll-reveal
                 data-reveal-delay={(index % 4) * 80}

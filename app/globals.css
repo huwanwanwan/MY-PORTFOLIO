@@ -15280,60 +15280,28 @@ html.dark .cert-lightbox-desc {
 
 
 .home-about-reversed-grid {
-
   max-width: 1200px;
-
   margin: 0 auto;
-
   display: grid;
-
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-
   align-items: center;
-
   gap: clamp(36px, 6vw, 80px);
-
 }
-
-
 
 .home-about-stats-matrix {
-
   display: grid;
-
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-
-  gap: 1px;
-
-  background: var(--line);
-
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  background: var(--card-surface);
   border: 1px solid var(--card-border);
-
   border-radius: 24px;
-
   overflow: hidden;
-
   box-shadow: 0 14px 36px rgba(0, 0, 0, 0.05);
-
-  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1), opacity 900ms cubic-bezier(0.22, 1, 0.36, 1);
-
 }
 
-
-
-.dark .home-about-stats-matrix,
-
-[data-theme="dark"] .home-about-stats-matrix {
-
-  background: rgba(255, 255, 255, 0.1);
-
-  border-color: rgba(255, 255, 255, 0.12);
-
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.32);
-
+.home-about-stats-matrix > .home-stat-cell + .home-stat-cell {
+  border-top: 1px solid var(--card-border);
 }
-
-
 
 .home-stat-cell {
 
@@ -15354,6 +15322,11 @@ html.dark .cert-lightbox-desc {
   cursor: pointer;
 
   transition: background 0.22s ease, transform 0.22s ease;
+
+  min-width: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 
 }
 
@@ -20594,3 +20567,524 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
 /* Keep descenders visible when highlighted headings wrap onto another line. */
 .page .editorial-title:has(> .heading-highlight) { line-height: 1.35 !important; overflow: visible; }
 .page .heading-highlight { padding: .015em .10em .08em; }
+
+/* Align the looping project's copies to exactly the same card position. */
+.page .projects-slider-scroll > .project-slide-card { scroll-snap-align: start !important; scroll-snap-stop: normal !important; }
+
+/* About page reference layout: personal cards and compact learning timeline. */
+.about-life .about-details-grid-personal { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.about-life .about-detail-card-wide { grid-column: 1 / -1; }
+.about-life .about-card-kicker > .about-icon { width: 28px; height: 28px; padding: 6px; border: 1px solid var(--card-border); border-radius: 9px; background: var(--raised-surface); color: var(--accent); }
+.about-life .about-detail-card h3 { font-weight: 500; }
+.about-journey-layout { display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+.about-journey-timeline { position: relative; border-left: 1px solid var(--card-border); padding-left: 24px; }
+.about-journey-row { position: relative; display: flex; align-items: center; gap: 14px; padding: 18px; border-bottom: 1px solid var(--card-border); }
+.about-journey-row:last-child { border-bottom: 0; }
+.about-journey-row::before { content: ''; position: absolute; left: -29px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 55%, transparent); }
+.about-journey-icon { display: grid; place-items: center; flex: 0 0 36px; width: 36px; height: 36px; border-radius: 9px; color: var(--accent); background: color-mix(in srgb, var(--palette-burgundy) 65%, var(--card-surface)); }
+.about-journey-icon svg { width: 20px; height: 20px; margin: 0; padding: 0; border-radius: 0; background: transparent; color: inherit; }
+.about-journey-layout h4 { margin: 0 0 4px; color: var(--ink); font-size: 14px; font-weight: 650; }
+.about-journey-layout p { margin: 0; color: var(--text-secondary); font-size: 12px; line-height: 1.6; }
+.about-journey-row > div { min-width: 0; }
+.about-journey-date { margin-left: auto; flex-shrink: 0; border: 1px solid var(--card-border); border-radius: 999px; padding: 4px 10px; font-size: 11px; color: var(--text-secondary); }
+.about-journey-summary { display: grid; gap: 20px; padding: 24px; border: 1px solid var(--card-border); border-radius: 16px; background: var(--card-surface); }
+.about-journey-summary > div { display: flex; align-items: flex-start; gap: 12px; }
+.about-journey-summary strong { display: block; color: var(--ink); font-size: 12px; margin-bottom: 3px; }
+.about-school-details { margin-top: 24px; }
+.about-school-details > summary { cursor: pointer; color: var(--accent); padding: 12px 0; font-size: 14px; }
+.about-school-details[open] > summary { margin-bottom: 16px; }
+@media (max-width: 800px) { .about-journey-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+@media (max-width: 600px) { .about-life .about-details-grid-personal { grid-template-columns: minmax(0, 1fr); } .about-journey-row { flex-wrap: wrap; padding: 16px 8px; } .about-journey-date { margin-left: 50px; } }
+
+/* About interests heading and surfaces remain readable in both themes. */
+.page .about-life {
+  --about-heading-surface: #ffdccd;
+  --about-heading-ink: #541a2e;
+}
+.page.dark .about-life {
+  --about-heading-surface: #541a2e;
+  --about-heading-ink: #fff5ef;
+}
+.page .about-life #about-life-heading {
+  font-size: clamp(2.1rem, 4.8vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -.025em;
+  line-height: 1.35;
+}
+.page .about-life #about-life-heading .heading-highlight {
+  background: var(--about-heading-surface);
+  color: var(--about-heading-ink);
+  -webkit-text-fill-color: var(--about-heading-ink);
+  padding: .025em .1em .08em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.page .about-life #about-life-heading .text-muted {
+  color: var(--muted);
+  -webkit-text-fill-color: currentColor;
+}
+.page .about-life :is(.editorial-eyebrow, .section-kicker) { color: var(--eyebrow-ink); }
+.page .about-life :is(.about-detail-card, .about-journey-summary) { background: var(--card-surface); border-color: var(--card-border); color: var(--ink); }
+.page .about-life :is(.about-card-kicker > .about-icon, .about-highlight-icon-badge, .about-journey-icon) { background: var(--icon-surface); color: var(--icon-ink); border-color: var(--card-border); }
+.page .about-life :is(.about-highlight-kicker, .about-detail-card h3 span) { color: var(--section-ink); }
+.page .about-life .about-favorites-list dt { color: var(--text-secondary); }
+.page .about-life .about-favorites-list dd { color: var(--ink); }
+.page .about-life .about-favorites-list > div { border-color: var(--line); }
+.page .about-life .about-detail-highlight { border-color: var(--line); }
+.page .about-life .about-highlight-quote { color: var(--ink); }
+
+/* Reference composition for the About hero and development principles. */
+.page .about-reference-hero, .page .about-reference-approach { position: relative; isolation: isolate; background: transparent; }
+.page .about-reference-hero { padding-top: clamp(40px, 6vw, 72px); padding-bottom: clamp(40px, 6vw, 72px); }
+.page .about-reference-hero .about-hero-grid { position: relative; z-index: 1; max-width: 1200px; grid-template-columns: minmax(0, 1fr) minmax(320px, .68fr); gap: clamp(40px, 7vw, 100px); align-items: center; }
+.page .about-reference-hero .about-hero-copy h1 { font-size: clamp(40px, 5.5vw, 72px); font-weight: 800; letter-spacing: -.035em; }
+.page .about-reference-hero .heading-highlight, .page .about-reference-approach .heading-highlight { border-radius: 6px; }
+.page .about-reference-hero .about-lead { font-size: clamp(17px, 1.5vw, 20px); line-height: 1.8; margin-top: 24px; }
+.page .about-reference-hero .about-supporting-copy { font-size: 16px; line-height: 1.8; margin-top: 12px; }
+.page .about-reference-hero .about-actions { margin-top: 16px; gap: 20px; }
+.page .about-reference-hero .about-actions .intro-link { font-size: 14px; padding: 11px 26px; border-radius: 16px; }
+.page .about-reference-hero .intro-link-secondary { background: transparent; border: 1px solid var(--muted); color: var(--ink); }
+.page .about-reference-hero .about-profile-card { border-radius: 22px; background: var(--card-surface); }
+.page .about-reference-hero .about-portrait-frame { margin: 0; min-height: 0; aspect-ratio: 1.12; background: radial-gradient(ellipse at 50% 100%, #ef3e45 0%, #9b1538 42%, #242034 100%); }
+.page .about-reference-hero .about-portrait-image { object-fit: contain; object-position: center bottom; filter: drop-shadow(2px 0 0 #ffa586) drop-shadow(-2px 0 0 #ffa586) drop-shadow(0 -2px 0 #ffa586); }
+.page .about-reference-hero .about-portrait-frame figcaption { position: absolute; bottom: 0; font-size: 9px; letter-spacing: 0; padding: 13px 15px; flex-wrap: nowrap; }
+.page .about-reference-hero .about-portrait-frame figcaption span + span { border-left: 1px solid var(--muted); padding-left: 16px; }
+.page .about-reference-hero .about-profile-meta { padding: 14px 20px; border: 0; gap: 6px 12px; }
+.page .about-reference-hero .about-profile-meta .section-kicker { font-size: 11px; color: var(--accent); }
+.page .about-reference-hero .about-profile-meta strong { font-size: 13px; }
+.page .about-reference-hero .about-profile-meta p { font-size: 10px; }
+.page .about-reference-approach { padding-top: 30px; padding-bottom: 60px; border-top: 1px solid var(--line); }
+.page .about-reference-approach > .editorial-heading { max-width: 1200px; margin: 0 auto 36px; }
+.page .about-reference-approach .editorial-title { font-size: clamp(2.1rem, 4.8vw, 3.5rem); }
+.page .about-reference-approach > .editorial-heading > p:last-child { border-left: 2px solid var(--muted); padding-left: 42px; font-size: 16px; line-height: 1.5; }
+.page .about-reference-approach .about-principles-grid { max-width: 1200px; margin: 0 auto; gap: 24px; }
+.page .about-reference-approach .about-principle { position: relative; isolation: isolate; overflow: hidden; border-radius: 22px; padding: 16px 24px 42px; background: var(--card-surface); }
+.page .about-reference-approach .about-principle-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.page .about-principle-symbol { display: grid; place-items: center; width: 48px; height: 48px; flex: 0 0 48px; border-radius: 13px; background: var(--icon-surface); color: var(--icon-ink); }
+.page .about-principle-symbol svg { width: 28px; height: 28px; margin: 0; padding: 0; background: transparent; color: inherit; }
+.page .about-reference-approach .about-principle-highlight { border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); font-size: 10px; padding: 7px 10px; letter-spacing: 0; white-space: nowrap; }
+.page .about-reference-approach .about-principle h3 { font-size: 22px; line-height: 1.3; margin-bottom: 12px; color: var(--ink); }
+.page .about-reference-approach .about-principle p { font-size: 15px; line-height: 1.5; color: var(--text-secondary); }
+.page.dark:has(.about-reference-hero) { background-image: radial-gradient(ellipse at 100% 5%, #b51a2b44, transparent 25%), radial-gradient(ellipse at 0% 26%, #b51a2b33, transparent 22%); }
+@media (max-width: 900px) {
+ .page .about-reference-hero .about-hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, .85fr); gap: 32px; }
+ .page .about-reference-approach .about-principles-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+ .page .about-reference-hero .about-hero-grid { grid-template-columns: minmax(0, 1fr); }
+ .page .about-reference-hero .about-profile-card { width: 100%; max-width: 380px; justify-self: center; }
+ .page .about-reference-approach > .editorial-heading > p:last-child { padding-left: 18px; }
+ .page .about-reference-hero .about-actions { flex-wrap: wrap; gap: 12px; }
+ .about-title-break { display: none; }
+}
+
+/* Refined reference geometry without decorative waves. */
+.page .about-reference-hero .about-profile-card { width: 100%; max-width: none; justify-self: stretch; border-radius: 22px; border-color: color-mix(in srgb,var(--muted) 35%,transparent); }
+.page .about-reference-hero .about-portrait-frame { aspect-ratio: 1.12; padding-bottom: 38px; background: radial-gradient(ellipse at 50% 92%,#ed3653 0%,#a5163b 37%,#491c35 65%,#242034 100%); }
+.page .about-reference-hero .about-portrait-image { inset: 12px 0 38px !important; width: 100% !important; height: calc(100% - 50px) !important; object-fit: cover; object-position: center 20%; clip-path: none; border-radius: 0; }
+.page .about-reference-hero .about-portrait-frame figcaption { height: 38px; box-sizing: border-box; align-items: center; border-radius: 13px 13px 0 0; background: color-mix(in srgb,var(--card-surface) 94%,transparent); }
+.page .about-reference-hero .about-profile-meta { min-height: 62px; box-sizing: border-box; background: var(--card-surface); }
+.page.dark .about-reference-hero .about-profile-card { background: linear-gradient(145deg,#24283e,#1c253b); }
+.page.dark .about-reference-hero .about-profile-meta { background: linear-gradient(145deg,#24283e,#1c253b); }
+.page .about-reference-approach .about-principle { border-radius: 22px; min-height: 220px; padding: clamp(20px, 3vw, 32px); background: linear-gradient(135deg,var(--card-surface),var(--raised-surface)); border-color: color-mix(in srgb,var(--muted) 30%,transparent); }
+.page.dark .about-reference-approach .about-principle { background: linear-gradient(135deg,#1c263d 0%,#242b43 58%,#20283f 100%); }
+.page .about-reference-approach .about-principle-symbol { border-radius: 13px; background: linear-gradient(145deg,#70162f,#471b34); color: #ffa586; }
+.page .about-reference-approach .about-principle-symbol svg { stroke-width: 1.8; }
+.page .about-reference-approach .about-principle-highlight { border-radius: 999px; background: linear-gradient(135deg,color-mix(in srgb,var(--accent) 18%,var(--card-surface)),var(--card-surface)); }
+.page .about-reference-hero .intro-link-secondary { display: inline-flex; align-items: center; gap: 10px; border-radius: 17px; }
+.page .about-reference-hero .intro-link-secondary svg { width: 19px; height: 19px; }
+@media(max-width:640px) { .page .about-reference-hero .about-profile-card { justify-self: center; } }
+
+@media (max-width: 900px) { .page .about-reference-hero .about-hero-grid { grid-template-columns: minmax(0, 1fr); } .page .about-reference-hero .about-profile-card { max-width: 460px; width: 100%; justify-self: center; } .page .about-reference-hero .about-hero-copy h1 { font-size: clamp(36px, 7vw, 56px); } }
+
+/* Swap the principles intro columns and keep waves inside their cards. */
+.page .about-reference-approach > .editorial-heading > .editorial-eyebrow { grid-column: 2; grid-row: 1; }
+.page .about-reference-approach > .editorial-heading > h2 { grid-column: 2; grid-row: 2; }
+.page .about-reference-approach > .editorial-heading > p:last-child { grid-column: 1; grid-row: 1 / 3; border-left: 0; padding-left: 0; padding-right: 42px; border-right: 2px solid var(--muted); }
+.page .about-reference-approach .about-principles-grid > .about-principle {
+  padding-bottom: 58px;
+  transition: opacity 950ms cubic-bezier(.22,1,.36,1), translate 950ms cubic-bezier(.22,1,.36,1), transform 400ms cubic-bezier(.22,1,.36,1), box-shadow 400ms ease, border-color 400ms ease;
+  transition-delay: 0s;
+}
+.page .about-reference-approach .about-principle h3 { font-weight: 750; }
+.page .about-principle-wave { position: absolute; inset: auto 0 0; width: 100%; height: 60px; pointer-events: none; z-index: -1; transition: transform 500ms cubic-bezier(.22,1,.36,1); }
+.page .about-life .about-detail-card, .page .about-reference-hero .about-profile-card, .page .about-journey-summary { transition: opacity 950ms cubic-bezier(.22,1,.36,1), translate 950ms cubic-bezier(.22,1,.36,1), transform 400ms cubic-bezier(.22,1,.36,1), box-shadow 400ms ease, border-color 400ms ease; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+ .page .about-reference-approach .about-principle:hover, .page .about-life .about-detail-card:hover, .page .about-reference-hero .about-profile-card:hover, .page .about-journey-summary:hover { transform: translateY(-6px); border-color: color-mix(in srgb,var(--accent) 55%,var(--card-border)); box-shadow: 0 16px 32px #161b2f20; }
+ .page .about-principle:hover .about-principle-wave { transform: scaleY(1.12); transform-origin: bottom; }
+}
+@media(max-width:900px) {
+ .page .about-reference-approach > .editorial-heading { grid-template-columns: minmax(0,1fr); }
+ .page .about-reference-approach > .editorial-heading > .editorial-eyebrow { grid-column: 1; grid-row: 1; }
+ .page .about-reference-approach > .editorial-heading > h2 { grid-column: 1; grid-row: 2; }
+ .page .about-reference-approach > .editorial-heading > p:last-child { grid-column: 1; grid-row: 3; padding: 0; margin-top: 16px; border: 0; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .page .about-reference-approach .about-principles-grid > .about-principle, .page .about-life .about-detail-card, .page .about-reference-hero .about-profile-card, .page .about-journey-summary, .page .about-principle-wave { transition: none; }
+}
+
+/* Illustrated interest cards with red glass accents. */
+.page .about-life .about-details-grid-personal > .about-detail-card:nth-child(2) { grid-column: 1; grid-row: 2 / 4; }
+.page .about-life .about-details-grid-personal > .about-interest-feature:nth-child(3) { grid-column: 2; grid-row: 2; }
+.page .about-life .about-details-grid-personal > .about-interest-feature:nth-child(4) { grid-column: 2; grid-row: 3; }
+.page .about-life .about-interest-feature { isolation: isolate; border-radius: 20px; padding: 22px 155px 24px 30px; background: radial-gradient(ellipse at 95% 90%,color-mix(in srgb,var(--accent) 8%,transparent),transparent 60%),linear-gradient(135deg,var(--card-surface),var(--raised-surface)); }
+.page.dark .about-life .about-interest-feature { background: radial-gradient(ellipse at 95% 100%,#541a2e30,transparent 65%),linear-gradient(135deg,#242f49 0%,#1e2941 65%,#202b45 100%); border-color: #38435e; }
+.page .about-life .about-interest-feature h3 { font-size: 24px; font-weight: 750; margin-bottom: 6px; }
+.page .about-life .about-interest-feature > p:not(.section-kicker) { font-size: 14px; line-height: 1.5; margin-top: 0; }
+.page .about-life .about-interest-feature .about-card-kicker { font-size: 11px; letter-spacing: .05em; margin-bottom: 10px; }
+.page .about-life .about-interest-feature .about-card-kicker > .about-icon { background: var(--raised-surface); color: var(--accent); border-radius: 50%; width: 26px; height: 26px; }
+.about-interest-art { position: absolute; width: 120px; height: 120px; right: 22px; top: 50%; transform: translateY(-50%); pointer-events: none; color: #ffd0bc; }
+.about-interest-art-glow { position: absolute; inset: 17px 10px 15px 30px; border-radius: 38px 12px 16px 12px; background: linear-gradient(145deg,#b51a2b,#6b1d3f 65%,#541a2e55); box-shadow: 0 0 30px #b51a2b30; transform: skewY(-6deg); }
+.about-interest-art svg { position: relative; width: 100%; height: 100%; filter: drop-shadow(0 0 3px #ffa586a0) drop-shadow(0 0 10px #f03b5f60); transition: transform 450ms cubic-bezier(.22,1,.36,1); }
+.about-interest-art-laptop .about-interest-art-glow { inset: 23px 15px 15px 32px; border-radius: 8px; transform: rotate(5deg); }
+.page:not(.dark) .about-interest-art { color: #fff0e8; }
+@media(hover:hover) and (prefers-reduced-motion:no-preference) { .about-interest-feature:hover .about-interest-art svg { transform: translateY(-3px) rotate(-3deg); } }
+@media(max-width:1100px) and (min-width:601px) { .page .about-life .about-interest-feature { padding-right: 118px; padding-left: 22px; } .about-interest-art { width: 92px; right: 12px; } }
+@media(max-width:600px) {
+ .page .about-life .about-details-grid-personal > .about-detail-card:nth-child(n) { grid-column: auto; grid-row: auto; }
+ .page .about-life .about-interest-feature { padding: 22px 118px 24px 22px; }
+ .about-interest-art { width: 96px; height: 110px; right: 12px; }
+ .page .about-life .about-interest-feature h3 { font-size: 21px; }
+}
+@media(prefers-reduced-motion:reduce) { .about-interest-art svg { transition: none; } }
+
+/* Personal introduction replaces the About hero. */
+.page .about-personal-hero { position: relative; isolation: isolate; overflow: hidden; padding-top: 64px; padding-bottom: 90px; background: radial-gradient(ellipse at 100% 10%,color-mix(in srgb,var(--accent) 13%,transparent),transparent 40%),var(--canvas); }
+.page.dark .about-personal-hero { background: radial-gradient(ellipse at 100% 3%,#8d153855,transparent 36%),radial-gradient(ellipse at 0 65%,#541a2e44,transparent 40%),#11182b; }
+.about-personal-heading { max-width: 1200px; margin: 0 auto 40px; display: grid; grid-template-columns: minmax(0,1.55fr) minmax(0,1fr); gap: 40px; align-items: center; }
+.page .about-personal-heading h1 { display: block; max-width: none; font-size: clamp(32px,3.8vw,52px); line-height: 1.18; font-weight: 800; letter-spacing: -.03em; margin: 0; }
+.page .about-personal-heading .heading-highlight { border-radius: 0; }
+.about-personal-heading > p { border-left: 2px solid var(--muted); padding-left: 40px; font-size: 20px; line-height: 1.5; color: var(--text-secondary); }
+.about-personal-layout { max-width: 1200px; margin: auto; display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); gap: 36px; }
+.about-personal-story { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); column-gap: 24px; align-content: start; padding-right: 28px; border-right: 1px solid var(--card-border); }
+.about-personal-portrait { position: relative; align-self: end; min-width: 0; isolation: isolate; }
+.about-personal-portrait::before { content: ''; position: absolute; z-index: -1; left: -3%; right: -3%; bottom: 8%; aspect-ratio: 1; border-radius: 50%; background: linear-gradient(135deg,#b51a2b,#741c41 55%,#541a2e44); }
+.page .about-personal-portrait .about-portrait-frame { aspect-ratio: .82; min-height: 0; background: transparent; overflow: visible; mask-image: linear-gradient(#000 90%,transparent 100%); }
+.page .about-personal-portrait .about-portrait-image { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; clip-path: none; filter: drop-shadow(2px 0 0 #ff977e) drop-shadow(-2px 0 0 #ff977e) drop-shadow(0 -2px 0 #ff977e); }
+.about-personal-portrait figcaption { display: none; }
+.about-personal-bio { padding-top: 22px; }
+.about-personal-bio .section-kicker { color: var(--accent); font-size: 12px; letter-spacing: .2em; margin-bottom: 18px; }
+.about-personal-bio h2 { font-size: clamp(25px,2.6vw,36px); line-height: 1.2; font-weight: 800; color: var(--ink); margin: 0 0 24px; }
+.about-personal-bio h2 span { color: var(--accent); }
+.about-personal-bio > p:not(.section-kicker) { font-size: 16px; color: var(--text-secondary); line-height: 1.55; margin: 0 0 14px; }
+.about-personal-quote { grid-column: 1 / -1; position: relative; margin: 22px 0 0 16px; padding: 0 0 0 34px; color: var(--ink); }
+.about-personal-quote > span { position: absolute; top: -28px; left: -8px; font-size: 70px; font-family: Georgia,serif; font-weight: 700; color: var(--accent); }
+.about-personal-quote p { margin: 16px 0 0; border-left: 2px solid var(--accent); padding-left: 20px; font: italic 20px/1.5 Georgia,serif; }
+.about-personal-interests { display: grid; gap: 16px; align-content: start; }
+.about-personal-interest { position: relative; isolation: isolate; overflow: hidden; min-width: 0; padding: 18px 22px 20px 86px; border-radius: 26px; border: 1px solid var(--card-border); background: linear-gradient(135deg,var(--card-surface),var(--raised-surface)); transition: transform 400ms cubic-bezier(.22,1,.36,1),box-shadow 400ms ease,border-color 400ms ease; }
+.page.dark .about-personal-interest { background: linear-gradient(135deg,#222d46,#22283e 65%,#202b43); border-color: #414a64; }
+.about-personal-interest-icon { position: absolute; left: 22px; top: 14px; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 14px; color: #ffa586; background: linear-gradient(145deg,#81152f,#351f38); }
+.about-personal-interest-icon svg { width: 30px; height: 30px; padding: 0; margin: 0; background: transparent; color: inherit; }
+.about-personal-interest h2 { font-size: 21px; line-height: 1.3; font-weight: 750; color: var(--ink); margin: 0 0 12px; }
+.about-personal-interest h3 { color: var(--accent); font-size: 20px; font-weight: 750; margin: 0 0 5px; }
+.about-personal-interest > p { font-size: 13px; line-height: 1.55; color: var(--text-secondary); margin: 0; padding-right: 96px; }
+.about-personal-interest .about-interest-art { width: 104px; height: 110px; right: 16px; top: 60%; }
+.about-personal-interest .about-favorites-list { margin: 0; }
+.about-personal-interest .about-favorites-list > div { padding: 6px 0; gap: 12px; grid-template-columns: 82px minmax(0,1fr); }
+.about-personal-interest .about-favorites-list dt, .about-personal-interest .about-favorites-list dd { font-size: 12px; }
+.about-personal-favorites::after, .about-personal-next::after { content: ''; position: absolute; z-index: -1; bottom: -28px; right: -20px; width: 160px; height: 55px; border-radius: 70% 0 0; transform: rotate(-20deg); background: linear-gradient(#cf284b,#541a2e33); }
+.about-personal-ribbon { position: absolute; width: 45%; height: 120px; pointer-events: none; z-index: -1; filter: drop-shadow(0 0 30px #b51a2b77); }
+.about-personal-ribbon-top { right: 0; top: 0; }
+.about-personal-ribbon-bottom { left: 0; bottom: 0; }
+@media(hover:hover) and (prefers-reduced-motion:no-preference) { .about-personal-interest:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 14px 30px #161b2f25; } }
+@media(max-width:1100px) { .about-personal-layout { grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); gap: 24px; } .about-personal-story { grid-template-columns: minmax(0,1fr); } .about-personal-portrait { width: 250px; justify-self: center; } .about-personal-bio { padding-top: 0; } .about-personal-interest { padding-left: 72px; } .about-personal-interest-icon { left: 14px; } .about-personal-interest > p { padding-right: 70px; } .about-personal-interest .about-interest-art { width: 82px; right: 7px; } }
+@media(max-width:760px) { .page .about-personal-hero { padding-top: 40px; } .about-personal-heading, .about-personal-layout { grid-template-columns: minmax(0,1fr); } .about-personal-heading { gap: 16px; margin-bottom: 24px; } .about-personal-heading > p { margin: 0; font-size: 16px; padding-left: 20px; } .about-personal-story { padding-right: 0; border-right: 0; } .about-personal-portrait { width: min(100%,320px); } .about-personal-bio { padding-top: 16px; } .about-personal-quote { margin-bottom: 18px; } .about-personal-interest { border-radius: 22px; } .about-personal-ribbon { width: 70%; height: 75px; } }
+@media(prefers-reduced-motion:reduce) { .about-personal-interest { transition: none; } }
+
+/* Keep the personal hero independent of the shared page heading grid. */
+.page .about-personal-heading h1.editorial-title { display: block; line-height: 1.18 !important; }
+.page .about-personal-heading h1 > .heading-highlight { display: inline; width: auto; padding: .015em .1em .08em; }
+.page .about-personal-heading h1 > .text-muted { display: inline; line-height: inherit; }
+.page .about-personal-heading > div { min-width: 0; }
+.page .about-personal-heading > p { margin: 30px 0 0; }
+.page .about-personal-story { min-width: 0; align-items: start; }
+.page .about-personal-bio { min-width: 0; }
+.page .about-personal-game, .page .about-personal-next { min-height: 168px; }
+.page .about-personal-interest > p { padding-right: 108px; font-size: 14px; }
+.page .about-personal-interest h3 { padding-right: 96px; }
+.page .about-personal-interest .about-interest-art { top: auto; bottom: 20px; transform: none; }
+.page .about-personal-quote { margin-top: 24px; }
+.page .about-personal-ribbon-top { width: 42%; height: 120px; top: 0; }
+.page .about-personal-ribbon-bottom { width: 42%; height: 100px; bottom: 0; }
+@media(max-width:1100px) and (min-width:761px) {
+ .page .about-personal-heading { grid-template-columns: minmax(0,1.4fr) minmax(0,1fr); gap: 28px; }
+ .page .about-personal-heading h1 { font-size: clamp(32px,3.6vw,44px); }
+ .page .about-personal-interest > p { padding-right: 78px; }
+ .page .about-personal-interest h3 { padding-right: 60px; }
+}
+@media(max-width:760px) {
+ .page .about-personal-heading > p { margin: 0; }
+ .page .about-personal-interest { padding-left: 74px; padding-right: 16px; }
+ .page .about-personal-interest > p { padding-right: 78px; }
+ .page .about-personal-interest h3 { padding-right: 0; font-size: 18px; }
+ .page .about-personal-interest .about-interest-art { width: 80px; right: 6px; bottom: 12px; }
+ .page .about-personal-ribbon-top { width: 65%; height: 70px; }
+ .page .about-personal-ribbon-bottom { width: 65%; height: 70px; }
+}
+@media(max-width:380px) {
+ .page .about-personal-interest > p { padding-right: 0; }
+ .page .about-personal-interest { padding-bottom: 100px; }
+ .page .about-personal-favorites { padding-bottom: 20px; padding-left: 22px; }
+ .page .about-personal-favorites > h2 { margin-left: 52px; }
+ .page .about-personal-interest .about-favorites-list > div { grid-template-columns: 65px minmax(0,1fr); gap: 8px; }
+}
+
+/* Match Home's highlight and simplify the illustrated personal cards. */
+.page .about-personal-interest { padding: 22px 24px; }
+.page .about-personal-interest h2 { margin: 0 0 12px; }
+.page .about-personal-interest > p { padding-right: 108px; }
+.page .about-personal-interest h3 { padding-right: 100px; }
+.page .about-personal-favorites::after, .page .about-personal-next::after { content: none; }
+.page .about-personal-favorites .about-favorites-list { padding-right: 100px; }
+.page .about-personal-favorites .about-interest-art { top: 50%; bottom: auto; transform: translateY(-50%); }
+.page .about-personal-favorites .about-interest-art-glow { display: block; }
+.page .about-personal-favorites .about-interest-art svg { filter: drop-shadow(0 0 6px color-mix(in srgb,var(--accent) 35%,transparent)); }
+.page .about-personal-interest .about-interest-art { color: #ffd0bc; }
+.page:not(.dark) .about-personal-hero { --ink: #161b2f; --text-secondary: #4c5971; --muted: #5e687e; --accent: #b51a2b; --card-border: #cbd3e3; background: radial-gradient(ellipse at 10% 50%,#f5d8e3 0%,transparent 42%),radial-gradient(ellipse at 100% 0%,#ffe2d8,transparent 45%),#f7f8fc; }
+.page:not(.dark) .about-personal-interest { background: linear-gradient(135deg,#fff,#edf0f8); border-color: #cbd3e3; box-shadow: 0 5px 16px #161b2f08; }
+.page:not(.dark) .about-personal-heading .heading-highlight { background: #ffdccd; color: #541a2e; -webkit-text-fill-color: #541a2e; }
+.page.dark .about-personal-heading .heading-highlight { background: #541a2e; color: #fff5ef; -webkit-text-fill-color: #fff5ef; }
+.page:not(.dark) .about-personal-interest .about-interest-art { color: #8c233d; }
+.page:not(.dark) .about-personal-interest .about-interest-art-glow { background: linear-gradient(145deg,#f4b6bd,#ffe1d7); box-shadow: 0 0 22px #b51a2b15; }
+.page:not(.dark) .about-personal-interest .about-interest-art svg { filter: drop-shadow(0 0 3px #b51a2b25); }
+.page .about-personal-interest .about-favorites-list dt { color: var(--text-secondary); }
+.page .about-personal-interest .about-favorites-list dd { color: var(--ink); }
+.page .about-personal-interest .about-favorites-list dt svg { color: var(--accent); }
+.page .about-personal-interest .about-favorites-list > div { border-color: color-mix(in srgb,var(--muted) 22%,transparent); }
+/* Outline, disc, and glow follow the portrait reference. */
+.page .about-personal-portrait { align-self: end; }
+.page .about-personal-portrait::before { top: auto; left: 0; right: 8%; bottom: -3%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(ellipse at 50% 75%,#b51a2b 0%,#8d1d43 52%,#541a2e 100%); box-shadow: 0 0 65px 20px #a41d4930; }
+.page .about-personal-portrait::after { content: ''; position: absolute; inset: 15% -18% -4%; z-index: -2; background: radial-gradient(ellipse,#b51a2b33,transparent 70%); pointer-events: none; }
+.page .about-personal-portrait .about-portrait-frame { aspect-ratio: .92; overflow: visible; mask-image: none; }
+.page .about-personal-portrait .about-portrait-image { inset: 0 6px !important; width: calc(100% - 12px) !important; height: 100% !important; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 -1.5px 0 #ff967e) drop-shadow(1.5px 0 0 #ff967e) drop-shadow(-1.5px 0 0 #ff967e) drop-shadow(0 0 5px #ff745b30); }
+.page:not(.dark) .about-personal-portrait::before { background: radial-gradient(ellipse at 50% 75%,#b51a2b 0%,#9c244b 55%,#e2a9bd 100%); box-shadow: 0 0 55px 15px #b51a2b15; }
+@media(min-width:1101px) { .page .about-personal-story { grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); gap: 24px; } }
+@media(max-width:1100px) and (min-width:761px) { .page .about-personal-interest { padding: 22px 18px; } .page .about-personal-interest > p, .page .about-personal-favorites .about-favorites-list { padding-right: 80px; } }
+@media(max-width:760px) { .page .about-personal-interest { padding: 22px; } .page .about-personal-interest > p { padding-right: 82px; } .page .about-personal-favorites .about-favorites-list { padding-right: 86px; } .page .about-personal-interest h3 { padding-right: 0; } }
+@media(max-width:430px) { .page .about-personal-interest .about-favorites-list > div { grid-template-columns: 62px minmax(0,1fr); gap: 6px; } .page .about-personal-favorites .about-favorites-list { padding-right: 58px; } .page .about-personal-favorites .about-interest-art { width: 65px; right: 4px; } }
+@media(max-width:380px) { .page .about-personal-game, .page .about-personal-next { padding-bottom: 108px; } .page .about-personal-interest > p { padding-right: 0; } .page .about-personal-favorites > h2 { margin-left: 0; } }
+
+/* Reference portrait: transparent surroundings and a single soft lower fade. */
+.page .about-personal-portrait,
+.page:not(.dark) .about-personal-portrait {
+  isolation: isolate;
+  z-index: 0;
+  background: transparent;
+  mask-image: linear-gradient(to bottom,#000 0%,#000 88%,transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom,#000 0%,#000 88%,transparent 100%);
+}
+.page .about-personal-portrait::before {
+  left: 0;
+  right: 8%;
+  top: auto;
+  bottom: -12%;
+  aspect-ratio: 1;
+  background: radial-gradient(ellipse at 50% 70%,#a82045 0%,#8c1c42 52%,#541a2e 100%);
+  box-shadow: 0 0 38px 10px #a41d4920;
+}
+.page .about-personal-portrait::after,
+.page:not(.dark) .about-personal-portrait::after {
+  inset: 12% -12% -10%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center,#a41d4926 0%,transparent 66%);
+  filter: blur(16px);
+}
+.page.dark .about-personal-portrait::after {
+  background: radial-gradient(ellipse at 50% 10%,#090f2080 0%,transparent 55%),radial-gradient(ellipse at 50% 75%,#a41d4933 0%,transparent 65%);
+}
+.page .about-personal-portrait .about-portrait-frame {
+  z-index: 1;
+  aspect-ratio: 1;
+  background: transparent;
+  overflow: visible;
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+
+/* Neutral light About surfaces and a slightly larger portrait. */
+.page:not(.dark) .about-personal-hero {
+  --canvas: #faf9f7;
+  --ink: #242126;
+  --text-secondary: #565057;
+  --muted: #726a72;
+  --card-border: #ded7db;
+  background: radial-gradient(ellipse at 10% 50%,#f5e4e8 0%,transparent 42%),radial-gradient(ellipse at 100% 0%,#ffe9df,transparent 45%),#faf9f7;
+}
+.page:not(.dark) .about-personal-interest { background: linear-gradient(135deg,#fffdfc,#f5f0f1); border-color: #ded7db; }
+.page:not(.dark) .about-personal-portrait::before { background: radial-gradient(ellipse at 50% 75%,#b51a2b 0%,#9c244b 55%,#d68ba5 100%); }
+.page .about-personal-portrait .about-portrait-image {
+  inset: -10px 0 0 !important;
+  width: 100% !important;
+  height: calc(100% + 10px) !important;
+  object-fit: contain;
+  object-position: center bottom;
+}
+.page .about-personal-portrait .about-portrait-frame { overflow: visible; }
+@media(min-width:1101px) { .page .about-personal-story { grid-template-columns: minmax(0,1.25fr) minmax(0,1fr); } }
+
+
+
+
+@media(max-width:1100px) and (min-width:761px) { .page .about-personal-portrait { width: min(100%,275px); } }
+@media(max-width:760px) { .page .about-personal-portrait { width: min(100%,340px); } }
+/* Only soften the lower edge of the portrait in light mode. */
+.page:not(.dark) .about-personal-portrait {
+  -webkit-mask-image: linear-gradient(to bottom,#000 0%,#000 94%,transparent 100%);
+  mask-image: linear-gradient(to bottom,#000 0%,#000 94%,transparent 100%);
+}
+
+/* Keep the name in two readable lines and remove heading divider rules. */
+.page .about-personal-bio h2 { font-size: clamp(24px,2.1vw,32px); line-height: 1.25; letter-spacing: -.025em; }
+.page .about-personal-bio h2 > .about-name-line { display: block; color: var(--ink); white-space: nowrap; }
+.page .about-personal-bio h2 .about-name-nickname { color: var(--accent); }
+.page .about-personal-heading > p { border: 0; padding-left: 0; }
+.page .about-reference-approach > .editorial-heading > p:last-child { border: 0; padding-left: 0; padding-right: 0; }
+.page .about-reference-approach { border-top: 0; }
+.page .about-personal-story { border-right: 0; }
+@media(min-width:1101px) { .page .about-personal-story { grid-template-columns: minmax(0,1fr) minmax(0,1fr); } }
+
+/* About page cards use their surfaces without outlined borders. */
+.page:has(.about-personal-hero) :is(.about-personal-interest,.about-principle,.about-detail-card,.about-journey-summary) { border: 0; }
+.page:has(.about-personal-hero) :is(.about-personal-interest,.about-principle,.about-detail-card,.about-journey-summary):hover { border: 0; }
+
+/* Reference composition: portrait, biography, facts, and a shared quote panel. */
+.page .about-personal-hero { padding-top: 38px; padding-bottom: 54px; }
+.page .about-personal-heading { grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); gap: 28px; margin-bottom: 30px; }
+.page .about-personal-heading h1.editorial-title { font-size: clamp(30px,3vw,42px); }
+.page .about-personal-heading > p { font-size: 15px; max-width: 340px; margin-top: 0; padding-left: 36px; border-left: 1px solid var(--muted); }
+.page .about-personal-layout { grid-template-columns: minmax(0,2.2fr) minmax(0,1fr); gap: 28px; align-items: start; }
+.page .about-personal-story { grid-template-columns: minmax(0,1fr) minmax(0,1.05fr) minmax(0,.86fr); gap: 22px; padding: 0; align-items: start; }
+.page .about-personal-bio { padding-top: 18px; }
+.page .about-personal-bio .section-kicker { font-size: 10px; letter-spacing: .15em; margin-bottom: 14px; }
+.page .about-personal-bio h2 { font-size: clamp(23px,2vw,30px); margin-bottom: 16px; line-height: 1.12; }
+.page .about-personal-bio > p:not(.section-kicker) { font-size: 13px; line-height: 1.45; margin-bottom: 12px; }
+.page .about-personal-portrait { width: 100%; align-self: end; mask-image: none; -webkit-mask-image: none; }
+.page:not(.dark) .about-personal-portrait { mask-image: none; -webkit-mask-image: none; }
+.page .about-personal-portrait .about-portrait-frame { aspect-ratio: .83; mask-image: linear-gradient(#000 94%,transparent 100%); -webkit-mask-image: linear-gradient(#000 94%,transparent 100%); }
+.page .about-personal-portrait .about-portrait-image { inset: 0 -8px !important; width: calc(100% + 16px) !important; height: 100% !important; object-fit: contain; object-position: center bottom; }
+.page .about-personal-portrait::before, .page:not(.dark) .about-personal-portrait::before { inset: 15% 8% 0 -2%; aspect-ratio: auto; border: 1px solid #f7768366; border-radius: 40px; transform: skewX(-17deg); background: linear-gradient(155deg,#541a2e 0%,#b51a2b 58%,#ffad8c 100%); box-shadow: 0 0 42px #b51a2b35; }
+.page .about-personal-portrait::after, .page:not(.dark) .about-personal-portrait::after, .page.dark .about-personal-portrait::after { inset: 40% 24% 20% -12%; filter: none; border-radius: 28px; border: 1px solid #f7768366; transform: skewX(-17deg); background: linear-gradient(145deg,#541a2e88,#c72a4b99); }
+.about-personal-facts { border-left: 1px solid color-mix(in srgb,var(--accent) 50%,var(--card-border)); padding-left: 20px; margin-top: 36px; }
+.about-personal-facts > div { display: flex; align-items: flex-start; gap: 14px; padding: 18px 0; }
+.about-personal-facts > div + div { border-top: 1px solid color-mix(in srgb,var(--muted) 35%,transparent); }
+.about-personal-facts > div:first-child { padding-top: 0; }
+.about-personal-fact-icon { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; border-radius: 13px; color: #ffa586; background: linear-gradient(145deg,#95152e,#541a2e); }
+.about-personal-fact-icon svg { width: 28px; height: 28px; padding: 0; margin: 0; background: transparent; color: inherit; }
+.about-personal-facts p { color: var(--text-secondary); font-size: 11px; margin: 0 0 3px; }
+.about-personal-facts strong { color: var(--ink); font-size: 12px; font-weight: 600; line-height: 1.4; }
+.page .about-personal-quote { grid-column: 1 / -1; position: relative; isolation: isolate; overflow: hidden; z-index: 2; margin: -18px 0 0 16px; padding: 16px 26px 16px 100px; border: 1px solid #9e496466; border-radius: 18px; background: linear-gradient(115deg,#38243c,#511d38 80%,#771e3c); }
+.page .about-personal-quote > span { top: -6px; left: 38px; color: #ffa586; font-size: 74px; }
+.page .about-personal-quote p { border: 0; padding: 0; margin: 0; font-size: 17px; line-height: 1.4; color: #fff1ec; }
+.page .about-personal-quote::after { content: ''; position: absolute; z-index: -1; bottom: -35px; right: -25px; width: 170px; height: 60px; background: linear-gradient(#eb3758,#b51a2b33); border-radius: 70% 0 0; transform: rotate(-20deg); }
+.page:not(.dark) .about-personal-quote { background: linear-gradient(115deg,#fbe7e7,#f2d3dc); border-color: #d8a6b5; }
+.page:not(.dark) .about-personal-quote p { color: #541a2e; }
+.page:not(.dark) .about-personal-quote > span { color: #b51a2b; }
+.page .about-personal-ribbon { opacity: .5; }
+@media(max-width:1200px) and (min-width:901px) { .page .about-personal-story { grid-template-columns: minmax(0,1fr) minmax(0,1.1fr); } .about-personal-facts { grid-column: 1 / -1; display: flex; gap: 18px; margin: 0; padding: 14px 0 0; border-left: 0; border-top: 1px solid var(--card-border); } .about-personal-facts > div { flex: 1; padding: 0; } .about-personal-facts > div + div { border: 0; } .about-personal-fact-icon { flex-basis: 34px; width: 34px; height: 34px; } .page .about-personal-quote { margin-top: 0; padding-left: 66px; } .page .about-personal-quote > span { left: 15px; } }
+@media(max-width:900px) { .page .about-personal-layout { grid-template-columns: minmax(0,1fr); } .page .about-personal-story { grid-template-columns: minmax(0,1fr) minmax(0,1.1fr) minmax(0,.9fr); } .page .about-personal-bio h2 { font-size: 24px; } .page .about-personal-interests { grid-template-columns: minmax(0,1fr); } }
+@media(max-width:640px) { .page .about-personal-heading { grid-template-columns: minmax(0,1fr); gap: 16px; } .page .about-personal-heading > p { padding-left: 18px; } .page .about-personal-story { grid-template-columns: minmax(0,1fr); } .page .about-personal-portrait { max-width: 300px; justify-self: center; } .page .about-personal-bio h2 { font-size: 30px; } .about-personal-facts { margin-top: 0; padding-left: 16px; } .page .about-personal-quote { margin: 0; padding: 22px 22px 22px 58px; } .page .about-personal-quote > span { left: 10px; top: 0; font-size: 60px; } }
+
+/* Full-width introduction above a single row of illustrated interest cards. */
+.page .about-personal-layout { display: grid; grid-template-columns: minmax(0,1fr); gap: 32px; }
+.page .about-personal-story { display: grid; grid-template-columns: minmax(0,.95fr) minmax(0,1.2fr) minmax(0,.8fr); gap: 32px; padding: 0; }
+.page .about-personal-bio { padding-top: 24px; }
+.page .about-personal-bio .section-kicker { font-size: 12px; margin-bottom: 18px; }
+.page .about-personal-bio h2 { font-size: clamp(28px,2.8vw,38px); line-height: 1.15; margin-bottom: 22px; }
+.page .about-personal-bio > p:not(.section-kicker) { font-size: 16px; line-height: 1.6; margin-bottom: 16px; }
+.page .about-personal-facts { grid-column: auto; display: grid; gap: 0; margin: 44px 0 0; padding: 0 0 0 24px; border-top: 0; border-left: 1px solid color-mix(in srgb,var(--accent) 45%,transparent); }
+.page .about-personal-facts > div { flex: initial; padding: 20px 0; gap: 14px; }
+.page .about-personal-facts > div:first-child { padding-top: 0; }
+.page .about-personal-facts > div + div { border-top: 1px solid color-mix(in srgb,var(--muted) 25%,transparent); }
+.page .about-personal-fact-icon { flex-basis: 44px; width: 44px; height: 44px; }
+.page .about-personal-facts p { font-size: 13px; }
+.page .about-personal-facts strong { font-size: 14px; }
+.page .about-personal-portrait, .page:not(.dark) .about-personal-portrait { align-self: end; justify-self: center; width: 100%; max-width: 350px; background: transparent; mask-image: linear-gradient(#000 0%,#000 89%,transparent 100%); -webkit-mask-image: linear-gradient(#000 0%,#000 89%,transparent 100%); }
+.page .about-personal-portrait .about-portrait-frame { aspect-ratio: .94; width: 100%; height: auto; min-height: 0; overflow: visible; background: transparent; mask-image: none; -webkit-mask-image: none; }
+.page .about-personal-portrait .about-portrait-image { inset: 0 6px !important; width: calc(100% - 12px) !important; height: 100% !important; object-fit: contain; object-position: center bottom; }
+.page .about-personal-portrait::before, .page:not(.dark) .about-personal-portrait::before { inset: 18% 10% -1% 0; border-radius: 38px; background: linear-gradient(155deg,#541a2e 0%,#a81c3c 52%,#ed4550 78%,#ffb08d 100%); box-shadow: 0 0 50px #a81c3c30; }
+.page .about-personal-portrait::after, .page:not(.dark) .about-personal-portrait::after { inset: 40% 24% 14% -8%; border-radius: 26px; background: linear-gradient(145deg,#541a2e70,#b51a2b90); filter: none; }
+.page .about-personal-quote { margin: 0; padding: 20px 36px 20px 100px; grid-column: 1 / -1; }
+.page .about-personal-quote p { font-size: 20px; line-height: 1.5; }
+.page .about-personal-quote > span { top: -4px; left: 30px; }
+.page .about-personal-interests { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 22px; align-items: stretch; }
+.page .about-personal-interest { min-height: 220px; padding: 24px; border-radius: 22px; }
+.page .about-personal-interest h2 { font-size: 22px; margin-bottom: 16px; }
+.page .about-personal-interest h3 { padding-right: 0; font-size: 20px; }
+.page .about-personal-interest > p { font-size: 14px; line-height: 1.6; padding-right: 88px; }
+.page .about-personal-interest .about-interest-art { width: 90px; height: 110px; right: 10px; bottom: 18px; }
+.page .about-personal-favorites .about-favorites-list { padding-right: 72px; }
+.page .about-personal-favorites .about-favorites-list > div { grid-template-columns: 62px minmax(0,1fr); gap: 8px; padding: 8px 0; }
+.page .about-personal-favorites .about-interest-art { top: 55%; bottom: auto; transform: translateY(-50%); width: 80px; }
+.page.dark .about-personal-hero { background: radial-gradient(ellipse at 17% 35%,#7e1b3d38,transparent 35%),radial-gradient(ellipse at 100% 0%,#b51a2b33,transparent 35%),radial-gradient(ellipse at 70% 100%,#541a2e30,transparent 50%),linear-gradient(120deg,#101729,#171b30 65%,#11182b); }
+.page:not(.dark) .about-personal-hero { background: radial-gradient(ellipse at 17% 35%,#e5adbb35,transparent 35%),radial-gradient(ellipse at 100% 0%,#ffdecf66,transparent 40%),linear-gradient(120deg,#faf9f7,#f6f2f4); }
+.page .about-personal-ribbon { opacity: .8; z-index: -1; }
+@media(max-width:1050px) {
+ .page .about-personal-story { grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 24px; }
+ .page .about-personal-facts { grid-column: 1 / -1; grid-template-columns: repeat(3,minmax(0,1fr)); margin: 0; padding: 20px 0 0; border-left: 0; border-top: 1px solid var(--card-border); gap: 20px; }
+ .page .about-personal-facts > div { padding: 0; }
+ .page .about-personal-facts > div + div { border-top: 0; }
+ .page .about-personal-interests { grid-template-columns: repeat(2,minmax(0,1fr)); }
+ .page .about-personal-interests > :last-child { grid-column: 1 / -1; }
+}
+@media(max-width:640px) {
+ .page .about-personal-story { grid-template-columns: minmax(0,1fr); }
+ .page .about-personal-portrait { max-width: 320px; }
+ .page .about-personal-bio { padding-top: 0; }
+ .page .about-personal-bio h2 { font-size: clamp(28px,7vw,36px); }
+ .page .about-personal-facts { grid-column: 1; grid-template-columns: minmax(0,1fr); }
+ .page .about-personal-interests { grid-template-columns: minmax(0,1fr); gap: 16px; }
+ .page .about-personal-interests > :last-child { grid-column: auto; }
+ .page .about-personal-quote { padding: 20px 20px 20px 60px; }
+ .page .about-personal-quote > span { left: 10px; }
+ .page .about-personal-quote p { font-size: 17px; }
+}
+
+/* Keep decorative edges clear of the portrait crop and the heading copy. */
+.page .about-personal-portrait, .page:not(.dark) .about-personal-portrait { mask-image: none; -webkit-mask-image: none; }
+.page .about-personal-portrait .about-portrait-frame { mask-image: linear-gradient(#000 89%,transparent 100%); -webkit-mask-image: linear-gradient(#000 89%,transparent 100%); }
+.page .about-personal-portrait::before, .page:not(.dark) .about-personal-portrait::before { bottom: 14%; }
+.page .about-personal-portrait::after, .page:not(.dark) .about-personal-portrait::after { bottom: 24%; }
+.page .about-personal-ribbon-top { top: -60px; }
+
+/* Portrait contour follows the active theme. */
+.page .about-personal-portrait { --about-portrait-outline: #b51a2b; }
+.page.dark .about-personal-portrait { --about-portrait-outline: #ff967e; }
+
+/* Visible light-theme card surfaces without border outlines. */
+.page:not(.dark) .about-personal-interest {
+  background: linear-gradient(135deg,#fff 0%,#f0e4e9 100%);
+  box-shadow: 0 8px 24px #541a2e14, 0 2px 6px #161b2f08;
+}
+.page:not(.dark) .about-reference-approach .about-principle {
+  background: linear-gradient(135deg,#fff 0%,#e4e9f3 100%);
+  box-shadow: 0 8px 24px #242f491a, 0 2px 6px #161b2f08;
+}
+.page:not(.dark):has(.about-personal-hero) :is(.about-detail-card,.about-journey-summary) {
+  background: linear-gradient(135deg,#fff 0%,#e9edf5 100%);
+  box-shadow: 0 8px 24px #242f4917;
+}
+@media(hover:hover) {
+ .page:not(.dark) .about-personal-interest:hover { box-shadow: 0 14px 30px #541a2e24; }
+ .page:not(.dark) .about-reference-approach .about-principle:hover { box-shadow: 0 14px 30px #242f4926; }
+}
+
+/* Align all three illustrations and emphasize the two-line focus statement. */
+.page .about-personal-favorites .about-interest-art { top: auto; bottom: 18px; right: 10px; width: 90px; height: 110px; transform: none; }
+.page .about-reference-approach > .editorial-heading > p:last-child { font-size: clamp(20px,1.75vw,26px); line-height: 1.5; }
+.page .about-reference-approach .about-focus-line { display: block; }
+@media(min-width:1101px) { .page .about-reference-approach .about-focus-line { white-space: nowrap; } }
+
+/* High-contrast portrait contour in both themes. */
+.page .about-personal-portrait { --about-portrait-outline: #c8102e; }
+.page.dark .about-personal-portrait { --about-portrait-outline: #ffad8d; }
+
+/* A light keyline keeps the red portrait edge visible against its red backdrop. */
+.page .about-personal-portrait { --about-portrait-outline: #a30826; --about-portrait-inner-outline: #fff0e8; }
+.page.dark .about-personal-portrait { --about-portrait-outline: #ffad8d; --about-portrait-inner-outline: #ffe3d2; }
+
+/* Light portrait: white outer rim, red inner rim, then the photograph. */
+.page .about-personal-portrait { --about-portrait-outer-outline: #ffffff; --about-portrait-outline: #c8102e; --about-portrait-inner-outline: #c8102e; }
+.page.dark .about-personal-portrait { --about-portrait-outer-outline: transparent; --about-portrait-outline: #ffad8d; --about-portrait-inner-outline: #ffe3d2; }
+
+/* Match the About portrait's white outer rim and red inner rim in light mode. */
+.page:not(.dark) .home-portrait-image { filter: url(#home-portrait-outline) !important; }

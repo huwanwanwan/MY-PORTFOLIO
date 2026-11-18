@@ -1,5 +1,3 @@
-import BahalertoShowcase from "./bahalerto-showcase";
-import SiglaShowcase from "./sigla-showcase";
 import ProjectsSlider from "./projects-slider";
 import Link from "next/link";
 import AboutPortrait from "./about-portrait";
@@ -41,6 +39,9 @@ const aboutIcons = {
   heart: "M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8z",
   music: "M9 18V5l12-2v13 M9 18a3 3 0 1 1-3-3c1.7 0 3 1.3 3 3z M21 16a3 3 0 1 1-3-3c1.7 0 3 1.3 3 3z",
   game: "M6 12h4m-2-2v4m8-1h.01M18 10h.01M7 6h10a4 4 0 0 1 3.9 3.2l1 5a3 3 0 0 1-5 2.8l-2.2-2H9.3l-2.2 2a3 3 0 0 1-5-2.8l1-5A4 4 0 0 1 7 6z",
+  layers: "m12 3 10 5-10 5L2 8l10-5z M2 12l10 5 10-5 M2 16l10 5 10-5",
+  growth: "M3 21h18 M5 21v-6h4v6 M11 21V11h4v10 M17 21V7h4v14 M4 10l6-5 4 2 6-5 M15 2h5v5",
+  mail: "M3 5h18v14H3z M3 5l9 7 9-7",
   sparkles: "m12 3 1.9 5.8L20 11l-6.1 2.2L12 19l-2-5.8L4 11l6-2.2L12 3z M19 14l1.2 2.8L23 18l-2.8 1.2L19 22l-1.2-2.8L15 18l2.8-1.2L19 14z",
   school: "M22 10 12 4 2 10l10 6 10-6z M6 12v5c3 3 9 3 12 0v-5",
   graduation: "M22 10 12 5 2 10l10 5 10-5z M6 12v5c4 3 8 3 12 0v-5 M22 10v6",
@@ -71,6 +72,24 @@ function AboutIcon({ name }: { name: AboutIconName }) {
   );
 }
 
+function InterestArtwork({ kind }: { kind: "game" | "laptop" | "music" }) {
+  return <div className={"about-interest-art about-interest-art-" + kind} aria-hidden="true">
+    <span className="about-interest-art-glow" />
+    <svg viewBox="0 0 120 110" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      {kind === "music" ? <>
+        <path d="M43 75V29l49-10v46 M43 41l49-10" /><ellipse cx="31" cy="78" rx="12" ry="9" transform="rotate(-20 31 78)" /><ellipse cx="80" cy="68" rx="12" ry="9" transform="rotate(-20 80 68)" />
+      </> : kind === "game" ? <>
+        <path d="M37 32c-11-3-18 6-21 19l-7 26c-3 13 5 19 14 10l16-14h35l15 16c8 9 17 5 16-8l-3-27c-1-14-9-21-20-20l-14 3-17-3-14-2Z" />
+        <path d="M28 46v15m-7-8h15" /><circle cx="81" cy="49" r="2.5" /><circle cx="91" cy="58" r="2.5" /><circle cx="72" cy="58" r="2.5" /><circle cx="81" cy="67" r="2.5" />
+        <circle cx="43" cy="66" r="5" /><circle cx="61" cy="66" r="5" /><path d="m49 48 9 1" />
+      </> : <>
+        <path d="m27 21 73 5-5 61-76-8 8-58Z M23 70l73 7 M19 79 5 89l80 12 10-14 M5 89l1 5 79 11 1-4" />
+        <path d="m50 40-10 7 9 9m21-15 9 9-11 6m-7-20-7 24 M42 89l20 3" />
+      </>}
+    </svg>
+  </div>;
+}
+
 export function AboutSection({
   projectPlaceholder = false,
 }: {
@@ -85,7 +104,7 @@ export function AboutSection({
         aria-labelledby="about-heading"
       >
         <div className="home-about-reversed-grid">
-          {/* LEFT COLUMN: 2x2 Stats Matrix (Clickable Links) */}
+          {/* Four stacked stat rows (clickable links) */}
           <div className="home-about-stats-matrix">
             <Link
               href="/about#about-education-heading"
@@ -171,7 +190,7 @@ export function AboutSection({
             </Link>
           </div>
 
-          {/* RIGHT COLUMN: Description & Learn More Button */}
+          {/* Description & Learn More Button */}
           <div
             className="home-about-copy-right scroll-reveal"
             data-scroll-reveal
@@ -206,64 +225,56 @@ export function AboutSection({
 
   return (
     <>
-      <section
-        className="section-block content-section about-hero scroll-reveal"
-        id="about"
-        data-scroll-reveal
-        aria-labelledby="about-heading"
-      >
-        <div className="about-hero-grid">
-          <div className="about-hero-copy">
-            <p className="editorial-eyebrow">
-              <span className="editorial-eyebrow-dot" aria-hidden="true" />
-              ABOUT ME · BULACAN, PHILIPPINES
-            </p>
-            <h1 id="about-heading" className="editorial-title">
-              <span className="heading-highlight">My story and path,</span>
-              <br />
-              <span className="text-muted">as an aspiring software developer.</span>
-            </h1>
-            <p className="about-lead">
-              I&apos;m <strong className="editorial-highlight">Juan Domanico Militante (known as Ikoy)</strong>—a Web &amp; Mobile
-              Developer dedicated to crafting responsive digital products,
-              intuitive interfaces, and performant user experiences.
-            </p>
-            <p className="about-supporting-copy">
-              From clean front-end architecture to offline-first engineering in
-              projects like <strong className="editorial-highlight">SIGLA</strong> (a mobile sign language translator app), I build
-              purposeful software that connects ideas with real-world accessibility.
-            </p>
-            <div className="intro-actions about-actions">
-              <Link className="intro-link" href="/projects">
-                View my projects <span aria-hidden="true">↗</span>
-              </Link>
-              <Link className="intro-link intro-link-secondary" href="/contact">
-                Contact me
-              </Link>
+      <section className="section-block content-section about-life about-personal-hero" id="about" aria-labelledby="about-heading">
+        <svg className="about-personal-ribbon about-personal-ribbon-top" viewBox="0 0 800 160" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="personal-ribbon-top"><stop stopColor="#ef3653" /><stop offset=".65" stopColor="#ffa586" /><stop offset="1" stopColor="#ef3653" /></linearGradient></defs><path d="M0 140C300 172 570 26 800 0V85C530 5 330 190 0 140Z" fill="url(#personal-ribbon-top)" /></svg>
+        <header className="about-personal-heading">
+          <div><p className="editorial-eyebrow"><span className="editorial-eyebrow-dot" aria-hidden="true" />02 &#8212; OUTSIDE THE CODE EDITOR</p>
+          <h1 id="about-heading" className="editorial-title"><span className="heading-highlight">Life and interests,</span><br /><span className="text-muted">outside daily development.</span></h1></div>
+          <p>The interests, music, stories, and food that make a day feel like mine.</p>
+        </header>
+        <div className="about-personal-layout">
+          <div className="about-personal-story">
+            <div className="about-personal-portrait"><AboutPortrait /></div>
+            <div className="about-personal-bio">
+              <p className="section-kicker">A LITTLE ABOUT ME</p>
+              <h2><span className="about-name-line">Juan Domanico</span><span className="about-name-line">Militante <span className="about-name-nickname">(Ikoy)</span></span></h2>
+              <p>I&apos;m an ambivert. Sometimes I&apos;m talkative and noisy, and other times I&apos;m quiet&#8212;it depends on my mood and the people around me.</p>
+              <p>I may look serious or a little intimidating at first, but I&apos;m actually clingy and not as serious as I seem.</p>
             </div>
-          </div>
-          {projectPlaceholder ? (
-            <div className="about-sigla-standalone-wrapper">
-              <BahalertoShowcase />
-              <SiglaShowcase />
-            </div>
-          ) : (
-            <aside className="about-profile-card" aria-label="About Juan">
-              <AboutPortrait />
-              <div className="about-profile-meta">
-                <span className="section-kicker">
-                  <AboutIcon name="pin" /> BASED IN
-                </span>
-                <strong>Bulacan, Philippines</strong>
-                <p>Front-end developer · App and website creator</p>
-              </div>
+            <aside className="about-personal-facts" aria-label="Location, role, and focus">
+              <div><span className="about-personal-fact-icon"><AboutIcon name="pin" /></span><div><p>Based in</p><strong>Bulacan, Philippines</strong></div></div>
+              <div><span className="about-personal-fact-icon"><EducationIcon name="code" /></span><div><p>Role</p><strong>Web &amp; Mobile Developer</strong></div></div>
+              <div><span className="about-personal-fact-icon"><AboutIcon name="graduation" /></span><div><p>Focus</p><strong>Building useful and<br /> user-friendly solutions</strong></div></div>
             </aside>
-          )}
+            <blockquote className="about-personal-quote"><span aria-hidden="true">&#8220;</span><p>The little things make me happy&#8212;especially when friends or others remember something about me. It makes me feel special and appreciated.</p></blockquote>
+          </div>
+          <div className="about-personal-interests">
+            <article className="about-personal-interest about-personal-favorites">
+              <h2>My Favorites</h2>
+              <dl className="about-favorites-list">
+                  <div><dt><AboutIcon name="music" /> Song</dt><dd>&ldquo;This Time I Fall&rdquo; — Jesse Lawrence</dd></div>
+                  <div><dt><AboutIcon name="star" /> Artist</dt><dd>Maroon 5</dd></div>
+                  <div><dt><AboutIcon name="film" /> Movie</dt><dd><em>More Than Blue</em></dd></div>
+                  <div><dt><AboutIcon name="food" /> Food</dt><dd>Palabok</dd></div>
+                </dl>
+              <InterestArtwork kind="music" />
+            </article>
+            <article className="about-personal-interest about-personal-game">
+              <h2>In My Free Time</h2><h3>Play, move, unwind.</h3>
+              <p>I enjoy online games like Mobile Legends, League of Legends, and CrossFire. I also like playing table tennis during my free time.</p>
+              <InterestArtwork kind="game" />
+            </article>
+            <article className="about-personal-interest about-personal-next">
+              <h2>What&apos;s Next</h2><h3>Always learning.</h3>
+              <p>I want to learn more programming languages, improve my coding skills, and discover more about software development.</p>
+              <InterestArtwork kind="laptop" />
+            </article>
+          </div>
         </div>
+        <svg className="about-personal-ribbon about-personal-ribbon-bottom" viewBox="0 0 800 160" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="personal-ribbon-bottom"><stop stopColor="#ef3653" /><stop offset=".35" stopColor="#ffa586" /><stop offset="1" stopColor="#b51a2b" /></linearGradient></defs><path d="M0 32C260-8 420 150 800 145C420 180 240 15 0 128Z" fill="url(#personal-ribbon-bottom)" /></svg>
       </section>
-
       <section
-        className="section-block content-section about-approach scroll-reveal"
+        className="section-block content-section about-approach about-reference-approach scroll-reveal"
         id="about-approach"
         data-scroll-reveal
         aria-labelledby="about-approach-heading"
@@ -279,174 +290,83 @@ export function AboutSection({
             <span className="text-muted">practicality, clarity, and growth.</span>
           </h2>
           <p>
-            I like making digital experiences <strong className="editorial-highlight">clear, approachable, and purposeful</strong>.
+            <span className="about-focus-line">I focus on building solutions that are</span><span className="about-focus-line"><strong className="editorial-highlight">clear, approachable, and purposeful</strong>.</span>
           </p>
         </div>
         <div className="about-principles-grid">
           <article className="about-principle scroll-reveal" data-scroll-reveal>
             <div className="about-principle-top">
-              <span>01</span>
-              <span className="about-principle-highlight">HUMAN-CENTERED</span>
+              <span className="about-principle-symbol"><EducationIcon name="code" /></span>
+              <span className="about-principle-highlight">01 &#8212; PLAN &amp; UNDERSTAND</span>
             </div>
-            <h3>Start with the people</h3>
+            <h3>Start with the problem.</h3>
             <p>
-              I think about who will use a project and what they need it to help
-              them do.
+              I take time to understand the goals and requirements before writing code.
             </p>
+            <svg className="about-principle-wave" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="principle-wave-1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#d52a49" /><stop offset="100%" stopColor="#541a2e" stopOpacity=".35" /></linearGradient></defs><path d="M0 26C90 37 125 78 240 45S350 2 400 8V60H0Z" fill={"url(#principle-wave-1)"} /></svg>
           </article>
           <article className="about-principle scroll-reveal" data-scroll-reveal>
             <div className="about-principle-top">
-              <span>02</span>
-              <span className="about-principle-highlight">INTUITIVE UI</span>
+              <span className="about-principle-symbol"><AboutIcon name="layers" /></span>
+              <span className="about-principle-highlight">02 &#8212; BUILD &amp; ITERATE</span>
             </div>
-            <h3>Shape a clear experience</h3>
+            <h3>Shape a clear solution.</h3>
             <p>
-              I enjoy building friendly interfaces for websites and mobile
-              applications.
+              I break the idea into smaller, practical steps and build it with intention.
             </p>
+            <svg className="about-principle-wave" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="principle-wave-2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#d52a49" /><stop offset="100%" stopColor="#541a2e" stopOpacity=".35" /></linearGradient></defs><path d="M0 26C90 37 125 78 240 45S350 2 400 8V60H0Z" fill={"url(#principle-wave-2)"} /></svg>
           </article>
           <article className="about-principle scroll-reveal" data-scroll-reveal>
             <div className="about-principle-top">
-              <span>03</span>
-              <span className="about-principle-highlight">GROWTH MINDSET</span>
+              <span className="about-principle-symbol"><AboutIcon name="growth" /></span>
+              <span className="about-principle-highlight">03 &#8212; IMPROVE &amp; GROW</span>
             </div>
-            <h3>Keep learning by building</h3>
+            <h3>Keep learning by building.</h3>
             <p>
-              Each project helps me practice, improve, and make my next work
-              more useful.
+              I revisit, refine, and explore new tools and ideas to make each project better.
             </p>
+            <svg className="about-principle-wave" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="principle-wave-3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#d52a49" /><stop offset="100%" stopColor="#541a2e" stopOpacity=".35" /></linearGradient></defs><path d="M0 26C90 37 125 78 240 45S350 2 400 8V60H0Z" fill={"url(#principle-wave-3)"} /></svg>
           </article>
         </div>
       </section>
 
-      <section
-        className="section-block content-section about-life scroll-reveal"
-        id="about-life"
-        data-scroll-reveal
-        aria-labelledby="about-life-heading"
-      >
-        <div className="content-section-heading editorial-heading">
-          <p className="editorial-eyebrow">
-            <span className="editorial-eyebrow-dot" aria-hidden="true" />
-            02 — OUTSIDE THE CODE EDITOR
-          </p>
-          <h2 id="about-life-heading" className="editorial-title">
-            <span className="heading-highlight">Life and interests,</span>
-            <br />
-            <span className="text-muted">outside daily development.</span>
-          </h2>
-          <p>
-            {projectPlaceholder
-              ? "A little about who I am beyond the work I do."
-              : "The interests, music, stories, and food that make a day feel like mine."}
-          </p>
-        </div>
-        {projectPlaceholder ? (
-          <div className="about-life-grid">
-            <div className="about-copy">
-              <p>
-                I enjoy making time for the things and people that help me feel
-                balanced, and I like continuing to learn as I grow.
-              </p>
-            </div>
-            <div className="about-motto">
-              <span className="section-kicker">A MOTTO I LIVE BY</span>
-              <blockquote>
-                &ldquo;No one can do it for you, so take responsibility and do
-                it yourself.&rdquo;
-              </blockquote>
-            </div>
-          </div>
-        ) : (
-          <div className="about-detail-groups">
-            <div className="about-details-grid about-details-grid-personal">
-              <article
-                className="about-detail-card about-detail-card-wide"
-                data-scroll-reveal
-                data-about-side="left"
-              >
-                <p className="section-kicker about-card-kicker">
-                  <AboutIcon name="person" /> A LITTLE ABOUT ME
-                </p>
-                <h3>Juan Domanico Militante <span>(Ikoy)</span></h3>
-                <p>
-                  I&apos;m an ambivert. Sometimes I&apos;m talkative and noisy,
-                  and other times I&apos;m quiet—it depends on my mood and the
-                  people around me.
-                </p>
-                <p>
-                  I may look serious or a little intimidating at first, but
-                  I&apos;m actually clingy and not as serious as I seem. Once
-                  people get to know me, they see a different side.
-                </p>
-                <div className="about-detail-highlight">
-                  <div className="about-highlight-header">
-                    <span className="about-highlight-icon-badge">
-                      <AboutIcon name="heart" />
-                    </span>
-                    <span className="about-highlight-kicker">PERSONAL NOTE</span>
-                  </div>
-                  <p className="about-highlight-quote">
-                    &ldquo;The little things make me happy—especially when friends or
-                    others remember something about me. It makes me feel special
-                    and appreciated.&rdquo;
-                  </p>
-                </div>
-              </article>
-              <article
-                className="about-detail-card"
-                data-scroll-reveal
-                data-about-side="right"
-              >
-                <p className="section-kicker about-card-kicker">
-                  <AboutIcon name="star" /> MY FAVORITES
-                </p>
-                <dl className="about-favorites-list">
-                  <div><dt><AboutIcon name="music" /> Song</dt><dd>&ldquo;This Time I Fall&rdquo; — Jesse Lawrence</dd></div>
-                  <div><dt><AboutIcon name="star" /> Artist</dt><dd>Maroon 5</dd></div>
-                  <div><dt><AboutIcon name="film" /> Movie</dt><dd><em>More Than Blue</em></dd></div>
-                  <div><dt><AboutIcon name="food" /> Food</dt><dd>Palabok</dd></div>
-                </dl>
-              </article>
-              <article
-                className="about-detail-card"
-                data-scroll-reveal
-                data-about-side="left"
-              >
-                <p className="section-kicker about-card-kicker">
-                  <AboutIcon name="game" /> IN MY FREE TIME
-                </p>
-                <h3>Play, move, unwind.</h3>
-                <p>
-                  I enjoy online games like Mobile Legends, League of Legends,
-                  and CrossFire. I also like playing table tennis during my free
-                  time.
-                </p>
-              </article>
-              <article
-                className="about-detail-card"
-                data-scroll-reveal
-                data-about-side="right"
-              >
-                <p className="section-kicker about-card-kicker">
-                  <AboutIcon name="sparkles" /> WHAT&apos;S NEXT
-                </p>
-                <h3>Always learning.</h3>
-                <p>
-                  I want to learn more programming languages, improve my coding
-                  skills, and discover more about software development.
-                </p>
-              </article>
-            </div>
 
+      <section className="section-block content-section about-life" aria-label="Education and work experience">
+        <div className="about-detail-groups">
             <section
               className="about-detail-group"
               aria-labelledby="about-education-heading"
             >
               <div className="about-detail-heading">
-                <p className="section-kicker">MY LEARNING JOURNEY</p>
-                <h3 id="about-education-heading">Educational background</h3>
+                <p className="section-kicker">EXPERIENCE &amp; EDUCATION</p>
+                <h3 id="about-education-heading">My journey in tech and learning.</h3>
               </div>
+              <div className="about-journey-layout">
+                <div className="about-journey-timeline">
+                  <article className="about-journey-row">
+                    <span className="about-journey-icon"><AboutIcon name="graduation" /></span>
+                    <div><h4>BS in Information Technology</h4><p>Pambayang Dalubhasaan ng Marilao</p></div>
+                    <span className="about-journey-date">Currently studying</span>
+                  </article>
+                  <article className="about-journey-row">
+                    <span className="about-journey-icon"><AboutIcon name="work" /></span>
+                    <div><h4>IT Capstone Project Developer</h4><p>SIGLA ? Mobile Sign Language Translator</p></div>
+                    <span className="about-journey-date">Capstone</span>
+                  </article>
+                  <article className="about-journey-row">
+                    <span className="about-journey-icon"><EducationIcon name="code" /></span>
+                    <div><h4>Personal Projects</h4><p>Web, Mobile, and Game Development</p></div>
+                    <span className="about-journey-date">Ongoing</span>
+                  </article>
+                </div>
+                <aside className="about-journey-summary" aria-label="Education and availability">
+                  <div><span className="about-journey-icon"><AboutIcon name="graduation" /></span><div><h4>Education</h4><strong>BS in Information Technology</strong><p>Pambayang Dalubhasaan ng Marilao</p></div></div>
+                  <div><span className="about-journey-icon"><AboutIcon name="pin" /></span><div><h4>Location</h4><p>Bulacan, Philippines</p></div></div>
+                  <div><span className="about-journey-icon"><AboutIcon name="sparkles" /></span><div><h4>Open to</h4><p>Internship ? Collaborations ? Opportunities</p></div></div>
+                </aside>
+              </div>
+              <details className="about-school-details">
+                <summary>View my full educational background</summary>
               <div className="about-details-grid about-details-grid-education">
                 <article
                   className="about-detail-card"
@@ -500,6 +420,7 @@ export function AboutSection({
                   <p>Pambayang Dalubhasaan ng Marilao (PDM)</p>
                 </article>
               </div>
+              </details>
             </section>
 
             <section
@@ -528,14 +449,9 @@ export function AboutSection({
                 </p>
               </article>
             </section>
-          </div>
-        )}
-        <div className="about-closing-link">
-          <p>Have an idea or want to work together?</p>
-          <Link className="intro-link" href="/contact">
-            Let&apos;s connect <span aria-hidden="true">↗</span>
-          </Link>
+
         </div>
+        <div className="about-closing-link"><p>Have an idea or want to work together?</p><Link className="intro-link" href="/contact">Let&apos;s connect <span aria-hidden="true">&#8599;</span></Link></div>
       </section>
     </>
   );

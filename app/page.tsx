@@ -120,6 +120,19 @@ export default function Home() {
         </div>
         <div className="home-portrait-column">
           <figure className="home-portrait-frame">
+            <svg width="0" height="0" aria-hidden="true" focusable="false" style={{ position: "absolute", overflow: "visible" }}>
+              <defs>
+                <filter id="home-portrait-outline" x="-10%" y="-10%" width="120%" height="120%" colorInterpolationFilters="sRGB">
+                  <feMorphology in="SourceAlpha" operator="dilate" radius="6" result="outerExpanded" />
+                  <feFlood floodColor="#ffffff" />
+                  <feComposite in2="outerExpanded" operator="in" result="whiteOutline" />
+                  <feMorphology in="SourceAlpha" operator="dilate" radius="4" result="innerExpanded" />
+                  <feFlood floodColor="#c8102e" />
+                  <feComposite in2="innerExpanded" operator="in" result="redOutline" />
+                  <feMerge><feMergeNode in="whiteOutline" /><feMergeNode in="redOutline" /><feMergeNode in="SourceGraphic" /></feMerge>
+                </filter>
+              </defs>
+            </svg>
             <Image
               src="/profile/professional_profile_cutout.png"
               alt="Portrait of Juan Domanico Militante"

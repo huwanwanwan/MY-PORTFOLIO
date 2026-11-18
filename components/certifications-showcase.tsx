@@ -70,7 +70,6 @@ function CertificationCategoryGallery({
   category,
 }: CertificationsShowcaseProps & { category: GalleryCategory | "All" }) {
   const [lightboxCert, setLightboxCert] = useState<CertificationItem | null>(null);
-  const [mounted, setMounted] = useState<boolean>(false);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   const isDarkMode = useSyncExternalStore(
     subscribeToTheme,
@@ -78,9 +77,6 @@ function CertificationCategoryGallery({
     () => false
   );
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Use the primary category so combined labels do not duplicate entries.
   const filtered = category === "All"
@@ -96,42 +92,6 @@ function CertificationCategoryGallery({
     }, 60);
     return () => clearTimeout(timer);
   }, [category]);
-
-  function scrollCertificates(direction: "left" | "right") {
-    if (!scrollContainerRef.current) return;
-    const track = scrollContainerRef.current;
-    const cards = Array.from(track.children).filter((el): el is HTMLElement => el instanceof HTMLElement && el.matches(".cert-slide-card"));
-    if (cards.length === 0) return;
-
-    const viewportCenter = track.scrollLeft + track.clientWidth / 2;
-    let activeIndex = 0;
-    let minDistance = Infinity;
-
-    for (let i = 0; i < cards.length; i++) {
-      const card = cards[i];
-      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-      const distance = Math.abs(cardCenter - viewportCenter);
-      if (distance < minDistance) {
-        minDistance = distance;
-        activeIndex = i;
-      }
-    }
-
-    const targetIndex = direction === "left"
-      ? Math.max(0, activeIndex - 1)
-      : Math.min(cards.length - 1, activeIndex + 1);
-
-    if (targetIndex === activeIndex) return;
-
-    const targetCard = cards[targetIndex];
-    if (!targetCard) return;
-
-    const targetLeft = targetCard.offsetLeft - (track.clientWidth - targetCard.offsetWidth) / 2;
-    track.scrollTo({
-      left: Math.max(0, targetLeft),
-      behavior: "smooth",
-    });
-  }
 
   const handleCloseLightbox = useCallback(() => {
     setLightboxCert(null);
@@ -190,42 +150,13 @@ function CertificationCategoryGallery({
             </>
           )}
         </div>
-        <div className="cert-gallery-actions">
-          {/* Top-Right Arrow Buttons (Home Page Carousel Only) */}
-          {variant === "carousel" && (
-            <div className="cert-carousel-nav" aria-label="Certificate carousel navigation">
-              <button
-                type="button"
-                className="cert-nav-arrow"
-                onClick={(e) => { e.currentTarget.blur(); scrollCertificates("left"); }}
-                aria-label="Previous certificate"
-              >
-                ←
-              </button>
-              <button
-                type="button"
-                className="cert-nav-arrow"
-                onClick={(e) => { e.currentTarget.blur(); scrollCertificates("right"); }}
-                aria-label="Next certificate"
-              >
-                →
-              </button>
-            </div>
-          )}
-        </div>
+
       </div>
 
       {/* ── Content View: Arrow-type Carousel for Home, Scrollable Animated Grid for Experience Page ── */}
       {variant === "carousel" ? (
         <div className="cert-carousel-wrapper" data-scroll-reveal>
-          <button
-            type="button"
-            className="cert-side-arrow cert-side-arrow-left"
-            onClick={(e) => { e.currentTarget.blur(); scrollCertificates("left"); }}
-            aria-label="Previous certificate"
-          >
-            ‹
-          </button>
+
 
           <div
             ref={scrollContainerRef}
@@ -322,14 +253,7 @@ function CertificationCategoryGallery({
             })}
           </div>
 
-          <button
-            type="button"
-            className="cert-side-arrow cert-side-arrow-right"
-            onClick={(e) => { e.currentTarget.blur(); scrollCertificates("right"); }}
-            aria-label="Next certificate"
-          >
-            ›
-          </button>
+
         </div>
       ) : (
         /* Scrollable Grid Mode: No arrows, cards revealed with animation as user scrolls down */
@@ -427,7 +351,7 @@ function CertificationCategoryGallery({
       )}
 
       {/* ── High-Resolution Lightbox Modal rendered via Portal directly to body ── */}
-      {lightboxCert && mounted && typeof document !== "undefined" && createPortal(
+      {lightboxCert && typeof document !== "undefined" && createPortal(
         <div
           className={`cert-lightbox-backdrop${isDarkMode ? " dark" : ""}`}
           onClick={handleCloseLightbox}
