@@ -303,7 +303,7 @@ export function AboutSection({
             <p>
               I take time to understand the goals and requirements before writing code.
             </p>
-            <svg className="about-principle-wave" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="principle-wave-1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#d52a49" /><stop offset="100%" stopColor="#541a2e" stopOpacity=".35" /></linearGradient></defs><path d="M0 26C90 37 125 78 240 45S350 2 400 8V60H0Z" fill={"url(#principle-wave-1)"} /></svg>
+            
           </article>
           <article className="about-principle scroll-reveal" data-scroll-reveal>
             <div className="about-principle-top">
@@ -314,7 +314,7 @@ export function AboutSection({
             <p>
               I break the idea into smaller, practical steps and build it with intention.
             </p>
-            <svg className="about-principle-wave" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="principle-wave-2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#d52a49" /><stop offset="100%" stopColor="#541a2e" stopOpacity=".35" /></linearGradient></defs><path d="M0 26C90 37 125 78 240 45S350 2 400 8V60H0Z" fill={"url(#principle-wave-2)"} /></svg>
+            
           </article>
           <article className="about-principle scroll-reveal" data-scroll-reveal>
             <div className="about-principle-top">
@@ -325,7 +325,7 @@ export function AboutSection({
             <p>
               I revisit, refine, and explore new tools and ideas to make each project better.
             </p>
-            <svg className="about-principle-wave" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="principle-wave-3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#d52a49" /><stop offset="100%" stopColor="#541a2e" stopOpacity=".35" /></linearGradient></defs><path d="M0 26C90 37 125 78 240 45S350 2 400 8V60H0Z" fill={"url(#principle-wave-3)"} /></svg>
+            
           </article>
         </div>
       </section>

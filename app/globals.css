@@ -20707,11 +20707,9 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
   transition-delay: 0s;
 }
 .page .about-reference-approach .about-principle h3 { font-weight: 750; }
-.page .about-principle-wave { position: absolute; inset: auto 0 0; width: 100%; height: 60px; pointer-events: none; z-index: -1; transition: transform 500ms cubic-bezier(.22,1,.36,1); }
 .page .about-life .about-detail-card, .page .about-reference-hero .about-profile-card, .page .about-journey-summary { transition: opacity 950ms cubic-bezier(.22,1,.36,1), translate 950ms cubic-bezier(.22,1,.36,1), transform 400ms cubic-bezier(.22,1,.36,1), box-shadow 400ms ease, border-color 400ms ease; }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
  .page .about-reference-approach .about-principle:hover, .page .about-life .about-detail-card:hover, .page .about-reference-hero .about-profile-card:hover, .page .about-journey-summary:hover { transform: translateY(-6px); border-color: color-mix(in srgb,var(--accent) 55%,var(--card-border)); box-shadow: 0 16px 32px #161b2f20; }
- .page .about-principle:hover .about-principle-wave { transform: scaleY(1.12); transform-origin: bottom; }
 }
 @media(max-width:900px) {
  .page .about-reference-approach > .editorial-heading { grid-template-columns: minmax(0,1fr); }
@@ -20720,7 +20718,7 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
  .page .about-reference-approach > .editorial-heading > p:last-child { grid-column: 1; grid-row: 3; padding: 0; margin-top: 16px; border: 0; }
 }
 @media(prefers-reduced-motion:reduce) {
- .page .about-reference-approach .about-principles-grid > .about-principle, .page .about-life .about-detail-card, .page .about-reference-hero .about-profile-card, .page .about-journey-summary, .page .about-principle-wave { transition: none; }
+ .page .about-reference-approach .about-principles-grid > .about-principle, .page .about-life .about-detail-card, .page .about-reference-hero .about-profile-card, .page .about-journey-summary { transition: none; }
 }
 
 /* Illustrated interest cards with red glass accents. */
@@ -21097,3 +21095,6 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
 /* Quote panel without an outlined border in either theme. */
 .page .about-personal-quote,
 .page:not(.dark) .about-personal-quote { border: 0; }
+
+/* Principle cards have plain lower edges. */
+.page .about-reference-approach .about-principles-grid > .about-principle { padding-bottom: clamp(20px,3vw,32px); }
