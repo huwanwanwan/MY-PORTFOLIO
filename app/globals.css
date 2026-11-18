@@ -21093,3 +21093,7 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
 .page .about-personal-quote { background: #242f49; }
 .page:not(.dark) .about-personal-quote { background: #f2e6ea; }
 .page .about-personal-quote::after { content: none; }
+
+/* Quote panel without an outlined border in either theme. */
+.page .about-personal-quote,
+.page:not(.dark) .about-personal-quote { border: 0; }
