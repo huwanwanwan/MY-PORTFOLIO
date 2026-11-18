@@ -162,7 +162,7 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
           <div className="brand-block">
             <Link className="brand-link" href="/" aria-label="Juan Domanico Militante Home">
               <Image
-                src="/tab-logo.png"
+                src="/brand-mark.svg"
                 alt="Wancor Logo"
                 width={56}
                 height={56}
@@ -210,7 +210,7 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
             <div className="mega-footer-col brand-col">
               <Link href="/" className="mega-footer-logo-link">
                 <Image
-                  src="/tab-logo.png"
+                  src="/brand-mark.svg"
                   alt="Wancor Logo"
                   width={38}
                   height={38}

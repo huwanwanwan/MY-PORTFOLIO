@@ -29,6 +29,7 @@ export default function Home() {
         data-scroll-reveal
         aria-labelledby="home-heading"
       >
+        <svg className="hero-waves" viewBox="0 0 1600 180" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="hero-wave"><stop stopColor="#FFA586"/><stop offset=".4" stopColor="#384358"/><stop offset="1" stopColor="#B51A2B"/></linearGradient></defs><path d="M0 42C210 36 266 188 620 140S1000 232 1250 80S1500 -6 1600 0V180H0Z" fill="url(#hero-wave)"/><path d="M0 146C300 180 440 122 710 151S1060 208 1320 110S1510 33 1600 36V180H0Z" fill="#541A2E" opacity=".74"/></svg>
         <div className="profile-copy">
           <p className="eyebrow">
             <span className="availability-dot" aria-hidden="true" />
@@ -65,9 +66,8 @@ export default function Home() {
               href="/Juan_Militante_CV.html"
               target="_blank"
               rel="noopener noreferrer"
-              download="Juan_Militante_CV.html"
             >
-              <span>Download CV</span>
+              <span>View CV</span>
               <svg
                 viewBox="0 0 24 24"
                 width="17"
@@ -147,9 +147,8 @@ export default function Home() {
                 href="/Juan_Militante_CV.html"
                 target="_blank"
                 rel="noopener noreferrer"
-                download="Juan_Militante_CV.html"
-              >
-                <span>Download CV</span>
+                >
+                <span>View CV</span>
                 <svg
                   viewBox="0 0 24 24"
                   width="17"
@@ -195,11 +194,11 @@ export default function Home() {
         </div>
       </section>
       <GitHubContributions />
-      <AboutSection projectPlaceholder />
       <ProjectsSection slider={true} />
+      <AboutSection projectPlaceholder />
       <SkillsSection compact />
       <ExperienceSection slider={true} />
-      <ContactSection />
+      <ContactSection compact />
     </SiteShell>
   );
 }

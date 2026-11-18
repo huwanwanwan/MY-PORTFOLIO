@@ -591,6 +591,7 @@ export function ProjectsSection({
 }
 
 export function SkillsSection({ compact = false }: { compact?: boolean } = {}) {
+  const Heading = compact ? "h2" : "h1";
   return (
     <section
       className="section-block content-section"
@@ -602,11 +603,11 @@ export function SkillsSection({ compact = false }: { compact?: boolean } = {}) {
           <span className="editorial-eyebrow-dot" aria-hidden="true" />
           TECHNICAL TOOLKIT &amp; ARCHITECTURE
         </p>
-        <h1 id="skills-heading" className="editorial-title">
+        <Heading id="skills-heading" className="editorial-title">
           Technologies I build with,
           <br />
           <span className="text-muted">tested through hands-on projects.</span>
-        </h1>
+        </Heading>
         <p>
           The languages, frameworks, platforms, and tools I&apos;ve explored through my projects and studies. Select any technology below to see which projects use it in their stack.
         </p>
@@ -621,6 +622,7 @@ export function ExperienceSection({
 }: {
   slider?: boolean;
 } = {}) {
+  const Heading = slider ? "h2" : "h1";
   return (
     <section
       className="section-block content-section"
@@ -632,11 +634,11 @@ export function ExperienceSection({
           <span className="editorial-eyebrow-dot" aria-hidden="true" />
           EDUCATION &amp; MILESTONES
         </p>
-        <h1 id="experience-heading" className="editorial-title">
+        <Heading id="experience-heading" className="editorial-title">
           My development journey,
           <br />
           <span className="text-muted">education, growth, and milestones.</span>
-        </h1>
+        </Heading>
         <p>Projects, systems, and academic milestones from my development journey.</p>
       </div>
       <div className="experience-education-grid">
@@ -733,6 +735,6 @@ export function ExperienceSection({
   );
 }
 
-export function ContactSection() {
-  return <ContactHub />;
+export function ContactSection({ compact = false }: { compact?: boolean } = {}) {
+  return <ContactHub compact={compact} />;
 }

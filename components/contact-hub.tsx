@@ -22,7 +22,8 @@ const getValidSubmissions = (): number[] => {
   }
 };
 
-export default function ContactHub() {
+export default function ContactHub({ compact = false }: { compact?: boolean } = {}) {
+  const Heading = compact ? "h2" : "h1";
   const [copied, setCopied] = useState(false);
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [sendProgress, setSendProgress] = useState(0);
@@ -176,11 +177,11 @@ export default function ContactHub() {
           <span className="editorial-eyebrow-dot" aria-hidden="true" />
           LET&apos;S CONNECT &amp; BUILD
         </p>
-        <h1 id="contact-heading" className="editorial-title">
+        <Heading id="contact-heading" className="editorial-title">
           Let&apos;s start a conversation,
           <br />
           <span className="contact-statement-outline">open for opportunities</span> &amp; projects.
-        </h1>
+        </Heading>
         <p className="contact-subtitle">
           Have an exciting project, collaboration inquiry, or question? Feel free to reach out directly through any channel or send a message below.
         </p>
@@ -490,12 +491,6 @@ export default function ContactHub() {
             )}
 
             <div className="form-footer-action">
-              <div className="form-security-note">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                </svg>
-                <span>Protected by bot verification and disposable-email screening</span>
-              </div>
 
               <button
                 type="submit"
@@ -509,42 +504,19 @@ export default function ContactHub() {
           </form>
         </div>
 
-        {/* Centered Resume Highlight Card */}
-        <div className="contact-resume-card scroll-reveal" data-scroll-reveal>
-          <div className="resume-icon-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-              <line x1="16" y1="13" x2="8" y2="13" />
-              <line x1="16" y1="17" x2="8" y2="17" />
-              <polyline points="10 9 9 9 8 9" />
-            </svg>
-          </div>
-          <div className="resume-text-content">
-            <h4>Curriculum Vitae / Resume</h4>
-            <p>
-              My complete professional CV with academic background, tech competencies, and project portfolio is ready for instant download or printing.
-            </p>
-          </div>
-          <div className="resume-btn-wrap">
-            <a
-              href="/Juan_Militante_CV.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              download="Juan_Militante_CV.html"
-              className="resume-pill-btn resume-pill-btn-active"
-              title="Download Juan Militante CV"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" x2="12" y1="15" y2="3" />
-              </svg>
-              <span>Download Resume</span>
-              <span className="status-badge">Ready</span>
-            </a>
-          </div>
-        </div>
+        <a
+          href="/Juan_Militante_CV.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="contact-resume-download"
+        >
+          <span>View resume</span>
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" x2="12" y1="15" y2="3" />
+          </svg>
+        </a>
       </div>
     </section>
   );
