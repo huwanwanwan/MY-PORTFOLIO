@@ -1,11 +1,12 @@
-import { parseContributionCalendar, rollingContributionCalendar } from "../../../server/github-contributions";
+import { contributionCalendarDate, parseContributionCalendar, rollingContributionCalendar } from "../../../server/github-contributions";
 
 export async function GET() {
   try {
     const now = new Date();
-    const start = new Date(now);
+    const end = new Date(contributionCalendarDate(now) + "T00:00:00Z");
+    const start = new Date(end);
     start.setUTCDate(start.getUTCDate() - 364);
-    const years = [...new Set([start.getUTCFullYear(), now.getUTCFullYear()])];
+    const years = [...new Set([start.getUTCFullYear(), end.getUTCFullYear()])];
     // Explicit yearly calendars avoid GitHub's stale default rolling-calendar response.
     const calendars = await Promise.all(years.map(async year => {
       const url = new URL("https://github.com/users/huwanwanwan/contributions");

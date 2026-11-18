@@ -39,11 +39,17 @@ export function parseContributionCalendar(html: string): ContributionCalendar {
   };
 }
 
+export function contributionCalendarDate(now = new Date()): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Manila", year: "numeric", month: "2-digit", day: "2-digit",
+  }).format(now);
+}
+
 export function rollingContributionCalendar(
   calendars: ContributionCalendar[],
   now = new Date(),
 ): ContributionCalendar {
-  const end = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+  const end = new Date(contributionCalendarDate(now) + "T00:00:00Z");
   const start = new Date(end);
   start.setUTCDate(start.getUTCDate() - 364);
   const firstDate = start.toISOString().slice(0, 10);
