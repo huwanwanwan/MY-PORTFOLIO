@@ -270,64 +270,6 @@ export function AboutSection({
           </div>
         </div>
       </section>
-      <section
-        className="section-block content-section about-approach about-reference-approach scroll-reveal"
-        id="about-approach"
-        data-scroll-reveal
-        aria-labelledby="about-approach-heading"
-      >
-        <div className="content-section-heading editorial-heading">
-          <p className="editorial-eyebrow">
-            <span className="editorial-eyebrow-dot" aria-hidden="true" />
-            01 — MY DEVELOPMENT PRINCIPLES
-          </p>
-          <h2 id="about-approach-heading" className="editorial-title">
-            <span className="heading-highlight">How I approach every build,</span>
-            <br />
-            <span className="text-muted">practicality, clarity, and growth.</span>
-          </h2>
-          <p>
-            <span className="about-focus-line">I focus on building solutions that are</span><span className="about-focus-line"><strong className="editorial-highlight">clear, approachable, and purposeful</strong>.</span>
-          </p>
-        </div>
-        <div className="about-principles-grid">
-          <article className="about-principle scroll-reveal" data-scroll-reveal>
-            <div className="about-principle-top">
-              <span className="about-principle-symbol"><EducationIcon name="code" /></span>
-              <span className="about-principle-highlight">01 &#8212; PLAN &amp; UNDERSTAND</span>
-            </div>
-            <h3>Start with the problem.</h3>
-            <p>
-              I take time to understand the goals and requirements before writing code.
-            </p>
-
-          </article>
-          <article className="about-principle scroll-reveal" data-scroll-reveal>
-            <div className="about-principle-top">
-              <span className="about-principle-symbol"><AboutIcon name="layers" /></span>
-              <span className="about-principle-highlight">02 &#8212; BUILD &amp; ITERATE</span>
-            </div>
-            <h3>Shape a clear solution.</h3>
-            <p>
-              I break the idea into smaller, practical steps and build it with intention.
-            </p>
-
-          </article>
-          <article className="about-principle scroll-reveal" data-scroll-reveal>
-            <div className="about-principle-top">
-              <span className="about-principle-symbol"><AboutIcon name="growth" /></span>
-              <span className="about-principle-highlight">03 &#8212; IMPROVE &amp; GROW</span>
-            </div>
-            <h3>Keep learning by building.</h3>
-            <p>
-              I revisit, refine, and explore new tools and ideas to make each project better.
-            </p>
-
-          </article>
-        </div>
-      </section>
-
-
       <section className="section-block content-section about-life" aria-label="Education and work experience">
         <div className="about-detail-groups">
             <section
@@ -448,8 +390,66 @@ export function AboutSection({
             </section>
 
         </div>
+      </section>
+      <section
+        className="section-block content-section about-approach about-reference-approach scroll-reveal"
+        id="about-approach"
+        data-scroll-reveal
+        aria-labelledby="about-approach-heading"
+      >
+        <div className="content-section-heading editorial-heading">
+          <p className="editorial-eyebrow">
+            <span className="editorial-eyebrow-dot" aria-hidden="true" />
+            01 — MY DEVELOPMENT PRINCIPLES
+          </p>
+          <h2 id="about-approach-heading" className="editorial-title">
+            <span className="heading-highlight">How I approach every build,</span>
+            <br />
+            <span className="text-muted">practicality, clarity, and growth.</span>
+          </h2>
+          <p>
+            <span className="about-focus-line">I focus on building solutions that are</span><span className="about-focus-line"><strong className="editorial-highlight">clear, approachable, and purposeful</strong>.</span>
+          </p>
+        </div>
+        <div className="about-principles-grid">
+          <article className="about-principle scroll-reveal" data-scroll-reveal>
+            <div className="about-principle-top">
+              <span className="about-principle-symbol"><EducationIcon name="code" /></span>
+              <span className="about-principle-highlight">01 &#8212; PLAN &amp; UNDERSTAND</span>
+            </div>
+            <h3>Start with the problem.</h3>
+            <p>
+              I take time to understand the goals and requirements before writing code.
+            </p>
+
+          </article>
+          <article className="about-principle scroll-reveal" data-scroll-reveal>
+            <div className="about-principle-top">
+              <span className="about-principle-symbol"><AboutIcon name="layers" /></span>
+              <span className="about-principle-highlight">02 &#8212; BUILD &amp; ITERATE</span>
+            </div>
+            <h3>Shape a clear solution.</h3>
+            <p>
+              I break the idea into smaller, practical steps and build it with intention.
+            </p>
+
+          </article>
+          <article className="about-principle scroll-reveal" data-scroll-reveal>
+            <div className="about-principle-top">
+              <span className="about-principle-symbol"><AboutIcon name="growth" /></span>
+              <span className="about-principle-highlight">03 &#8212; IMPROVE &amp; GROW</span>
+            </div>
+            <h3>Keep learning by building.</h3>
+            <p>
+              I revisit, refine, and explore new tools and ideas to make each project better.
+            </p>
+
+          </article>
+        </div>
         <div className="about-closing-link"><p>Have an idea or want to work together?</p><Link className="intro-link" href="/contact">Let&apos;s connect <span aria-hidden="true">&#8599;</span></Link></div>
       </section>
+
+
     </>
   );
 }
