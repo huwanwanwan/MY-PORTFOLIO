@@ -367,19 +367,6 @@ export default function ContactHub() {
               aria-hidden="true"
             />
 
-            {/* Daily Security Quota Indicator */}
-            <div className="contact-security-badge-row">
-              <div className="contact-security-pill">
-                <span className={`contact-security-dot ${dailyRemaining === 0 ? "exhausted" : ""}`} aria-hidden="true" />
-                <span>Anti-Spam Security: <strong>{dailyRemaining} of {MAX_DAILY_MESSAGES}</strong> messages remaining today</span>
-              </div>
-              <span className="security-reset-hint">
-                {dailyRemaining === 0
-                  ? `Refreshes in ~${nextResetHours} hour${nextResetHours > 1 ? "s" : ""}`
-                  : "24-hour protected limit"}
-              </span>
-            </div>
-
             {/* Quota Exhausted Warning Card */}
             {dailyRemaining === 0 && (
               <div className="contact-rate-limit-banner" role="alert">

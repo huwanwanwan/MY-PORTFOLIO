@@ -25,10 +25,50 @@ type CertificationsShowcaseProps = {
   variant?: "carousel" | "scrollable";
 };
 
-export default function CertificationsShowcase({
+type GalleryCategory = "Certifications" | "Seminars" | "Competitions";
+const galleryCategories: GalleryCategory[] = ["Certifications", "Seminars", "Competitions"];
+const categoryIntroductions: Record<GalleryCategory, { eyebrow: string; lead: string; detail: string; description: string }> = {
+  Certifications: {
+    eyebrow: "COURSE COMPLETION & TECHNICAL LEARNING",
+    lead: "Certifications,",
+    detail: "building knowledge through continued learning.",
+    description: "Explore completed courses and certificates in programming, cloud computing, data analytics, and academic learning events.",
+  },
+  Seminars: {
+    eyebrow: "TECHNICAL EVENTS & SHARED KNOWLEDGE",
+    lead: "Seminars,",
+    detail: "exploring ideas and learning from others.",
+    description: "Browse seminar and webinar events covering developer tools, artificial intelligence, and cybersecurity.",
+  },
+  Competitions: {
+    eyebrow: "PRACTICAL PROJECTS & ACADEMIC PARTICIPATION",
+    lead: "Competitions,",
+    detail: "putting ideas into practice.",
+    description: "Discover academic competition participation and hands-on projects that bring technical learning into the real world.",
+  },
+};
+
+export default function CertificationsShowcase({ variant = "carousel" }: CertificationsShowcaseProps) {
+  return (
+    <section className="cert-gallery-section" id="certifications" data-scroll-reveal>
+      <div className={`cert-category-groups${variant === "carousel" ? " cert-summary" : ""}`}>
+        {variant === "carousel" ? (
+          <>
+            <CertificationCategoryGallery category="All" variant={variant} />
+            <a className="cert-summary-more" href="/experience#certifications">View all certifications, seminars, and competitions <span aria-hidden="true">→</span></a>
+          </>
+        ) : galleryCategories.map(category => (
+          <CertificationCategoryGallery key={category} category={category} variant={variant} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function CertificationCategoryGallery({
   variant = "carousel",
-}: CertificationsShowcaseProps) {
-  const [activeCategory, setActiveCategory] = useState<string>("All");
+  category,
+}: CertificationsShowcaseProps & { category: GalleryCategory | "All" }) {
   const [lightboxCert, setLightboxCert] = useState<CertificationItem | null>(null);
   const [mounted, setMounted] = useState<boolean>(false);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
@@ -42,24 +82,25 @@ export default function CertificationsShowcase({
     setMounted(true);
   }, []);
 
-  const categories = ["All", "Certifications", "Seminars", "Competitions"] as const;
-
-  const filtered =
-    activeCategory === "All"
-      ? certificationsData
-      : certificationsData.filter((c) => c.category === activeCategory);
+  // Use the primary category so combined labels do not duplicate entries.
+  const filtered = category === "All"
+    ? galleryCategories.flatMap(group => {
+        const highlight = certificationsData.find(item => item.category.split("/")[0] === group);
+        return highlight ? [highlight] : [];
+      })
+    : certificationsData.filter(item => item.category.split("/")[0] === category);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       window.dispatchEvent(new Event("scroll"));
     }, 60);
     return () => clearTimeout(timer);
-  }, [activeCategory]);
+  }, [category]);
 
   function scrollCertificates(direction: "left" | "right") {
     if (!scrollContainerRef.current) return;
     const track = scrollContainerRef.current;
-    const cards = Array.from(track.children).filter((el): el is HTMLElement => el instanceof HTMLElement);
+    const cards = Array.from(track.children).filter((el): el is HTMLElement => el instanceof HTMLElement && el.matches(".cert-slide-card"));
     if (cards.length === 0) return;
 
     const viewportCenter = track.scrollLeft + track.clientWidth / 2;
@@ -132,39 +173,24 @@ export default function CertificationsShowcase({
   }, [lightboxCert, handleCloseLightbox, handleNextLightbox, handlePrevLightbox]);
 
   return (
-    <section className="cert-gallery-section" id="certifications" data-scroll-reveal>
-      {/* ── Top Header Row ── */}
-      <div className="cert-gallery-header" data-scroll-reveal>
-        <div className="cert-gallery-intro">
-          <p className="editorial-eyebrow">
-            <span className="editorial-eyebrow-dot" aria-hidden="true" />
-            VERIFIED CREDENTIALS &amp; SEMINARS
-          </p>
-          <h2 className="editorial-title">
-            Certificates &amp; recognitions,
-            <br />
-            <span className="text-muted">earned through learning and competing.</span>
-          </h2>
-          <p className="cert-gallery-subtitle">
-            Browse official certificates, technical seminars, and verified academic competition entries.
-          </p>
+    <section className="cert-category-group" aria-labelledby={`cert-category-${category.toLowerCase()}`}>
+      <div className="cert-gallery-header cert-category-header" data-scroll-reveal>
+        <div className="cert-category-intro">
+          {category === "All" ? (
+            <h3 className="cert-category-title" id="cert-category-all">Selected highlights <span className="cert-category-count">{filtered.length}</span></h3>
+          ) : (
+            <>
+              <p className="editorial-eyebrow"><span className="editorial-eyebrow-dot" aria-hidden="true" />{categoryIntroductions[category].eyebrow}</p>
+              <h3 className="editorial-title cert-category-editorial-title" id={`cert-category-${category.toLowerCase()}`}>
+                {categoryIntroductions[category].lead}<br />
+                <span className="text-muted">{categoryIntroductions[category].detail}</span>
+              </h3>
+              <p className="cert-gallery-subtitle">{categoryIntroductions[category].description}</p>
+              <p className="cert-category-total">{filtered.length} {category.toLowerCase()} {filtered.length === 1 ? "entry" : "entries"}</p>
+            </>
+          )}
         </div>
-
         <div className="cert-gallery-actions">
-          {/* Category Filter Tabs */}
-          <div className="cert-filter-pills" role="tablist" aria-label="Certification categories">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                className={`cert-pill-btn${activeCategory === cat ? " active" : ""}`}
-                onClick={() => setActiveCategory(cat)}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
           {/* Top-Right Arrow Buttons (Home Page Carousel Only) */}
           {variant === "carousel" && (
             <div className="cert-carousel-nav" aria-label="Certificate carousel navigation">
@@ -217,7 +243,7 @@ export default function CertificationsShowcase({
                   data-reveal-delay={(index % 4) * 80}
                 >
                   <div className="cert-card-topbar">
-                    <span className={`cert-card-badge cert-badge-${cert.category.toLowerCase()}`}>
+                    <span className={`cert-card-badge cert-badge-${cert.category.split("/")[0].toLowerCase()}`}>
                       {cert.category}
                     </span>
                     <span className="cert-card-index">{indexStr}</span>
@@ -308,7 +334,7 @@ export default function CertificationsShowcase({
       ) : (
         /* Scrollable Grid Mode: No arrows, cards revealed with animation as user scrolls down */
         <div className="cert-scrollable-grid-wrapper" data-scroll-reveal>
-          <div key={activeCategory} className="cert-scrollable-grid" role="region" aria-label="Certificates directory">
+          <div key={category} className="cert-scrollable-grid" role="region" aria-label="Certificates directory">
             {filtered.map((cert, index) => {
               const indexStr = String(index + 1).padStart(2, "0");
               return (
@@ -319,7 +345,7 @@ export default function CertificationsShowcase({
                   data-reveal-delay={(index % 3) * 90}
                 >
                   <div className="cert-card-topbar">
-                    <span className={`cert-card-badge cert-badge-${cert.category.toLowerCase()}`}>
+                    <span className={`cert-card-badge cert-badge-${cert.category.split("/")[0].toLowerCase()}`}>
                       {cert.category}
                     </span>
                     <span className="cert-card-index">{indexStr}</span>
@@ -447,8 +473,8 @@ export default function CertificationsShowcase({
               <Image
                 src={lightboxCert.image}
                 alt={lightboxCert.alt}
-                width={1400}
-                height={950}
+                fill
+                sizes="(max-width: 640px) 100vw, 900px"
                 className="cert-lightbox-image"
                 unoptimized
                 priority
@@ -457,7 +483,7 @@ export default function CertificationsShowcase({
 
             <div className="cert-lightbox-caption">
               <div className="cert-lightbox-header">
-                <span className={`cert-card-badge cert-badge-${lightboxCert.category.toLowerCase()}`}>
+                <span className={`cert-card-badge cert-badge-${lightboxCert.category.split("/")[0].toLowerCase()}`}>
                   {lightboxCert.category}
                 </span>
                 <span className="cert-date">{lightboxCert.date}</span>

@@ -554,9 +554,10 @@ export function ProjectsSection({
     <section
       className="section-block content-section"
       id="projects"
-      aria-labelledby="projects-heading"
+      aria-labelledby={slider ? undefined : "projects-heading"}
+      aria-label={slider ? "Featured projects" : undefined}
     >
-      <div className="content-section-heading editorial-heading">
+      {!slider && <div className="content-section-heading editorial-heading">
         <p className="editorial-eyebrow">
           <span className="editorial-eyebrow-dot" aria-hidden="true" />
           SELECTED ACADEMIC &amp; PERSONAL WORK
@@ -569,7 +570,7 @@ export function ProjectsSection({
         <p>
           Ideas and systems I&apos;ve built across <strong className="editorial-highlight">Mobile &amp; AR</strong>, <strong className="editorial-highlight">Web &amp; Systems</strong>, Game Development, and IoT hardware.
         </p>
-      </div>
+      </div>}
       {slider ? (
         <ProjectsSlider />
       ) : (

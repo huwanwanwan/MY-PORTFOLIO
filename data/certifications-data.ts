@@ -3,7 +3,7 @@ export interface CertificationItem {
   title: string;
   issuer: string;
   date: string;
-  category: "Certifications" | "Seminars" | "Competitions";
+  category: "Certifications" | "Seminars" | "Competitions" | "Competitions/Certifications";
   image: string;
   alt: string;
   recipient: string;
@@ -13,16 +13,55 @@ export interface CertificationItem {
 
 export const certificationsData: CertificationItem[] = [
   {
+    id: "python-essentials-1",
+    title: "Python Essentials 1",
+    issuer: "Cisco Networking Academy",
+    date: "November 03, 2026",
+    category: "Certifications",
+    image: "/certificates/python-essentials-1.png",
+    alt: "Python Essentials 1 completion certificate awarded to Militante Juan Enrico Domanico by Cisco Networking Academy",
+    recipient: "Militante Juan Enrico Domanico",
+    description:
+      "Certificate for successfully completing Python Essentials 1, offered by Networking Academy through the Cisco Networking Academy program. Completed on November 3, 2026.",
+    tags: ["Python", "Programming", "Cisco Networking Academy"],
+  },
+  {
+    id: "javascript-essentials-1",
+    title: "JavaScript Essentials 1",
+    issuer: "Cisco Networking Academy",
+    date: "November 03, 2026",
+    category: "Certifications",
+    image: "/certificates/javascript-essentials-1.png",
+    alt: "JavaScript Essentials 1 completion certificate awarded to Militante Juan Enrico Domanico by Cisco Networking Academy",
+    recipient: "Militante Juan Enrico Domanico",
+    description:
+      "Certificate for successfully completing JavaScript Essentials 1, offered by Networking Academy through the Cisco Networking Academy program. Completed on November 3, 2026.",
+    tags: ["JavaScript", "Programming", "Cisco Networking Academy"],
+  },
+  {
+    id: "data-analytics-essentials",
+    title: "Data Analytics Essentials",
+    issuer: "Cisco Networking Academy",
+    date: "October 27, 2026",
+    category: "Certifications",
+    image: "/certificates/data-analytics-essentials-borderless.png",
+    alt: "Data Analytics Essentials completion certificate awarded to Militante Juan Enrico Domanico by Cisco Networking Academy",
+    recipient: "Militante Juan Enrico Domanico",
+    description:
+      "Certificate for successfully completing Data Analytics Essentials, offered by Networking Academy through the Cisco Networking Academy program. Completed on October 27, 2026.",
+    tags: ["Data Analytics", "Data Analysis", "Cisco Networking Academy"],
+  },
+  {
     id: "aws-cloud-practitioner",
     title: "AWS Cloud Practitioner Essentials",
     issuer: "Amazon Web Services (AWS) Training & Certification",
     date: "November 04, 2025",
     category: "Certifications",
-    image: "/certificates/AWS.png",
+    image: "/certificates/aws-cloud-practitioner-certificate.png?v=signature-blurred",
     alt: "AWS Cloud Practitioner Essentials Completion Certificate for Juan Enrico D. Militante",
     recipient: "Juan Enrico D. Militante",
     description:
-      "Official certificate of completion from AWS Training & Certification, verifying foundational mastery of AWS Cloud infrastructure, security models, compute services, pricing strategies, and architectural best practices.",
+      "Completion certificate from AWS Training & Certification for AWS Cloud Practitioner Essentials, awarded on November 4, 2025.",
     tags: ["Cloud Computing", "AWS", "Cloud Architecture"],
   },
   {
@@ -30,7 +69,7 @@ export const certificationsData: CertificationItem[] = [
     title: "Arduino Competition — \"La Niña\"",
     issuer: "Pambayang Dalubhasaan ng Marilao · College of Computer Studies",
     date: "May 20, 2024",
-    category: "Competitions",
+    category: "Competitions/Certifications",
     image: "/certificates/ARDUINO.jpg",
     alt: "Certificate of Participation in Arduino Competition for project La Niña",
     recipient: "Juan Enrico D. Militante",
@@ -43,12 +82,12 @@ export const certificationsData: CertificationItem[] = [
     title: "Git Happens: The Essential Guide for New Devs",
     issuer: "Pambayang Dalubhasaan ng Marilao · Computer Science Department",
     date: "March 02, 2026",
-    category: "Seminars",
-    image: "/certificates/CERT-GIT.jpg",
+    category: "Certifications",
+    image: "/certificates/git-happens-participation-certificate.png?v=signatures-blurred",
     alt: "Certificate of Participation for Git Happens seminar presented to Juan Enrico D. Militante",
     recipient: "Juan Enrico D. Militante",
     description:
-      "Certificate of Participation for actively participating in the intensive seminar on modern Git version control, branching strategies, collaborative workflows, and repository management for software engineers.",
+      "Certificate of Participation for the Git Happens: The Essential Guide for New Devs seminar, held on March 2, 2026 at the Multi-Purpose Hall, Pambayang Dalubhasaan ng Marilao.",
     tags: ["Git", "Version Control", "Dev Workflows"],
   },
   {
@@ -56,12 +95,12 @@ export const certificationsData: CertificationItem[] = [
     title: "IT Capstone Project Public Forum",
     issuer: "Pambayang Dalubhasaan ng Marilao · Information Technology Department",
     date: "January 21, 2026",
-    category: "Seminars",
-    image: "/certificates/CERT-ATT.png",
+    category: "Certifications",
+    image: "/certificates/it-forum-attendance-certificate.png",
     alt: "Certificate of Attendance for IT Capstone Project Public Forum",
-    recipient: "Juan Enrico Militante",
+    recipient: "Juan Enrico D. Militante",
     description:
-      "Certificate of Attendance for participating in the IT Capstone Project Public Forum, engaging with technical research presentations, capstone defense evaluations, and cutting-edge software solutions.",
+      "Certificate of Attendance for the IT Capstone Project Public Forum, held on January 21, 2026 at the Multipurpose Hall, Pambayang Dalubhasaan ng Marilao.",
     tags: ["Capstone Research", "IT Forum", "System Architecture"],
   },
   {
@@ -91,69 +130,17 @@ export const certificationsData: CertificationItem[] = [
     tags: ["Artificial Intelligence", "Webinar", "AI Integration"],
   },
   {
-    id: "google-cloud-applying-ai-principles",
-    title: "Applying AI Principles with Google Cloud",
-    issuer: "Google Cloud",
-    date: "Nov 7, 2025",
-    category: "Certifications",
-    image: "/certificates/aws-1.png",
-    alt: "Applying AI Principles with Google Cloud Completion Badge - Google Cloud",
-    recipient: "Juan Enrico D. Militante",
+    id: "cyber-security-seminar-2024",
+    title: "Cyber Security Seminar",
+    issuer: "Pambayang Dalubhasaan ng Marilao · Computer Science Society",
+    date: "April 05, 2024",
+    category: "Seminars",
+    image: "/certificates/cyber-security-seminar-2024.png",
+    alt: "Cyber Security Seminar event poster for April 5, 2024 at PDM Multipurpose Hall, featuring guest speaker Edwin S. Gracia, MSIT",
+    recipient: "Computer Science Society",
     description:
-      "Official Google Cloud skill badge verifying the operational application of responsible AI principles, identifying bias, evaluating ethical frameworks, and implementing governance best practices in enterprise ML pipelines.",
-    tags: ["Google Cloud", "AI Principles", "Responsible AI"],
-  },
-  {
-    id: "google-cloud-prompt-design-vertex-ai",
-    title: "Prompt Design in Vertex AI",
-    issuer: "Google Cloud",
-    date: "Nov 1, 2025",
-    category: "Certifications",
-    image: "/certificates/aws-2.png",
-    alt: "Prompt Design in Vertex AI Skill Badge - Google Cloud",
-    recipient: "Juan Enrico D. Militante",
-    description:
-      "Official Google Cloud skill badge credential earned for mastering prompt engineering techniques, multimodal prompt crafting, zero-shot and few-shot conditioning, and tuning parameters using Google Vertex AI Studio.",
-    tags: ["Google Cloud", "Vertex AI", "Prompt Engineering"],
-  },
-  {
-    id: "google-cloud-intro-responsible-ai",
-    title: "Introduction to Responsible AI",
-    issuer: "Google Cloud",
-    date: "Oct 30, 2025",
-    category: "Certifications",
-    image: "/certificates/aws-3.png",
-    alt: "Introduction to Responsible AI Completion Badge - Google Cloud",
-    recipient: "Juan Enrico D. Militante",
-    description:
-      "Official Google Cloud course credential focusing on the foundational concepts of ethical AI deployment, fairness, interpretability, transparency, and safety protocols across machine learning lifecycles.",
-    tags: ["Google Cloud", "Responsible AI", "Ethics in AI"],
-  },
-  {
-    id: "google-cloud-intro-llm",
-    title: "Introduction to Large Language Models",
-    issuer: "Google Cloud",
-    date: "Oct 30, 2025",
-    category: "Certifications",
-    image: "/certificates/aws-4.png",
-    alt: "Introduction to Large Language Models Completion Badge - Google Cloud",
-    recipient: "Juan Enrico D. Militante",
-    description:
-      "Official Google Cloud credential demonstrating deep foundational understanding of Large Language Models (LLMs), transformer architecture fundamentals, fine-tuning methodologies, and modern generative AI applications.",
-    tags: ["Google Cloud", "LLM", "Deep Learning"],
-  },
-  {
-    id: "google-cloud-intro-generative-ai",
-    title: "Introduction to Generative AI",
-    issuer: "Google Cloud",
-    date: "Oct 29, 2025",
-    category: "Certifications",
-    image: "/certificates/aws-5.png",
-    alt: "Introduction to Generative AI Completion Badge - Google Cloud",
-    recipient: "Juan Enrico D. Militante",
-    description:
-      "Official Google Cloud course credential verifying foundational concepts of Generative AI, difference from traditional ML, generative modeling foundations, and Google Cloud Gen AI ecosystem capabilities.",
-    tags: ["Google Cloud", "Generative AI", "Machine Learning"],
+      "Event poster for the Cyber Security Seminar held on April 5, 2024, from 1:00 PM to 3:00 PM at PDM Multipurpose Hall, featuring guest speaker Edwin S. Gracia, MSIT.",
+    tags: ["Cybersecurity", "Technical Seminar", "Computer Science Society"],
   },
 ];
 

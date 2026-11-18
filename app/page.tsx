@@ -9,6 +9,7 @@ import {
 } from "../components/portfolio-sections";
 import { TechIcon } from "../components/tech-icon";
 import SiteShell from "../components/site-shell";
+import GitHubContributions from "../components/github-contributions";
 
 const heroTechnologies = [
   "HTML",
@@ -193,6 +194,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <GitHubContributions />
       <AboutSection projectPlaceholder />
       <ProjectsSection slider={true} />
       <SkillsSection />
