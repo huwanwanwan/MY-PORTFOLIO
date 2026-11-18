@@ -197,7 +197,7 @@ export default function Home() {
       <GitHubContributions />
       <AboutSection projectPlaceholder />
       <ProjectsSection slider={true} />
-      <SkillsSection />
+      <SkillsSection compact />
       <ExperienceSection slider={true} />
       <ContactSection />
     </SiteShell>

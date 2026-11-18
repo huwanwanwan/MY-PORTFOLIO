@@ -6,7 +6,7 @@ import { useState, useRef, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { projectsData, type ProjectItem } from "../data/projects-data";
-import { TechIcon } from "./tech-icon";
+import TechBadge from "./tech-badge";
 
 type CategoryFilter =
   | "All"
@@ -315,12 +315,11 @@ export default function ProjectsSlider() {
                       <Link
                         key={tag}
                         href={`/skills?skill=${encodeURIComponent(tag === "React.js" ? "React" : tag)}#skills`}
-                        className="tech-tag-pill"
+                        className="project-tech-link"
                         style={{ textDecoration: "none", color: "inherit" }}
                         title={`See all projects using ${tag}`}
                       >
-                        <TechIcon name={tag} />
-                        <span>{tag}</span>
+                        <TechBadge name={tag} />
                       </Link>
                     ))}
                   </div>

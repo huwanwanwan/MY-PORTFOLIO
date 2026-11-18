@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { ProjectItem, projectsData } from "../data/projects-data";
-import { TechIcon } from "./tech-icon";
+import TechBadge from "./tech-badge";
 import ProjectMediaStage from "./project-media-stage";
 
 type CategoryFilter =
@@ -374,10 +374,7 @@ export default function ProjectsShowcase({
                   <span className="smart-tech-heading">BUILT WITH</span>
                   <div className="smart-tech-tags" aria-label={`Technologies used in ${project.title}`}>
                     {project.tags.map((tag) => (
-                      <span key={tag} className="tech-tag-pill">
-                        <TechIcon name={tag} />
-                        <span>{tag}</span>
-                      </span>
+                      <TechBadge key={tag} name={tag} />
                     ))}
                   </div>
                 </div>

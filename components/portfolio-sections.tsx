@@ -590,7 +590,7 @@ export function ProjectsSection({
   );
 }
 
-export function SkillsSection() {
+export function SkillsSection({ compact = false }: { compact?: boolean } = {}) {
   return (
     <section
       className="section-block content-section"
@@ -611,7 +611,7 @@ export function SkillsSection() {
           The languages, frameworks, platforms, and tools I&apos;ve explored through my projects and studies. Select any technology below to see which projects use it in their stack.
         </p>
       </div>
-      <SkillsShowcase />
+      <SkillsShowcase projectLimit={compact ? 3 : undefined} />
     </section>
   );
 }

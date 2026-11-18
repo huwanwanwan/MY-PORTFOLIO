@@ -15,7 +15,7 @@ export default function GitHubContributions() {
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch("/api/github-contributions", { signal: controller.signal })
+    fetch("/api/github-contributions", { signal: controller.signal, cache: "no-store" })
       .then(async response => {
         if (!response.ok) throw new Error("Unavailable");
         const data: ContributionCalendar = await response.json();

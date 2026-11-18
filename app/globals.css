@@ -20102,3 +20102,49 @@ html, body {
  .github-calendar-footer { flex-direction: column; align-items: start; gap: 12px; }
  .github-calendar-footer p { min-height: 2.7em; }
 }
+
+/* Project timeline inspired by the stacked work-history reference. */
+.skills-project-timeline-section { margin-top: 64px; padding-top: 52px; border-top: 1px solid var(--card-border); min-width: 0; }
+.skills-project-timeline-heading { max-width: 900px; margin-bottom: 54px; }
+.skills-project-timeline-heading .editorial-title { margin: 18px 0 22px; }
+.skills-project-timeline-heading > p:last-child { max-width: 790px; color: var(--text-secondary); font-size: .95rem; line-height: 1.8; }
+.skills-project-timeline { list-style: none; padding: 0 0 0 30px; margin: 0 0 28px clamp(0px, 12vw, 180px); max-width: 880px; border-left: 2px solid var(--card-border); }
+.skills-project-timeline-entry { position: relative; margin: 0; padding: 0 0 26px; }
+.skills-project-timeline-entry:last-child { padding-bottom: 0; }
+.skills-project-timeline-marker { position: absolute; top: 34px; left: -41px; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--card-border); background: var(--section-surface); display: grid; place-items: center; }
+.skills-project-timeline-marker::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); opacity: .65; }
+.skills-project-timeline-card { padding: 27px 28px; border: 1px solid var(--card-border); border-radius: 22px; background: var(--card-surface); color: var(--ink); min-width: 0; }
+.skills-project-timeline-card-heading { display: flex; gap: 16px; align-items: center; }
+.skills-project-timeline-thumbnail { position: relative; flex: 0 0 58px; width: 58px; height: 58px; border: 1px solid var(--card-border); border-radius: 14px; overflow: hidden; background: var(--raised-surface); display: grid; place-items: center; color: var(--accent); font-size: .9rem; }
+.skills-project-timeline-thumbnail img { object-fit: cover; }
+.skills-project-timeline-identity { min-width: 0; }
+.skills-project-timeline-category { color: var(--muted); font-size: .63rem; letter-spacing: .075em; text-transform: uppercase; font-weight: 600; }
+.skills-project-timeline-identity h3 { margin: 3px 0; color: var(--ink); font-size: 1.1rem; line-height: 1.3; font-weight: 700; }
+.skills-project-timeline-identity p { margin: 0; color: var(--text-secondary); font-size: .9rem; line-height: 1.5; }
+.skills-project-timeline-description { margin: 18px 0; color: var(--text-secondary); font-size: .92rem; line-height: 1.85; }
+.skills-project-timeline-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 20px; padding: 0; }
+.skills-project-timeline-tags li { padding: 3px 8px; border: 1px solid var(--tag-border); border-radius: 6px; background: var(--tag-surface); color: var(--tag-ink); font-size: .67rem; line-height: 1.5; }
+.skills-project-timeline-link { color: var(--ink); font-size: .85rem; font-weight: 600; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 6px; text-decoration-thickness: 1px; }
+.skills-project-timeline-link:hover { color: var(--accent); }
+.skills-project-timeline-more { display: inline-flex; margin-left: clamp(32px, 15vw, 212px); }
+@media(max-width:768px) { .skills-project-timeline { margin-left: 9px; padding-left: 23px; } .skills-project-timeline-marker { left: -34px; } .skills-project-timeline-heading { margin-bottom: 34px; } .skills-project-timeline-card { padding: 20px; border-radius: 18px; } .skills-project-timeline-more { margin-left: 34px; } }
+@media(max-width:480px) { .skills-project-timeline-section { padding-top: 36px; margin-top: 44px; } .skills-project-timeline-card { padding: 18px 16px; } .skills-project-timeline-card-heading { gap: 12px; align-items: start; } .skills-project-timeline-thumbnail { flex-basis: 48px; width: 48px; height: 48px; border-radius: 12px; } .skills-project-timeline-identity h3 { font-size: 1rem; } .skills-project-timeline-identity p { font-size: .8rem; } .skills-project-timeline-category { font-size: .56rem; } .skills-project-timeline-description { font-size: .85rem; } }
+
+/* Category-colored timeline dots and brand-colored technology badges. */
+.skills-project-timeline-entry { --project-color: #e16c45; }
+.skills-project-timeline-entry[data-project-category="Mobile & AR"] { --project-color: #159dc4; }
+.skills-project-timeline-entry[data-project-category="Web & Systems"] { --project-color: #db7635; }
+.skills-project-timeline-entry[data-project-category="Games & Animation"] { --project-color: #a96ce6; }
+.skills-project-timeline-entry[data-project-category="IoT & Hardware"] { --project-color: #27a578; }
+.skills-project-timeline-marker { border-color: color-mix(in srgb, var(--project-color) 55%, var(--card-border)); box-shadow: 0 0 0 4px color-mix(in srgb, var(--project-color) 12%, transparent); }
+.skills-project-timeline-marker::after { background: var(--project-color); opacity: 1; }
+.skills-project-timeline-category { color: var(--project-color); }
+.skills-project-timeline-card:hover { border-color: color-mix(in srgb, var(--project-color) 45%, var(--card-border)); }
+.brand-tech-badge { display: inline-flex; align-items: center; gap: 7px; padding: 6px 9px; min-height: 30px; border: 1px solid color-mix(in srgb, var(--tech-brand) 38%, var(--card-border)); border-radius: 8px; background: color-mix(in srgb, var(--tech-brand) 10%, var(--card-surface)); color: var(--ink); font-size: .68rem; font-weight: 600; line-height: 1.3; white-space: nowrap; }
+.brand-tech-badge .tech-icon-svg { display: block; flex: 0 0 16px; width: 16px; height: 16px; color: var(--tech-brand); }
+.skills-project-timeline-tags { gap: 7px; }
+.skills-project-timeline-tags > li { display: block; padding: 0; background: transparent; border: 0; border-radius: 0; }
+.project-tech-link { display: inline-flex; max-width: 100%; border-radius: 8px; }
+.project-tech-link:hover .brand-tech-badge { background: color-mix(in srgb, var(--tech-brand) 18%, var(--card-surface)); border-color: var(--tech-brand); }
+.project-slider-dot { background: color-mix(in srgb, var(--accent) 35%, var(--card-border)); }
+.project-slider-dot.active { background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 15%, transparent); }

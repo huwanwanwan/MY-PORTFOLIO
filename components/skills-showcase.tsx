@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { skills, categoryColors, type Skill } from "../data/skills-data";
 import { projectsData, type ProjectItem } from "../data/projects-data";
+import TechBadge from "./tech-badge";
 
 /* ─── Individual Skill Icon (brand-colored SVG logos) ─── */
 function SkillIcon({ name }: { name: string }) {
@@ -474,10 +475,9 @@ function getProjectsUsingSkill(skillName: string): ProjectItem[] {
   );
 }
 
-export default function SkillsShowcase() {
+export default function SkillsShowcase({ projectLimit }: { projectLimit?: number }) {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -504,41 +504,6 @@ export default function SkillsShowcase() {
 
   const matchingProjects = selectedSkill ? getProjectsUsingSkill(selectedSkill) : [];
 
-  function scrollGallery(direction: "left" | "right") {
-    if (!scrollContainerRef.current) return;
-    const track = scrollContainerRef.current;
-    const cards = Array.from(track.children).filter((el): el is HTMLElement => el instanceof HTMLElement);
-    if (cards.length === 0) return;
-
-    const viewportCenter = track.scrollLeft + track.clientWidth / 2;
-    let activeIndex = 0;
-    let minDistance = Infinity;
-
-    for (let i = 0; i < cards.length; i++) {
-      const card = cards[i];
-      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-      const distance = Math.abs(cardCenter - viewportCenter);
-      if (distance < minDistance) {
-        minDistance = distance;
-        activeIndex = i;
-      }
-    }
-
-    const targetIndex = direction === "left"
-      ? Math.max(0, activeIndex - 1)
-      : Math.min(cards.length - 1, activeIndex + 1);
-
-    if (targetIndex === activeIndex) return;
-
-    const targetCard = cards[targetIndex];
-    if (!targetCard) return;
-
-    const targetLeft = targetCard.offsetLeft - (track.clientWidth - targetCard.offsetWidth) / 2;
-    track.scrollTo({
-      left: Math.max(0, targetLeft),
-      behavior: "smooth",
-    });
-  }
 
   return (
     <div className="skills-showcase">
@@ -782,150 +747,43 @@ export default function SkillsShowcase() {
         </div>
       </section>
 
-      {/* ── Scrollable Projects Showcase Strip with Horizontal Timeline & Dot on top ── */}
-      <section className="skills-projects-scroll-section" aria-labelledby="projects-strip-heading" data-scroll-reveal>
-        <div className="skills-projects-header" data-scroll-reveal>
-          <div>
-            <p className="editorial-eyebrow">
-              <span className="editorial-eyebrow-dot" aria-hidden="true" />
-              03 — EXPLORE BY TECHNOLOGY
-            </p>
-            <h2 id="projects-strip-heading" className="editorial-title">
-              Projects built with these tools,
-              <br />
-              <span className="text-muted">across four years of IT study.</span>
-            </h2>
-            <p>
-              Browse individual project summaries, roles, and technical stacks developed at Pambayang Dalubhasaan ng Marilao.
-            </p>
-          </div>
-          <div className="skills-gallery-actions">
-            <div className="skills-carousel-nav" aria-label="Project carousel navigation">
-              <button
-                type="button"
-                className="skills-nav-arrow"
-                onClick={(e) => { e.currentTarget.blur(); scrollGallery("left"); }}
-                aria-label="Previous project"
-              >
-                ←
-              </button>
-              <button
-                type="button"
-                className="skills-nav-arrow"
-                onClick={(e) => { e.currentTarget.blur(); scrollGallery("right"); }}
-                aria-label="Next project"
-              >
-                →
-              </button>
-            </div>
-            <Link href="/projects" className="skills-all-projects-btn">
-              View All 14 Projects →
-            </Link>
-          </div>
+      <section className="skills-project-timeline-section" aria-labelledby="projects-strip-heading" data-scroll-reveal>
+        <div className="skills-project-timeline-heading" data-scroll-reveal>
+          <p className="editorial-eyebrow"><span className="editorial-eyebrow-dot" aria-hidden="true" />03 &mdash; EXPLORE BY TECHNOLOGY</p>
+          <h2 id="projects-strip-heading" className="editorial-title">
+            Projects built with these tools,<br />
+            <span className="text-muted">across four years of IT study.</span>
+          </h2>
+          <p>Browse individual project summaries, roles, and technical stacks developed at Pambayang Dalubhasaan ng Marilao.</p>
         </div>
-
-        <div className="skills-projects-carousel-wrapper" data-scroll-reveal>
-          <button
-            type="button"
-            className="skills-side-arrow skills-side-arrow-left"
-            onClick={(e) => { e.currentTarget.blur(); scrollGallery("left"); }}
-            aria-label="Previous project"
-          >
-            ‹
-          </button>
-
-          <div
-            ref={scrollContainerRef}
-            className="skills-projects-horizontal-scroll"
-            tabIndex={0}
-            aria-label="Projects gallery carousel"
-          >
-            {projectsData.map((project, i) => {
-              const displayNumber = String(i + 1).padStart(2, "0");
-              const thumbnailSrc =
-                project.images && project.images.length > 0 ? project.images[0] : null;
-
-              return (
-                <div key={project.id} className="skills-timeline-column">
-                  {/* Horizontal Timeline Connector & Dot at the top */}
-                  <div className="skills-timeline-node-track" aria-hidden="true">
-                    <span className="skills-timeline-line-before" />
-                    <div className="skills-timeline-dot">
-                      <span className="skills-timeline-dot-inner" />
+        <ol className="skills-project-timeline" aria-label="Project development timeline">
+          {projectsData.slice(0, projectLimit).map(project => {
+            const thumbnail = project.images?.[0];
+            return (
+              <li className="skills-project-timeline-entry" key={project.id} data-project-category={project.category}>
+                <span className="skills-project-timeline-marker" aria-hidden="true" />
+                <article className="skills-project-timeline-card scroll-reveal" data-scroll-reveal>
+                  <div className="skills-project-timeline-card-heading">
+                    <div className="skills-project-timeline-thumbnail">
+                      {thumbnail ? <Image src={thumbnail} alt={`${project.title} preview`} fill sizes="60px" unoptimized /> : <span aria-hidden="true">&lt;/&gt;</span>}
                     </div>
-                    <span className="skills-timeline-line-after" />
+                    <div className="skills-project-timeline-identity">
+                      <span className="skills-project-timeline-category">{project.category}</span>
+                      <h3>{project.title}</h3>
+                      <p>{project.role}</p>
+                    </div>
                   </div>
-
-                  {/* Card designed like Image 2 */}
-                  <article
-                    className="skills-scroll-card skills-timeline-card scroll-reveal"
-                    data-scroll-reveal
-                  >
-                    {/* Top Row: Small Picture + Title & Subtitle */}
-                    <div className="skills-timeline-card-header">
-                      {/* Small Project Picture */}
-                      <div className="skills-timeline-thumb-box">
-                        {thumbnailSrc ? (
-                          <img
-                            src={thumbnailSrc}
-                            alt={`${project.title} preview`}
-                            className="skills-timeline-thumb-img"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div className="skills-timeline-thumb-fallback">
-                            <span>{displayNumber}</span>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Header Info next to picture */}
-                      <div className="skills-timeline-header-info">
-                        <div className="skills-timeline-badge-row">
-                          <span className="skills-scroll-badge">{project.category}</span>
-                          <span className="skills-timeline-num">{displayNumber}</span>
-                        </div>
-                        <h3 className="skills-scroll-card-title">{project.title}</h3>
-                        <p className="skills-scroll-card-role">{project.role}</p>
-                      </div>
-                    </div>
-
-                    {/* Middle: Description */}
-                    <p className="skills-scroll-card-desc">{project.paragraphs[0]}</p>
-
-                    {/* Tech Pills */}
-                    <div className="skills-scroll-card-tech">
-                      {project.tags.map((t) => (
-                        <span key={t} className="skills-scroll-tech-pill">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Bottom: Action Link */}
-                    <div className="skills-scroll-card-footer">
-                      <Link
-                        href={`/projects#project-${project.id}`}
-                        className="skills-scroll-card-link"
-                      >
-                        View project details <span aria-hidden="true">↗</span>
-                      </Link>
-                    </div>
-                  </article>
-                </div>
-              );
-            })}
-          </div>
-
-          <button
-            type="button"
-            className="skills-side-arrow skills-side-arrow-right"
-            onClick={(e) => { e.currentTarget.blur(); scrollGallery("right"); }}
-            aria-label="Next project"
-          >
-            ›
-          </button>
-        </div>
+                  <p className="skills-project-timeline-description">{project.paragraphs[0]}</p>
+                  <ul className="skills-project-timeline-tags" aria-label={`${project.title} technologies`}>
+                    {project.tags.map(tag => <li key={tag}><TechBadge name={tag} /></li>)}
+                  </ul>
+                  <Link className="skills-project-timeline-link" href={`/projects#project-${project.id}`}>View project details <span aria-hidden="true">&#8599;</span></Link>
+                </article>
+              </li>
+            );
+          })}
+        </ol>
+        <Link href="/projects" className="skills-all-projects-btn skills-project-timeline-more">View All {projectsData.length} Projects <span aria-hidden="true">&#8594;</span></Link>
       </section>
     </div>
   );
