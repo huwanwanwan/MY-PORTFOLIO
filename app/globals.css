@@ -21098,3 +21098,6 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
 
 /* Principle cards have plain lower edges. */
 .page .about-reference-approach .about-principles-grid > .about-principle { padding-bottom: clamp(20px,3vw,32px); }
+
+/* The About introduction heading stands alone. */
+.page .about-personal-heading { grid-template-columns: minmax(0,1fr); }

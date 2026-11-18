@@ -230,7 +230,6 @@ export function AboutSection({
         <header className="about-personal-heading">
           <div><p className="editorial-eyebrow"><span className="editorial-eyebrow-dot" aria-hidden="true" />02 &#8212; OUTSIDE THE CODE EDITOR</p>
           <h1 id="about-heading" className="editorial-title"><span className="heading-highlight">Life and interests,</span><br /><span className="text-muted">outside daily development.</span></h1></div>
-          <p>The interests, music, stories, and food that make a day feel like mine.</p>
         </header>
         <div className="about-personal-layout">
           <div className="about-personal-story">
