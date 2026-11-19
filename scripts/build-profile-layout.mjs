@@ -14,10 +14,10 @@ await writeFile(new URL('cover.svg', output), svg(960, 220, 'Wancor cover — cr
 
 const sections = [['about', 'A LITTLE ABOUT ME', 'The person behind the projects.'], ['work', 'WHAT I BUILD', 'Web, mobile, games, and hardware.'], ['metrics', 'MY GITHUB AT A GLANCE', 'Real numbers. My own colors.']];
 for (const [slug, title, subtitle] of sections) {
-  await writeFile(new URL(`section-${slug}-vivid.svg`, output), svg(960, 80, title, `<rect width="960" height="80" rx="14" fill="url(#section)"/><rect x="24" y="24" width="6" height="32" rx="2" fill="#B51A2B"/><g font-family="Arial, Helvetica, sans-serif" fill="#E8EDF5"><text x="44" y="35" font-size="17" font-weight="700" letter-spacing="2">${title}</text><text x="44" y="58" font-size="13" fill="#B4BED0">${subtitle}</text></g><path d="M545 40H932" stroke="#384358"/>`));
+  await writeFile(new URL(`section-${slug}-signature.svg`, output), svg(960, 80, title, `<rect width="960" height="80" rx="14" fill="url(#section)"/><rect x="24" y="24" width="6" height="32" rx="2" fill="#B51A2B"/><g font-family="Arial, Helvetica, sans-serif" fill="#E8EDF5"><text x="44" y="35" font-size="17" font-weight="700" letter-spacing="2">${title}</text><text x="44" y="58" font-size="13" fill="#B4BED0">${subtitle}</text></g><path d="M545 40H932" stroke="#FFA586" opacity=".35"/>`));
 }
 
-await writeFile(new URL('featured-work-vivid.svg', output), svg(960, 260, 'Selected projects: SIGLA, DocuLink, InventoPOS, games, and hardware', `
+await writeFile(new URL('featured-work-signature.svg', output), svg(960, 260, 'Selected projects: SIGLA, DocuLink, InventoPOS, games, and hardware', `
   <rect width="960" height="260" rx="18" fill="#161B2F"/>
   <g font-family="Arial, Helvetica, sans-serif" fill="#E8EDF5">
     ${[
