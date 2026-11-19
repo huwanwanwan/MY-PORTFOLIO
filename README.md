@@ -20,10 +20,10 @@
 <img src="./profile-assets/reference-toolkit-nautical-premium-paced-loop-motion.svg" width="100%" alt="Tech stack: web development, mobile and games, backend and data, tools and others. Real technology logos in their original brand colors." />
 
 <a id="selected-projects"></a>
-<a href="https://portfolio.juandomanicomilitante.workers.dev/projects"><img src="./profile-assets/reference-projects-wheel-premium-paced-loop-motion.svg" width="100%" alt="Selected projects: SigLa, BAHAlerto, RecogniZarenus, InventoPOS. Skills in web and mobile development, system design, databases, UI/UX, API integration, problem solving, and teamwork." /></a>
+<a href="https://portfolio.juandomanicomilitante.workers.dev/projects"><img src="./profile-assets/reference-projects-color-wheel-premium-paced-loop-motion.svg" width="100%" alt="Selected projects: SigLa, BAHAlerto, RecogniZarenus, InventoPOS. Skills in web and mobile development, system design, databases, UI/UX, API integration, problem solving, and teamwork." /></a>
 
 <a id="github-analytics"></a>
-<a href="https://github.com/huwanwanwan?tab=repositories"><img src="https://raw.githubusercontent.com/huwanwanwan/huwanwanwan/main/profile-assets/dashboard-reference-skull-premium-paced-loop-motion.svg" width="100%" alt="Real GitHub repositories, authored commits, contributions, followers, current and longest streaks, contribution history, and language charts." /></a>
+<a href="https://github.com/huwanwanwan?tab=repositories"><img src="https://raw.githubusercontent.com/huwanwanwan/huwanwanwan/main/profile-assets/dashboard-reference-color-skull-premium-paced-loop-motion.svg" width="100%" alt="Real GitHub repositories, authored commits, contributions, followers, current and longest streaks, contribution history, and language charts." /></a>
 <img src="https://raw.githubusercontent.com/huwanwanwan/huwanwanwan/main/profile-assets/activity-reference-airy-premium-paced-loop-motion.svg" width="100%" alt="GitHub contribution calendar for the last 365 days." />
 
 <a id="achievements"></a>
