@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - scripts/update-profile-metrics.mjs
+      - scripts/build-profile-layout.mjs
       - .github/workflows/profile-metrics.yml
 
 permissions:
