@@ -112,3 +112,20 @@ for (const sender of ['visitor@gmail.com', 'visitor@yahoo.com', 'visitor@outlook
     assert.equal(response.status, 200);
   });
 }
+
+
+test('sends the EmailJS private key only to the server-side delivery provider', async () => {
+  const settings = { ...env(), EMAILJS_PRIVATE_KEY: 'test-private-key' };
+  let calls = 0;
+  const response = await handleContact(request(), settings, async (url, options) => {
+    if (++calls === 1) {
+      assert.equal(new URLSearchParams(options.body).has('accessToken'), false);
+      return Response.json(verified);
+    }
+    assert.equal(url, 'https://api.emailjs.com/api/v1.0/email/send');
+    assert.equal(JSON.parse(options.body).accessToken, settings.EMAILJS_PRIVATE_KEY);
+    return new Response('OK');
+  });
+  assert.equal(response.status, 200);
+  assert.equal((await response.text()).includes(settings.EMAILJS_PRIVATE_KEY), false);
+});

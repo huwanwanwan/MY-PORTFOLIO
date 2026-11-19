@@ -17,3 +17,6 @@ These checks protect this website form. They cannot filter mail sent directly to
 References: [Turnstile server validation](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/), [FormSubmit AJAX API](https://formsubmit.co/ajax-documentation). Domain-list license: `data/DISPOSABLE-EMAIL-LICENSE.txt`.
 
 EmailJS recipient fields (`to_email`, `recipient_email`, and legacy `email`/`user_email`) are fixed to the portfolio owner. Visitor addresses are used only in explicit sender and Reply-To fields and included in the message. In the EmailJS template, keep To Email set to the owner address or `{{to_email}}`; use `{{reply_to}}` for replies.
+
+
+When EmailJS Account / Security has **Use Private Key** enabled, add the EmailJS private key as an encrypted Cloudflare Worker secret named `EMAILJS_PRIVATE_KEY` on the `portfolio` Worker. The server sends it as EmailJS's `accessToken`; it is never exposed in browser code or responses. Save the EmailJS security settings and deploy the Cloudflare secret change. Do not put the private key in Git or a `NEXT_PUBLIC_` variable.
