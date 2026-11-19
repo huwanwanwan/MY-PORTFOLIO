@@ -9,6 +9,7 @@ on:
     paths:
       - scripts/update-profile-metrics.mjs
       - scripts/build-profile-layout.mjs
+      - scripts/profile-icons.mjs
       - .github/workflows/profile-metrics.yml
 
 permissions:

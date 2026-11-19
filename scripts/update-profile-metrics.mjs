@@ -1,4 +1,5 @@
 import { mkdir, writeFile } from 'node:fs/promises';
+import { icon, technologyIcon } from './profile-icons.mjs';
 
 const username = 'huwanwanwan';
 const palette = { midnight: '#161B2F', navy: '#242F49', slate: '#384358', peach: '#FFA586', crimson: '#B51A2B', burgundy: '#541A2E' };
@@ -11,10 +12,10 @@ const output = new URL('../profile-assets/', import.meta.url);
 await mkdir(output, { recursive: true });
 await import('./build-profile-layout.mjs');
 for (const label of ['Portfolio', 'Email', 'LinkedIn']) {
-  await writeFile(new URL(`link-${label.toLowerCase()}-accent.svg`, output), svg(200, 44, label, box(1, 1, 198, 42, navy, 12) + text(100, 28, label.toUpperCase(), 13, peach, 'text-anchor="middle" font-weight="700" letter-spacing="2"')));
+  await writeFile(new URL(`link-${label.toLowerCase()}-icons.svg`, output), svg(200, 44, label, box(1, 1, 198, 42, navy, 12) + icon({ Portfolio: 'folder', Email: 'mail', LinkedIn: 'link' }[label], 17, 13, 18) + text(115, 28, label.toUpperCase(), 13, peach, 'text-anchor="middle" font-weight="700" letter-spacing="2"')));
 }
 
-await writeFile(new URL('header-accent.svg', output), svg(960, 224, 'Juan Domanico Militante | Web and Mobile Developer', `
+await writeFile(new URL('header-icons.svg', output), svg(960, 224, 'Juan Domanico Militante | Web and Mobile Developer', `
   <path d="M0 194H960" stroke="${slate}"/>
   <rect x="414" y="32" width="132" height="4" rx="2" fill="${crimson}"/>
   ${text(480, 95, 'JUAN DOMANICO MILITANTE', 34, peach, 'text-anchor="middle" font-weight="700" letter-spacing="2"')}
@@ -35,20 +36,21 @@ groups.forEach(([label, items]) => {
   let row = 0;
   let badges = '';
   items.forEach((item, index) => {
-    const width = Math.max(98, item.length * 10.5 + 40);
-    if (x + width > 912 || (items.length === 7 && index === 4)) { x = 48; row++; }
+    const width = Math.max(126, item.length * 10.5 + 68);
+    if (x + width > 912 || ((items.length === 7 && index === 4) || (items.length === 6 && index === 3))) { x = 48; row++; }
     const y = stackY + 58 + row * 62;
-    badges += box(x, y, width, 48, midnight, 24) + text(x + width / 2, y + 31, item, 19, peach, 'text-anchor="middle"');
+    badges += box(x, y, width, 48, midnight, 24) + icon(technologyIcon(item), x + 16, y + 14, 20) + text(x + 47, y + 31, item, 19);
     x += width + 12;
   });
   const height = 132 + row * 62;
   stack += box(20, stackY, 920, height, navy, 30);
   stack += `<rect x="20" y="${stackY}" width="920" height="${height}" rx="30" fill="none" stroke="${peach}" stroke-opacity=".28"/>`;
-  stack += `<rect x="46" y="${stackY + 24}" width="4" height="18" rx="2" fill="${peach}"/>`;
-  stack += text(62, stackY + 39, label, 17, peach, 'font-weight="700" letter-spacing="1.5"') + badges;
+  const groupIcon = { WEB: 'code', 'MOBILE & GAMES': 'phone', 'BACKEND & DATA': 'database', 'TOOLS & HARDWARE': 'tools' }[label];
+  stack += icon(groupIcon, 46, stackY + 21, 24);
+  stack += text(82, stackY + 39, label, 17, peach, 'font-weight="700" letter-spacing="1.5"') + badges;
   stackY += height + 20;
 });
-await writeFile(new URL('tech-stack-accent.svg', output), svg(960, stackY + 4, 'Tech stack grouped by web, mobile and games, backend and data, tools and hardware', stack));
+await writeFile(new URL('tech-stack-icons.svg', output), svg(960, stackY + 4, 'Tech stack grouped by web, mobile and games, backend and data, tools and hardware', stack));
 
 async function github(path) {
   const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'huwanwanwan-profile-metrics' };
@@ -128,7 +130,7 @@ top.forEach(([name, bytes], index) => {
   metrics += `<rect x="190" y="${y - 10}" width="640" height="10" rx="5" fill="${slate}"/><rect x="190" y="${y - 10}" width="${Math.max(1, 640 * percent / 100).toFixed(2)}" height="10" rx="5" fill="${peach}"/>`;
 });
 metrics += text(32, 660, `Updated ${updated} (Philippine time) | Public GitHub data`, 12);
-await writeFile(new URL('analytics-accent.svg', output), svg(960, 686, 'GitHub repository metrics and language use', metrics));
+await writeFile(new URL('analytics-icons.svg', output), svg(960, 686, 'GitHub repository metrics and language use', metrics));
 
 const colors = [navy, slate, burgundy, crimson, peach];
 let calendar = text(32, 45, 'CONTRIBUTION ACTIVITY', 18, peach, 'font-weight="700" letter-spacing="2"');
@@ -152,7 +154,7 @@ calendar += text(48, 254, `${days[0].date} to ${days.at(-1).date}`, 12) + text(7
 colors.forEach((color, index) => { calendar += `<rect x="${777 + index * 17}" y="243" width="12" height="12" rx="3" fill="${color}"/>`; });
 calendar += text(871, 254, 'More', 12);
 calendar += text(48, 280, 'GitHub contributions, including commits, issues, pull requests, and reviews.', 12);
-await writeFile(new URL('activity-accent.svg', output), svg(960, 306, 'GitHub contribution calendar in the portfolio color palette', calendar));
+await writeFile(new URL('activity-icons.svg', output), svg(960, 306, 'GitHub contribution calendar in the portfolio color palette', calendar));
 
 // Dashboard inspired by the requested chart types, with original layout and styling.
 let dashboard = text(30, 40, 'JUAN / GITHUB OVERVIEW', 17, peach, 'font-weight="700" letter-spacing="2"');
@@ -225,5 +227,5 @@ milestones.forEach(([label, value], index) => {
 });
 dashboard += text(30, 1071, 'Commit charts cover your authored commits on default branches of owned public repositories.', 12);
 dashboard += text(30, 1093, 'Pull request and issue totals cover public GitHub activity. All metric tiles show real counts.', 12);
-await writeFile(new URL('dashboard-accent.svg', output), svg(960, 1116, 'GitHub dashboard: contributions, stats, commit hours, language donuts, and metric tiles', dashboard));
+await writeFile(new URL('dashboard-icons.svg', output), svg(960, 1116, 'GitHub dashboard: contributions, stats, commit hours, language donuts, and metric tiles', dashboard));
 console.log(`Updated profile assets: ${repos.length} public repositories, ${total} contributions.`);
