@@ -11,6 +11,7 @@ on:
       - scripts/build-profile-layout.mjs
       - scripts/profile-icons.mjs
       - scripts/profile-tech-logos.mjs
+      - scripts/animate-profile-assets.mjs
       - profile-assets/tech-logos/**
       - .github/workflows/profile-metrics.yml
 
