@@ -79,11 +79,12 @@ export async function handleContact(request: Request, env: ContactEnvironment, s
     // Its public key selects the account; no credentials are sent to browsers.
     const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]!);
     const inquiry = `From: ${name}\nReply to: ${email}\nPhone: ${phone || "Not provided"}\n\n${message}`;
+    const privateKey = env.EMAILJS_PRIVATE_KEY?.trim();
     const primary = await sendRequest("https://api.emailjs.com/api/v1.0/email/send", {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         service_id: "service_azcv23s", template_id: "template_3zl7lsk", user_id: "kUDnhN5l63awEUq0y",
-        ...(env.EMAILJS_PRIVATE_KEY ? { accessToken: env.EMAILJS_PRIVATE_KEY } : {}),
+        ...(privateKey ? { accessToken: privateKey } : {}),
         template_params: {
           from_name: name, name, user_name: name,
           // Legacy templates may use email/user_email for their To field.

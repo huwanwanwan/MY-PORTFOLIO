@@ -129,3 +129,14 @@ test('sends the EmailJS private key only to the server-side delivery provider', 
   assert.equal(response.status, 200);
   assert.equal((await response.text()).includes(settings.EMAILJS_PRIVATE_KEY), false);
 });
+
+
+test('trims whitespace around the EmailJS private key', async () => {
+  let calls = 0;
+  const response = await handleContact(request(), { ...env(), EMAILJS_PRIVATE_KEY: '  test-private-key\n' }, async (_url, options) => {
+    if (++calls === 1) return Response.json(verified);
+    assert.equal(JSON.parse(options.body).accessToken, 'test-private-key');
+    return new Response('OK');
+  });
+  assert.equal(response.status, 200);
+});
