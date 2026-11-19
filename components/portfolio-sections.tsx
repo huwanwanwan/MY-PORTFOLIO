@@ -236,8 +236,8 @@ export function AboutSection({
             <div className="about-personal-bio">
               <p className="section-kicker">A LITTLE ABOUT ME</p>
               <h2><span className="about-name-line">Juan Domanico</span><span className="about-name-line">Militante <span className="about-name-nickname">(Ikoy)</span></span></h2>
-              <p>I&apos;m an ambivert. Sometimes I&apos;m talkative and noisy, and other times I&apos;m quiet&#8212;it depends on my mood and the people around me.</p>
-              <p>I may look serious or a little intimidating at first, but I&apos;m actually clingy and not as serious as I seem.</p>
+              <p>I&apos;m an ambivert. Sometimes I&apos;m talkative and energetic, while other times I&apos;m quiet. It depends on my mood and the people I&apos;m with.</p>
+              <p>I may look serious or hard to approach at first, but I&apos;m actually friendly, caring, and a little clingy once you get to know me.</p>
             </div>
             <aside className="about-personal-facts" aria-label="Location, role, and focus">
               <div><span className="about-personal-fact-icon"><AboutIcon name="pin" /></span><div><p>Based in</p><strong>Bulacan, Philippines</strong></div></div>
