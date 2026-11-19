@@ -5,6 +5,7 @@ import { realTechLogo } from './profile-tech-logos.mjs';
 const out = new URL('../profile-assets/', import.meta.url);
 const data = JSON.parse(await readFile(new URL('github-data.json', out), 'utf8'));
 const art = `data:image/png;base64,${(await readFile(new URL('pirate-reference-art.png', out))).toString('base64')}`;
+const bannerArt = `data:image/png;base64,${(await readFile(new URL('pirate-banner-sharp.png', out))).toString('base64')}`;
 const brand = (await readFile(new URL('wancor-mark.svg', out), 'utf8')).replace(/^.*?<svg[^>]*>/s, '').replace(/<\/svg>\s*$/, '');
 const colors = { ink: '#EDF1F7', muted: '#BDC8D8', peach: '#FFA586', crimson: '#B51A2B', navy: '#161B2F', slate: '#384358', burgundy: '#541A2E' };
 const escape = value => String(value).replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'})[character]);
@@ -16,7 +17,7 @@ const svg = (height, title, body) => `<svg xmlns="http://www.w3.org/2000/svg" wi
  <linearGradient id="paper" x2="0" y2="1"><stop stop-color="#FFE1A0"/><stop offset=".5" stop-color="#EFC082"/><stop offset="1" stop-color="#FFA586"/></linearGradient>
  <linearGradient id="shade"><stop offset="0" stop-color="#161B2F"/><stop offset=".5" stop-color="#161B2F" stop-opacity=".98"/><stop offset=".72" stop-color="#161B2F" stop-opacity="0"/></linearGradient>
  <clipPath id="about-window"><rect x="16" y="48" width="968" height="232" rx="12"/></clipPath>
- <clipPath id="banner-window"><rect width="1000" height="156" rx="12"/></clipPath>
+ <clipPath id="banner-window"><rect width="1000" height="220" rx="8"/></clipPath>
 </defs><rect width="1000" height="${height}" fill="#161B2F"/><g font-family="Arial, Helvetica, sans-serif">${body}</g></svg>\n`;
 async function save(name, height, title, body) { await writeFile(new URL(`${name}-premium.svg`, out), svg(height, title, body)); }
 
@@ -35,15 +36,12 @@ function skull(x, y, scale = 1, opacity = 1) {
 }
 
 // Panoramic illustration with the real portfolio mark and editable SVG text.
-await save('reference-header', 228, 'Wancor — Juan Domanico Militante, Web and Mobile Developer', `
- <g clip-path="url(#banner-window)"><svg width="1000" height="156" viewBox="0 0 1536 512" preserveAspectRatio="none"><image href="${art}" width="1536" height="1024"/></svg></g>
- <rect width="1000" height="156" fill="url(#logo-shade)"/>
- <svg x="347" y="39" width="91" height="66" viewBox="65 115 385 280">${brand}</svg>
- ${text(560,70,'WANCOR',31,colors.ink,'text-anchor="middle" font-weight="700" letter-spacing="9"')}
- ${text(560,93,'DEVELOP • BUILD • EXPLORE',10,colors.ink,'text-anchor="middle" letter-spacing="2.5"')}
- <path d="M0 153Q260 142 500 153T1000 151" fill="none" stroke="#B51A2B" stroke-width="4"/>
- ${text(500,189,'Juan Domanico Militante',32,colors.ink,'text-anchor="middle" font-weight="700"')}
- ${text(500,217,'Web & Mobile Developer | BSIT Student',17,colors.muted,'text-anchor="middle"')}
+await save('reference-banner-sharp', 220, 'Wancor — original logo over crisp panoramic pirate artwork', `
+ <g clip-path="url(#banner-window)"><image href="${bannerArt}" width="1000" height="220" preserveAspectRatio="xMidYMid slice"/></g>
+ <rect width="1000" height="220" fill="url(#logo-shade)" opacity=".65"/>
+ <svg x="347" y="66" width="91" height="66" viewBox="65 115 385 280">${brand}</svg>
+ ${text(560,97,'WANCOR',31,colors.ink,'text-anchor="middle" font-weight="700" letter-spacing="9"')}
+ ${text(560,125,'DEVELOP • BUILD • EXPLORE',10,colors.ink,'text-anchor="middle" letter-spacing="2.5"')}
 `);
 
 for (const [name, title, symbol] of [['portfolio','PORTFOLIO','code'],['email','EMAIL','mail'],['linkedin','LINKEDIN','link']]) {

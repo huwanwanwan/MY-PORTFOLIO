@@ -9,3 +9,9 @@ Create an anime illustration asset sheet for a One Piece themed developer GitHub
 ## Data accuracy
 
 `github-data.json` contains only public GitHub summary data. The daily workflow generates this snapshot and builds the reference layout. Contribution streaks count consecutive days, allowing an unfinished current day; total active days are not labeled as a streak. Achievement cards list completed courses recorded in data/certifications-data.ts. The InventoPOS 100/100 academic milestone is recorded in data/projects-data.ts. No earned GitHub achievement ranks are claimed.
+
+## Sharper standalone banner
+
+`pirate-banner-sharp.png` was generated with the built-in image_gen tool at 2172 × 724. Its SVG viewport uses `preserveAspectRatio="xMidYMid slice"`, rather than stretching the illustration. The name and role are native README text outside the SVG.
+
+Prompt: Create a very wide panoramic anime pirate ocean banner, aspect ratio 6:1 (ideally 3072x512), high-resolution clean crisp cel shading. One Piece inspired scene: at far left a black Straw Hat Pirates Jolly Roger on a wooden mast; at far right the complete Thousand Sunny ship with mast sails and lion figurehead, sailing beside a green island. The middle 50 percent is open deep blue sky with sparse clouds so a logo can be overlaid. Bright blue ocean waves across the bottom. Keep the ship and flag fully within a shallow horizontal composition, no tall framing, no vertical elements outside the panoramic strip. Do not add text, letters, logos, user interface, borders, or watermarks. Professional detailed anime background illustration, sharp linework and clean edges. Navy blues with warm straw-gold and crimson accents. This must be a single wide scene, NOT a collage, NOT two panels.

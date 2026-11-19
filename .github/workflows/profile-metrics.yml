@@ -15,6 +15,7 @@ on:
       - scripts/apply-pirate-theme.mjs
       - scripts/build-reference-profile.mjs
       - profile-assets/pirate-reference-art.png
+      - profile-assets/pirate-banner-sharp.png
       - profile-assets/tech-logos/**
       - .github/workflows/profile-metrics.yml
 
