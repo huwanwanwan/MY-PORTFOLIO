@@ -114,10 +114,11 @@ await save('reference-projects',276,'Selected projects and development skills',p
 function languageDonut(x,y,title,counts,unit) {
  const sorted=Object.entries(counts).filter(([,count])=>count>0).sort((a,b)=>b[1]-a[1]);
  const list=sorted.length<=4?sorted:sorted.slice(0,3);if(sorted.length>4)list.push(['Other',sorted.slice(3).reduce((sum,[,value])=>sum+value,0)]);
- const total=list.reduce((sum,[,value])=>sum+value,0);const circumference=2*Math.PI*43;const shades=['#FFA586','#B51A2B','#384358','#7F8FA9'];
- let result=panel(x,y,314,157)+text(x+14,y+24,title,14,colors.ink,'font-weight="700"');let offset=0;
- list.forEach(([name,count],index)=>{const fraction=count/(total||1);result+=`<circle cx="${x+76}" cy="${y+92}" r="43" fill="none" stroke="${shades[index]}" stroke-width="14" stroke-dasharray="${fraction*circumference} ${circumference}" stroke-dashoffset="${-offset*circumference}" transform="rotate(-90 ${x+76} ${y+92})"/>`;offset+=fraction;result+=`<rect x="${x+143}" y="${y+53+index*22}" width="9" height="9" fill="${shades[index]}"/>`+text(x+160,y+62+index*22,name,11)+text(x+300,y+62+index*22,`${Math.round(fraction*100)}%`,11,colors.muted,'text-anchor="end"');});
- return result+text(x+76,y+92,total,24,colors.ink,'text-anchor="middle" font-weight="700"')+text(x+76,y+110,unit,11,colors.muted,'text-anchor="middle"');
+ const total=list.reduce((sum,[,value])=>sum+value,0);const circumference=2*Math.PI*67;const shades=['#FFA586','#B51A2B','#384358','#7F8FA9'];
+ let result=panel(x,y,472,250)+text(x+24,y+34,title,19,colors.ink,'font-weight="700"');let offset=0;
+ result+=`<circle cx="${x+112}" cy="${y+145}" r="67" fill="none" stroke="#161B2F" stroke-width="20"/>`;
+ list.forEach(([name,count],index)=>{const fraction=count/(total||1);result+=`<circle class="motion-donut" style="--arc:${fraction*circumference};--circumference:${circumference}" cx="${x+112}" cy="${y+145}" r="67" fill="none" stroke="${shades[index]}" stroke-width="20" stroke-dasharray="${fraction*circumference} ${circumference}" stroke-dashoffset="${-offset*circumference}" transform="rotate(-90 ${x+112} ${y+145})"><title>${escape(name)}: ${count} ${unit}</title></circle>`;offset+=fraction;result+=`<rect x="${x+222}" y="${y+89+index*33}" width="12" height="12" rx="2" fill="${shades[index]}"/>`+text(x+246,y+101+index*33,name,15)+text(x+448,y+101+index*33,`${Math.round(fraction*100)}%`,15,colors.muted,'text-anchor="end"');});
+ return result+text(x+112,y+146,total,34,colors.ink,'text-anchor="middle" font-weight="700"')+text(x+112,y+171,unit,15,colors.muted,'text-anchor="middle"');
 }
 let streak=0;let cursor=data.days.length-1;
 if(data.days[cursor]?.count===0)cursor--;
@@ -126,32 +127,32 @@ let longest=0,run=0;for(const day of data.days){run=day.count>0?run+1:0;longest=
 let analytics=rope(26)+label('GITHUB ANALYTICS','chart',14,3,300);
 const totals=[['code',data.publicRepos,'Repositories'],['branch',data.authoredCommits,'Commits'],['layers',data.total,'Contributions'],['user',data.followers,'Followers']];
 totals.forEach(([symbol,value,title],index)=>{
- const x=16+index*142;analytics+=panel(x,49,138,87)+icon(symbol,x+55,59,25)+text(x+69,105,value,23,colors.ink,'text-anchor="middle" font-weight="700"')+text(x+69,125,title,12,colors.muted,'text-anchor="middle"');
+ const x=16+index*144;analytics+=panel(x,60,128,124)+icon(symbol,x+50,76,28)+text(x+64,137,value,30,colors.ink,'text-anchor="middle" font-weight="700"')+text(x+64,163,title,13,colors.muted,'text-anchor="middle"');
 });
-analytics+=panel(596,49,388,87)+text(613,74,'GitHub Streak',17,colors.ink,'font-weight="700"')+text(616,109,`${streak} ${streak===1?'Day':'Days'}`,32,colors.peach,'font-weight="700"')+text(802,94,'Current streak',12,colors.muted)+text(802,115,`Longest: ${longest} days`,12,colors.muted)+skull(940,93,.62,.12);
-analytics+=panel(16,147,318,157)+text(31,172,'Contribution History',14,colors.ink,'font-weight="700"');
+analytics+=panel(600,60,384,124)+text(624,94,'GitHub Streak',19,colors.ink,'font-weight="700"')+text(624,141,`${streak} ${streak===1?'Day':'Days'}`,38,colors.peach,'font-weight="700"')+text(806,128,'Current streak',14,colors.muted)+text(806,157,`Longest: ${longest} days`,14,colors.muted)+skull(936,96,.5,.1);
+analytics+=panel(16,208,968,190)+text(40,243,'Contribution History',19,colors.ink,'font-weight="700"');
 const months=new Map();for(const day of data.days)months.set(day.date.slice(0,7),(months.get(day.date.slice(0,7))||0)+day.count);
-const entries=[...months];const max=Math.max(1,...entries.map(([,value])=>value));const points=entries.map(([,value],index)=>[36+index*278/Math.max(1,entries.length-1),274-value/max*78]);
+const entries=[...months];const max=Math.max(1,...entries.map(([,value])=>value));const points=entries.map(([,value],index)=>[48+index*904/Math.max(1,entries.length-1),352-value/max*88]);
 const path=points.map(([x,y],index)=>`${index?'L':'M'}${x.toFixed(1)} ${y.toFixed(1)}`).join(' ');
-analytics+=`<path d="${path}L314 274H36Z" fill="#B51A2B" fill-opacity=".6"/><path d="${path}" fill="none" stroke="#FFA586" stroke-width="3"/>`;
-entries.forEach(([month],index)=>{const [x,y]=points[index];analytics+=`<circle cx="${x}" cy="${y}" r="2" fill="#FFA586"/>`;if(index%3===0)analytics+=text(x,293,new Date(`${month}-01T00:00:00Z`).toLocaleDateString('en-US',{month:'short',timeZone:'UTC'}),10,colors.muted,'text-anchor="middle"');});
+analytics+=`<path d="${path}L952 352H48Z" fill="#B51A2B" fill-opacity=".6"/><path d="${path}" fill="none" stroke="#FFA586" stroke-width="3"/>`;
+entries.forEach(([month],index)=>{const [x,y]=points[index];analytics+=`<circle cx="${x}" cy="${y}" r="3" fill="#FFA586"/>`;if(index%2===0)analytics+=text(x,379,new Date(`${month}-01T00:00:00Z`).toLocaleDateString('en-US',{month:'short',timeZone:'UTC'}),13,colors.muted,'text-anchor="middle"');});
 const languageEntries=Object.entries(data.languageBytes).filter(([,bytes])=>bytes>0).sort((a,b)=>b[1]-a[1]);
 const languageTotal=languageEntries.reduce((sum,[,bytes])=>sum+bytes,0);
 const displayedLanguages=languageEntries.slice(0,4);
 if(languageEntries.length>4)displayedLanguages.push(['Other',languageEntries.slice(4).reduce((sum,[,bytes])=>sum+bytes,0)]);
-analytics+=panel(346,147,314,157)+text(360,171,'Most Used Languages',14,colors.ink,'font-weight="700"');
+analytics+=panel(16,422,472,250)+text(40,456,'Most Used Languages',19,colors.ink,'font-weight="700"');
 displayedLanguages.forEach(([name,bytes],index)=>{
- const percent=bytes/(languageTotal||1)*100;const y=195+index*22;
- analytics+=text(360,y,name,11)+`<rect x="439" y="${y-8}" width="161" height="7" rx="3.5" fill="#384358"/><rect class="motion-language" x="439" y="${y-8}" width="${Math.max(1,161*percent/100).toFixed(2)}" height="7" rx="3.5" fill="${index%2===0?'#FFA586':'#B51A2B'}"><title>${escape(name)}: ${bytes} code bytes (${percent.toFixed(1)}%)</title></rect>`+text(647,y,`${percent.toFixed(1)}%`,11,colors.muted,'text-anchor="end"');
+ const percent=bytes/(languageTotal||1)*100;const y=493+index*34;
+ analytics+=text(40,y,name,15)+`<rect x="146" y="${y-10}" width="248" height="10" rx="5" fill="#384358"/><rect class="motion-language" x="146" y="${y-10}" width="${Math.max(1,248*percent/100).toFixed(2)}" height="10" rx="5" fill="${index%2===0?'#FFA586':'#B51A2B'}"><title>${escape(name)}: ${bytes} code bytes (${percent.toFixed(1)}%)</title></rect>`+text(462,y,`${percent.toFixed(1)}%`,15,colors.muted,'text-anchor="end"');
 });
-analytics+=languageDonut(672,147,'Languages by Commit',data.commitLanguageCounts,'commits');
-await save('dashboard-reference-usage',317,`GitHub analytics — ${data.updated}; languages measured by public code bytes; current streak ${streak} days`,analytics);
+analytics+=languageDonut(512,422,'Languages by Commit',data.commitLanguageCounts,'commits');
+await save('dashboard-reference-airy',692,`GitHub analytics — ${data.updated}; languages measured by public code bytes; current streak ${streak} days`,analytics);
 
-let calendar=panel(16,6,968,156)+icon('chart',30,18,20)+text(60,34,'CONTRIBUTION ACTIVITY',15,colors.ink,'font-weight="700"')+text(967,34,`${data.total} contributions in the last 365 days`,12,colors.muted,'text-anchor="end"');
-const weekday=new Date(`${data.days[0].date}T00:00:00Z`).getUTCDay();const heat=['#242F49','#384358','#541A2E','#B51A2B','#FFA586'];let month='';
-data.days.forEach((day,index)=>{const position=weekday+index;const col=Math.floor(position/7);const row=position%7;const x=63+col*15;const y=61+row*12;const next=day.date.slice(0,7);if(next!==month&&col<51){calendar+=text(x,53,new Date(`${day.date}T00:00:00Z`).toLocaleDateString('en-US',{month:'short',timeZone:'UTC'}),9,colors.muted);month=next;}calendar+=`<rect x="${x}" y="${y}" width="12" height="10" rx="1" fill="${heat[day.level]}"><title>${day.date}: ${day.count} contributions</title></rect>`;});
-calendar+=text(856,145,'Less',9,colors.muted);heat.forEach((color,index)=>{calendar+=`<rect x="${882+index*12}" y="136" width="10" height="10" fill="${color}"/>`;});calendar+=text(949,145,'More',9,colors.muted);
-await save('activity-reference',173,'GitHub contribution calendar; real daily counts',calendar);
+let calendar=panel(16,6,968,218)+icon('chart',40,24,24)+text(76,43,'CONTRIBUTION ACTIVITY',18,colors.ink,'font-weight="700"')+text(958,43,`${data.total} contributions in the last 365 days`,13,colors.muted,'text-anchor="end"');
+const weekday=new Date(`${data.days[0].date}T00:00:00Z`).getUTCDay();const heat=['#161B2F','#384358','#541A2E','#B51A2B','#FFA586'];let month='';
+data.days.forEach((day,index)=>{const position=weekday+index;const col=Math.floor(position/7);const row=position%7;const x=48+col*16.5;const y=82+row*16;const next=day.date.slice(0,7);if(next!==month&&col<51){calendar+=text(x,69,new Date(`${day.date}T00:00:00Z`).toLocaleDateString('en-US',{month:'short',timeZone:'UTC'}),11,colors.muted);month=next;}calendar+=`<rect x="${x}" y="${y}" width="14" height="12" rx="2" fill="${heat[day.level]}"><title>${day.date}: ${day.count} contributions</title></rect>`;});
+calendar+=text(830,212,'Less',11,colors.muted);heat.forEach((color,index)=>{calendar+=`<rect x="${868+index*13}" y="202" width="10" height="10" fill="${color}"/>`;});calendar+=text(943,212,'More',11,colors.muted);
+await save('activity-reference-airy',240,'GitHub contribution calendar; real daily counts',calendar);
 
 let footer=rope(26,20,430)+label('ACHIEVEMENTS','chart',14,3,260)+rope(26,500,480)+label('GET IN TOUCH','mail',492,3,250);
 const certificates=[['code','JavaScript','Essentials 1','Cisco · 2026'],['code','Python','Essentials 1','Cisco · 2026'],['server','AWS Cloud','Practitioner Essentials','Course completed · 2025']];
