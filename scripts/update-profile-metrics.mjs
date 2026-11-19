@@ -11,10 +11,10 @@ const output = new URL('../profile-assets/', import.meta.url);
 await mkdir(output, { recursive: true });
 await import('./build-profile-layout.mjs');
 for (const label of ['Portfolio', 'Email', 'LinkedIn']) {
-  await writeFile(new URL(`link-${label.toLowerCase()}-signature.svg`, output), svg(200, 44, label, box(1, 1, 198, 42, navy, 12) + text(100, 28, label.toUpperCase(), 13, peach, 'text-anchor="middle" font-weight="700" letter-spacing="2"')));
+  await writeFile(new URL(`link-${label.toLowerCase()}-accent.svg`, output), svg(200, 44, label, box(1, 1, 198, 42, navy, 12) + text(100, 28, label.toUpperCase(), 13, peach, 'text-anchor="middle" font-weight="700" letter-spacing="2"')));
 }
 
-await writeFile(new URL('header-signature.svg', output), svg(960, 224, 'Juan Domanico Militante | Web and Mobile Developer', `
+await writeFile(new URL('header-accent.svg', output), svg(960, 224, 'Juan Domanico Militante | Web and Mobile Developer', `
   <path d="M0 194H960" stroke="${slate}"/>
   <rect x="414" y="32" width="132" height="4" rx="2" fill="${crimson}"/>
   ${text(480, 95, 'JUAN DOMANICO MILITANTE', 34, peach, 'text-anchor="middle" font-weight="700" letter-spacing="2"')}
@@ -43,11 +43,12 @@ groups.forEach(([label, items]) => {
   });
   const height = 132 + row * 62;
   stack += box(20, stackY, 920, height, navy, 30);
-  stack += `<rect x="46" y="${stackY + 24}" width="4" height="18" rx="2" fill="${crimson}"/>`;
+  stack += `<rect x="20" y="${stackY}" width="920" height="${height}" rx="30" fill="none" stroke="${peach}" stroke-opacity=".28"/>`;
+  stack += `<rect x="46" y="${stackY + 24}" width="4" height="18" rx="2" fill="${peach}"/>`;
   stack += text(62, stackY + 39, label, 17, peach, 'font-weight="700" letter-spacing="1.5"') + badges;
   stackY += height + 20;
 });
-await writeFile(new URL('tech-stack-signature.svg', output), svg(960, stackY + 4, 'Tech stack grouped by web, mobile and games, backend and data, tools and hardware', stack));
+await writeFile(new URL('tech-stack-accent.svg', output), svg(960, stackY + 4, 'Tech stack grouped by web, mobile and games, backend and data, tools and hardware', stack));
 
 async function github(path) {
   const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'huwanwanwan-profile-metrics' };
@@ -127,7 +128,7 @@ top.forEach(([name, bytes], index) => {
   metrics += `<rect x="190" y="${y - 10}" width="640" height="10" rx="5" fill="${slate}"/><rect x="190" y="${y - 10}" width="${Math.max(1, 640 * percent / 100).toFixed(2)}" height="10" rx="5" fill="${peach}"/>`;
 });
 metrics += text(32, 660, `Updated ${updated} (Philippine time) | Public GitHub data`, 12);
-await writeFile(new URL('analytics-signature.svg', output), svg(960, 686, 'GitHub repository metrics and language use', metrics));
+await writeFile(new URL('analytics-accent.svg', output), svg(960, 686, 'GitHub repository metrics and language use', metrics));
 
 const colors = [navy, slate, burgundy, crimson, peach];
 let calendar = text(32, 45, 'CONTRIBUTION ACTIVITY', 18, peach, 'font-weight="700" letter-spacing="2"');
@@ -151,7 +152,7 @@ calendar += text(48, 254, `${days[0].date} to ${days.at(-1).date}`, 12) + text(7
 colors.forEach((color, index) => { calendar += `<rect x="${777 + index * 17}" y="243" width="12" height="12" rx="3" fill="${color}"/>`; });
 calendar += text(871, 254, 'More', 12);
 calendar += text(48, 280, 'GitHub contributions, including commits, issues, pull requests, and reviews.', 12);
-await writeFile(new URL('activity-signature.svg', output), svg(960, 306, 'GitHub contribution calendar in the portfolio color palette', calendar));
+await writeFile(new URL('activity-accent.svg', output), svg(960, 306, 'GitHub contribution calendar in the portfolio color palette', calendar));
 
 // Dashboard inspired by the requested chart types, with original layout and styling.
 let dashboard = text(30, 40, 'JUAN / GITHUB OVERVIEW', 17, peach, 'font-weight="700" letter-spacing="2"');
@@ -224,5 +225,5 @@ milestones.forEach(([label, value], index) => {
 });
 dashboard += text(30, 1071, 'Commit charts cover your authored commits on default branches of owned public repositories.', 12);
 dashboard += text(30, 1093, 'Pull request and issue totals cover public GitHub activity. All metric tiles show real counts.', 12);
-await writeFile(new URL('dashboard-signature.svg', output), svg(960, 1116, 'GitHub dashboard: contributions, stats, commit hours, language donuts, and metric tiles', dashboard));
+await writeFile(new URL('dashboard-accent.svg', output), svg(960, 1116, 'GitHub dashboard: contributions, stats, commit hours, language donuts, and metric tiles', dashboard));
 console.log(`Updated profile assets: ${repos.length} public repositories, ${total} contributions.`);
