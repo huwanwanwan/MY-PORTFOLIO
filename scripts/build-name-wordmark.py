@@ -22,7 +22,7 @@ parts = []
 bottom, top = float("inf"), float("-inf")
 word_index = 0
 skull_index = 0
-word_colors = ["#B51A2B", "#FFA586", "#EDF1F7"]
+word_colors = ["#B51A2B", "#FFA586", "#FFA586"]
 for character in name:
     if character == " ":
         word_index += 1
@@ -68,5 +68,5 @@ svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="84" viewB
 <g transform="translate({x:.3f} {y:.3f}) scale({scale:.6f} {-scale:.6f})" fill="#EDF1F7">{''.join(parts)}</g>
 </svg>
 '''
-(root / "profile-assets/name-one-piece-colored.svg").write_text(svg, encoding="utf-8")
+(root / "profile-assets/name-one-piece-peach.svg").write_text(svg, encoding="utf-8")
 print("Created transparent SVG wordmark with real font outlines.")

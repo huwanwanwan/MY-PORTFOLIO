@@ -2,7 +2,7 @@
   <img src="./profile-assets/reference-banner-sharp-premium-paced-loop-motion.svg" width="100%" alt="Wancor pirate banner — Juan Domanico Militante, Web and Mobile Developer" />
 </div>
 
-<p align="center"><img src="./profile-assets/name-one-piece-colored.svg" width="100%" alt="Juan Domanico Militante — One Piece style lettering" /></p>
+<p align="center"><img src="./profile-assets/name-one-piece-peach.svg" width="100%" alt="Juan Domanico Militante — One Piece style lettering" /></p>
 <p align="center">Web &amp; Mobile Developer | BSIT Student</p>
 
 <p align="center">
