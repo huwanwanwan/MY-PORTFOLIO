@@ -1,7 +1,7 @@
 <div align="center">
 
   <a href="https://portfolio.juandomanicomilitante.workers.dev" target="_blank">
-    <img src="https://raw.githubusercontent.com/huwanwanwan/MY-PORTFOLIO/main/public/wancor-table-card.svg" alt="Juan Domanico Militante (WANCOR) - Profile Card" width="100%" style="max-width: 100%; height: auto;" />
+    <img src="./git_cover.png" alt="Juan Domanico Militante - Profile Cover" width="100%" style="max-width: 100%; height: auto;" />
   </a>
 
   <br /><br />
@@ -30,7 +30,7 @@
 
 > **"Engineering software with purpose — bridging intuitive mobile interfaces, responsive edge systems, and interactive physical hardware."**
 
-Hi! I'm **Juan Domanico Militante**, also known as **WANCOR**. I am an Information Technology student at **Pambayang Dalubhasaan ng Marilao (PDM)** specializing in **Web & Mobile Development**.
+Hi! I'm **Juan Domanico Militante**. I am an Information Technology student at **Pambayang Dalubhasaan ng Marilao (PDM)** specializing in **Web & Mobile Development**.
 
 Throughout my 4+ years of IT study and 14+ finished systems, my engineering mindset centers around **offline-first mobile architecture**, **modern edge web platforms**, and **interactive engineering** (Augmented Reality & IoT). I focus on software that solves real-world challenges—from assistive communication tools for the hearing-impaired to automated acoustic flood alert devices.
 
@@ -134,7 +134,7 @@ The live portfolio website is powered by cutting-edge edge infrastructure:
 2. **Dual-Layer Anti-Spam Security**:
    - **Strict Rate Limiting**: Max 5 contact form submissions per 24 hours per visitor IP.
    - **Bot Defense**: Automated spam bots and rapid-fire requests are rejected before reaching inboxes.
-3. **Interactive WANCOR AI FAQ Bot**: Embedded assistant answering visitor inquiries regarding Juan's skills, education, and milestones with instant query suggestions.
+3. **Interactive AI FAQ Bot**: Embedded assistant answering visitor inquiries regarding Juan's skills, education, and milestones with instant query suggestions.
 4. **Adaptive Dark / Light Theme**: Dynamic CSS variable transitions with an interactive first-visit onboarding tutorial.
 5. **Mobile-First Touch Navigation**:
    - Clean gesture scrolling with hidden side arrows on mobile (`≤ 768px`) to guarantee cards and text are 100% visible.
@@ -167,5 +167,5 @@ The live portfolio website is powered by cutting-edge edge infrastructure:
 <br />
 
 <p align="center">
-  <sub>Designed &amp; Built with 🧡 by <strong>Juan Domanico Militante (WANCOR)</strong> • © 2026 All Rights Reserved</sub>
+  <sub>Designed &amp; Built with 🧡 by <strong>Juan Domanico Militante</strong> • © 2026 All Rights Reserved</sub>
 </p>
