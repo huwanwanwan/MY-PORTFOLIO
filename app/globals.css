@@ -21146,3 +21146,18 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
     transition: none;
   }
 }
+
+/* Projects use open spacing instead of separator rules or rounded frames. */
+.page #projects .projects-controls-bar::after,
+.page #projects .smart-project-row::after {
+  display: none;
+}
+.page #projects .smart-spec-row {
+  border: 0;
+}
+.page #projects :is(.smart-hero-card, .card-emblem-stage, .smart-thumb-card, .smart-highlight-banner) {
+  border-radius: 0;
+}
+.page #projects .smart-hero-caption-bar {
+  border-top: 0;
+}
