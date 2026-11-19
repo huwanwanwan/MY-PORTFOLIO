@@ -21085,3 +21085,64 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
   transform: none;
   letter-spacing: -0.025em;
 }
+
+/* Projects: upward reveals, quiet separators, and theme-aware text. */
+.page #projects .smart-project-row {
+  transition: opacity 650ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.page #projects .smart-project-row[data-reveal-ready="true"]:not([data-reveal-visible="true"]) {
+  opacity: 0;
+  transform: translateY(22px);
+}
+.page #projects .smart-project-row[data-reveal-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+/* The row handles the reveal so media and copy move together. */
+.page #projects .smart-project-row .smart-col-media,
+.page #projects .smart-project-row .smart-col-info {
+  opacity: 1;
+  transform: none;
+  transition: none;
+  will-change: auto;
+}
+.page #projects .smart-project-row::after {
+  left: 0;
+  width: 100%;
+  height: 1px;
+  transform: none;
+  background: linear-gradient(to right, transparent, color-mix(in srgb, var(--ink) 8%, transparent), transparent);
+}
+.page #projects .smart-spec-row {
+  border-color: color-mix(in srgb, var(--ink) 8%, transparent);
+}
+.page #projects .brand-tech-badge,
+.page #projects .brand-tech-badge:hover {
+  background: transparent;
+  border-color: var(--card-border);
+  color: var(--ink);
+  font-size: .875rem;
+}
+.page #projects .smart-highlight-banner {
+  background: var(--card-surface);
+  border-color: var(--card-border);
+  color: var(--ink);
+}
+.page #projects :is(.smart-info-title, .smart-info-overview, .smart-spec-val) {
+  color: var(--ink);
+}
+.page #projects :is(.smart-spec-name, .smart-tech-heading, .projects-showing-text, .sort-label) {
+  color: var(--text-secondary);
+}
+.page #projects .project-filter-pill.active .filter-count {
+  background: transparent;
+  color: inherit;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page #projects .smart-project-row[data-scroll-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
