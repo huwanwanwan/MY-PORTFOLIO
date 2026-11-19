@@ -20,10 +20,16 @@ plain_letters = {
 advance = 0
 parts = []
 bottom, top = float("inf"), float("-inf")
+word_index = 0
+skull_index = 0
+word_colors = ["#B51A2B", "#FFA586", "#EDF1F7"]
 for character in name:
+    if character == " ":
+        word_index += 1
+    letter_fill = word_colors[min(word_index, 2)]
     if character in plain_letters:
         path, width = plain_letters[character]
-        parts.append(f'<path data-letter="{character}" transform="translate({advance} 0)" d="{path}"/>')
+        parts.append(f'<path data-letter="{character}" transform="translate({advance} 0)" fill="{letter_fill}" d="{path}"/>')
         bottom, top = min(bottom, 0), max(top, 1420)
         advance += width
         continue
@@ -39,7 +45,18 @@ for character in name:
         bottom = min(bottom, bounds.bounds[1])
         top = max(top, bounds.bounds[3])
     if pen.getCommands():
-        parts.append(f'<path data-letter="{character}" transform="translate({advance} 0)" d="{pen.getCommands()}"/>')
+        if character == "O":
+            clip_id = f"skull-letter-{skull_index}"
+            skull_index += 1
+            parts.append(f'''<g data-letter="O" transform="translate({advance} 0)">
+<defs><clipPath id="{clip_id}"><path d="{pen.getCommands()}"/></clipPath></defs>
+<path fill="#EDF1F7" d="{pen.getCommands()}"/>
+<g clip-path="url(#{clip_id})">
+<path d="M330 1030V1200Q750 1530 1190 1200V1030Z" fill="#EFC082"/>
+<rect x="330" y="1070" width="860" height="105" fill="#B51A2B"/>
+</g></g>''')
+        else:
+            parts.append(f'<path data-letter="{character}" transform="translate({advance} 0)" fill="{letter_fill}" d="{pen.getCommands()}"/>')
     advance += font["hmtx"].metrics[glyph_name][0]
 
 scale = min(680 / advance, 52 / (top - bottom))
@@ -51,5 +68,5 @@ svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="84" viewB
 <g transform="translate({x:.3f} {y:.3f}) scale({scale:.6f} {-scale:.6f})" fill="#EDF1F7">{''.join(parts)}</g>
 </svg>
 '''
-(root / "profile-assets/name-one-piece-corrected.svg").write_text(svg, encoding="utf-8")
+(root / "profile-assets/name-one-piece-colored.svg").write_text(svg, encoding="utf-8")
 print("Created transparent SVG wordmark with real font outlines.")
