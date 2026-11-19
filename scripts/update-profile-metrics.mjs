@@ -1,5 +1,6 @@
 import { mkdir, writeFile } from 'node:fs/promises';
-import { icon, technologyIcon } from './profile-icons.mjs';
+import { icon } from './profile-icons.mjs';
+import { realTechLogo } from './profile-tech-logos.mjs';
 
 const username = 'huwanwanwan';
 const palette = { midnight: '#161B2F', navy: '#242F49', slate: '#384358', peach: '#FFA586', crimson: '#B51A2B', burgundy: '#541A2E' };
@@ -39,7 +40,7 @@ groups.forEach(([label, items]) => {
     const width = Math.max(126, item.length * 10.5 + 68);
     if (x + width > 912 || ((items.length === 7 && index === 4) || (items.length === 6 && index === 3))) { x = 48; row++; }
     const y = stackY + 58 + row * 62;
-    badges += box(x, y, width, 48, midnight, 24) + icon(technologyIcon(item), x + 16, y + 14, 20) + text(x + 47, y + 31, item, 19);
+    badges += box(x, y, width, 48, midnight, 24) + realTechLogo(item, x + 15, y + 13, 22) + text(x + 47, y + 31, item, 19);
     x += width + 12;
   });
   const height = 132 + row * 62;
@@ -50,7 +51,7 @@ groups.forEach(([label, items]) => {
   stack += text(82, stackY + 39, label, 17, peach, 'font-weight="700" letter-spacing="1.5"') + badges;
   stackY += height + 20;
 });
-await writeFile(new URL('tech-stack-portfolio.svg', output), svg(960, stackY + 4, 'Tech stack grouped by web, mobile and games, backend and data, tools and hardware', stack));
+await writeFile(new URL('tech-stack-real-logos.svg', output), svg(960, stackY + 4, 'Tech stack grouped by web, mobile and games, backend and data, tools and hardware', stack));
 
 async function github(path) {
   const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'huwanwanwan-profile-metrics' };

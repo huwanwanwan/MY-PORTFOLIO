@@ -10,6 +10,8 @@ on:
       - scripts/update-profile-metrics.mjs
       - scripts/build-profile-layout.mjs
       - scripts/profile-icons.mjs
+      - scripts/profile-tech-logos.mjs
+      - profile-assets/tech-logos/**
       - .github/workflows/profile-metrics.yml
 
 permissions:

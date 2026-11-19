@@ -23,7 +23,7 @@
 <br />
 
 <a id="tech-stack"></a>
-<img src="./profile-assets/tech-stack-portfolio.svg" width="100%" alt="My tech stack, grouped by web, mobile and games, backend and data, tools and hardware — all in my portfolio colors" />
+<img src="./profile-assets/tech-stack-real-logos.svg" width="100%" alt="My tech stack, grouped by web, mobile and games, backend and data, tools and hardware — all in my portfolio colors" />
 
 <br />
 
