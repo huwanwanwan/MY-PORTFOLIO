@@ -140,3 +140,18 @@ test('trims whitespace around the EmailJS private key', async () => {
   });
   assert.equal(response.status, 200);
 });
+
+test('identifies provider authentication failure without exposing credentials or provider response', async () => {
+  let count = 0;
+  const secret = 'sensitive-test-private-key';
+  const response = await handleContact(request(), {...env(), EMAILJS_PRIVATE_KEY: secret}, async () => {
+    if (++count === 1) return Response.json(verified);
+    if (count === 2) return new Response(`API access in strict mode, but no Private Key was provided ${secret}`, { status: 403 });
+    return Response.json({ success: false, message: 'Rate limit exceeded' }, { status: 429 });
+  });
+  assert.equal(response.status, 502);
+  const body = await response.text();
+  assert.match(body, /MAIL_AUTH/);
+  assert.equal(body.includes(secret), false);
+  assert.equal(body.includes('strict mode'), false);
+});

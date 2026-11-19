@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 import BotVerification from "./bot-verification";
 
 
-const MAX_DAILY_MESSAGES = 2;
+const MAX_DAILY_MESSAGES = 5;
 const ROLLING_WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 const getValidSubmissions = (): number[] => {
@@ -30,7 +30,7 @@ export default function ContactHub({ compact = false }: { compact?: boolean } = 
   const [turnstileToken, setTurnstileToken] = useState("");
   const [verificationReset, setVerificationReset] = useState(0);
   const [formError, setFormError] = useState("");
-  // 2-per-day rate limiting & honeypot security
+  // 5-per-day rate limiting & honeypot security
   const [dailyRemaining, setDailyRemaining] = useState<number>(MAX_DAILY_MESSAGES);
   const [nextResetHours, setNextResetHours] = useState<number>(24);
   const [honeypot, setHoneypot] = useState("");
@@ -373,9 +373,9 @@ export default function ContactHub({ compact = false }: { compact?: boolean } = 
               <div className="contact-rate-limit-banner" role="alert">
                 <div className="rate-limit-icon">🛡️</div>
                 <div className="rate-limit-content">
-                  <h4>Daily Quota Reached (2 / 2 Messages)</h4>
+                  <h4>Daily Quota Reached ({MAX_DAILY_MESSAGES} / {MAX_DAILY_MESSAGES} Messages)</h4>
                   <p>
-                    To prevent spam bots and ensure every inquiry receives personal attention, visitor messages are limited to 2 per 24 hours. Your quota will refresh in <strong>~{nextResetHours} hour{nextResetHours > 1 ? "s" : ""}</strong>.
+                    To prevent spam bots and ensure every inquiry receives personal attention, visitor messages are limited to {MAX_DAILY_MESSAGES} per 24 hours. Your quota will refresh in <strong>~{nextResetHours} hour{nextResetHours > 1 ? "s" : ""}</strong>.
                   </p>
                   <p>
                     Have an urgent inquiry or project deadline? Email Juan directly at{" "}
@@ -497,7 +497,7 @@ export default function ContactHub({ compact = false }: { compact?: boolean } = 
                 className="submit-dispatch-btn"
                 disabled={formStatus === "submitting" || dailyRemaining === 0 || !turnstileToken}
               >
-                <span>{dailyRemaining === 0 ? "Daily Limit Reached (2/2 today)" : formStatus === "submitting" ? `Sending... ${Math.round(sendProgress)}%` : "Send Message"}</span>
+                <span>{dailyRemaining === 0 ? `Daily Limit Reached (${MAX_DAILY_MESSAGES}/${MAX_DAILY_MESSAGES} today)` : formStatus === "submitting" ? `Sending... ${Math.round(sendProgress)}%` : "Send Message"}</span>
                 <span className="dispatch-arrow" aria-hidden="true">↗</span>
               </button>
             </div>

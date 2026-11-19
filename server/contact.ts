@@ -83,7 +83,7 @@ export async function handleContact(request: Request, env: ContactEnvironment, s
     const primary = await sendRequest("https://api.emailjs.com/api/v1.0/email/send", {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        service_id: "service_azcv23s", template_id: "template_3zl7lsk", user_id: "kUDnhN5l63awEUq0y",
+        service_id: "service_azcv23s", template_id: "template_3zl7lsk", user_id: "li_YK0lX5yfqpFJBu",
         ...(privateKey ? { accessToken: privateKey } : {}),
         template_params: {
           from_name: name, name, user_name: name,
@@ -99,7 +99,9 @@ export async function handleContact(request: Request, env: ContactEnvironment, s
       }),
       signal: AbortSignal.timeout(20000),
     });
-    if (primary.ok && (await primary.text()).trim() === "OK") return Response.json({ success: true }, { headers: { "Cache-Control": "no-store" } });
+    const primaryResult = (await primary.text()).trim();
+    const authenticationFailed = primary.status === 403 && /private key|strict mode|access.?token|authentication/i.test(primaryResult);
+    if (primary.ok && primaryResult === "OK") return Response.json({ success: true }, { headers: { "Cache-Control": "no-store" } });
     // Avoid a second delivery if the first provider has an ambiguous failure.
     if (primary.ok || primary.status >= 500) return reply("The email service could not confirm delivery. Please try again later or email me directly.", 502);
 
@@ -112,6 +114,7 @@ export async function handleContact(request: Request, env: ContactEnvironment, s
     if (!delivery.ok || (delivered.success !== true && delivered.success !== "true")) {
       const needsActivation = typeof delivered.message === "string" && /needs activation|activate form/i.test(delivered.message);
       console.error("Contact delivery rejected", { primaryStatus: primary.status, fallbackStatus: delivery.status, needsActivation });
+      if (authenticationFailed) return reply("Email delivery authentication failed. Please email me directly while the site owner resolves this. (MAIL_AUTH)", 502);
       return reply(needsActivation
         ? "The contact form's email service needs activation by the site owner. Please email me directly for now."
         : "Unable to deliver your message right now. Please try again later or email me directly.", 502);

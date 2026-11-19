@@ -132,7 +132,7 @@ The live portfolio website is powered by cutting-edge edge infrastructure:
 
 1. **Sub-50ms Global Edge Delivery**: Server-Side Rendered via `Vinext` on **Cloudflare Workers Edge Network**, delivering lightning-fast response times globally.
 2. **Dual-Layer Anti-Spam Security**:
-   - **Strict Rate Limiting**: Max 2 contact form submissions per 24 hours per visitor IP.
+   - **Strict Rate Limiting**: Max 5 contact form submissions per 24 hours per visitor IP.
    - **Bot Defense**: Automated spam bots and rapid-fire requests are rejected before reaching inboxes.
 3. **Interactive WANCOR AI FAQ Bot**: Embedded assistant answering visitor inquiries regarding Juan's skills, education, and milestones with instant query suggestions.
 4. **Adaptive Dark / Light Theme**: Dynamic CSS variable transitions with an interactive first-visit onboarding tutorial.
