@@ -8,4 +8,4 @@ Create an anime illustration asset sheet for a One Piece themed developer GitHub
 
 ## Data accuracy
 
-`github-data.json` contains only public GitHub summary data. The daily workflow generates this snapshot and builds the reference layout. Contribution streaks count consecutive days, allowing an unfinished current day; total active days are not labeled as a streak. The visual achievement cards describe areas of work, not earned GitHub achievement ranks.
+`github-data.json` contains only public GitHub summary data. The daily workflow generates this snapshot and builds the reference layout. Contribution streaks count consecutive days, allowing an unfinished current day; total active days are not labeled as a streak. Achievement cards list completed courses recorded in data/certifications-data.ts. The InventoPOS 100/100 academic milestone is recorded in data/projects-data.ts. No earned GitHub achievement ranks are claimed.

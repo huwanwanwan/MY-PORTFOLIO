@@ -9,16 +9,16 @@ const brand = (await readFile(new URL('wancor-mark.svg', out), 'utf8')).replace(
 const colors = { ink: '#EDF1F7', muted: '#BDC8D8', peach: '#FFA586', crimson: '#B51A2B', navy: '#161B2F', slate: '#384358', burgundy: '#541A2E' };
 const escape = value => String(value).replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'})[character]);
 const text = (x, y, value, size = 17, color = colors.ink, extra = '') => `<text x="${x}" y="${y}" font-size="${size}" fill="${color}" ${extra}>${escape(value)}</text>`;
-const panel = (x, y, width, height, radius = 12) => `<rect x="${x}" y="${y}" width="${width}" height="${height}" rx="${radius}" fill="url(#card)" stroke="#384358" stroke-width="1"/>`;
+const panel = (x, y, width, height, radius = 10) => `<rect x="${x}" y="${y}" width="${width}" height="${height}" rx="${radius}" fill="#242F49" stroke="#384358" stroke-width="1"/>`;
 const svg = (height, title, body) => `<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="${height}" viewBox="0 0 1000 ${height}" role="img" aria-labelledby="title"><title id="title">${escape(title)}</title>
 <defs>
- <linearGradient id="card" x2=".8" y2="1"><stop stop-color="#242F49"/><stop offset="1" stop-color="#101B2E"/></linearGradient>
+ <linearGradient id="logo-shade"><stop stop-color="#161B2F" stop-opacity="0"/><stop offset=".35" stop-color="#161B2F" stop-opacity=".7"/><stop offset=".65" stop-color="#161B2F" stop-opacity=".7"/><stop offset="1" stop-color="#161B2F" stop-opacity="0"/></linearGradient>
  <linearGradient id="paper" x2="0" y2="1"><stop stop-color="#FFE1A0"/><stop offset=".5" stop-color="#EFC082"/><stop offset="1" stop-color="#FFA586"/></linearGradient>
- <linearGradient id="shade"><stop offset="0" stop-color="#101A2C"/><stop offset=".5" stop-color="#101A2C" stop-opacity=".98"/><stop offset=".72" stop-color="#101A2C" stop-opacity="0"/></linearGradient>
+ <linearGradient id="shade"><stop offset="0" stop-color="#161B2F"/><stop offset=".5" stop-color="#161B2F" stop-opacity=".98"/><stop offset=".72" stop-color="#161B2F" stop-opacity="0"/></linearGradient>
  <clipPath id="about-window"><rect x="16" y="48" width="968" height="232" rx="12"/></clipPath>
  <clipPath id="banner-window"><rect width="1000" height="156" rx="12"/></clipPath>
-</defs><rect width="1000" height="${height}" fill="#0C1728"/><g font-family="Arial, Helvetica, sans-serif">${body}</g></svg>\n`;
-async function save(name, height, title, body) { await writeFile(new URL(`${name}.svg`, out), svg(height, title, body)); }
+</defs><rect width="1000" height="${height}" fill="#161B2F"/><g font-family="Arial, Helvetica, sans-serif">${body}</g></svg>\n`;
+async function save(name, height, title, body) { await writeFile(new URL(`${name}-premium.svg`, out), svg(height, title, body)); }
 
 function rope(y, x = 20, width = 960) {
   return `<g fill="none" stroke-linecap="round"><path d="M${x} ${y}H${x+width}" stroke="#7D492D" stroke-width="5"/><path d="M${x} ${y-1}H${x+width}" stroke="#F0BE83" stroke-width="3"/><path d="M${x} ${y-1}H${x+width}" stroke="#805335" stroke-width="3" stroke-dasharray="1 5"/></g>`;
@@ -37,18 +37,18 @@ function skull(x, y, scale = 1, opacity = 1) {
 // Panoramic illustration with the real portfolio mark and editable SVG text.
 await save('reference-header', 228, 'Wancor — Juan Domanico Militante, Web and Mobile Developer', `
  <g clip-path="url(#banner-window)"><svg width="1000" height="156" viewBox="0 0 1536 512" preserveAspectRatio="none"><image href="${art}" width="1536" height="1024"/></svg></g>
- <rect x="320" y="23" width="365" height="102" rx="16" fill="#0C1728" fill-opacity=".45"/>
+ <rect width="1000" height="156" fill="url(#logo-shade)"/>
  <svg x="347" y="39" width="91" height="66" viewBox="65 115 385 280">${brand}</svg>
  ${text(560,70,'WANCOR',31,colors.ink,'text-anchor="middle" font-weight="700" letter-spacing="9"')}
- ${text(560,93,'DEVELOP · BUILD · EXPLORE',10,colors.ink,'text-anchor="middle" letter-spacing="2.5"')}
+ ${text(560,93,'DEVELOP • BUILD • EXPLORE',10,colors.ink,'text-anchor="middle" letter-spacing="2.5"')}
  <path d="M0 153Q260 142 500 153T1000 151" fill="none" stroke="#B51A2B" stroke-width="4"/>
  ${text(500,189,'Juan Domanico Militante',32,colors.ink,'text-anchor="middle" font-weight="700"')}
- ${text(500,217,'Web & Mobile Developer · BSIT Student',17,colors.muted,'text-anchor="middle"')}
+ ${text(500,217,'Web & Mobile Developer | BSIT Student',17,colors.muted,'text-anchor="middle"')}
 `);
 
 for (const [name, title, symbol] of [['portfolio','PORTFOLIO','code'],['email','EMAIL','mail'],['linkedin','LINKEDIN','link']]) {
-  const button = `<svg xmlns="http://www.w3.org/2000/svg" width="220" height="43" viewBox="0 0 220 43"><defs><linearGradient id="button" x2="0" y2="1"><stop stop-color="#242F49"/><stop offset="1" stop-color="#101B2E"/></linearGradient></defs><rect x="1" y="1" width="218" height="41" rx="21" fill="url(#button)" stroke="#B51A2B" stroke-width="1.5"/>${icon(symbol,30,11,21)}<text x="127" y="27" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#EDF1F7" font-weight="700">${title}</text></svg>\n`;
-  await writeFile(new URL(`reference-link-${name}.svg`,out),button);
+  const button = `<svg xmlns="http://www.w3.org/2000/svg" width="220" height="43" viewBox="0 0 220 43"><rect x="1" y="1" width="218" height="41" rx="21" fill="#161B2F" stroke="#B51A2B" stroke-width="1.5"/>${icon(symbol,30,11,21)}<text x="127" y="27" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#EDF1F7" font-weight="700">${title}</text></svg>\n`;
+  await writeFile(new URL(`reference-link-${name}-premium.svg`,out),button);
 }
 
 await save('reference-about', 292, 'About Juan — 2 years of web and mobile development experience', `
@@ -72,14 +72,14 @@ const groups = [
  ['Web Development','code',['HTML','CSS','JavaScript','TypeScript','React','Next.js','Tailwind CSS']],
  ['Mobile & Games','phone',['Kotlin','Dart','Flutter','Unity','C#']],
  ['Backend & Data','database',['Node.js','Express','PHP','Python','PostgreSQL','MySQL']],
- ['Tools & Others','tools',['Git','GitHub','Cloudflare','Figma','Arduino']],
+ ['Tools & Hardware','tools',['Git','GitHub','Cloudflare','Figma','Arduino']],
 ];
 groups.forEach(([name,symbol,items],index)=>{
  const x=16+index*246;
  toolkit+=panel(x,49,232,99)+icon(symbol,x+14,62,22)+text(x+45,79,name,15,colors.ink,'font-weight="700"');
- items.forEach((name,number)=>{toolkit+=realTechLogo(name,x+17+number*(198/items.length),105,26);});
+ items.forEach((name,number)=>{toolkit+=realTechLogo(name,x+17+number*(198/items.length),105,26,'brand');});
 });
-await save('reference-toolkit',160,'Real technology logos in the portfolio peach color',toolkit);
+await save('reference-toolkit',160,'Real technology logos in their original brand colors',toolkit);
 
 // Reference layout: a two-by-two project grid next to practical skills.
 let projects=rope(26,20,678)+label('SELECTED PROJECTS','folder',14,3,300)+rope(26,738,245)+label('MY SKILLS','hat',722,3,215);
@@ -95,8 +95,8 @@ function projectBadge(index,x,y) {
 const work=[
  ['SigLa','phone',['A mobile sign language translator','for supported Filipino sign gestures.'],['Kotlin','Android'],'#242F49'],
  ['BAHAlerto','layers',['Flood maps, reports, alerts, and','vehicle passability guidance.'],['Flutter','Supabase'],'#242F49'],
- ['DocuLink','folder',['Document management tools','for organizing college records.'],['Web','Database'],'#242F49'],
- ['InventoPOS','database',['Sales and inventory management','for stock and daily transactions.'],['Web','Database'],'#541A2E'],
+ ['DocuLink','folder',['Document management tools','for organizing college records.'],['HTML','JavaScript','MySQL'],'#242F49'],
+ ['InventoPOS','database',['Sales and inventory management','for stock and daily transactions.'],['React','CSS','MySQL'],'#541A2E'],
 ];
 work.forEach(([name,symbol,lines,tags,tint],index)=>{
  const x=16+(index%2)*344; const y=49+Math.floor(index/2)*112;
@@ -107,7 +107,7 @@ work.forEach(([name,symbol,lines,tags,tint],index)=>{
  tags.forEach(tag=>{const width=tag.length*6+18;projects+=`<rect x="${tagX}" y="${y+76}" width="${width}" height="16" rx="8" fill="#384358"/>`+text(tagX+width/2,y+88,tag,10,colors.ink,'text-anchor="middle"');tagX+=width+6;});
 });
 projects+=panel(722,49,262,213);
-const skills=['Web & Mobile Development','System Design & Development','Database Management','UI/UX Implementation','API Integration','Problem Solving','Team Collaboration'];
+const skills=['Web & Mobile Development','System Design','Database Management','UI/UX Implementation','API Integration','Problem Solving','Team Collaboration'];
 skills.forEach((skill,index)=>{const y=74+index*25;projects+=`<path d="m738 ${y-5} 5 5 9-12" fill="none" stroke="#FFA586" stroke-width="3" stroke-linecap="round"/>`+text(762,y,skill,13);});
 await save('reference-projects',276,'Selected projects and development skills',projects);
 
@@ -145,11 +145,12 @@ calendar+=text(856,145,'Less',9,colors.muted);heat.forEach((color,index)=>{calen
 await save('activity-reference',173,'GitHub contribution calendar; real daily counts',calendar);
 
 let footer=rope(26,20,430)+label('ACHIEVEMENTS','chart',14,3,260)+rope(26,500,480)+label('GET IN TOUCH','mail',492,3,250);
-const badges=[['branch','Open Source','Contributor'],['code','Project','Builder'],['tools','Continuous','Learner'],['chart','Problem','Solver'],['user','Team','Collaborator']];
-badges.forEach(([symbol,first,second],index)=>{const x=16+index*85;footer+=panel(x,49,78,96,14)+icon(symbol,x+23,60,32)+text(x+39,110,first,10,colors.ink,'text-anchor="middle"')+text(x+39,125,second,10,colors.ink,'text-anchor="middle"');});
+const certificates=[['code','JavaScript','Essentials 1','Cisco · 2026'],['code','Python','Essentials 1','Cisco · 2026'],['server','AWS Cloud','Practitioner Essentials','Course completed · 2025']];
+certificates.forEach(([symbol,first,second,issuer],index)=>{const x=16+index*142;footer+=panel(x,49,134,96,10)+icon(symbol,x+54,58,26)+text(x+67,104,first,13,colors.ink,'text-anchor="middle" font-weight="700"')+text(x+67,121,second,10,colors.ink,'text-anchor="middle"')+text(x+67,137,issuer,9,colors.muted,'text-anchor="middle"');});
+footer+=text(20,165,'InventoPOS milestone: 100/100 academic project · UI/UX design',11,colors.muted);
 const contact=[['mail','militantejuanenricodomanico@gmail.com'],['link','portfolio.juandomanicomilitante.workers.dev'],['link','linkedin.com/in/juan-domanico-militante-b0972b363']];
 contact.forEach(([symbol,value],index)=>{footer+=icon(symbol,506,53+index*27,19)+text(537,68+index*27,value,12);});
 footer+=`<circle cx="927" cy="115" r="64" fill="#FFA586"/><path d="M871 154Q895 153 912 139T972 116V179H871Z" fill="#0C1728"/><g fill="#0C1728" stroke="#0C1728" stroke-linecap="round">${[0,1,2,3,4].map(i=>{const x=882+i*15;const y=143-i*4;return `<circle cx="${x}" cy="${y-13}" r="3"/><path d="M${x} ${y-10}V${y+2}m0-8-4 6m4-6 4 6m-4 2-3 8m3-8 3 8" stroke-width="2.5"/>`;}).join('')}<path d="M938 112V65M917 100H967M940 67Q969 69 969 97H940Z" stroke-width="2"/><path d="M913 106H973L961 116H926Z"/></g>`;
-footer+=text(500,172,`Updated ${data.updated} · Public GitHub data · One Piece inspired fan artwork`,10,colors.muted,'text-anchor="middle"');
-await save('reference-footer',184,'Achievements and contact details',footer);
+footer+=text(500,193,`Updated ${data.updated} · Public GitHub data · One Piece inspired fan artwork`,10,colors.muted,'text-anchor="middle"');
+await save('reference-footer',205,'Completed certifications, capstone milestone, and contact details',footer);
 console.log(`Reference-matched profile generated; current streak: ${streak}, longest streak: ${longest}.`);
