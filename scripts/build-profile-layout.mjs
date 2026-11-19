@@ -39,12 +39,12 @@ for (const [slug, title, subtitle] of sections) {
   await writeFile(new URL(`section-${slug}-simple.svg`, output), svg(960, 80, title, `<rect width="960" height="80" rx="14" fill="#161B2F"/><rect x="64" y="15" width="${title.length * 13 + 22}" height="31" rx="4" fill="#541A2E"/>${icon({about: 'user', work: 'folder', metrics: 'chart'}[slug], 24, 25, 28)}<g font-family="Arial, Helvetica, sans-serif" fill="#E8EDF5"><text x="70" y="35" font-size="17" font-weight="700" letter-spacing="2">${title}</text><text x="70" y="58" font-size="13" fill="#B4BED0">${subtitle}</text></g>`));
 }
 
-await writeFile(new URL('featured-work-simple.svg', output), svg(960, 260, 'Selected projects: SIGLA, DocuLink, InventoPOS, games, and hardware', `
+await writeFile(new URL('featured-work-categories.svg', output), svg(960, 260, 'Mobile applications, website, games, and hardware', `
   <rect width="960" height="260" rx="18" fill="#161B2F"/>
   <g font-family="Arial, Helvetica, sans-serif" fill="#E8EDF5">
     ${[
-      ['SIGLA', 'A sign language app that works offline.', 'KOTLIN · ANDROID'],
-      ['DOCULINK &amp; INVENTOPOS', 'Tools for documents, sales, and stock.', 'REACT · PHP · DATABASES'],
+      ['MOBILE APPLICATIONS', 'Easy-to-use mobile apps, including offline tools.', 'KOTLIN · ANDROID'],
+      ['WEBSITE', 'Responsive websites and useful web systems.', 'REACT · PHP · DATABASES'],
       ['GAMES &amp; AR', 'Games, 2D animation, and phone camera AR.', 'UNITY · C#'],
       ['HARDWARE &amp; SENSORS', 'Attendance devices and rainfall alerts.', 'ARDUINO · RFID · SENSORS'],
     ].map(([name, description, tools], index) => {

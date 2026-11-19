@@ -29,7 +29,7 @@
 
 <a id="selected-projects"></a>
 <img src="./profile-assets/section-work-simple.svg" width="100%" alt="What I build" />
-<a href="https://portfolio.juandomanicomilitante.workers.dev/projects"><img src="./profile-assets/featured-work-simple.svg" width="100%" alt="My projects: SIGLA, DocuLink, InventoPOS, games, and hardware systems" /></a>
+<a href="https://portfolio.juandomanicomilitante.workers.dev/projects"><img src="./profile-assets/featured-work-categories.svg" width="100%" alt="What I build: mobile applications, website, games, and hardware systems" /></a>
 
 <br />
 
