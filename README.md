@@ -18,9 +18,9 @@
 <a id="about-me"></a>
 <img src="./profile-assets/section-about-icons.svg" width="100%" alt="A little about me" />
 
-I'm **Juan Domanico Militante (Ikoy)**, a Web and Mobile Developer and Information Technology student at **Pambayang Dalubhasaan ng Marilao**.
+I'm **Juan Domanico Militante**, a Web and Mobile Developer and an Information Technology student at **Pambayang Dalubhasaan ng Marilao**.
 
-I have **4 years of experience** building websites and mobile apps. I like creating tools that are simple, useful, and easy to use — from apps that work offline to web systems for documents, sales, and stock.
+I have **4 years of experience** creating websites and mobile applications. I enjoy building simple, useful, and easy-to-use systems, including mobile apps that work offline and web applications for managing documents, sales, and inventory.
 
 <br />
 
