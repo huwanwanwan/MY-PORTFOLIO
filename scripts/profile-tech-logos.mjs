@@ -11,6 +11,7 @@ export const techLogoFiles = {
 const logos = new Map();
 for (const [name, file] of Object.entries(techLogoFiles)) {
   let source = await readFile(new URL(`../profile-assets/tech-logos/${file}.svg`, import.meta.url), 'utf8');
+  const originalSource = source;
   // Preserve the real artwork. Only recolor its paint, keeping light cutouts dark.
   const paint = (color) => {
     if (color === 'none' || color === 'transparent') return color;
@@ -28,11 +29,20 @@ for (const [name, file] of Object.entries(techLogoFiles)) {
   const scoped = body.replace(/\bid="([^"]+)"/g, `id="${prefix}$1"`)
     .replace(/url\(#([^)]*)\)/g, `url(#${prefix}$1)`)
     .replace(/(href=")#([^"]+)"/g, `$1#${prefix}$2"`);
-  logos.set(name, { viewBox, body: scoped });
+  let originalBody = originalSource.replace(/^.*?<svg[^>]*>/s, '').replace(/<\/svg>\s*$/, '');
+  // Official monochrome variants use white on dark surfaces; colored logos keep all brand paint.
+  const darkMono = ['github', 'express', 'unity'].includes(file);
+  if (darkMono) originalBody = originalBody.replace(/(?:#(?:000000|000|181616|222c37)|\bblack\b)/gi, '#FFFFFF');
+  originalBody = originalBody.replace(/\bid="([^"]+)"/g, `id="${prefix}$1"`)
+    .replace(/url\(#([^)]*)\)/g, `url(#${prefix}$1)`)
+    .replace(/(href=")#([^"]+)"/g, `$1#${prefix}$2"`);
+  logos.set(name, { viewBox, body: scoped, originalBody, darkMono });
 }
 
-export function realTechLogo(name, x, y, size = 22) {
+export function realTechLogo(name, x, y, size = 22, mode = 'peach') {
   const logo = logos.get(name);
   if (!logo) throw new Error(`Missing real technology logo: ${name}`);
-  return `<svg x="${x}" y="${y}" width="${size}" height="${size}" viewBox="${logo.viewBox}" fill="#FFA586" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${logo.body}</svg>`;
+  const branded = mode === 'brand';
+  const fill = branded ? (logo.darkMono ? '#FFFFFF' : '#000000') : '#FFA586';
+  return `<svg x="${x}" y="${y}" width="${size}" height="${size}" viewBox="${logo.viewBox}" fill="${fill}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">${branded ? logo.originalBody : logo.body}</svg>`;
 }
