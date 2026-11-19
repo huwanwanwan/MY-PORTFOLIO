@@ -13,6 +13,7 @@ cmap = font.getBestCmap()
 name = "JUAN DOMANICO MILITANTE"
 # The fan font substitutes figures for I and an anchor for E. Keep only its skull O.
 plain_letters = {
+    "N": ("M140 0H240V1420H140ZM610 0H710V1420H610ZM230 1420H350L620 0H500ZM70 0H310V70H70ZM70 1350H310V1420H70ZM540 0H780V70H540ZM540 1350H780V1420H540Z", 850),
     "I": ("M80 0H590V70L430 110V1310L590 1350V1420H80V1350L240 1310V110L80 70Z", 672),
     "E": ("M90 0H780V330H715L650 110H360V660H570L620 540H680V900H620L570 780H360V1310H650L715 1090H780V1420H90V1350L210 1310V110L90 70Z", 838),
 }
@@ -50,5 +51,5 @@ svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="84" viewB
 <g transform="translate({x:.3f} {y:.3f}) scale({scale:.6f} {-scale:.6f})" fill="#EDF1F7">{''.join(parts)}</g>
 </svg>
 '''
-(root / "profile-assets/name-one-piece-small.svg").write_text(svg, encoding="utf-8")
+(root / "profile-assets/name-one-piece-corrected.svg").write_text(svg, encoding="utf-8")
 print("Created transparent SVG wordmark with real font outlines.")
