@@ -65,7 +65,7 @@ await save('reference-about', 292, 'About Juan — 2 years of web and mobile dev
  </g>
 `);
 
-let toolkit = rope(26)+label('TECH STACK','tools',14,3,235);
+let toolkit = rope(26)+label('TECH STACK','pirate',14,3,235);
 const groups = [
  ['Web Development','code',['HTML','CSS','JavaScript','TypeScript','React','Next.js','Tailwind CSS']],
  ['Mobile & Games','phone',['Kotlin','Dart','Flutter','Unity','C#']],
@@ -77,23 +77,24 @@ groups.forEach(([name,symbol,items],index)=>{
  toolkit+=panel(x,49,232,99)+icon(symbol,x+14,62,22)+text(x+45,79,name,15,colors.ink,'font-weight="700"');
  items.forEach((name,number)=>{toolkit+=realTechLogo(name,x+17+number*(198/items.length),105,26,'brand');});
 });
-await save('reference-toolkit',160,'Real technology logos in their original brand colors',toolkit);
+await save('reference-toolkit-nautical',160,'Real technology logos in their original brand colors',toolkit);
 
 // Reference layout: a two-by-two project grid next to practical skills.
-let projects=rope(26,20,678)+label('SELECTED PROJECTS','folder',14,3,300)+rope(26,738,245)+label('MY SKILLS','hat',722,3,215);
+let projects=rope(26,20,678)+label('SELECTED PROJECTS','wheel',14,3,300)+rope(26,738,245)+label('MY SKILLS','hat',722,3,215);
 function projectBadge(index,x,y) {
  const drawings=[
-  '<path d="M20 57C14 48 9 40 12 36c3-3 8 4 11 8V19c0-7 7-7 7 0v17V10c0-7 7-7 7 0v25V16c0-7 7-7 7 0v22-12c0-7 7-7 7 0v19c0 14-7 20-16 20-7 0-12-3-15-8Z" fill="#EDF1F7"/><path d="M12 68H52" stroke="#4582D5" stroke-width="3"/>',
+  '<path d="M22 57 9 38c-3-5 2-8 5-4l9 10-4-23c-1-6 5-7 6-1l4 17-1-26c0-6 6-6 6 0l1 25 4-22c1-6 7-5 6 1l-3 23 6-15c2-5 7-3 5 2l-4 22c-2 14-7 21-16 21-5 0-9-5-11-11Z" fill="#F5FAFF"/>',
   '<path d="M32 10C8 10 12 35 32 49 52 35 56 10 32 10Z" fill="#B51A2B" stroke="#FFA586" stroke-width="2"/><circle cx="32" cy="25" r="6" fill="#0C1728"/><path d="M7 54q12-10 24 0t24 0M7 64q12-10 24 0t24 0" fill="none" stroke="#62ADD7" stroke-width="4"/>',
-  '<path d="M17 9H42L50 18V65H17Z" fill="none" stroke="#EDF1F7" stroke-width="3"/><path d="M13 15H9V70H43M25 26H43M25 35H43M25 44H43M25 53H39" fill="none" stroke="#EDF1F7" stroke-width="3"/>',
-  '<path d="M8 16H17L24 53H51L57 27H20" fill="none" stroke="#FFD397" stroke-width="4" stroke-linecap="round"/><circle cx="29" cy="64" r="4" fill="#FFD397"/><circle cx="49" cy="64" r="4" fill="#FFD397"/><path d="M28 34H49M31 41H46" stroke="#FFA586" stroke-width="3"/>',
+  '<g fill="none" stroke="#DCEEFF" stroke-width="2.5" stroke-linecap="round"><path d="M9 25V14h11m24 0h11v11M9 50v11h11m24 0h11V50"/><circle cx="32" cy="32" r="10"/><path d="M17 54c1-13 29-13 30 0M21 33h3m16 0h3M28 40q4 3 8 0M8 39H56"/></g><path d="M49 64q8 0 8 8m-8-4q4 0 4 4" fill="none" stroke="#FFA586" stroke-width="2"/>',
+  '<path d="M8 16H17L24 53H51L57 27H20" fill="none" stroke="#FFD397" stroke-width="4" stroke-linecap="round"/><path d="M24 29H54L50 48H28Z" fill="#FFAB54"/><circle cx="29" cy="64" r="4" fill="#FFD397"/><circle cx="49" cy="64" r="4" fill="#FFD397"/><path d="m34 34 9 7m0-7-9 7" stroke="#FFF4D5" stroke-width="2"/><path d="M31 32H45M34 43H43" stroke="#FFF4D5" stroke-width="1.5"/>',
  ];
- return `<svg x="${x}" y="${y}" width="64" height="77" viewBox="0 0 64 77">${drawings[index]}</svg>`;
+ const glowColor=['#398DFF','#44B5E8','#67CAE5','#FF9B49'][index];
+ return `<svg x="${x}" y="${y}" width="64" height="77" viewBox="0 0 64 77"><defs><radialGradient id="badge-light-${index}"><stop stop-color="${glowColor}" stop-opacity=".4"/><stop offset="1" stop-color="${glowColor}" stop-opacity="0"/></radialGradient><filter id="badge-glow-${index}" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3" result="blur"/><feFlood flood-color="${glowColor}"/><feComposite in2="blur" operator="in"/></filter></defs><rect width="64" height="77" rx="10" fill="#101B2E"/><ellipse cx="32" cy="39" rx="31" ry="36" fill="url(#badge-light-${index})"/><g filter="url(#badge-glow-${index})" opacity=".5">${drawings[index]}</g>${drawings[index]}</svg>`;
 }
 const work=[
  ['SigLa','phone',['A mobile sign language translator','for supported Filipino sign gestures.'],['Kotlin','Android'],'#242F49'],
  ['BAHAlerto','layers',['Flood maps, reports, alerts, and','vehicle passability guidance.'],['Flutter','Supabase'],'#242F49'],
- ['DocuLink','folder',['Document management tools','for organizing college records.'],['HTML','JavaScript','MySQL'],'#242F49'],
+ ['RecogniZarenus','chip',['Face recognition and RFID attendance','with an automated turnstile gate.'],['PHP','JavaScript','Arduino'],'#242F49'],
  ['InventoPOS','database',['Sales and inventory management','for stock and daily transactions.'],['React','CSS','MySQL'],'#541A2E'],
 ];
 work.forEach(([name,symbol,lines,tags,tint],index)=>{
@@ -107,7 +108,7 @@ work.forEach(([name,symbol,lines,tags,tint],index)=>{
 projects+=panel(722,49,262,213);
 const skills=['Web & Mobile Development','System Design','Database Management','UI/UX Implementation','API Integration','Problem Solving','Team Collaboration'];
 skills.forEach((skill,index)=>{const y=74+index*25;projects+=`<path d="m738 ${y-5} 5 5 9-12" fill="none" stroke="#FFA586" stroke-width="3" stroke-linecap="round"/>`+text(762,y,skill,13);});
-await save('reference-projects',276,'Selected projects and development skills',projects);
+await save('reference-projects-recognition',276,'SigLa, BAHAlerto, RecogniZarenus, InventoPOS and development skills',projects);
 
 function languageDonut(x,y,title,counts,unit) {
  const sorted=Object.entries(counts).filter(([,count])=>count>0).sort((a,b)=>b[1]-a[1]);
@@ -152,7 +153,7 @@ data.days.forEach((day,index)=>{const position=weekday+index;const col=Math.floo
 calendar+=text(830,212,'Less',11,colors.muted);heat.forEach((color,index)=>{calendar+=`<rect x="${868+index*13}" y="202" width="10" height="10" fill="${color}"/>`;});calendar+=text(943,212,'More',11,colors.muted);
 await save('activity-reference-airy',240,'GitHub contribution calendar; real daily counts',calendar);
 
-let footer=rope(26,20,430)+label('ACHIEVEMENTS','chart',14,3,260)+rope(26,500,480)+label('GET IN TOUCH','mail',492,3,250);
+let footer=rope(26,20,430)+label('ACHIEVEMENTS','trophy',14,3,260)+rope(26,500,480)+label('GET IN TOUCH','anchor',492,3,250);
 const certificates=[['code','JavaScript','Essentials 1','Cisco · 2026'],['code','Python','Essentials 1','Cisco · 2026'],['server','AWS Cloud','Practitioner Essentials','Course completed · 2025']];
 certificates.forEach(([symbol,first,second,issuer],index)=>{const x=16+index*142;footer+=panel(x,49,134,96,10)+icon(symbol,x+54,58,26)+text(x+67,104,first,13,colors.ink,'text-anchor="middle" font-weight="700"')+text(x+67,121,second,10,colors.ink,'text-anchor="middle"')+text(x+67,137,issuer,9,colors.muted,'text-anchor="middle"');});
 footer+=text(20,165,'InventoPOS milestone: 100/100 academic project · UI/UX design',11,colors.muted);
@@ -160,5 +161,5 @@ const contact=[['mail','militantejuanenricodomanico@gmail.com'],['link','portfol
 contact.forEach(([symbol,value],index)=>{footer+=icon(symbol,506,53+index*27,19)+text(537,68+index*27,value,12);});
 footer+=`<circle cx="927" cy="115" r="64" fill="#FFA586"/><path d="M871 154Q895 153 912 139T972 116V179H871Z" fill="#0C1728"/><g fill="#0C1728" stroke="#0C1728" stroke-linecap="round">${[0,1,2,3,4].map(i=>{const x=882+i*15;const y=143-i*4;return `<circle cx="${x}" cy="${y-13}" r="3"/><path d="M${x} ${y-10}V${y+2}m0-8-4 6m4-6 4 6m-4 2-3 8m3-8 3 8" stroke-width="2.5"/>`;}).join('')}<path d="M938 112V65M917 100H967M940 67Q969 69 969 97H940Z" stroke-width="2"/><path d="M913 106H973L961 116H926Z"/></g>`;
 footer+=text(500,193,`Updated ${data.updated} · Public GitHub data · One Piece inspired fan artwork`,10,colors.muted,'text-anchor="middle"');
-await save('reference-footer',205,'Completed certifications, capstone milestone, and contact details',footer);
+await save('reference-footer-nautical',205,'Completed certifications, capstone milestone, and contact details',footer);
 console.log(`Reference-matched profile generated; current streak: ${streak}, longest streak: ${longest}.`);
