@@ -2,13 +2,13 @@
 
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState, type VideoHTMLAttributes } from "react";
 
-// Load these small demos as local media so seeking also works when the CDN
-// serves an MP4 without byte-range support.
+// Load project demos as local media so native timestamp controls can seek
+// even when the CDN serves an MP4 without byte-range support.
 const SeekableVideo = forwardRef<HTMLVideoElement, VideoHTMLAttributes<HTMLVideoElement>>(
   function SeekableVideo({ src, ...props }, forwardedRef) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [localSource, setLocalSource] = useState<{ original: string; url: string } | null>(null);
-    const needsLocalSource = typeof src === "string" && src.startsWith("/BAHALERTO/");
+    const needsLocalSource = typeof src === "string" && src.startsWith("/") && /\.mp4(?:[?#]|$)/i.test(src);
     useImperativeHandle(forwardedRef, () => videoRef.current!);
 
     useEffect(() => {
@@ -30,6 +30,13 @@ const SeekableVideo = forwardRef<HTMLVideoElement, VideoHTMLAttributes<HTMLVideo
           if (!controller.signal.aborted) setLocalSource({ original: src, url: src });
         }
       };
+      if (!("IntersectionObserver" in window)) {
+        void load();
+        return () => {
+          controller.abort();
+          if (objectUrl) URL.revokeObjectURL(objectUrl);
+        };
+      }
       const observer = new IntersectionObserver((entries) => {
         if (entries.some((entry) => entry.isIntersecting)) void load();
       }, { rootMargin: "200px" });
