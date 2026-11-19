@@ -34,6 +34,9 @@ function hat(x, y) {
 function skull(x, y, scale = 1, opacity = 1) {
   return `<g transform="translate(${x} ${y}) scale(${scale})" opacity="${opacity}"><g stroke="#BDD0E3" stroke-width="6" stroke-linecap="round"><path d="m-26-20 52 45m-52 0 52-45"/></g><path d="M-18 0C-32-36 33-36 19 0L14 10v18h-29V10Z" fill="#BDD0E3"/><circle cx="-8" cy="-3" r="5" fill="#0C1728"/><circle cx="9" cy="-3" r="5" fill="#0C1728"/><path d="m0 4-3 5h6Zm-9 10v12m9-12v12m9-12v12" stroke="#0C1728"/>${hat(0,-20)}</g>`;
 }
+function spinningWheel(x,y,radius=38) {
+ return `<g transform="translate(${x} ${y})" opacity=".52"><g class="wheel-spin" fill="none" stroke="#FFA586" stroke-width="2" stroke-linecap="round"><circle r="${radius*.77}" stroke-width="5" stroke="#7F8FA9"/><circle r="${radius*.9}" stroke="#7F8FA9"/><circle r="7" fill="#384358"/>${Array.from({length:8},(_,index)=>`<g transform="rotate(${index*45})"><path d="M0-8V-${radius+4}"/><rect x="-2.5" y="-${radius+5}" width="5" height="8" rx="2" fill="#FFA586" stroke="none"/></g>`).join('')}</g></g>`;
+}
 
 // Panoramic illustration with the real portfolio mark and editable SVG text.
 await save('reference-banner-sharp', 220, 'Wancor — original logo over crisp panoramic pirate artwork', `
@@ -108,7 +111,8 @@ work.forEach(([name,symbol,lines,tags,tint],index)=>{
 projects+=panel(722,49,262,213);
 const skills=['Web & Mobile Development','System Design','Database Management','UI/UX Implementation','API Integration','Problem Solving','Team Collaboration'];
 skills.forEach((skill,index)=>{const y=74+index*25;projects+=`<path d="m738 ${y-5} 5 5 9-12" fill="none" stroke="#FFA586" stroke-width="3" stroke-linecap="round"/>`+text(762,y,skill,13);});
-await save('reference-projects-recognition',276,'SigLa, BAHAlerto, RecogniZarenus, InventoPOS and development skills',projects);
+projects+=spinningWheel(935,215);
+await save('reference-projects-wheel',276,'SigLa, BAHAlerto, RecogniZarenus, InventoPOS and skills with a spinning ship wheel',projects);
 
 function languageDonut(x,y,title,counts,unit) {
  const sorted=Object.entries(counts).filter(([,count])=>count>0).sort((a,b)=>b[1]-a[1]);
@@ -128,7 +132,8 @@ const totals=[['code',data.publicRepos,'Repositories'],['branch',data.authoredCo
 totals.forEach(([symbol,value,title],index)=>{
  const x=16+index*144;analytics+=panel(x,60,128,124)+icon(symbol,x+50,76,28)+text(x+64,137,value,30,colors.ink,'text-anchor="middle" font-weight="700"')+text(x+64,163,title,13,colors.muted,'text-anchor="middle"');
 });
-analytics+=panel(600,60,384,124)+text(624,94,'GitHub Streak',19,colors.ink,'font-weight="700"')+text(624,141,`${streak} ${streak===1?'Day':'Days'}`,38,colors.peach,'font-weight="700"')+text(806,128,'Current streak',14,colors.muted)+text(806,157,`Longest: ${longest} days`,14,colors.muted)+skull(936,96,.5,.1);
+const streakSkull=skull(928,126,1.35,.55).replace(/#BDD0E3|#EFC082|#F0C285|#805335/g,'#73849F').replace(/#0C1728|#B51A2B/g,'#242F49');
+analytics+=panel(600,60,384,124)+text(624,94,'GitHub Streak',19,colors.ink,'font-weight="700"')+text(624,139,`${streak} ${streak===1?'Day':'Days'}`,38,colors.peach,'font-weight="700"')+text(624,165,'Current streak',14,colors.muted)+text(782,171,`Longest: ${longest} days`,12,colors.muted)+streakSkull;
 analytics+=panel(16,208,968,190)+text(40,243,'Contribution History',19,colors.ink,'font-weight="700"');
 const months=new Map();for(const day of data.days)months.set(day.date.slice(0,7),(months.get(day.date.slice(0,7))||0)+day.count);
 const entries=[...months];const max=Math.max(1,...entries.map(([,value])=>value));const points=entries.map(([,value],index)=>[48+index*904/Math.max(1,entries.length-1),352-value/max*88]);
@@ -145,7 +150,7 @@ displayedLanguages.forEach(([name,bytes],index)=>{
  analytics+=text(40,y,name,15)+`<rect x="146" y="${y-10}" width="248" height="10" rx="5" fill="#384358"/><rect class="motion-language" x="146" y="${y-10}" width="${Math.max(1,248*percent/100).toFixed(2)}" height="10" rx="5" fill="${index%2===0?'#FFA586':'#B51A2B'}"><title>${escape(name)}: ${bytes} code bytes (${percent.toFixed(1)}%)</title></rect>`+text(462,y,`${percent.toFixed(1)}%`,15,colors.muted,'text-anchor="end"');
 });
 analytics+=languageDonut(512,422,'Languages by Commit',data.commitLanguageCounts,'commits');
-await save('dashboard-reference-airy',692,`GitHub analytics — ${data.updated}; languages measured by public code bytes; current streak ${streak} days`,analytics);
+await save('dashboard-reference-skull',692,`GitHub analytics — ${data.updated}; languages measured by public code bytes; current streak ${streak} days`,analytics);
 
 let calendar=panel(16,6,968,218)+icon('chart',40,24,24)+text(76,43,'CONTRIBUTION ACTIVITY',18,colors.ink,'font-weight="700"')+text(958,43,`${data.total} contributions in the last 365 days`,13,colors.muted,'text-anchor="end"');
 const weekday=new Date(`${data.days[0].date}T00:00:00Z`).getUTCDay();const heat=['#161B2F','#384358','#541A2E','#B51A2B','#FFA586'];let month='';
