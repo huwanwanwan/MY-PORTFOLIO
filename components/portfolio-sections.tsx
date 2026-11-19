@@ -206,7 +206,7 @@ export function AboutSection({
               <span className="text-muted">focused on usability and purpose.</span>
             </h2>
             <p className="home-about-desc">
-              A Web and Mobile Developer with <strong className="editorial-highlight">4 years of experience</strong> creating websites and mobile applications using <strong className="editorial-highlight">HTML, CSS, JavaScript, React, Kotlin, Node.js, and PostgreSQL</strong>. Focused on building responsive websites and mobile apps that are simple, useful, and easy to use.
+              A Web and Mobile Developer with <strong className="editorial-highlight">2 years of experience</strong> creating websites and mobile applications using <strong className="editorial-highlight">HTML, CSS, JavaScript, React, Kotlin, Node.js, and PostgreSQL</strong>. Focused on building responsive websites and mobile apps that are simple, useful, and easy to use.
             </p>
             <div className="home-about-action">
               <Link className="home-about-outline-btn" href="/about">
