@@ -228,6 +228,12 @@ milestones.forEach(([label, value], index) => {
 dashboard += text(30, 1071, 'Commit charts cover your authored commits on default branches of owned public repositories.', 12);
 dashboard += text(30, 1093, 'Pull request and issue totals cover public GitHub activity. All metric tiles show real counts.', 12);
 await writeFile(new URL('dashboard-simple.svg', output), svg(960, 1116, 'GitHub dashboard: contributions, stats, commit hours, language donuts, and metric tiles', dashboard));
+await writeFile(new URL('github-data.json', output), JSON.stringify({
+  updated, publicRepos: user.public_repos, followers: user.followers, authoredCommits,
+  total, activeDays, stars, forks, pullRequests: pullRequests.total_count,
+  issues: issues.total_count, hours, repoLanguageCounts, commitLanguageCounts, days,
+}, null, 2) + '\n');
+await import('./build-reference-profile.mjs');
 await import('./apply-pirate-theme.mjs');
 await import('./animate-profile-assets.mjs');
 console.log(`Updated profile assets: ${repos.length} public repositories, ${total} contributions.`);
