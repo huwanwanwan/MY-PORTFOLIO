@@ -21225,3 +21225,9 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
+
+/* Keep the Contact heading in normal text flow; a grid turns its line break into an empty row. */
+.page #contact .contact-hero-header .editorial-title {
+  display: block;
+  margin: 0 0 20px;
+}
