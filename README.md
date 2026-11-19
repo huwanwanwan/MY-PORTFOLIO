@@ -1,6 +1,9 @@
 <div align="center">
-  <img src="./profile-assets/reference-header-premium-paced-loop-motion.svg" width="100%" alt="Wancor pirate banner — Juan Domanico Militante, Web and Mobile Developer" />
+  <img src="./profile-assets/reference-banner-sharp-premium-paced-loop-motion.svg" width="100%" alt="Wancor pirate banner — Juan Domanico Militante, Web and Mobile Developer" />
 </div>
+
+<h1 align="center">Juan Domanico Militante</h1>
+<p align="center">Web &amp; Mobile Developer | BSIT Student</p>
 
 <p align="center">
   <a href="https://portfolio.juandomanicomilitante.workers.dev"><img src="./profile-assets/reference-link-portfolio-premium-paced-loop-motion.svg" width="170" alt="Portfolio" /></a> &nbsp;&nbsp;&nbsp;
