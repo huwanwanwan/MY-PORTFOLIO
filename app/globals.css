@@ -21204,3 +21204,11 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
   .page #experience .journey-column + .journey-column { border-left: 0; padding-left: 0; }
   .page #experience .journey-entry { gap: 14px; }
 }
+
+/* Keep the project title highlight snug around each wrapped line. */
+.page #projects .smart-info-title { line-height: 1.35; }
+.page #projects .smart-info-title .heading-highlight {
+  border-radius: 0;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}

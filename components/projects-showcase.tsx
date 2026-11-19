@@ -341,7 +341,7 @@ export default function ProjectsShowcase({
                 </div>
 
                 {/* Big Title & Project Type */}
-                <h2 className="smart-info-title">{project.title}</h2>
+                <h2 className="smart-info-title"><span className="heading-highlight">{project.title}</span></h2>
                 <p className="smart-info-subtitle">{project.type}</p>
 
                 {/* Concise Overview Paragraph */}

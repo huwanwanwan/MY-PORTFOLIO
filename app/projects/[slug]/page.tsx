@@ -15,7 +15,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <Link className="intro-link" href="/projects">All projects</Link>
         <header className="project-detail-heading">
           <p className="editorial-eyebrow">{project.category}</p>
-          <h1 id="project-heading" className="editorial-title">{project.title}</h1>
+          <h1 id="project-heading" className="editorial-title"><span className="heading-highlight">{project.title}</span></h1>
         </header>
         <ProjectsShowcase projectId={slug} />
       </section>
