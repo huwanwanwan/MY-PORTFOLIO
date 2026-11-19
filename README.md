@@ -2,7 +2,7 @@
   <img src="./profile-assets/cover.svg" width="100%" alt="Wancor cover from git_cover.png, cropped to a short banner" />
   <br /><br />
   <a href="https://portfolio.juandomanicomilitante.workers.dev">
-    <img src="./profile-assets/intro.svg" width="100%" alt="Hi, I'm Juan Domanico Militante (Ikoy), a Web and Mobile Developer from Bulacan, Philippines" />
+    <img src="./profile-assets/intro.svg" width="100%" alt="Juan Domanico Militante" />
   </a>
 </div>
 
