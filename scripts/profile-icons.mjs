@@ -1,5 +1,9 @@
 // Original outline symbols, styled for the portfolio rather than brand colors.
 export const iconPaths = {
+  wheel: '<circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 1v9m0 4v9M1 12h9m4 0h9M4 4l6 6m4 4 6 6M4 20l6-6m4-4 6-6"/>',
+  anchor: '<circle cx="12" cy="4" r="2"/><path d="M12 6v16M7 9h10M3 13c0 11 18 11 18 0M1 16l2-3 3 2m12 0 3-2 2 3"/>',
+  pirate: '<path d="M5 11c-3-9 17-9 14 0l-3 5v4H8v-4Z"/><circle cx="9" cy="11" r="1"/><circle cx="15" cy="11" r="1"/><path d="M10 17v3m4-3v3M2 21l5-4m10 0 5 4M4 6h16M7 5q0-8 10 0"/>',
+  trophy: '<path d="M7 3h10v7a5 5 0 0 1-10 0ZM7 5H2v3a5 5 0 0 0 5 5m10-8h5v3a5 5 0 0 1-5 5m-5 2v6m-5 0h10"/>',
   code: '<path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18"/>',
   layers: '<path d="m12 3 10 5-10 5L2 8Zm-9 9 9 5 9-5M3 16l9 5 9-5"/>',
   atom: '<circle cx="12" cy="12" r="1.5"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>',
