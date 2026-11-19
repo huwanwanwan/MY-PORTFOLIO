@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="43" viewBox="0 0 220 43"><style>
+  @keyframes appear { 0%,100% { opacity: .82; } 40%,92% { opacity: 1; } }
+  @keyframes rise { 0%,100% { transform: scaleY(.08); } 40%,92% { transform: scaleY(1); } }
+  @keyframes expand { 0%,100% { transform: scaleX(.08); } 40%,92% { transform: scaleX(1); } }
+  .motion-language { transform-box: fill-box; transform-origin: left center; animation: expand 14s ease-in-out infinite; }
+  @keyframes donut-reveal { 0%,100% { stroke-dasharray: 0 var(--circumference); } 50%,92% { stroke-dasharray: var(--arc) var(--circumference); } }
+  .motion-donut { animation: donut-reveal 14s ease-in-out infinite; }
+  @keyframes draw { 0%,100% { stroke-dashoffset: 1; } 45%,92% { stroke-dashoffset: 0; } }
+  @keyframes glow { 0%,100% { opacity: .72; } 50% { opacity: 1; } }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
+  @keyframes turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes sail { 0%,100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
+  .wheel-spin { transform-origin: 0px 0px; animation: turn 60s linear infinite; }
+  .pirate-flag { transform-box: fill-box; transform-origin: left center; animation: sail 12s ease-in-out infinite; }
+  text { animation: appear 10s ease-in-out infinite; }
+  .motion-bar { transform-box: fill-box; transform-origin: center bottom; animation: rise 14s cubic-bezier(.22,1,.36,1) infinite; }
+  .motion-line { stroke-dasharray: 1; animation: draw 14s ease-in-out infinite; }
+  .motion-ring { animation: appear 14s ease-in-out infinite; }
+  .motion-cell { animation: appear 12s ease-in-out infinite; animation-delay: var(--delay,0ms); }
+  .motion-icon { animation: glow 12s ease-in-out infinite; }
+  .motion-logo { animation: float 12s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style><rect x="1" y="1" width="218" height="41" rx="21" fill="#161B2F" stroke="#B51A2B" stroke-width="1.5"/><g transform="translate(30 11) scale(0.875)" fill="none" stroke="#FFA586" class="motion-icon" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18"/></g><text x="127" y="27" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#EDF1F7" font-weight="700">PORTFOLIO</text></svg>
