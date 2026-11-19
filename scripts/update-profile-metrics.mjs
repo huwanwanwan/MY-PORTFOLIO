@@ -7,15 +7,15 @@ const { midnight, navy, slate, peach, crimson, burgundy } = palette;
 const escape = (value) => String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[character]);
 const text = (x, y, value, size = 16, color = peach, extra = '') => `<text x="${x}" y="${y}" fill="${color === peach ? (size >= 17 || extra.includes('font-weight') ? '#E8EDF5' : '#B4BED0') : color}" font-size="${size}" ${extra}>${escape(value)}</text>`;
 const box = (x, y, width, height, fill = navy, radius = 16) => `<rect x="${x}" y="${y}" width="${width}" height="${height}" rx="${radius}" fill="${fill === navy ? 'url(#panel)' : fill === midnight ? 'url(#badge)' : fill}" stroke="${fill === navy ? burgundy : slate}"/>`;
-const svg = (width, height, title, body) => `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="title"><title id="title">${escape(title)}</title><defs><linearGradient id="panel" x1="0" y1="0" x2="1" y2=".5"><stop stop-color="#541A2E"/><stop offset=".6" stop-color="#242F49"/><stop offset="1" stop-color="#242F49"/></linearGradient><linearGradient id="badge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#541A2E"/><stop offset="1" stop-color="#161B2F"/></linearGradient></defs><rect width="${width}" height="${height}" rx="20" fill="${midnight}"/><g font-family="Arial, Helvetica, sans-serif">${body}</g></svg>\n`;
+const svg = (width, height, title, body) => `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="title"><title id="title">${escape(title)}</title><defs><linearGradient id="panel" x1="0" y1="0" x2="1" y2=".5"><stop stop-color="#242F49"/><stop offset="1" stop-color="#384358"/></linearGradient><linearGradient id="badge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#541A2E"/><stop offset="1" stop-color="#161B2F"/></linearGradient></defs><rect width="${width}" height="${height}" rx="20" fill="${midnight}"/><g font-family="Arial, Helvetica, sans-serif">${body}</g></svg>\n`;
 const output = new URL('../profile-assets/', import.meta.url);
 await mkdir(output, { recursive: true });
 await import('./build-profile-layout.mjs');
 for (const label of ['Portfolio', 'Email', 'LinkedIn']) {
-  await writeFile(new URL(`link-${label.toLowerCase()}-icons.svg`, output), svg(200, 44, label, box(1, 1, 198, 42, navy, 12) + icon({ Portfolio: 'folder', Email: 'mail', LinkedIn: 'link' }[label], 17, 13, 18) + text(115, 28, label.toUpperCase(), 13, peach, 'text-anchor="middle" font-weight="700" letter-spacing="2"')));
+  await writeFile(new URL(`link-${label.toLowerCase()}-portfolio.svg`, output), svg(200, 44, label, box(1, 1, 198, 42, navy, 12) + icon({ Portfolio: 'folder', Email: 'mail', LinkedIn: 'link' }[label], 17, 13, 18) + text(115, 28, label.toUpperCase(), 13, peach, 'text-anchor="middle" font-weight="700" letter-spacing="2"')));
 }
 
-await writeFile(new URL('header-icons.svg', output), svg(960, 224, 'Juan Domanico Militante | Web and Mobile Developer', `
+await writeFile(new URL('header-portfolio.svg', output), svg(960, 224, 'Juan Domanico Militante | Web and Mobile Developer', `
   <path d="M0 194H960" stroke="${slate}"/>
   <rect x="414" y="32" width="132" height="4" rx="2" fill="${crimson}"/>
   ${text(480, 95, 'JUAN DOMANICO MILITANTE', 34, peach, 'text-anchor="middle" font-weight="700" letter-spacing="2"')}
@@ -29,7 +29,7 @@ const groups = [
   ['BACKEND & DATA', ['Node.js', 'Express', 'PHP', 'Python', 'MySQL', 'PostgreSQL']],
   ['TOOLS & HARDWARE', ['Git', 'GitHub', 'Cloudflare', 'Figma', 'Arduino']],
 ];
-let stack = text(32, 45, 'TECH STACK', 18, peach, 'font-weight="700" letter-spacing="2"');
+let stack = `<rect x="24" y="20" width="158" height="36" rx="6" fill="${burgundy}"/>` + text(32, 45, 'TECH STACK', 18, peach, 'font-weight="700" letter-spacing="2"');
 let stackY = 76;
 groups.forEach(([label, items]) => {
   let x = 48;
@@ -50,7 +50,7 @@ groups.forEach(([label, items]) => {
   stack += text(82, stackY + 39, label, 17, peach, 'font-weight="700" letter-spacing="1.5"') + badges;
   stackY += height + 20;
 });
-await writeFile(new URL('tech-stack-icons.svg', output), svg(960, stackY + 4, 'Tech stack grouped by web, mobile and games, backend and data, tools and hardware', stack));
+await writeFile(new URL('tech-stack-portfolio.svg', output), svg(960, stackY + 4, 'Tech stack grouped by web, mobile and games, backend and data, tools and hardware', stack));
 
 async function github(path) {
   const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'huwanwanwan-profile-metrics' };
@@ -130,7 +130,7 @@ top.forEach(([name, bytes], index) => {
   metrics += `<rect x="190" y="${y - 10}" width="640" height="10" rx="5" fill="${slate}"/><rect x="190" y="${y - 10}" width="${Math.max(1, 640 * percent / 100).toFixed(2)}" height="10" rx="5" fill="${peach}"/>`;
 });
 metrics += text(32, 660, `Updated ${updated} (Philippine time) | Public GitHub data`, 12);
-await writeFile(new URL('analytics-icons.svg', output), svg(960, 686, 'GitHub repository metrics and language use', metrics));
+await writeFile(new URL('analytics-portfolio.svg', output), svg(960, 686, 'GitHub repository metrics and language use', metrics));
 
 const colors = [navy, slate, burgundy, crimson, peach];
 let calendar = text(32, 45, 'CONTRIBUTION ACTIVITY', 18, peach, 'font-weight="700" letter-spacing="2"');
@@ -154,7 +154,7 @@ calendar += text(48, 254, `${days[0].date} to ${days.at(-1).date}`, 12) + text(7
 colors.forEach((color, index) => { calendar += `<rect x="${777 + index * 17}" y="243" width="12" height="12" rx="3" fill="${color}"/>`; });
 calendar += text(871, 254, 'More', 12);
 calendar += text(48, 280, 'GitHub contributions, including commits, issues, pull requests, and reviews.', 12);
-await writeFile(new URL('activity-icons.svg', output), svg(960, 306, 'GitHub contribution calendar in the portfolio color palette', calendar));
+await writeFile(new URL('activity-portfolio.svg', output), svg(960, 306, 'GitHub contribution calendar in the portfolio color palette', calendar));
 
 // Dashboard inspired by the requested chart types, with original layout and styling.
 let dashboard = text(30, 40, 'JUAN / GITHUB OVERVIEW', 17, peach, 'font-weight="700" letter-spacing="2"');
@@ -227,5 +227,5 @@ milestones.forEach(([label, value], index) => {
 });
 dashboard += text(30, 1071, 'Commit charts cover your authored commits on default branches of owned public repositories.', 12);
 dashboard += text(30, 1093, 'Pull request and issue totals cover public GitHub activity. All metric tiles show real counts.', 12);
-await writeFile(new URL('dashboard-icons.svg', output), svg(960, 1116, 'GitHub dashboard: contributions, stats, commit hours, language donuts, and metric tiles', dashboard));
+await writeFile(new URL('dashboard-portfolio.svg', output), svg(960, 1116, 'GitHub dashboard: contributions, stats, commit hours, language donuts, and metric tiles', dashboard));
 console.log(`Updated profile assets: ${repos.length} public repositories, ${total} contributions.`);
