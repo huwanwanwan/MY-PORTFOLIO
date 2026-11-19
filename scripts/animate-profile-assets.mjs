@@ -2,26 +2,26 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 // CSS animations work inside SVG images on GitHub; no scripts or external files.
 const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
-const files = new Set([...readme.matchAll(/profile-assets\/([a-z-]+)\.svg/g)].map((match) => match[1].replace(/-(?:(?:slow-)?loop-)?motion$/, '')));
+const files = new Set([...readme.matchAll(/profile-assets\/([a-z-]+)\.svg/g)].map((match) => match[1].replace(/-(?:(?:slow-|paced-)?loop-)?motion$/, '')));
 const css = `<style>
-  @keyframes appear { 0%,100% { opacity: .82; } 15%,90% { opacity: 1; } }
-  @keyframes rise { 0%,100% { transform: scaleY(.08); } 20%,90% { transform: scaleY(1); } }
-  @keyframes expand { 0%,100% { transform: scaleX(.08); } 20%,90% { transform: scaleX(1); } }
-  .motion-language { transform-box: fill-box; transform-origin: left center; animation: expand 24s ease-in-out infinite; }
-  @keyframes donut-reveal { 0%,100% { stroke-dasharray: 0 var(--circumference); } 28%,90% { stroke-dasharray: var(--arc) var(--circumference); } }
-  .motion-donut { animation: donut-reveal 24s ease-in-out infinite; }
-  @keyframes draw { 0%,100% { stroke-dashoffset: 1; } 25%,90% { stroke-dashoffset: 0; } }
+  @keyframes appear { 0%,100% { opacity: .82; } 40%,92% { opacity: 1; } }
+  @keyframes rise { 0%,100% { transform: scaleY(.08); } 40%,92% { transform: scaleY(1); } }
+  @keyframes expand { 0%,100% { transform: scaleX(.08); } 40%,92% { transform: scaleX(1); } }
+  .motion-language { transform-box: fill-box; transform-origin: left center; animation: expand 14s ease-in-out infinite; }
+  @keyframes donut-reveal { 0%,100% { stroke-dasharray: 0 var(--circumference); } 50%,92% { stroke-dasharray: var(--arc) var(--circumference); } }
+  .motion-donut { animation: donut-reveal 14s ease-in-out infinite; }
+  @keyframes draw { 0%,100% { stroke-dashoffset: 1; } 45%,92% { stroke-dashoffset: 0; } }
   @keyframes glow { 0%,100% { opacity: .72; } 50% { opacity: 1; } }
   @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
   @keyframes turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   @keyframes sail { 0%,100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
   .wheel-spin { transform-origin: 0px 0px; animation: turn 60s linear infinite; }
   .pirate-flag { transform-box: fill-box; transform-origin: left center; animation: sail 12s ease-in-out infinite; }
-  text { animation: appear 18s ease-in-out infinite; }
-  .motion-bar { transform-box: fill-box; transform-origin: center bottom; animation: rise 24s cubic-bezier(.22,1,.36,1) infinite; }
-  .motion-line { stroke-dasharray: 1; animation: draw 24s ease-in-out infinite; }
-  .motion-ring { animation: appear 24s ease-in-out infinite; }
-  .motion-cell { animation: appear 18s ease-in-out infinite; animation-delay: var(--delay,0ms); }
+  text { animation: appear 10s ease-in-out infinite; }
+  .motion-bar { transform-box: fill-box; transform-origin: center bottom; animation: rise 14s cubic-bezier(.22,1,.36,1) infinite; }
+  .motion-line { stroke-dasharray: 1; animation: draw 14s ease-in-out infinite; }
+  .motion-ring { animation: appear 14s ease-in-out infinite; }
+  .motion-cell { animation: appear 12s ease-in-out infinite; animation-delay: var(--delay,0ms); }
   .motion-icon { animation: glow 12s ease-in-out infinite; }
   .motion-logo { animation: float 12s ease-in-out infinite; }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
@@ -45,6 +45,6 @@ for (const file of files) {
     svg = svg.replace(/<rect\b([^>]*width="(?:12|14)"[^>]*height="(?:10|12)"[^>]*)>/g, (_, attrs) => `<rect class="motion-cell" style="--delay:${index++ % 18 * 35}ms" ${attrs}>`);
   }
   svg = svg.replace(/(<svg\b[^>]*>)/, `$1${css}`);
-  await writeFile(new URL(`../profile-assets/${file}-slow-loop-motion.svg`, import.meta.url), svg);
+  await writeFile(new URL(`../profile-assets/${file}-paced-loop-motion.svg`, import.meta.url), svg);
 }
 console.log(`Animated ${files.size} README graphics with reduced-motion support.`);
