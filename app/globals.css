@@ -1615,8 +1615,6 @@ h1 {
 
 .about-principles-grid > .about-principle:nth-child(1) {
 
-  --principle-reveal-x: -56px;
-
   transition-delay: 140ms;
 
 }
@@ -1625,8 +1623,6 @@ h1 {
 
 .about-principles-grid > .about-principle:nth-child(2) {
 
-  --principle-reveal-x: 0px;
-
   transition-delay: 360ms;
 
 }
@@ -1634,8 +1630,6 @@ h1 {
 
 
 .about-principles-grid > .about-principle:nth-child(3) {
-
-  --principle-reveal-x: 56px;
 
   transition-delay: 580ms;
 
@@ -1647,7 +1641,7 @@ h1 {
 
   opacity: 0;
 
-  translate: var(--principle-reveal-x, 0px) 24px;
+  translate: 0 24px;
 
 }
 
@@ -1893,22 +1887,6 @@ h1 {
 
 
 
-.about-detail-card[data-about-side="left"] {
-
-  --about-magnet-offset: -64px;
-
-}
-
-
-
-.about-detail-card[data-about-side="right"] {
-
-  --about-magnet-offset: 64px;
-
-}
-
-
-
 .about-details-grid-personal > .about-detail-card:nth-child(2),
 
 .about-details-grid-education > .about-detail-card:nth-child(2) {
@@ -1951,7 +1929,7 @@ h1 {
 
   opacity: 0;
 
-  translate: var(--about-magnet-offset, 0px) 18px;
+  translate: 0 18px;
 
 }
 
@@ -20591,8 +20569,7 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
 .about-journey-summary > div { display: flex; align-items: flex-start; gap: 12px; }
 .about-journey-summary strong { display: block; color: var(--ink); font-size: 12px; margin-bottom: 3px; }
 .about-school-details { margin-top: 24px; }
-.about-school-details > summary { cursor: pointer; color: var(--accent); padding: 12px 0; font-size: 14px; }
-.about-school-details[open] > summary { margin-bottom: 16px; }
+
 @media (max-width: 800px) { .about-journey-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
 @media (max-width: 600px) { .about-life .about-details-grid-personal { grid-template-columns: minmax(0, 1fr); } .about-journey-row { flex-wrap: wrap; padding: 16px 8px; } .about-journey-date { margin-left: 50px; } }
 
@@ -21101,3 +21078,10 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
 
 /* The About introduction heading stands alone. */
 .page .about-personal-heading { grid-template-columns: minmax(0,1fr); }
+
+/* The About heading follows its section's upward fade without zooming. */
+.about-reference-approach[data-scroll-reveal] .editorial-title {
+  opacity: 1;
+  transform: none;
+  letter-spacing: -0.025em;
+}

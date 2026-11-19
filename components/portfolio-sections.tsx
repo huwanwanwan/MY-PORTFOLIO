@@ -244,7 +244,7 @@ export function AboutSection({
               <div><span className="about-personal-fact-icon"><EducationIcon name="code" /></span><div><p>Role</p><strong>Web &amp; Mobile Developer</strong></div></div>
               <div><span className="about-personal-fact-icon"><AboutIcon name="graduation" /></span><div><p>Focus</p><strong>Building useful and<br /> user-friendly solutions</strong></div></div>
             </aside>
-            <blockquote className="about-personal-quote"><span aria-hidden="true">&#8220;</span><p>The little things make me happy&#8212;especially when friends or others remember something about me. It makes me feel special and appreciated.</p></blockquote>
+            <blockquote className="about-personal-quote"><span aria-hidden="true">&#8220;</span><p>I appreciate the little things, especially when someone remembers something about me. Even the smallest gestures mean a lot.</p></blockquote>
           </div>
           <div className="about-personal-interests">
             <article className="about-personal-interest about-personal-favorites">
@@ -304,13 +304,11 @@ export function AboutSection({
                   <div><span className="about-journey-icon"><AboutIcon name="sparkles" /></span><div><h4>Open to</h4><p>Internship ? Collaborations ? Opportunities</p></div></div>
                 </aside>
               </div>
-              <details className="about-school-details">
-                <summary>View my full educational background</summary>
+              <div className="about-school-details">
               <div className="about-details-grid about-details-grid-education">
                 <article
                   className="about-detail-card"
                   data-scroll-reveal
-                  data-about-side="left"
                 >
                   <p className="section-kicker about-card-kicker">
                     <AboutIcon name="school" /> ELEMENTARY
@@ -321,7 +319,6 @@ export function AboutSection({
                 <article
                   className="about-detail-card"
                   data-scroll-reveal
-                  data-about-side="right"
                 >
                   <p className="section-kicker about-card-kicker">
                     <AboutIcon name="school" /> HIGH SCHOOL
@@ -332,7 +329,6 @@ export function AboutSection({
                 <article
                   className="about-detail-card"
                   data-scroll-reveal
-                  data-about-side="left"
                 >
                   <p className="section-kicker about-card-kicker">
                     <AboutIcon name="school" /> JUNIOR &amp; SENIOR HIGH SCHOOL
@@ -350,7 +346,6 @@ export function AboutSection({
                 <article
                   className="about-detail-card"
                   data-scroll-reveal
-                  data-about-side="right"
                 >
                   <p className="section-kicker about-card-kicker">
                     <AboutIcon name="graduation" /> COLLEGE · CURRENTLY STUDYING
@@ -359,7 +354,7 @@ export function AboutSection({
                   <p>Pambayang Dalubhasaan ng Marilao (PDM)</p>
                 </article>
               </div>
-              </details>
+              </div>
             </section>
 
             <section
