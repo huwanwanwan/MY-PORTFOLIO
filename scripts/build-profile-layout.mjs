@@ -19,7 +19,7 @@ await writeFile(new URL('portfolio-cover.svg', output), svg(960, 180, 'Wancor â€
   <text x="480" y="139" fill="#E8EDF5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="7">WANCOR</text>
 `));
 
-await writeFile(new URL('about-experience.svg', output), svg(960, 290, 'About Juan Domanico Militante', `
+await writeFile(new URL('about-simple.svg', output), svg(960, 290, 'About Juan Domanico Militante', `
   <rect width="960" height="290" rx="18" fill="#161B2F"/>
   <rect x="96" y="141" width="215" height="30" rx="4" fill="#541A2E"/>
   <g font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#B4BED0">
@@ -36,10 +36,10 @@ await writeFile(new URL('about-experience.svg', output), svg(960, 290, 'About Ju
 
 const sections = [['about', 'ABOUT ME', 'Web and Mobile Developer'], ['work', 'SELECTED PROJECTS', 'Web, mobile, games, and hardware'], ['metrics', 'GITHUB ACTIVITY', 'Public contributions and repository statistics']];
 for (const [slug, title, subtitle] of sections) {
-  await writeFile(new URL(`section-${slug}-portfolio.svg`, output), svg(960, 80, title, `<rect width="960" height="80" rx="14" fill="#161B2F"/><rect x="64" y="15" width="${title.length * 13 + 22}" height="31" rx="4" fill="#541A2E"/>${icon({about: 'user', work: 'folder', metrics: 'chart'}[slug], 24, 25, 28)}<g font-family="Arial, Helvetica, sans-serif" fill="#E8EDF5"><text x="70" y="35" font-size="17" font-weight="700" letter-spacing="2">${title}</text><text x="70" y="58" font-size="13" fill="#B4BED0">${subtitle}</text></g><path d="M545 40H932" stroke="#FFA586" opacity=".35"/>`));
+  await writeFile(new URL(`section-${slug}-simple.svg`, output), svg(960, 80, title, `<rect width="960" height="80" rx="14" fill="#161B2F"/><rect x="64" y="15" width="${title.length * 13 + 22}" height="31" rx="4" fill="#541A2E"/>${icon({about: 'user', work: 'folder', metrics: 'chart'}[slug], 24, 25, 28)}<g font-family="Arial, Helvetica, sans-serif" fill="#E8EDF5"><text x="70" y="35" font-size="17" font-weight="700" letter-spacing="2">${title}</text><text x="70" y="58" font-size="13" fill="#B4BED0">${subtitle}</text></g>`));
 }
 
-await writeFile(new URL('featured-work-portfolio.svg', output), svg(960, 260, 'Selected projects: SIGLA, DocuLink, InventoPOS, games, and hardware', `
+await writeFile(new URL('featured-work-simple.svg', output), svg(960, 260, 'Selected projects: SIGLA, DocuLink, InventoPOS, games, and hardware', `
   <rect width="960" height="260" rx="18" fill="#161B2F"/>
   <g font-family="Arial, Helvetica, sans-serif" fill="#E8EDF5">
     ${[
@@ -50,7 +50,7 @@ await writeFile(new URL('featured-work-portfolio.svg', output), svg(960, 260, 'S
     ].map(([name, description, tools], index) => {
       const x = 20 + index % 2 * 470;
       const y = 18 + Math.floor(index / 2) * 120;
-      return `<rect x="${x}" y="${y}" width="450" height="104" rx="26" fill="url(#project)" stroke="#B51A2B"/>${icon(['phone', 'database', 'game', 'chip'][index], x + 18, y + 17, 23)}<rect x="${x + 47}" y="${y + 16}" width="${name.replace(/&amp;/g, '&').length * 9.4 + 20}" height="26" rx="4" fill="#541A2E"/><text x="${x + 52}" y="${y + 35}" font-size="15" font-weight="700">${name}</text><text x="${x + 18}" y="${y + 55}" font-size="14" fill="#B4BED0">${description}</text><text x="${x + 18}" y="${y + 82}" font-size="11" fill="#B4BED0" letter-spacing="1">${tools}</text>`;
+      return `<rect x="${x}" y="${y}" width="450" height="104" rx="26" fill="url(#project)"/>${icon(['phone', 'database', 'game', 'chip'][index], x + 18, y + 17, 23)}<rect x="${x + 47}" y="${y + 16}" width="${name.replace(/&amp;/g, '&').length * 9.4 + 20}" height="26" rx="4" fill="#541A2E"/><text x="${x + 52}" y="${y + 35}" font-size="15" font-weight="700">${name}</text><text x="${x + 18}" y="${y + 55}" font-size="14" fill="#B4BED0">${description}</text><text x="${x + 18}" y="${y + 82}" font-size="11" fill="#B4BED0" letter-spacing="1">${tools}</text>`;
     }).join('')}
   </g>
 `));
