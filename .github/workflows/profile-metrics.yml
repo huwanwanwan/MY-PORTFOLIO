@@ -12,6 +12,7 @@ on:
       - scripts/profile-icons.mjs
       - scripts/profile-tech-logos.mjs
       - scripts/animate-profile-assets.mjs
+      - scripts/apply-pirate-theme.mjs
       - profile-assets/tech-logos/**
       - .github/workflows/profile-metrics.yml
 
