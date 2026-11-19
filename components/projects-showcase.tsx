@@ -16,6 +16,7 @@ interface ProjectsShowcaseProps {
   initialFilter?: CategoryFilter;
   featuredOnly?: boolean;
   limit?: number;
+  projectId?: string;
 }
 
 function ProjectEmblem({ id }: { id: string }) {
@@ -191,6 +192,7 @@ export default function ProjectsShowcase({
   initialFilter = "All",
   featuredOnly = false,
   limit,
+  projectId,
 }: ProjectsShowcaseProps) {
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>(initialFilter);
   const [sortOrder, setSortOrder] = useState<"featured" | "chronological">("featured");
@@ -216,6 +218,7 @@ export default function ProjectsShowcase({
   ];
 
   const filteredProjects = useMemo(() => {
+    if (projectId) return projectsData.filter((project) => project.id === projectId);
     let list = featuredOnly ? projectsData.filter((p) => p.isFeatured) : [...projectsData];
 
     if (selectedCategory !== "All") {
@@ -233,12 +236,12 @@ export default function ProjectsShowcase({
     }
 
     return list;
-  }, [selectedCategory, sortOrder, featuredOnly, limit]);
+  }, [selectedCategory, sortOrder, featuredOnly, limit, projectId]);
 
   return (
     <div className="projects-showcase-container">
       {/* Category Filter & Sort Bar */}
-      <div className="projects-controls-bar">
+      {!projectId && <><div className="projects-controls-bar">
         <div className="projects-category-tabs" role="tablist" aria-label="Filter projects by category">
           {categories.map((cat) => {
             const isActive = selectedCategory === cat.label;
@@ -288,6 +291,8 @@ export default function ProjectsShowcase({
           {selectedCategory !== "All" && ` in ${selectedCategory}`}
         </p>
       </div>
+
+      </>}
 
       {/* Side-by-Side Project Rows (Card Container on one side, Description Beside It) */}
       <div className="project-detail-rows">
@@ -341,7 +346,9 @@ export default function ProjectsShowcase({
 
                 {/* Concise Overview Paragraph */}
                 <div className="smart-info-desc-box">
-                  <p className="smart-info-overview">{project.paragraphs[0]}</p>
+                  {(projectId ? project.paragraphs : project.paragraphs.slice(0, 1)).map((paragraph) => (
+                    <p className="smart-info-overview" key={paragraph}>{paragraph}</p>
+                  ))}
                 </div>
 
                 {/* MY ROLE / CONTEXT row */}

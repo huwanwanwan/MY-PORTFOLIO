@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
+import { projectsData } from "../data/projects-data";
 
 export interface ExperienceItem {
   index: string;
@@ -118,18 +119,18 @@ export const experiencesList: ExperienceItem[] = [
   },
 ];
 
-const INITIAL_VISIBLE_COUNT = 4;
+const experienceProjects: Record<string, string[]> = {
+  "01": ["sigla"], "02": ["class-project-game"], "03": ["recognizarenus"],
+  "04": ["halal-2025"], "05": ["inventopos"], "06": ["doculink"],
+  "07": ["la-nina-detector"], "08": ["fitness-management-system"],
+  "09": ["force-x", "almighty-jungle", "isla-arena"], "10": ["attack-on-pdm"],
+  "11": ["marilao-fantasy"], "12": ["milktaste"],
+};
 
 export default function ExperienceList() {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const visibleExperiences = isExpanded
-    ? experiencesList
-    : experiencesList.slice(0, INITIAL_VISIBLE_COUNT);
-
   return (
     <div className="experience-list-container">
-      {visibleExperiences.map((entry) => (
+      {experiencesList.map((entry) => (
         <article
           key={entry.index}
           className="journey-entry scroll-reveal visible"
@@ -146,36 +147,21 @@ export default function ExperienceList() {
                 <span key={tag}>{tag}</span>
               ))}
             </div>
+            <div className="experience-project-links">
+              {(experienceProjects[entry.index] ?? []).map((id) => {
+                const project = projectsData.find((item) => item.id === id);
+                return project ? (
+                  <Link key={id} className="experience-project-link" href={`/projects/${id}`}>
+                    View {project.title}
+                  </Link>
+                ) : null;
+              })}
+            </div>
           </div>
         </article>
       ))}
 
-      <div className="experience-expand-action">
-        <button
-          type="button"
-          onClick={() => setIsExpanded(!isExpanded)}
-          className={`experience-expand-btn ${isExpanded ? "expanded" : ""}`}
-          aria-expanded={isExpanded}
-        >
-          <span>
-            {isExpanded
-              ? "Show Less Experience"
-              : `View Full Experience (${experiencesList.length} Milestones)`}
-          </span>
-          <svg
-            className="experience-arrow-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
-        </button>
-      </div>
+
     </div>
   );
 }

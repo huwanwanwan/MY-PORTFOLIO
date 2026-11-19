@@ -21161,3 +21161,10 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
 .page #projects .smart-hero-caption-bar {
   border-top: 0;
 }
+
+.experience-project-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.experience-project-link { display: inline-flex; align-items: center; padding: 9px 15px; border: 1px solid var(--card-border); border-radius: 6px; background: transparent; color: var(--ink); text-decoration: none; font-size: .875rem; font-weight: 600; }
+.experience-project-link:hover { background: var(--raised-surface); border-color: var(--accent); }
+.experience-project-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.project-detail-heading { margin: 28px 0 36px; }
+.project-detail-page .smart-info-desc-box { display: grid; gap: 14px; }
