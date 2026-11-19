@@ -21178,11 +21178,11 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
 .page #experience .journey-column + .journey-column { padding-left: 30px; border-left: 1px solid var(--line); }
 .page #experience .journey-column-heading { display: flex; align-items: center; gap: 16px; border: 0; padding-bottom: 10px; font-size: 22px; font-weight: 750; }
 .page #experience .journey-column-heading::after { content: ''; height: 1px; flex: 1; background: var(--accent); opacity: .65; }
-.page #experience .journey-entry { position: relative; grid-template-columns: 18px minmax(0,1fr); gap: 20px; padding: 15px 0; border: 0; }
+.page #experience .journey-entry { display: grid; align-items: start; position: relative; grid-template-columns: 18px minmax(0,1fr); gap: 20px; padding: 15px 0; border: 0; }
 .page #experience .journey-entry::before { left: 8px; top: 28px; bottom: -18px; width: 1px; background: var(--line); }
 .page #experience .journey-entry:last-child::before,
 .page #experience .journey-column > .journey-entry:nth-last-of-type(1)::before { display: none; }
-.page #experience .journey-index { position: relative; top: 4px; width: 16px; height: 16px; min-width: 16px; margin: 0; padding: 0; border-radius: 50%; border: 3px solid var(--canvas); outline: 2px solid color-mix(in srgb,var(--accent) 28%,transparent); background: var(--accent); box-shadow: none; }
+.page #experience .journey-index { position: relative; left: 0; top: 4px; box-sizing: border-box; width: 16px; height: 16px; min-width: 16px; margin: 0; padding: 0; border-radius: 50%; border: 3px solid var(--canvas); outline: 2px solid color-mix(in srgb,var(--accent) 28%,transparent); background: var(--accent); box-shadow: none; }
 .page #experience .journey-index > * { display: none; }
 .page #experience .journey-entry .education-level { color: var(--accent); font-size: 12px; margin-bottom: 3px; }
 .page #experience .journey-entry h4 { font-size: 18px; line-height: 1.25; font-weight: 750; }

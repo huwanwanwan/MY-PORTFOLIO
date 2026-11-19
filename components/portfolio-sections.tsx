@@ -557,7 +557,7 @@ export function ExperienceSection({
           <article className="journey-entry scroll-reveal" data-scroll-reveal>
             <span className="journey-index"><EducationIcon name="code" /></span>
             <div>
-              <p className="education-level">College ? Current</p>
+              <p className="education-level">College &mdash; Current</p>
               <h4>Bachelor of Science in Information Technology</h4>
               <p className="journey-role">Pambayang Dalubhasaan ng Marilao (PDM)</p>
               <p>Currently pursuing a BS in Information Technology.</p>
