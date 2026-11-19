@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="80" viewBox="0 0 960 80" role="img" aria-labelledby="title"><style>
+  @keyframes appear { from { opacity: .25; } to { opacity: 1; } }
+  @keyframes rise { from { transform: scaleY(.08); } to { transform: scaleY(1); } }
+  @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  @keyframes glow { 0%,100% { opacity: .72; } 50% { opacity: 1; } }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
+  @keyframes turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes sail { 0%,100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
+  .wheel-spin { transform-origin: 0px 0px; animation: turn 36s linear infinite; }
+  .pirate-flag { transform-box: fill-box; transform-origin: left center; animation: sail 6s ease-in-out infinite; }
+  text { animation: appear .8s ease-out both; }
+  .motion-bar { transform-box: fill-box; transform-origin: center bottom; animation: rise 1.6s cubic-bezier(.22,1,.36,1) both; }
+  .motion-line { stroke-dasharray: 1; animation: draw 2.2s ease-out both; }
+  .motion-ring { animation: appear 1.8s ease-out both; }
+  .motion-cell { animation: appear 1s ease-out both; animation-delay: var(--delay,0ms); }
+  .motion-icon { animation: glow 5s ease-in-out infinite; }
+  .motion-logo { animation: float 6s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style><title id="title">One Piece inspired — ABOUT ME</title><defs><linearGradient id="section"><stop stop-color="#541A2E"/><stop offset=".7" stop-color="#161B2F"/></linearGradient><linearGradient id="project"><stop stop-color="#242F49"/><stop offset="1" stop-color="#384358"/></linearGradient></defs><rect width="960" height="80" rx="14" fill="#161B2F"/><rect x="64" y="15" width="126" height="31" rx="4" fill="#541A2E"/><g transform="translate(24 25) scale(1.1666666666666667)" fill="none" stroke="#FFA586" class="motion-icon" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/></g><g font-family="Arial, Helvetica, sans-serif" fill="#E8EDF5"><text x="70" y="35" font-size="17" font-weight="700" letter-spacing="2">ABOUT ME</text><text x="70" y="58" font-size="13" fill="#B4BED0">Web and Mobile Developer</text></g><g transform="translate(884 43) scale(0.48)"><path d="M-27 0Q-25-29 0-29T27 0Z" fill="#FFA586"/><path d="M-27-6Q0-2 27-6V1H-27Z" fill="#B51A2B"/><ellipse cy="3" rx="42" ry="8" fill="#FFA586"/><path d="M-25-18Q0-27 22-18" fill="none" stroke="#541A2E" stroke-opacity=".4"/></g></svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="290" viewBox="0 0 960 290" role="img" aria-labelledby="title"><style>
+  @keyframes appear { from { opacity: .25; } to { opacity: 1; } }
+  @keyframes rise { from { transform: scaleY(.08); } to { transform: scaleY(1); } }
+  @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  @keyframes glow { 0%,100% { opacity: .72; } 50% { opacity: 1; } }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
+  @keyframes turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes sail { 0%,100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
+  .wheel-spin { transform-origin: 0px 0px; animation: turn 36s linear infinite; }
+  .pirate-flag { transform-box: fill-box; transform-origin: left center; animation: sail 6s ease-in-out infinite; }
+  text { animation: appear .8s ease-out both; }
+  .motion-bar { transform-box: fill-box; transform-origin: center bottom; animation: rise 1.6s cubic-bezier(.22,1,.36,1) both; }
+  .motion-line { stroke-dasharray: 1; animation: draw 2.2s ease-out both; }
+  .motion-ring { animation: appear 1.8s ease-out both; }
+  .motion-cell { animation: appear 1s ease-out both; animation-delay: var(--delay,0ms); }
+  .motion-icon { animation: glow 5s ease-in-out infinite; }
+  .motion-logo { animation: float 6s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style><title id="title">One Piece inspired — About Juan Domanico Militante</title><defs><linearGradient id="section"><stop stop-color="#541A2E"/><stop offset=".7" stop-color="#161B2F"/></linearGradient><linearGradient id="project"><stop stop-color="#242F49"/><stop offset="1" stop-color="#384358"/></linearGradient></defs>
+  <rect width="960" height="290" rx="18" fill="#161B2F"/>
+  <rect x="96" y="141" width="215" height="30" rx="4" fill="#541A2E"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#B4BED0">
+    <text x="28" y="42">I'm <tspan font-weight="700" fill="#E8EDF5">Juan Domanico Militante</tspan>, a <tspan fill="#FFA586">Web and Mobile Developer</tspan></text>
+    <text x="28" y="74">and an Information Technology student at</text>
+    <text x="28" y="106" font-weight="700" fill="#E8EDF5">Pambayang Dalubhasaan ng Marilao.</text>
+    <text x="28" y="164">I have</text><text x="102" y="164" font-weight="700" fill="#FFF5EF">2 years of experience</text>
+    <text x="324" y="164">creating websites and mobile applications.</text>
+    <text x="28" y="196">I enjoy building <tspan fill="#E8EDF5" font-weight="700">simple, useful, and easy-to-use systems</tspan>, including</text>
+    <text x="28" y="228"><tspan fill="#FFA586">mobile apps that work offline</tspan> and web applications for managing</text>
+    <text x="28" y="260">documents, sales, and inventory.</text>
+  </g>
+<g transform="translate(855 195)" opacity=".85">
+    <circle cy="4" r="66" fill="#242F49"/>
+    <circle cy="4" r="56" fill="#541A2E" opacity=".42"/>
+    <g transform="translate(0 -27) scale(0.7)"><path d="M-27 0Q-25-29 0-29T27 0Z" fill="#FFA586"/><path d="M-27-6Q0-2 27-6V1H-27Z" fill="#B51A2B"/><ellipse cy="3" rx="42" ry="8" fill="#FFA586"/><path d="M-25-18Q0-27 22-18" fill="none" stroke="#541A2E" stroke-opacity=".4"/></g>
+    <path d="m-14-9-19 12 6 46h22L-8 4Zm28 0L33 3l-6 46H5L8 4Z" fill="#B51A2B"/>
+    <path d="M-14-9-8 4 0 12 8 4 14-9" fill="none" stroke="#FFA586" stroke-width="2"/>
+    <path d="M-28 48H28L23 63H-23Z" fill="#384358"/>
+    <path d="M-29 46H29" stroke="#FFA586" stroke-width="5"/>
+    <circle cx="-12" cy="18" r="2" fill="#FFA586"/><circle cx="-11" cy="30" r="2" fill="#FFA586"/>
+    <path d="m-27 6 4 31m50-31-4 31" fill="none" stroke="#FFA586" stroke-opacity=".3" stroke-width="1.5"/>
+  </g></svg>

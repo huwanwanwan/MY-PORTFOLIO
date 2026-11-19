@@ -34,33 +34,62 @@ function flag(x, y) {
 
 function costume(x, y) {
   return `<g transform="translate(${x} ${y})" opacity=".85">
+    <circle cy="4" r="66" fill="#242F49"/>
+    <circle cy="4" r="56" fill="#541A2E" opacity=".42"/>
     ${strawHat(0, -27, .7)}
     <path d="m-14-9-19 12 6 46h22L-8 4Zm28 0L33 3l-6 46H5L8 4Z" fill="${crimson}"/>
     <path d="M-14-9-8 4 0 12 8 4 14-9" fill="none" stroke="${peach}" stroke-width="2"/>
     <path d="M-28 48H28L23 63H-23Z" fill="#384358"/>
     <path d="M-29 46H29" stroke="${peach}" stroke-width="5"/>
     <circle cx="-12" cy="18" r="2" fill="${peach}"/><circle cx="-11" cy="30" r="2" fill="${peach}"/>
+    <path d="m-27 6 4 31m50-31-4 31" fill="none" stroke="${peach}" stroke-opacity=".3" stroke-width="1.5"/>
   </g>`;
 }
 
+function island(x, y, scale = 1) {
+  return `<g transform="translate(${x} ${y}) scale(${scale})" opacity=".15" fill="${peach}">
+    <path d="M-35 20Q0 1 35 20Z"/><path d="M-2 13Q5-3 0-24L4-24Q10-3 3 13Z"/>
+    <path d="M2-22Q-25-38-31-12Q-14-22 2-22Zm0 0Q24-40 32-15Q18-24 2-22Zm0 0Q-2-44-17-38Q-7-29 2-22Zm0 0Q12-46 22-36Q9-29 2-22Z"/>
+    <path d="M-38 28Q-17 22 0 28T38 28" fill="none" stroke="${peach}" stroke-width="2"/>
+  </g>`;
+}
+
+async function refinedCover() {
+  const mark = await readFile(new URL('wancor-mark.svg', root), 'utf8');
+  const paths = mark.replace(/^.*?<svg[^>]*>/s, '').replace(/<\/svg>\s*$/, '');
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="960" height="220" viewBox="0 0 960 220" role="img" aria-labelledby="title"><title id="title">Wancor — One Piece inspired developer's log</title>
+    <defs><radialGradient id="sea-light"><stop stop-color="#541A2E"/><stop offset="1" stop-color="#161B2F"/></radialGradient><clipPath id="sea-window"><rect width="960" height="220" rx="22"/></clipPath></defs>
+    <g clip-path="url(#sea-window)">
+      <rect width="960" height="220" fill="${navy}"/><ellipse cx="480" cy="81" rx="340" ry="170" fill="url(#sea-light)"/>
+      <g fill="none" stroke="#384358" opacity=".5"><circle cx="145" cy="97" r="67"/><circle cx="145" cy="97" r="78" stroke-dasharray="1 10"/><path d="M210 118Q290 165 370 96T600 97T731 90" stroke-dasharray="3 9"/></g>
+      ${wheel(145, 97, 43)}${flag(800, 98)}
+      <svg x="424" y="35" width="112" height="82" viewBox="65 115 385 280">${paths}</svg>
+      <g font-family="Arial, Helvetica, sans-serif" text-anchor="middle"><text x="480" y="24" fill="${peach}" font-size="10" letter-spacing="3">DEVELOPER'S LOG</text><text x="480" y="147" fill="#E8EDF5" font-size="19" font-weight="700" letter-spacing="8">WANCOR</text></g>
+      <path d="M0 178C140 148 265 202 420 177S730 149 960 173V220H0Z" fill="#242F49"/>
+      <path d="M0 194C183 169 286 219 493 193S758 172 960 193V220H0Z" fill="#384358" opacity=".65"/>
+      <path d="M0 212C194 192 322 234 540 211S791 197 960 211V220H0Z" fill="#541A2E"/>
+      <g font-family="Arial, Helvetica, sans-serif" font-size="10" letter-spacing="1.7" fill="#B4BED0"><text x="26" y="204">BULACAN, PHILIPPINES</text><text x="934" y="204" text-anchor="end">WEB &amp; MOBILE DEVELOPER</text></g>
+    </g>
+  </svg>\n`;
+}
+
 for (const themedFile of files) {
-  if (!themedFile.endsWith('-voyage')) continue;
-  const file = themedFile.replace(/-voyage$/, '');
+  if (!themedFile.endsWith('-grand-voyage')) continue;
+  const file = themedFile.replace(/-grand-voyage$/, '');
   let svg = await readFile(new URL(`${file}.svg`, root), 'utf8');
   let decoration = '';
   if (file === 'portfolio-cover') {
-    decoration = wheel(145, 85, 56) + flag(797, 85);
-    svg = svg.replace(/<\/svg>\s*$/, `${decoration}</svg>\n`);
+    svg = await refinedCover();
     // The central portfolio logo remains the original Wancor artwork.
   } else if (file.startsWith('section-')) {
-    decoration = wheel(885, 40, 23, .8);
+    decoration = file.includes('about') ? strawHat(884, 43, .48) : file.includes('work') ? compass(884, 40, 20) : wheel(885, 40, 23, .8);
     svg = svg.replace(/<\/svg>\s*$/, `${decoration}</svg>\n`);
   } else if (file.startsWith('about-')) {
     svg = svg.replace(/<\/svg>\s*$/, `${costume(855, 195)}</svg>\n`);
   } else if (file.startsWith('tech-stack')) {
-    svg = svg.replace(/<\/svg>\s*$/, `${wheel(886, 38, 22, .9)}</svg>\n`);
+    svg = svg.replace(/<\/svg>\s*$/, `<text x="824" y="43" fill="#B4BED0" font-family="Arial, Helvetica, sans-serif" text-anchor="end" font-size="11" letter-spacing="2">THE CREW’S TOOLKIT</text>${wheel(886, 38, 22, .9)}</svg>\n`);
   } else if (file.startsWith('featured-work')) {
-    svg = svg.replace(/<\/svg>\s*$/, `<g opacity=".16">${compass(428, 67, 24)}${compass(898, 67, 24)}${compass(428, 187, 24)}${compass(898, 187, 24)}</g></svg>\n`);
+    svg = svg.replace(/<\/svg>\s*$/, `${island(424, 75, .65)}${island(894, 75, .65)}${island(424, 195, .65)}${island(894, 195, .65)}</svg>\n`);
   } else if (file.startsWith('dashboard')) {
     svg = svg.replace('JUAN / GITHUB OVERVIEW', 'CAPTAIN’S LOG / GITHUB')
       .replace('Contribution history', 'Voyage of contributions')
