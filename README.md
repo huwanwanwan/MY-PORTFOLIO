@@ -16,9 +16,9 @@
 <br />
 
 <a id="about-me"></a>
-<img src="./profile-assets/section-about-portfolio.svg" width="100%" alt="A little about me" />
+<img src="./profile-assets/section-about-experience.svg" width="100%" alt="A little about me" />
 
-<img src="./profile-assets/about-portfolio.svg" width="100%" alt="I'm Juan Domanico Militante, a Web and Mobile Developer and an Information Technology student at Pambayang Dalubhasaan ng Marilao. I have 4 years of experience creating websites and mobile applications. I enjoy building simple, useful, and easy-to-use systems, including mobile apps that work offline and web applications for managing documents, sales, and inventory." />
+<img src="./profile-assets/about-experience.svg" width="100%" alt="I'm Juan Domanico Militante, a Web and Mobile Developer and an Information Technology student at Pambayang Dalubhasaan ng Marilao. I have 2 years of experience creating websites and mobile applications. I enjoy building simple, useful, and easy-to-use systems, including mobile apps that work offline and web applications for managing documents, sales, and inventory." />
 
 <br />
 

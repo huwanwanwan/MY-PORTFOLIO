@@ -19,14 +19,14 @@ await writeFile(new URL('portfolio-cover.svg', output), svg(960, 180, 'Wancor â€
   <text x="480" y="139" fill="#E8EDF5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="7">WANCOR</text>
 `));
 
-await writeFile(new URL('about-portfolio.svg', output), svg(960, 290, 'About Juan Domanico Militante', `
+await writeFile(new URL('about-experience.svg', output), svg(960, 290, 'About Juan Domanico Militante', `
   <rect width="960" height="290" rx="18" fill="#161B2F"/>
   <rect x="96" y="141" width="215" height="30" rx="4" fill="#541A2E"/>
   <g font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#B4BED0">
     <text x="28" y="42">I'm <tspan font-weight="700" fill="#E8EDF5">Juan Domanico Militante</tspan>, a <tspan fill="#FFA586">Web and Mobile Developer</tspan></text>
     <text x="28" y="74">and an Information Technology student at</text>
     <text x="28" y="106" font-weight="700" fill="#E8EDF5">Pambayang Dalubhasaan ng Marilao.</text>
-    <text x="28" y="164">I have</text><text x="102" y="164" font-weight="700" fill="#FFF5EF">4 years of experience</text>
+    <text x="28" y="164">I have</text><text x="102" y="164" font-weight="700" fill="#FFF5EF">2 years of experience</text>
     <text x="324" y="164">creating websites and mobile applications.</text>
     <text x="28" y="196">I enjoy building <tspan fill="#E8EDF5" font-weight="700">simple, useful, and easy-to-use systems</tspan>, including</text>
     <text x="28" y="228"><tspan fill="#FFA586">mobile apps that work offline</tspan> and web applications for managing</text>
