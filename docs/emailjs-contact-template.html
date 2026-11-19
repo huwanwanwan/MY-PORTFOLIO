@@ -3,14 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <meta name="supported-color-schemes" content="dark">
+  <style>
+    body, table, td, p, h1, a { font-family: Arial, Helvetica, sans-serif; }
+    table { border-spacing: 0; mso-table-lspace: 0; mso-table-rspace: 0; }
+    a[x-apple-data-detectors] { color: inherit !important; }
+    @media screen and (max-width: 480px) {
+      .email-outer { padding: 12px 8px !important; }
+      .email-content { padding: 20px 16px !important; }
+      .email-heading { font-size: 26px !important; }
+    }
+  </style>
   <title>Wancor — New inquiry</title>
 </head>
-<body style="margin:0;padding:0;background-color:#161b2f;color:#f4f6fc;font-family:Arial,Helvetica,sans-serif;-webkit-text-size-adjust:100%;">
+<body style="font-family:Arial,Helvetica,sans-serif;margin:0;padding:0;background-color:#161b2f;color:#f4f6fc;font-family:Arial,Helvetica,sans-serif;-webkit-text-size-adjust:100%;">
   <div style="display:none;max-height:0;overflow:hidden;opacity:0;">New inquiry from {{from_name}}: {{subject}}</div>
   <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#161b2f" style="background-color:#161b2f;">
     <tr>
-      <td align="center" style="padding:24px 12px;">
-        <table role="presentation" align="center" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#242f49" style="width:100%;max-width:620px;background-color:#242f49;border:1px solid #46536e;border-radius:20px;overflow:hidden;">
+      <td align="center" class="email-outer" style="padding:24px 12px;">
+        <table role="presentation" align="center" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#242f49" style="font-family:Arial,Helvetica,sans-serif;color:#f4f6fc;margin:0 auto;width:100%;max-width:620px;background-color:#242f49;border:1px solid #384358;border-radius:20px;">
           <tr>
             <td align="center" background="https://portfolio.juandomanicomilitante.workers.dev/email-header-gradient.png" bgcolor="#161b2f" style="text-align:center;font-family:Arial,Helvetica,sans-serif;padding:36px 24px;background-color:#161b2f;background-image:url(https://portfolio.juandomanicomilitante.workers.dev/email-header-gradient.png);background-repeat:no-repeat;background-size:cover;border-bottom:3px solid #ffa586;">
               <img src="https://portfolio.juandomanicomilitante.workers.dev/email-wancor-logo.png" alt="Wancor logo" width="60" height="60" style="display:block;border:0;border-radius:14px;margin:0 auto 16px;">
@@ -20,37 +32,37 @@
             </td>
           </tr>
           <tr>
-            <td style="padding:24px;">
-              <p style="margin:0 0 6px;color:#abb7cd;font-size:14px;">SENDER</p>
-              <p style="margin:0 0 8px;color:#f4f6fc;font-size:22px;font-weight:bold;line-height:1.4;overflow-wrap:anywhere;word-break:break-word;">{{from_name}}</p>
-              <p style="margin:0 0 22px;font-size:16px;line-height:1.6;overflow-wrap:anywhere;word-break:break-word;"><a href="mailto:{{from_email}}" style="color:#ffa586;text-decoration:underline;">{{from_email}}</a></p>
+            <td class="email-content" bgcolor="#242f49" style="font-family:Arial,Helvetica,sans-serif;padding:24px;background-color:#242f49;color:#f4f6fc;">
+              <p style="font-family:Arial,Helvetica,sans-serif;margin:0 0 6px;color:#d8dfed;font-size:14px;"><span aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:8px;width:28px;line-height:28px;background-color:#ffa586;color:#161b2f;text-align:center;border-radius:6px;font-family:Arial,Helvetica,sans-serif;font-size:20px;font-weight:bold;">&#9993;</span>SENDER</p>
+              <p style="font-family:Arial,Helvetica,sans-serif;margin:0 0 8px;color:#f4f6fc;font-size:22px;font-weight:bold;line-height:1.4;overflow-wrap:anywhere;word-break:break-word;">{{from_name}}</p>
+              <p style="font-family:Arial,Helvetica,sans-serif;margin:0 0 22px;font-size:16px;line-height:1.6;overflow-wrap:anywhere;word-break:break-word;"><a href="mailto:{{from_email}}" style="color:#ffa586;text-decoration:underline;">{{from_email}}</a></p>
               <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;table-layout:fixed;">
                 <tr>
-                  <td style="padding:16px 0;border-top:1px solid #46536e;">
-                    <p style="margin:0 0 6px;color:#abb7cd;font-size:14px;">CONTACT PHONE</p>
-                    <p style="margin:0;color:#f4f6fc;font-size:16px;line-height:1.6;overflow-wrap:anywhere;word-break:break-word;">{{phone}}</p>
+                  <td style="padding:16px 0;border-top:1px solid #384358;">
+                    <p style="font-family:Arial,Helvetica,sans-serif;margin:0 0 6px;color:#d8dfed;font-size:14px;"><span aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:8px;width:28px;line-height:28px;background-color:#ffa586;color:#161b2f;text-align:center;border-radius:6px;font-family:Arial,Helvetica,sans-serif;font-size:20px;font-weight:bold;">&#9742;</span>CONTACT PHONE</p>
+                    <p style="font-family:Arial,Helvetica,sans-serif;margin:0;color:#f4f6fc;font-size:16px;line-height:1.6;overflow-wrap:anywhere;word-break:break-word;">{{phone}}</p>
                   </td>
                 </tr>
                 <tr>
-                  <td style="padding:16px 0;border-top:1px solid #46536e;">
-                    <p style="margin:0 0 6px;color:#abb7cd;font-size:14px;">SUBJECT</p>
-                    <p style="margin:0;color:#f4f6fc;font-size:16px;line-height:1.6;overflow-wrap:anywhere;word-break:break-word;">{{subject}}</p>
+                  <td style="padding:16px 0;border-top:1px solid #384358;">
+                    <p style="font-family:Arial,Helvetica,sans-serif;margin:0 0 6px;color:#d8dfed;font-size:14px;"><span aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:8px;width:28px;line-height:28px;background-color:#ffa586;color:#161b2f;text-align:center;border-radius:6px;font-family:Arial,Helvetica,sans-serif;font-size:20px;font-weight:bold;">&#8801;</span>SUBJECT</p>
+                    <p style="font-family:Arial,Helvetica,sans-serif;margin:0;color:#f4f6fc;font-size:16px;line-height:1.6;overflow-wrap:anywhere;word-break:break-word;">{{subject}}</p>
                   </td>
                 </tr>
               </table>
-              <p style="margin:14px 0 12px;color:#ffa586;font-size:14px;font-weight:bold;letter-spacing:1px;">MESSAGE</p>
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#1b2238" style="width:100%;table-layout:fixed;background-color:#1b2238;border:1px solid #46536e;border-radius:12px;">
+              <p style="font-family:Arial,Helvetica,sans-serif;margin:14px 0 12px;color:#ffa586;font-size:14px;font-weight:bold;letter-spacing:1px;"><span aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:8px;width:28px;line-height:28px;background-color:#ffa586;color:#161b2f;text-align:center;border-radius:6px;font-family:Arial,Helvetica,sans-serif;font-size:20px;font-weight:bold;">&#9998;</span>MESSAGE</p>
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#161b2f" style="width:100%;table-layout:fixed;background-color:#161b2f;border:1px solid #384358;border-radius:12px;">
                 <tr>
-                  <td style="padding:20px;color:#f4f6fc;font-size:16px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;">{{message}}</td>
+                  <td style="font-family:Arial,Helvetica,sans-serif;padding:20px;color:#f4f6fc;font-size:16px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;">{{message}}</td>
                 </tr>
               </table>
-              <p style="margin:20px 0 0;color:#c1cbe0;font-size:14px;line-height:1.6;">Use your email app’s Reply button to respond to the sender.</p>
+              <p style="font-family:Arial,Helvetica,sans-serif;margin:20px 0 0;color:#d8dfed;font-size:14px;line-height:1.6;">Use your email app’s Reply button to respond to the sender.</p>
             </td>
           </tr>
           <tr>
-            <td bgcolor="#1b2238" style="padding:20px 24px;background-color:#1b2238;border-top:1px solid #46536e;">
-              <p style="margin:0;color:#abb7cd;font-size:14px;line-height:1.6;">Sent through <a href="https://portfolio.juandomanicomilitante.workers.dev" style="color:#ffa586;text-decoration:none;font-weight:bold;">Wancor Portfolio</a></p>
-              <p style="margin:4px 0 0;color:#abb7cd;font-size:14px;line-height:1.6;">Web &amp; Mobile Developer</p>
+            <td bgcolor="#161b2f" style="padding:20px 24px;background-color:#161b2f;border-top:1px solid #384358;">
+              <p style="font-family:Arial,Helvetica,sans-serif;margin:0;color:#d8dfed;font-size:14px;line-height:1.6;">Sent through <a href="https://portfolio.juandomanicomilitante.workers.dev" style="color:#ffa586;text-decoration:none;font-weight:bold;">Wancor Portfolio</a></p>
+              <p style="font-family:Arial,Helvetica,sans-serif;margin:4px 0 0;color:#d8dfed;font-size:14px;line-height:1.6;">Web &amp; Mobile Developer</p>
             </td>
           </tr>
         </table>
