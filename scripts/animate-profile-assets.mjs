@@ -2,22 +2,22 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 // CSS animations work inside SVG images on GitHub; no scripts or external files.
 const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
-const files = new Set([...readme.matchAll(/profile-assets\/([a-z-]+)\.svg/g)].map((match) => match[1].replace(/-motion$/, '')));
+const files = new Set([...readme.matchAll(/profile-assets\/([a-z-]+)\.svg/g)].map((match) => match[1].replace(/-(?:loop-)?motion$/, '')));
 const css = `<style>
-  @keyframes appear { from { opacity: .25; } to { opacity: 1; } }
-  @keyframes rise { from { transform: scaleY(.08); } to { transform: scaleY(1); } }
-  @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  @keyframes appear { 0%,100% { opacity: .82; } 15%,90% { opacity: 1; } }
+  @keyframes rise { 0%,100% { transform: scaleY(.08); } 20%,90% { transform: scaleY(1); } }
+  @keyframes draw { 0%,100% { stroke-dashoffset: 1; } 25%,90% { stroke-dashoffset: 0; } }
   @keyframes glow { 0%,100% { opacity: .72; } 50% { opacity: 1; } }
   @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
   @keyframes turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   @keyframes sail { 0%,100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
   .wheel-spin { transform-origin: 0px 0px; animation: turn 36s linear infinite; }
   .pirate-flag { transform-box: fill-box; transform-origin: left center; animation: sail 6s ease-in-out infinite; }
-  text { animation: appear .8s ease-out both; }
-  .motion-bar { transform-box: fill-box; transform-origin: center bottom; animation: rise 1.6s cubic-bezier(.22,1,.36,1) both; }
-  .motion-line { stroke-dasharray: 1; animation: draw 2.2s ease-out both; }
-  .motion-ring { animation: appear 1.8s ease-out both; }
-  .motion-cell { animation: appear 1s ease-out both; animation-delay: var(--delay,0ms); }
+  text { animation: appear 10s ease-in-out infinite; }
+  .motion-bar { transform-box: fill-box; transform-origin: center bottom; animation: rise 10s cubic-bezier(.22,1,.36,1) infinite; }
+  .motion-line { stroke-dasharray: 1; animation: draw 10s ease-in-out infinite; }
+  .motion-ring { animation: appear 10s ease-in-out infinite; }
+  .motion-cell { animation: appear 8s ease-in-out infinite; animation-delay: var(--delay,0ms); }
   .motion-icon { animation: glow 5s ease-in-out infinite; }
   .motion-logo { animation: float 6s ease-in-out infinite; }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
@@ -41,6 +41,6 @@ for (const file of files) {
     svg = svg.replace(/<rect\b([^>]*width="12"[^>]*height="12"[^>]*)>/g, (_, attrs) => `<rect class="motion-cell" style="--delay:${index++ % 18 * 35}ms" ${attrs}>`);
   }
   svg = svg.replace(/(<svg\b[^>]*>)/, `$1${css}`);
-  await writeFile(new URL(`../profile-assets/${file}-motion.svg`, import.meta.url), svg);
+  await writeFile(new URL(`../profile-assets/${file}-loop-motion.svg`, import.meta.url), svg);
 }
 console.log(`Animated ${files.size} README graphics with reduced-motion support.`);

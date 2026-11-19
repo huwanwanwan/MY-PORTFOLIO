@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="220" viewBox="0 0 960 220" role="img" aria-labelledby="title"><style>
+  @keyframes appear { 0%,100% { opacity: .82; } 15%,90% { opacity: 1; } }
+  @keyframes rise { 0%,100% { transform: scaleY(.08); } 20%,90% { transform: scaleY(1); } }
+  @keyframes draw { 0%,100% { stroke-dashoffset: 1; } 25%,90% { stroke-dashoffset: 0; } }
+  @keyframes glow { 0%,100% { opacity: .72; } 50% { opacity: 1; } }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
+  @keyframes turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes sail { 0%,100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
+  .wheel-spin { transform-origin: 0px 0px; animation: turn 36s linear infinite; }
+  .pirate-flag { transform-box: fill-box; transform-origin: left center; animation: sail 6s ease-in-out infinite; }
+  text { animation: appear 10s ease-in-out infinite; }
+  .motion-bar { transform-box: fill-box; transform-origin: center bottom; animation: rise 10s cubic-bezier(.22,1,.36,1) infinite; }
+  .motion-line { stroke-dasharray: 1; animation: draw 10s ease-in-out infinite; }
+  .motion-ring { animation: appear 10s ease-in-out infinite; }
+  .motion-cell { animation: appear 8s ease-in-out infinite; animation-delay: var(--delay,0ms); }
+  .motion-icon { animation: glow 5s ease-in-out infinite; }
+  .motion-logo { animation: float 6s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style><title id="title">One Piece inspired — Wancor — One Piece inspired developer's log</title>
+    <defs><radialGradient id="sea-light"><stop stop-color="#541A2E"/><stop offset="1" stop-color="#161B2F"/></radialGradient><clipPath id="sea-window"><rect width="960" height="220" rx="22"/></clipPath></defs>
+    <g clip-path="url(#sea-window)">
+      <rect width="960" height="220" fill="#161B2F"/><ellipse cx="480" cy="81" rx="340" ry="170" fill="url(#sea-light)"/>
+      <g fill="none" stroke="#384358" opacity=".5"><circle cx="145" cy="97" r="67"/><circle cx="145" cy="97" r="78" stroke-dasharray="1 10"/><path d="M210 118Q290 165 370 96T600 97T731 90" stroke-dasharray="3 9"/></g>
+      <g transform="translate(145 97)" opacity="1"><g class="wheel-spin" fill="none" stroke="#FFA586" stroke-width="2.5" stroke-linecap="round">
+    <circle r="29.240000000000002"/><circle r="6.88" fill="#B51A2B"/>
+    <g transform="rotate(0)"><path d="M0 -8.6V-43"/><path d="M-3 -43H3" stroke-width="4"/></g><g transform="rotate(45)"><path d="M0 -8.6V-43"/><path d="M-3 -43H3" stroke-width="4"/></g><g transform="rotate(90)"><path d="M0 -8.6V-43"/><path d="M-3 -43H3" stroke-width="4"/></g><g transform="rotate(135)"><path d="M0 -8.6V-43"/><path d="M-3 -43H3" stroke-width="4"/></g><g transform="rotate(180)"><path d="M0 -8.6V-43"/><path d="M-3 -43H3" stroke-width="4"/></g><g transform="rotate(225)"><path d="M0 -8.6V-43"/><path d="M-3 -43H3" stroke-width="4"/></g><g transform="rotate(270)"><path d="M0 -8.6V-43"/><path d="M-3 -43H3" stroke-width="4"/></g><g transform="rotate(315)"><path d="M0 -8.6V-43"/><path d="M-3 -43H3" stroke-width="4"/></g>
+  </g></g><g transform="translate(800 98)"><path d="M-61-62V65" stroke="#FFA586" stroke-width="4" stroke-linecap="round"/><g class="pirate-flag"><path d="M-58-58C-15-78 32-40 73-60V35C26 55-16 18-58 39Z" fill="#242F49"/>
+    <g transform="translate(5 -5)" stroke="#E8EDF5" stroke-width="6" stroke-linecap="round"><path d="m-27-8 48 39m-48 0L21-8"/></g>
+    <path d="M-16 2C-34-37 37-42 27 1L20 13V26H-9V13Z" fill="#E8EDF5"/>
+    <ellipse cx="-5" cy="-1" rx="5" ry="7" fill="#161B2F"/><ellipse cx="16" cy="-1" rx="5" ry="7" fill="#161B2F"/>
+    <path d="m5 6-4 6h8Zm-9 9v10m9-10v10m9-10v10" fill="#161B2F" stroke="#161B2F"/>
+    <g transform="translate(5 -24) scale(0.77)"><path d="M-27 0Q-25-29 0-29T27 0Z" fill="#FFA586"/><path d="M-27-6Q0-2 27-6V1H-27Z" fill="#B51A2B"/><ellipse cy="3" rx="42" ry="8" fill="#FFA586"/><path d="M-25-18Q0-27 22-18" fill="none" stroke="#541A2E" stroke-opacity=".4"/></g>
+  </g></g>
+      <svg x="424" y="35" width="112" height="82" viewBox="65 115 385 280"><path fill="#B51A2B" d="M80 134h105l34 58 34-58h38l-54 92 56 96 87-160h-33l-43 76-31-11 54-93h104L289 378l-34-58-36 58zm51 28 89 156 17-29-73-127z"/></svg>
+      <g font-family="Arial, Helvetica, sans-serif" text-anchor="middle"><text x="480" y="24" fill="#FFA586" font-size="10" letter-spacing="3">DEVELOPER'S LOG</text><text x="480" y="147" fill="#E8EDF5" font-size="19" font-weight="700" letter-spacing="8">WANCOR</text></g>
+      <path d="M0 178C140 148 265 202 420 177S730 149 960 173V220H0Z" fill="#242F49"/>
+      <path d="M0 194C183 169 286 219 493 193S758 172 960 193V220H0Z" fill="#384358" opacity=".65"/>
+      <path d="M0 212C194 192 322 234 540 211S791 197 960 211V220H0Z" fill="#541A2E"/>
+      <g font-family="Arial, Helvetica, sans-serif" font-size="10" letter-spacing="1.7" fill="#B4BED0"><text x="26" y="204">BULACAN, PHILIPPINES</text><text x="934" y="204" text-anchor="end">WEB &amp; MOBILE DEVELOPER</text></g>
+    </g>
+  </svg>

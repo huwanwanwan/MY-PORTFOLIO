@@ -2,7 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 const root = new URL('../profile-assets/', import.meta.url);
 const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
-const files = new Set([...readme.matchAll(/profile-assets\/([a-z-]+)\.svg/g)].map((match) => match[1].replace(/-motion$/, '')));
+const files = new Set([...readme.matchAll(/profile-assets\/([a-z-]+)\.svg/g)].map((match) => match[1].replace(/-(?:loop-)?motion$/, '')));
 const peach = '#FFA586';
 const crimson = '#B51A2B';
 const navy = '#161B2F';
