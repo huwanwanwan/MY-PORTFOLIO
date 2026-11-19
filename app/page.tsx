@@ -48,8 +48,7 @@ export default function Home() {
             <span className="hero-name">Web &amp; Mobile Developer</span>
           </h1>
           <p className="intro-copy">
-            Web and Mobile Developer focused on building responsive websites,
-            functional mobile applications, and intuitive user interfaces.
+            Web and Mobile Developer who creates responsive websites, functional mobile apps, and easy-to-use interfaces.
           </p>
           <div className="intro-actions desktop-only-actions">
             <Link className="intro-link" href="/projects">
