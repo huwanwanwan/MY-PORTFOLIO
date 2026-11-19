@@ -135,8 +135,17 @@ const entries=[...months];const max=Math.max(1,...entries.map(([,value])=>value)
 const path=points.map(([x,y],index)=>`${index?'L':'M'}${x.toFixed(1)} ${y.toFixed(1)}`).join(' ');
 analytics+=`<path d="${path}L314 274H36Z" fill="#B51A2B" fill-opacity=".6"/><path d="${path}" fill="none" stroke="#FFA586" stroke-width="3"/>`;
 entries.forEach(([month],index)=>{const [x,y]=points[index];analytics+=`<circle cx="${x}" cy="${y}" r="2" fill="#FFA586"/>`;if(index%3===0)analytics+=text(x,293,new Date(`${month}-01T00:00:00Z`).toLocaleDateString('en-US',{month:'short',timeZone:'UTC'}),10,colors.muted,'text-anchor="middle"');});
-analytics+=languageDonut(346,147,'Languages by Repository',data.repoLanguageCounts,'repos')+languageDonut(672,147,'Languages by Commit',data.commitLanguageCounts,'commits');
-await save('dashboard-reference',317,`GitHub analytics — ${data.updated}; current streak ${streak} days`,analytics);
+const languageEntries=Object.entries(data.languageBytes).filter(([,bytes])=>bytes>0).sort((a,b)=>b[1]-a[1]);
+const languageTotal=languageEntries.reduce((sum,[,bytes])=>sum+bytes,0);
+const displayedLanguages=languageEntries.slice(0,4);
+if(languageEntries.length>4)displayedLanguages.push(['Other',languageEntries.slice(4).reduce((sum,[,bytes])=>sum+bytes,0)]);
+analytics+=panel(346,147,314,157)+text(360,171,'Most Used Languages',14,colors.ink,'font-weight="700"');
+displayedLanguages.forEach(([name,bytes],index)=>{
+ const percent=bytes/(languageTotal||1)*100;const y=195+index*22;
+ analytics+=text(360,y,name,11)+`<rect x="439" y="${y-8}" width="161" height="7" rx="3.5" fill="#384358"/><rect class="motion-language" x="439" y="${y-8}" width="${Math.max(1,161*percent/100).toFixed(2)}" height="7" rx="3.5" fill="${index%2===0?'#FFA586':'#B51A2B'}"><title>${escape(name)}: ${bytes} code bytes (${percent.toFixed(1)}%)</title></rect>`+text(647,y,`${percent.toFixed(1)}%`,11,colors.muted,'text-anchor="end"');
+});
+analytics+=languageDonut(672,147,'Languages by Commit',data.commitLanguageCounts,'commits');
+await save('dashboard-reference-usage',317,`GitHub analytics — ${data.updated}; languages measured by public code bytes; current streak ${streak} days`,analytics);
 
 let calendar=panel(16,6,968,156)+icon('chart',30,18,20)+text(60,34,'CONTRIBUTION ACTIVITY',15,colors.ink,'font-weight="700"')+text(967,34,`${data.total} contributions in the last 365 days`,12,colors.muted,'text-anchor="end"');
 const weekday=new Date(`${data.days[0].date}T00:00:00Z`).getUTCDay();const heat=['#242F49','#384358','#541A2E','#B51A2B','#FFA586'];let month='';

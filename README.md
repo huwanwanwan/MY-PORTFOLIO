@@ -16,11 +16,11 @@
 <a href="https://portfolio.juandomanicomilitante.workers.dev/projects"><img src="./profile-assets/reference-projects-premium-loop-motion.svg" width="100%" alt="Selected projects: SigLa, BAHAlerto, DocuLink, InventoPOS. Skills in web and mobile development, system design, databases, UI/UX, API integration, problem solving, and teamwork." /></a>
 
 <a id="github-analytics"></a>
-<a href="https://github.com/huwanwanwan?tab=repositories"><img src="https://raw.githubusercontent.com/huwanwanwan/huwanwanwan/main/profile-assets/dashboard-reference-premium-loop-motion.svg" width="100%" alt="Real GitHub repositories, authored commits, contributions, followers, current and longest streaks, contribution history, and language charts." /></a>
+<a href="https://github.com/huwanwanwan?tab=repositories"><img src="https://raw.githubusercontent.com/huwanwanwan/huwanwanwan/main/profile-assets/dashboard-reference-usage-premium-loop-motion.svg" width="100%" alt="Real GitHub repositories, authored commits, contributions, followers, current and longest streaks, contribution history, and language charts." /></a>
 <img src="https://raw.githubusercontent.com/huwanwanwan/huwanwanwan/main/profile-assets/activity-reference-premium-loop-motion.svg" width="100%" alt="GitHub contribution calendar for the last 365 days." />
 
 <a id="achievements"></a>
 <img src="./profile-assets/reference-footer-premium-loop-motion.svg" width="100%" alt="Completed JavaScript Essentials 1 and Python Essentials 1 courses from Cisco, AWS Cloud Practitioner Essentials course, and a 100/100 InventoPOS academic milestone. Contact Juan by email, LinkedIn, or portfolio." />
 
 <p align="center"><a href="mailto:militantejuanenricodomanico@gmail.com">Email</a> · <a href="https://portfolio.juandomanicomilitante.workers.dev">Portfolio</a> · <a href="https://www.linkedin.com/in/juan-domanico-militante-b0972b363/">LinkedIn</a></p>
-<p align="center"><sub>Updated daily from public GitHub data. Commit and language charts cover owned public repositories; languages use each repository's main language. Streaks count consecutive contribution days, not total active days. One Piece inspired fan artwork.</sub></p>
+<p align="center"><sub>Updated daily from public GitHub data. Charts cover owned public repositories. Most Used Languages measures code bytes; Languages by Commit uses each repository's main language. Streaks count consecutive contribution days, not total active days. One Piece inspired fan artwork.</sub></p>

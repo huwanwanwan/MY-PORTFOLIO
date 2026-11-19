@@ -241,7 +241,7 @@ await writeFile(new URL('dashboard-simple.svg', output), svg(960, 1116, 'GitHub 
 await writeFile(new URL('github-data.json', output), JSON.stringify({
   updated, publicRepos: user.public_repos, followers: user.followers, authoredCommits,
   total, activeDays, stars, forks, pullRequests: pullRequests.total_count,
-  issues: issues.total_count, hours, repoLanguageCounts, commitLanguageCounts, days,
+  issues: issues.total_count, hours, repoLanguageCounts, commitLanguageCounts, languageBytes, days,
 }, null, 2) + '\n');
 await import('./build-reference-profile.mjs');
 await import('./apply-pirate-theme.mjs');

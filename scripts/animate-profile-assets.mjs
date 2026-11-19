@@ -6,6 +6,8 @@ const files = new Set([...readme.matchAll(/profile-assets\/([a-z-]+)\.svg/g)].ma
 const css = `<style>
   @keyframes appear { 0%,100% { opacity: .82; } 15%,90% { opacity: 1; } }
   @keyframes rise { 0%,100% { transform: scaleY(.08); } 20%,90% { transform: scaleY(1); } }
+  @keyframes expand { 0%,100% { transform: scaleX(.08); } 20%,90% { transform: scaleX(1); } }
+  .motion-language { transform-box: fill-box; transform-origin: left center; animation: expand 10s ease-in-out infinite; }
   @keyframes draw { 0%,100% { stroke-dashoffset: 1; } 25%,90% { stroke-dashoffset: 0; } }
   @keyframes glow { 0%,100% { opacity: .72; } 50% { opacity: 1; } }
   @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
