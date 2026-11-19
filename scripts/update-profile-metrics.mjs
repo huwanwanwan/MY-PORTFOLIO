@@ -4,7 +4,7 @@ const username = 'huwanwanwan';
 const palette = { midnight: '#161B2F', navy: '#242F49', slate: '#384358', peach: '#FFA586', crimson: '#B51A2B', burgundy: '#541A2E' };
 const { midnight, navy, slate, peach, crimson, burgundy } = palette;
 const escape = (value) => String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[character]);
-const text = (x, y, value, size = 16, color = peach, extra = '') => `<text x="${x}" y="${y}" fill="${color}" font-size="${size}" ${extra}>${escape(value)}</text>`;
+const text = (x, y, value, size = 16, color = peach, extra = '') => `<text x="${x}" y="${y}" fill="${color === peach ? '#FFFFFF' : color}" font-size="${size}" ${extra}>${escape(value)}</text>`;
 const box = (x, y, width, height, fill = navy, radius = 16) => `<rect x="${x}" y="${y}" width="${width}" height="${height}" rx="${radius}" fill="${fill}" stroke="${slate}"/>`;
 const svg = (width, height, title, body) => `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="title"><title id="title">${escape(title)}</title><rect width="${width}" height="${height}" rx="20" fill="${midnight}"/><g font-family="Arial, Helvetica, sans-serif">${body}</g></svg>\n`;
 const output = new URL('../profile-assets/', import.meta.url);

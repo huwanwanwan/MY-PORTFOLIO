@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="960" height="224" viewBox="0 0 960 224" role="img" aria-labelledby="title"><title id="title">Juan Domanico Militante | Web and Mobile Developer</title><rect width="960" height="224" rx="20" fill="#161B2F"/><g font-family="Arial, Helvetica, sans-serif">
   <path d="M0 194H960" stroke="#384358"/>
   <rect x="414" y="32" width="132" height="4" rx="2" fill="#B51A2B"/>
-  <text x="480" y="95" fill="#FFA586" font-size="34" text-anchor="middle" font-weight="700" letter-spacing="2">JUAN DOMANICO MILITANTE</text>
-  <text x="480" y="137" fill="#FFA586" font-size="22" text-anchor="middle">Web and Mobile Developer</text>
-  <text x="480" y="175" fill="#FFA586" font-size="15" text-anchor="middle">Bulacan, Philippines</text>
+  <text x="480" y="95" fill="#FFFFFF" font-size="34" text-anchor="middle" font-weight="700" letter-spacing="2">JUAN DOMANICO MILITANTE</text>
+  <text x="480" y="137" fill="#FFFFFF" font-size="22" text-anchor="middle">Web and Mobile Developer</text>
+  <text x="480" y="175" fill="#FFFFFF" font-size="15" text-anchor="middle">Bulacan, Philippines</text>
 </g></svg>
