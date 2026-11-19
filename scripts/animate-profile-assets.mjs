@@ -9,6 +9,10 @@ const css = `<style>
   @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
   @keyframes glow { 0%,100% { opacity: .72; } 50% { opacity: 1; } }
   @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
+  @keyframes turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes sail { 0%,100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
+  .wheel-spin { transform-origin: 0px 0px; animation: turn 36s linear infinite; }
+  .pirate-flag { transform-box: fill-box; transform-origin: left center; animation: sail 6s ease-in-out infinite; }
   text { animation: appear .8s ease-out both; }
   .motion-bar { transform-box: fill-box; transform-origin: center bottom; animation: rise 1.6s cubic-bezier(.22,1,.36,1) both; }
   .motion-line { stroke-dasharray: 1; animation: draw 2.2s ease-out both; }
@@ -22,7 +26,7 @@ const css = `<style>
 for (const file of files) {
   const source = new URL(`../profile-assets/${file}.svg`, import.meta.url);
   let svg = await readFile(source, 'utf8');
-  svg = svg.replace(/(<g\b[^>]*stroke="#FFA586")/g, '$1 class="motion-icon"');
+  svg = svg.replace(/(<g\b[^>]*stroke="#FFA586")/g, (tag) => tag.includes('class=') ? tag : `${tag} class="motion-icon"`);
   // Animate only the outer logo viewport, never its internal paths or transforms.
   if (file.startsWith('tech-stack') || file === 'portfolio-cover') {
     svg = svg.replace(/<svg\b(?=[^>]*\bx=")/g, '<svg class="motion-logo"');
