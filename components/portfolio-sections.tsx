@@ -533,25 +533,23 @@ export function ExperienceSection({
   const Heading = slider ? "h2" : "h1";
   return (
     <section
-      className="section-block content-section"
+      className="section-block content-section experience-reference"
       id="experience"
       aria-labelledby="experience-heading"
     >
       <div className="content-section-heading editorial-heading">
         <p className="editorial-eyebrow">
           <span className="editorial-eyebrow-dot" aria-hidden="true" />
-          EDUCATION &amp; MILESTONES
+          EXPERIENCE &amp; EDUCATION
         </p>
         <Heading id="experience-heading" className="editorial-title">
-          <span className="heading-highlight">My development journey,</span>
-          <br />
-          <span className="text-muted">education, growth, and milestones.</span>
+          Experience &amp; Education
         </Heading>
-        <p>Projects, systems, and academic milestones from my development journey.</p>
+        <p>A look at the projects I&apos;ve built and what I&apos;ve learned along the way.</p>
       </div>
       <div className="experience-education-grid">
         <div className="journey-column">
-          <h2 className="journey-column-heading">Experience</h2>
+          <h2 className="journey-column-heading">Project Experience</h2>
           <ExperienceList />
         </div>
         <div className="journey-column">
@@ -559,7 +557,7 @@ export function ExperienceSection({
           <article className="journey-entry scroll-reveal" data-scroll-reveal>
             <span className="journey-index"><EducationIcon name="code" /></span>
             <div>
-              <p className="education-level">College</p>
+              <p className="education-level">College ? Current</p>
               <h4>Bachelor of Science in Information Technology</h4>
               <p className="journey-role">Pambayang Dalubhasaan ng Marilao (PDM)</p>
               <p>Currently pursuing a BS in Information Technology.</p>
@@ -601,7 +599,7 @@ export function ExperienceSection({
                 <circle cx="12" cy="8" r="7" />
                 <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
               </svg>
-              Academic Honors &amp; Awards
+              Academic Achievements
             </span>
             <div className="education-awards-grid">
               <div className="education-award-item">
@@ -627,17 +625,6 @@ export function ExperienceSection({
           </div>
         </div>
       </div>
-      <div className="credentials-single">
-        <article className="credential-panel scroll-reveal" id="credentials" data-scroll-reveal>
-          <p className="section-kicker">ACADEMIC HONORS</p>
-          <h2>Academic Recognition</h2>
-          <p>
-            Graduated with Honors and received a Conduct Award from
-            Assemblywoman Felicita&apos;s G. Bernardino Memorial Trade School.
-          </p>
-        </article>
-      </div>
-
       <CertificationsShowcase variant={slider ? "carousel" : "scrollable"} />
     </section>
   );

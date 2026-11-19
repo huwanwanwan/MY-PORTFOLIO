@@ -21168,3 +21168,39 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
 .experience-project-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .project-detail-heading { margin: 28px 0 36px; }
 .project-detail-page .smart-info-desc-box { display: grid; gap: 14px; }
+
+/* Compact Experience and Education timeline, based on the supplied reference. */
+.page #experience.experience-reference { padding-top: 36px; }
+.page #experience > .editorial-heading { display: block; margin-bottom: 32px; }
+.page #experience > .editorial-heading .editorial-title { font-size: clamp(30px, 3.5vw, 44px); line-height: 1.15; color: var(--ink); margin-bottom: 8px; }
+.page #experience > .editorial-heading > p:last-child { max-width: none; margin: 0; font-size: 17px; color: var(--text-secondary); }
+.page #experience .experience-education-grid { grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); gap: 36px; }
+.page #experience .journey-column + .journey-column { padding-left: 30px; border-left: 1px solid var(--line); }
+.page #experience .journey-column-heading { display: flex; align-items: center; gap: 16px; border: 0; padding-bottom: 10px; font-size: 22px; font-weight: 750; }
+.page #experience .journey-column-heading::after { content: ''; height: 1px; flex: 1; background: var(--accent); opacity: .65; }
+.page #experience .journey-entry { position: relative; grid-template-columns: 18px minmax(0,1fr); gap: 20px; padding: 15px 0; border: 0; }
+.page #experience .journey-entry::before { left: 8px; top: 28px; bottom: -18px; width: 1px; background: var(--line); }
+.page #experience .journey-entry:last-child::before,
+.page #experience .journey-column > .journey-entry:nth-last-of-type(1)::before { display: none; }
+.page #experience .journey-index { position: relative; top: 4px; width: 16px; height: 16px; min-width: 16px; margin: 0; padding: 0; border-radius: 50%; border: 3px solid var(--canvas); outline: 2px solid color-mix(in srgb,var(--accent) 28%,transparent); background: var(--accent); box-shadow: none; }
+.page #experience .journey-index > * { display: none; }
+.page #experience .journey-entry .education-level { color: var(--accent); font-size: 12px; margin-bottom: 3px; }
+.page #experience .journey-entry h4 { font-size: 18px; line-height: 1.25; font-weight: 750; }
+.page #experience .journey-entry > div > p:not(.education-level) { font-size: 14px; line-height: 1.45; margin-top: 6px; color: var(--ink); }
+.page #experience .journey-entry .tag-row { gap: 8px; margin-top: 9px; }
+.page #experience .journey-entry .tag-row > span { padding: 4px 12px; min-height: 0; font-size: 12px; line-height: 1.3; border-radius: 20px; background: var(--raised-surface); color: var(--ink); }
+.page #experience .experience-project-links { margin-top: 9px; }
+.page #experience .experience-project-link { padding: 5px 10px; font-size: 12px; }
+.page #experience .education-awards-card { margin-top: 18px; padding: 18px 0 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: transparent; box-shadow: none; }
+.page #experience .education-awards-card::before { display: none; }
+.page #experience .education-awards-badge { display: flex; color: var(--ink); font-size: 21px; text-transform: none; letter-spacing: -.02em; padding: 0; background: transparent; border: 0; }
+.page #experience .education-awards-badge > svg { display: none; }
+.page #experience .education-awards-grid { gap: 14px; margin-top: 16px; }
+.page #experience .education-award-item { padding: 0; border: 0; background: transparent; box-shadow: none; }
+.page #experience .education-award-item h5 { font-size: 16px; margin-bottom: 3px; }
+.page #experience .education-award-item p { font-size: 13px; line-height: 1.4; }
+@media(max-width:800px) {
+  .page #experience .experience-education-grid { grid-template-columns: minmax(0,1fr); gap: 28px; }
+  .page #experience .journey-column + .journey-column { border-left: 0; padding-left: 0; }
+  .page #experience .journey-entry { gap: 14px; }
+}

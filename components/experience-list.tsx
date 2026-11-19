@@ -130,17 +130,16 @@ const experienceProjects: Record<string, string[]> = {
 export default function ExperienceList() {
   return (
     <div className="experience-list-container">
-      {experiencesList.map((entry) => (
+      {experiencesList.slice(0, 4).map((entry) => (
         <article
           key={entry.index}
           className="journey-entry scroll-reveal visible"
           data-scroll-reveal
         >
-          <span className="journey-index">{entry.index}</span>
+          <span className="journey-index" aria-hidden="true" />
           <div>
             <p className="education-level">{entry.level}</p>
             <h4>{entry.title}</h4>
-            <p className="journey-role">{entry.role}</p>
             <p>{entry.description}</p>
             <div className="tag-row">
               {entry.tags.map((tag) => (
