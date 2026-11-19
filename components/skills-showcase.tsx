@@ -219,7 +219,7 @@ export default function SkillsShowcase({ projectLimit }: { projectLimit?: number
             <span className="text-muted">from interface design to backend logic.</span>
           </h2>
           <p>
-            Disciplines developed through <strong className="editorial-highlight">offline-first mobile architecture</strong>, full-stack web platforms, and interactive engineering.
+            Skills gained from building <strong className="editorial-highlight">mobile apps that work offline, complete web applications, and interactive systems.</strong>
           </p>
         </div>
 
