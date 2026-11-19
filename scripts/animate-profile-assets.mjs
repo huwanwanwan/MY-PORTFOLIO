@@ -28,7 +28,7 @@ for (const file of files) {
   let svg = await readFile(source, 'utf8');
   svg = svg.replace(/(<g\b[^>]*stroke="#FFA586")/g, (tag) => tag.includes('class=') ? tag : `${tag} class="motion-icon"`);
   // Animate only the outer logo viewport, never its internal paths or transforms.
-  if (file.startsWith('tech-stack') || file === 'portfolio-cover') {
+  if (file.startsWith('tech-stack') || file.includes('toolkit') || file === 'portfolio-cover') {
     svg = svg.replace(/<svg\b(?=[^>]*\bx=")/g, '<svg class="motion-logo"');
   }
   if (file.startsWith('dashboard')) {
@@ -38,7 +38,7 @@ for (const file of files) {
   }
   if (file.startsWith('activity')) {
     let index = 0;
-    svg = svg.replace(/<rect\b([^>]*width="12"[^>]*height="12"[^>]*)>/g, (_, attrs) => `<rect class="motion-cell" style="--delay:${index++ % 18 * 35}ms" ${attrs}>`);
+    svg = svg.replace(/<rect\b([^>]*width="12"[^>]*height="(?:10|12)"[^>]*)>/g, (_, attrs) => `<rect class="motion-cell" style="--delay:${index++ % 18 * 35}ms" ${attrs}>`);
   }
   svg = svg.replace(/(<svg\b[^>]*>)/, `$1${css}`);
   await writeFile(new URL(`../profile-assets/${file}-loop-motion.svg`, import.meta.url), svg);

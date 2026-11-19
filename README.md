@@ -1,47 +1,26 @@
 <div align="center">
-  <img src="./profile-assets/portfolio-cover-grand-voyage-loop-motion.svg" width="100%" alt="Original Wancor logo from my portfolio" />
-
+  <img src="./profile-assets/reference-header-loop-motion.svg" width="100%" alt="Wancor pirate banner — Juan Domanico Militante, Web and Mobile Developer" />
+  <a href="https://portfolio.juandomanicomilitante.workers.dev"><img src="./profile-assets/reference-link-portfolio-loop-motion.svg" width="170" alt="Portfolio" /></a>
+  <a href="mailto:militantejuanenricodomanico@gmail.com"><img src="./profile-assets/reference-link-email-loop-motion.svg" width="170" alt="Email" /></a>
+  <a href="https://www.linkedin.com/in/juan-domanico-militante-b0972b363/"><img src="./profile-assets/reference-link-linkedin-loop-motion.svg" width="170" alt="LinkedIn" /></a>
+  <p><a href="#about-me">About Me</a> &nbsp; · &nbsp; <a href="#tech-stack">Tech Stack</a> &nbsp; · &nbsp; <a href="#selected-projects">Projects</a> &nbsp; · &nbsp; <a href="#github-analytics">Analytics</a> &nbsp; · &nbsp; <a href="#achievements">Achievements</a></p>
 </div>
 
-<h1 align="center">Juan Domanico Militante</h1>
-<p align="center">Web &amp; Mobile Developer · Bulacan, Philippines</p>
-
-<p align="center">
-  <a href="https://portfolio.juandomanicomilitante.workers.dev"><img src="./profile-assets/link-portfolio-simple-grand-voyage-loop-motion.svg" width="150" alt="Visit my portfolio" /></a>
-  <a href="mailto:militantejuanenricodomanico@gmail.com"><img src="./profile-assets/link-email-simple-grand-voyage-loop-motion.svg" width="150" alt="Email Juan" /></a>
-  <a href="https://www.linkedin.com/in/juan-domanico-militante-b0972b363/"><img src="./profile-assets/link-linkedin-simple-grand-voyage-loop-motion.svg" width="150" alt="Connect on LinkedIn" /></a>
-</p>
-
-<p align="center"><a href="#about-me">About me</a> &nbsp; · &nbsp; <a href="#tech-stack">Tech stack</a> &nbsp; · &nbsp; <a href="#selected-projects">Projects</a> &nbsp; · &nbsp; <a href="#github-analytics">Analytics</a></p>
-
-<br />
-
 <a id="about-me"></a>
-<img src="./profile-assets/section-about-simple-grand-voyage-loop-motion.svg" width="100%" alt="A little about me" />
-
-<img src="./profile-assets/about-simple-grand-voyage-loop-motion.svg" width="100%" alt="I'm Juan Domanico Militante, a Web and Mobile Developer and an Information Technology student at Pambayang Dalubhasaan ng Marilao. I have 2 years of experience creating websites and mobile applications. I enjoy building simple, useful, and easy-to-use systems, including mobile apps that work offline and web applications for managing documents, sales, and inventory." />
-
-<br />
+<img src="./profile-assets/reference-about-loop-motion.svg" width="100%" alt="I'm Juan Domanico Militante, a Web and Mobile Developer and an Information Technology student at Pambayang Dalubhasaan ng Marilao. I have 2 years of experience creating websites and mobile applications. I enjoy building simple, useful, and easy-to-use systems, including mobile apps that work offline and web applications for managing documents, sales, and inventory." />
 
 <a id="tech-stack"></a>
-<img src="./profile-assets/tech-stack-simple-grand-voyage-loop-motion.svg" width="100%" alt="My tech stack, grouped by web, mobile and games, backend and data, tools and hardware — all in my portfolio colors" />
-
-<br />
+<img src="./profile-assets/reference-toolkit-loop-motion.svg" width="100%" alt="Tech stack: web development, mobile and games, backend and data, tools and others. Real technology logos in peach." />
 
 <a id="selected-projects"></a>
-<img src="./profile-assets/section-work-simple-grand-voyage-loop-motion.svg" width="100%" alt="What I build" />
-<a href="https://portfolio.juandomanicomilitante.workers.dev/projects"><img src="./profile-assets/featured-work-categories-grand-voyage-loop-motion.svg" width="100%" alt="What I build: mobile applications, website, games, and hardware systems" /></a>
-
-<br />
+<a href="https://portfolio.juandomanicomilitante.workers.dev/projects"><img src="./profile-assets/reference-projects-loop-motion.svg" width="100%" alt="Selected projects: SigLa, BAHAlerto, DocuLink, InventoPOS. Skills in web and mobile development, system design, databases, UI/UX, API integration, problem solving, and teamwork." /></a>
 
 <a id="github-analytics"></a>
-<img src="./profile-assets/section-metrics-simple-grand-voyage-loop-motion.svg" width="100%" alt="My GitHub at a glance" />
-<a href="https://github.com/huwanwanwan?tab=repositories"><img src="https://raw.githubusercontent.com/huwanwanwan/huwanwanwan/main/profile-assets/dashboard-simple-grand-voyage-loop-motion.svg" width="100%" alt="GitHub analytics: contribution history, public activity stats, commit hours in UTC+8, languages by repository and by commit, and metric tiles" /></a>
+<a href="https://github.com/huwanwanwan?tab=repositories"><img src="https://raw.githubusercontent.com/huwanwanwan/huwanwanwan/main/profile-assets/dashboard-reference-loop-motion.svg" width="100%" alt="Real GitHub repositories, authored commits, contributions, followers, current and longest streaks, contribution history, and language charts." /></a>
+<img src="https://raw.githubusercontent.com/huwanwanwan/huwanwanwan/main/profile-assets/activity-reference-loop-motion.svg" width="100%" alt="GitHub contribution calendar for the last 365 days." />
 
-<br />
+<a id="achievements"></a>
+<img src="./profile-assets/reference-footer-loop-motion.svg" width="100%" alt="Open source contributor, project builder, continuous learner, problem solver, team collaborator. Contact Juan by email, LinkedIn, or portfolio." />
 
-<img src="https://raw.githubusercontent.com/huwanwanwan/huwanwanwan/main/profile-assets/activity-simple-grand-voyage-loop-motion.svg" width="100%" alt="My contribution calendar over the last 365 days, in my portfolio palette" />
-
-<p align="center"><sub>Updated daily from public GitHub data. Commit charts cover my authored commits on default branches of owned public repositories. Language donuts use each repository's main language.</sub></p>
-
-<p align="center"><a href="mailto:militantejuanenricodomanico@gmail.com">Have a project in mind? Let's talk.</a></p>
+<p align="center"><a href="mailto:militantejuanenricodomanico@gmail.com">Email</a> · <a href="https://portfolio.juandomanicomilitante.workers.dev">Portfolio</a> · <a href="https://www.linkedin.com/in/juan-domanico-militante-b0972b363/">LinkedIn</a></p>
+<p align="center"><sub>Updated daily from public GitHub data. Commit and language charts cover owned public repositories; languages use each repository's main language. Streaks count consecutive contribution days, not total active days. One Piece inspired fan artwork.</sub></p>
