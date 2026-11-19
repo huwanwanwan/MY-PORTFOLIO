@@ -98,9 +98,19 @@ for (const repo of ownRepos) {
 }
 const pullRequests = await github(`/search/issues?q=${encodeURIComponent(`author:${username} type:pr is:public`)}&per_page=1`);
 const issues = await github(`/search/issues?q=${encodeURIComponent(`author:${username} type:issue is:public`)}&per_page=1`);
-const activityResponse = await fetch('https://portfolio.juandomanicomilitante.workers.dev/api/github-contributions', { signal: AbortSignal.timeout(30000), cache: 'no-store' });
-if (!activityResponse.ok) throw new Error(`Contribution calendar: ${activityResponse.status}`);
-const activity = await activityResponse.json();
+let activity;
+for (let attempt = 0; attempt < 4; attempt++) {
+  try {
+    const response = await fetch('https://portfolio.juandomanicomilitante.workers.dev/api/github-contributions', { signal: AbortSignal.timeout(30000), cache: 'no-store' });
+    if (!response.ok) throw new Error(`Contribution calendar: ${response.status}`);
+    activity = await response.json();
+    break;
+  } catch (error) {
+    if (attempt === 3) throw error; // Keep previously published data if the source remains unavailable.
+    console.warn(`Contribution source unavailable; retry ${attempt + 1}/3.`);
+    await new Promise(resolve => setTimeout(resolve, 2000 * 2 ** attempt));
+  }
+}
 if (activity.username !== username || !Array.isArray(activity.days) || activity.days.length < 360) throw new Error('Invalid contribution calendar');
 const days = activity.days;
 if (days.some((day) => !/^\d{4}-\d{2}-\d{2}$/.test(day.date) || !Number.isInteger(day.count) || day.count < 0 || !Number.isInteger(day.level) || day.level < 0 || day.level > 4)) throw new Error('Invalid contribution day');
