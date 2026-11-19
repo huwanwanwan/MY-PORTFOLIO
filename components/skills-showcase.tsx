@@ -240,7 +240,7 @@ export default function SkillsShowcase({ projectLimit }: { projectLimit?: number
               <span className="capability-num">01</span>
               <h3>Web &amp; System Development</h3>
               <p>
-                Designing and building responsive web applications, document management platforms (DocuLink), and inventory POS systems (InventoPOS) using React, JavaScript, PHP, HTML/CSS, and relational database systems.
+                Building websites that work well on phones and computers. Projects include DocuLink for managing documents and InventoPOS for tracking sales and stock, using React, JavaScript, PHP, HTML, CSS, and databases.
               </p>
             </div>
           </article>
@@ -261,7 +261,7 @@ export default function SkillsShowcase({ projectLimit }: { projectLimit?: number
               <span className="capability-num">02</span>
               <h3>Mobile &amp; Accessibility Solutions</h3>
               <p>
-                Crafting mobile applications like <strong>SigLa</strong> (Sign Language Translator for hearing and speech-impaired communities) using Kotlin and mobile front-end frameworks, with offline translation and intuitive touch interactions.
+                Building easy-to-use mobile apps with Kotlin, including <strong>SigLa</strong>, a sign language translator for people with hearing or speech difficulties. It works without an internet connection and has simple touch controls.
               </p>
             </div>
           </article>
@@ -282,7 +282,7 @@ export default function SkillsShowcase({ projectLimit }: { projectLimit?: number
               <span className="capability-num">03</span>
               <h3>Game Development &amp; AR</h3>
               <p>
-                Developing augmented-reality mobile games (Attack on PDM) and interactive combat action games (Force X, Almighty Jungle) with Unity, C#, 2D animation (Marilao Fantasy), and character AI behaviors.
+                Creating games with Unity and C#, including Attack on PDM, which adds game objects to the real world through a phone camera. Other projects include action games Force X and Almighty Jungle, 2D animation in Marilao Fantasy, and characters that react to players.
               </p>
             </div>
           </article>
@@ -303,7 +303,7 @@ export default function SkillsShowcase({ projectLimit }: { projectLimit?: number
               <span className="capability-num">04</span>
               <h3>Hardware, IoT &amp; Sensors</h3>
               <p>
-                Integrating physical microcontrollers with software workflows: automated attendance gates with RFID readers and camera face recognition (RecogniZarenus), and acoustic rainfall alert triggers (La Niña Detector) with Arduino.
+                Connecting devices and sensors to software. Projects include RecogniZarenus, an attendance gate that uses ID card readers and face recognition, and La Niña Detector, an Arduino device that detects rain sounds and sends alerts.
               </p>
             </div>
           </article>
