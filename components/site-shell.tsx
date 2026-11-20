@@ -42,11 +42,24 @@ type SiteShellProps = {
 export default function SiteShell({ activePage, children }: SiteShellProps) {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement | null>(null);
+  const headerRef = useRef<HTMLElement | null>(null);
   const darkMode = useSyncExternalStore(
     subscribeToTheme,
     getThemeSnapshot,
     () => false,
   );
+
+  useLayoutEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    const updateHeaderHeight = () => {
+      document.documentElement.style.setProperty("--header-height", `${header.getBoundingClientRect().height}px`);
+    };
+    updateHeaderHeight();
+    const observer = new ResizeObserver(updateHeaderHeight);
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
 
   useLayoutEffect(() => {
     // Reset before painting the destination so only its entrance animation plays.
@@ -158,7 +171,7 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
   return (
     <main className={`page${darkMode ? " dark" : ""}`}>
       <article className="portfolio-shell">
-        <header className="topbar">
+        <header className="topbar" ref={headerRef}>
           <div className="brand-block">
             <Link className="brand-link" href="/" aria-label="Juan Domanico Militante Home">
               <Image

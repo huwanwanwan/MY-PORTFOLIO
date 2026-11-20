@@ -1,0 +1,151 @@
+/* Shared responsive rules follow the legacy styles so breakpoints stay consistent. */
+.page :is(.content-section, .editorial-heading, .form-group, .form-grid-row,
+  .project-slide-info, .cert-category-intro, .mega-footer-col) {
+  min-width: 0;
+}
+
+.page :is(h1, h2, h3, .cert-slide-issuer, .contact-email-address) {
+  overflow-wrap: anywhere;
+}
+
+.page [id] {
+  scroll-margin-top: calc(var(--header-height, 76px) + 16px);
+}
+
+.page :is(.cert-carousel-scroll, .skills-projects-horizontal-scroll) {
+  align-items: flex-start;
+  overscroll-behavior-x: contain;
+}
+
+.page :is(.project-slide-card, .cert-slide-card) {
+  height: auto;
+  align-self: flex-start;
+}
+
+@media (max-width: 768px) {
+  .page .portfolio-shell {
+    padding-top: var(--header-height, 184px) !important;
+  }
+
+  .page .dashboard-content {
+    --content-gutter: 20px;
+    padding-inline: 20px;
+  }
+
+  .page .profile-intro {
+    margin-inline: calc(-1 * var(--content-gutter));
+  }
+
+  .page .topbar {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    column-gap: 8px !important;
+    padding-left: max(12px, env(safe-area-inset-left)) !important;
+    padding-right: max(12px, env(safe-area-inset-right)) !important;
+  }
+
+  .page .topbar-actions {
+    gap: 6px;
+    padding-left: 0 !important;
+  }
+
+  .page .topbar :is(.theme-toggle, .topbar-resume) {
+    min-height: 44px !important;
+  }
+
+  .page .topbar .theme-toggle {
+    min-width: 44px !important;
+  }
+
+  .page .topbar .topbar-resume {
+    padding-inline: 10px;
+    gap: 5px;
+  }
+
+  .page .topbar .brand-name {
+    white-space: normal !important;
+    font-size: .82rem !important;
+    overflow-wrap: normal;
+  }
+
+  .page .topbar .active-mode {
+    white-space: normal !important;
+    letter-spacing: 0;
+  }
+
+  .page .topbar .primary-nav {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px !important;
+    border-radius: 16px !important;
+    overflow: visible !important;
+  }
+
+  .page .topbar .primary-nav a {
+    min-height: 44px !important;
+    padding: 0 6px !important;
+    font-size: .875rem !important;
+  }
+
+  .page :is(.cert-filter-pills, .projects-category-tabs) {
+    flex-wrap: wrap;
+    max-width: 100%;
+    gap: 8px;
+    overflow: visible;
+  }
+
+  .page .projects-controls-bar {
+    align-items: stretch;
+    min-width: 0;
+  }
+
+  .page :is(.cert-pill-btn, .project-filter-pill, .skills-filter-btn) {
+    min-height: 44px;
+  }
+
+  .page :is(.styled-input, .styled-textarea, select) {
+    min-width: 0;
+    max-width: 100%;
+    font-size: 16px;
+  }
+
+  .page :is(.form-footer-action, .github-activity-heading,
+    .github-calendar-summary, .github-calendar-footer) {
+    flex-wrap: wrap;
+  }
+
+  .page .editorial-contact-index .editorial-index-value {
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  /* Summary credentials remain discoverable without an unlabelled swipe. */
+  .page .cert-summary .cert-carousel-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-inline: 0 !important;
+    padding: 0 !important;
+  }
+
+  .page .cert-summary .cert-carousel-scroll {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr);
+    overflow: visible !important;
+    gap: 20px !important;
+  }
+
+  .page .cert-summary .cert-carousel-scroll > .cert-slide-card {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 768px) {
+  .page .topbar .primary-nav {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .page .cert-summary .cert-carousel-scroll {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
