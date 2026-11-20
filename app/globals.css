@@ -597,6 +597,41 @@ body:not(.dark) .theme-toggle {
 
 }
 
+.page .topbar-resume {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--soft);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.page .topbar-resume:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.page .topbar-resume:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 800px) {
+  .page .topbar-resume {
+    min-height: 36px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+}
+
 
 
 .theme-toggle {
