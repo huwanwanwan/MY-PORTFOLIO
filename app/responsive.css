@@ -149,3 +149,32 @@
   }
 }
 
+/* Keep both the document and its controls usable on phones held sideways. */
+@media (max-width: 768px), (max-height: 600px) {
+  .cert-lightbox-backdrop {
+    height: 100dvh !important;
+    padding: 12px !important;
+  }
+
+  .cert-lightbox-backdrop .cert-lightbox-container {
+    height: calc(100dvh - 24px) !important;
+    max-height: calc(100dvh - 24px) !important;
+  }
+
+  .cert-lightbox-backdrop .cert-lightbox-caption {
+    flex: 0 1 auto;
+    max-height: 45%;
+    padding: 16px;
+    overflow-y: auto;
+  }
+
+  .cert-lightbox-backdrop .cert-lightbox-media-wrapper {
+    min-height: 100px !important;
+  }
+
+  .cert-lightbox-backdrop :is(.cert-lightbox-close, .cert-lightbox-arrow) {
+    display: flex;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
