@@ -13,6 +13,19 @@ export interface CertificationItem {
 
 export const certificationsData: CertificationItem[] = [
   {
+    id: "operating-systems-basics",
+    title: "Operating Systems Basics",
+    issuer: "Cisco Networking Academy",
+    date: "November 20, 2026",
+    category: "Certifications",
+    image: "/certificates/operating-systems-basics.png",
+    alt: "Operating Systems Basics completion certificate awarded to Militante Juan Enrico Domanico by Cisco Networking Academy",
+    recipient: "Militante Juan Enrico Domanico",
+    description:
+      "Certificate for successfully completing Operating Systems Basics, offered by Networking Academy through the Cisco Networking Academy program. Completed on November 20, 2026.",
+    tags: ["Operating Systems", "IT Fundamentals", "Cisco Networking Academy"],
+  },
+  {
     id: "computer-hardware-basics",
     title: "Computer Hardware Basics",
     issuer: "Cisco Networking Academy",
