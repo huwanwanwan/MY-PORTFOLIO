@@ -13,6 +13,19 @@ export interface CertificationItem {
 
 export const certificationsData: CertificationItem[] = [
   {
+    id: "computer-hardware-basics",
+    title: "Computer Hardware Basics",
+    issuer: "Cisco Networking Academy",
+    date: "November 20, 2026",
+    category: "Certifications",
+    image: "/certificates/computer-hardware-basics.png",
+    alt: "Computer Hardware Basics completion certificate awarded to Militante Juan Enrico Domanico by Cisco Networking Academy",
+    recipient: "Militante Juan Enrico Domanico",
+    description:
+      "Certificate for successfully completing Computer Hardware Basics, offered by Networking Academy through the Cisco Networking Academy program. Completed on November 20, 2026.",
+    tags: ["Computer Hardware", "IT Fundamentals", "Cisco Networking Academy"],
+  },
+  {
     id: "python-essentials-1",
     title: "Python Essentials 1",
     issuer: "Cisco Networking Academy",
