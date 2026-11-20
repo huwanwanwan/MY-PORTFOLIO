@@ -13,6 +13,19 @@ export interface CertificationItem {
 
 export const certificationsData: CertificationItem[] = [
   {
+    id: "introduction-to-cybersecurity",
+    title: "Introduction to Cybersecurity",
+    issuer: "Cisco Networking Academy",
+    date: "November 20, 2026",
+    category: "Certifications",
+    image: "/certificates/introduction-to-cybersecurity.png",
+    alt: "Introduction to Cybersecurity completion certificate awarded to Militante Juan Enrico Domanico by Cisco Networking Academy",
+    recipient: "Militante Juan Enrico Domanico",
+    description:
+      "Certificate for successfully completing Introduction to Cybersecurity, offered by Networking Academy through the Cisco Networking Academy program. Completed on November 20, 2026.",
+    tags: ["Cybersecurity", "Network Security", "Cisco Networking Academy"],
+  },
+  {
     id: "operating-systems-basics",
     title: "Operating Systems Basics",
     issuer: "Cisco Networking Academy",
