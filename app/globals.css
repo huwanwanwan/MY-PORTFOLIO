@@ -601,6 +601,7 @@ body:not(.dark) .theme-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
   flex: 0 0 auto;
   min-height: 44px;
   padding: 0 16px;
