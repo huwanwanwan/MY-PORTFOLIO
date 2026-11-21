@@ -16,7 +16,7 @@ export const experiencesList: ExperienceItem[] = [
   {
     index: "01",
     level: "Latest Capstone / Thesis",
-    title: "SigLa — Sign Language Translator",
+    title: "SigLa: Sign Language Translator",
     role: "Front-End Developer & UI/UX",
     description: "Developed the mobile application's user interface and experience for a 5-tier sign language translation system with offline-first recognition.",
     tags: ["Kotlin", "React.js", "Tailwind"],
@@ -24,7 +24,7 @@ export const experiencesList: ExperienceItem[] = [
   {
     index: "02",
     level: "College Game Development",
-    title: "Class Project (Game Dev) — Whole Class Project",
+    title: "Class Project (Game Dev): Whole Class Project",
     role: "Game Developer & Systems Contributor",
     description: "Collaborated with our entire class on a comprehensive game development pipeline, contributing to gameplay mechanics, world design, and cross-functional team coordination.",
     tags: ["Unity", "C#", "Game Development"],
@@ -32,7 +32,7 @@ export const experiencesList: ExperienceItem[] = [
   {
     index: "03",
     level: "Proposed Thesis",
-    title: "RecogniZarenus — Facial Recognition Attendance",
+    title: "RecogniZarenus: Facial Recognition Attendance",
     role: "Lead Developer",
     description: "Built a facial recognition attendance system with automated turnstile gate, RFID scanning, and real-time SMS parent notifications.",
     tags: ["PHP", "JavaScript", "Arduino"],
@@ -40,7 +40,7 @@ export const experiencesList: ExperienceItem[] = [
   {
     index: "04",
     level: "Collab Case Study (2025)",
-    title: "HALAL 2025 — E-Voting System",
+    title: "HALAL 2025: E-Voting System",
     role: "Co-Developer",
     description: "Developed an e-voting system combining Database Management Systems and OOP with Java and MySQL for voter verification and ballot tabulation.",
     tags: ["Java", "MySQL"],
@@ -48,7 +48,7 @@ export const experiencesList: ExperienceItem[] = [
   {
     index: "05",
     level: "Web Dev & SAD Case Study",
-    title: "InventoPOS — Point of Sale & Inventory",
+    title: "InventoPOS: Point of Sale & Inventory",
     role: "UI/UX Designer",
     description: "Designed the UI/UX in Figma and built the interface with React.js. Received a perfect 100/100 grade for the completed system.",
     tags: ["React.js", "Figma", "CSS"],
@@ -56,7 +56,7 @@ export const experiencesList: ExperienceItem[] = [
   {
     index: "06",
     level: "EDOOP Case Study · PDM",
-    title: "DocuLink — Document Request System",
+    title: "DocuLink: Document Request System",
     role: "Front-End Developer",
     description: "Built the front-end for a web-based document request system with order-tracking-style status pipeline (Processing → Ongoing → Delivered).",
     tags: ["HTML", "CSS", "JavaScript"],
@@ -64,7 +64,7 @@ export const experiencesList: ExperienceItem[] = [
   {
     index: "07",
     level: "Arduino Exhibit · 1st Year",
-    title: "La Niña Detector — IoT Rain Alarm",
+    title: "La Niña Detector: IoT Rain Alarm",
     role: "Hardware & Firmware Developer",
     description: "Developed an Arduino-based rain sensor alarm system, demonstrated live to the college dean at the Arduino Exhibit.",
     tags: ["Arduino", "IoT"],
@@ -82,13 +82,13 @@ export const experiencesList: ExperienceItem[] = [
     level: "Game Development Projects",
     title: "Force X · Almighty Jungle · Isla Arena",
     role: "Game Developer & Animator",
-    description: "Developed three Unity games — a 3D combat action game, an action-adventure quest, and a tropical island battle arena — including character design, animations, enemy AI, and combat mechanics.",
+    description: "Developed three Unity games: a 3D combat action game, an action-adventure quest, and a tropical island battle arena, including character design, animations, enemy AI, and combat mechanics.",
     tags: ["Unity", "C#", "3D"],
   },
   {
     index: "10",
     level: "College AR Project",
-    title: "Attack on PDM — AR Game",
+    title: "Attack on PDM: AR Game",
     role: "Co-Developer",
     description: "Co-developed a Pokémon GO-inspired augmented reality game in Unity featuring five Filipino mythology characters with real-world AR combat.",
     tags: ["Unity", "AR"],
@@ -96,7 +96,7 @@ export const experiencesList: ExperienceItem[] = [
   {
     index: "11",
     level: "CGA Project",
-    title: "Marilao Fantasy — 2D Animation",
+    title: "Marilao Fantasy: 2D Animation",
     role: "Character Animator",
     description: "Animated characters frame by frame using FlipaClip for a 2D action animation featuring a hero with Thunder Wave and Dash abilities.",
     tags: ["FlipaClip", "Animation"],
@@ -104,9 +104,9 @@ export const experiencesList: ExperienceItem[] = [
   {
     index: "12",
     level: "1st Year College",
-    title: "Milktaste — Desktop Application",
+    title: "Milktaste: Desktop Application",
     role: "Lead Developer",
-    description: "Built my first college software project using Java as the sole developer in a two-member team — a foundational milestone in my development journey.",
+    description: "Built my first college software project using Java as the sole developer in a two-member team, a foundational milestone in my development journey.",
     tags: ["Java"],
   },
   {

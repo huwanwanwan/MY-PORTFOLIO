@@ -25,7 +25,7 @@ export default function BahalertoShowcase() {
   return (
     <section className="bahalerto-showcase" ref={containerRef} aria-labelledby="bahalerto-demo-heading">
       <p className="bahalerto-new-caption">Newly Created System</p>
-      <h3 id="bahalerto-demo-heading">BAHAlerto — A More Prepared Community</h3>
+      <h3 id="bahalerto-demo-heading">BAHAlerto: A More Prepared Community</h3>
       <div className="bahalerto-videos">
         {[
           { src: "community-demo-cropped.mp4", poster: "website-home.png", label: "Mobile app download website demo" },

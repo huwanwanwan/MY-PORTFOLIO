@@ -338,7 +338,7 @@ export const projectsData: ProjectItem[] = [
     isFeatured: true,
     paragraphs: [
       "This is our collaborative Game Development project created collectively by our whole class. Every member contributed to the conceptualization, asset production, gameplay mechanics, and world design.",
-      "Working as an entire class on a unified game development pipeline taught us essential industry workflows—cross-functional team coordination, version integration, asset optimization, and collective problem-solving to bring an ambitious interactive vision to life.",
+      "Working as an entire class on a unified game development pipeline taught us essential industry workflows: cross-functional team coordination, version integration, asset optimization, and collective problem-solving to bring an ambitious interactive vision to life.",
     ],
     highlights: [
       { label: "Collaboration Scope", value: "Whole Class Collaborative Project" },

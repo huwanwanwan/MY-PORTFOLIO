@@ -105,7 +105,7 @@ export const certificationsData: CertificationItem[] = [
   },
   {
     id: "arduino-competition",
-    title: "Arduino Competition — \"La Niña\"",
+    title: "Arduino Competition: \"La Niña\"",
     issuer: "Pambayang Dalubhasaan ng Marilao · College of Computer Studies",
     date: "May 20, 2024",
     category: "Competitions/Certifications",

@@ -211,7 +211,7 @@ export default function SkillsShowcase({ projectLimit }: { projectLimit?: number
         <div className="editorial-heading" data-scroll-reveal>
           <p className="editorial-eyebrow">
             <span className="editorial-eyebrow-dot" aria-hidden="true" />
-            02 — CORE TECHNICAL STRENGTHS
+            02: CORE TECHNICAL STRENGTHS
           </p>
           <h2 id="capabilities-heading" className="editorial-title">
             <span className="heading-highlight">Key areas of focus,</span>
@@ -312,7 +312,7 @@ export default function SkillsShowcase({ projectLimit }: { projectLimit?: number
 
       <section className="skills-project-timeline-section" aria-labelledby="projects-strip-heading" data-scroll-reveal>
         <div className="skills-project-timeline-heading" data-scroll-reveal>
-          <p className="editorial-eyebrow"><span className="editorial-eyebrow-dot" aria-hidden="true" />03 &mdash; EXPLORE BY TECHNOLOGY</p>
+          <p className="editorial-eyebrow"><span className="editorial-eyebrow-dot" aria-hidden="true" />03: EXPLORE BY TECHNOLOGY</p>
           <h2 id="projects-strip-heading" className="editorial-title">
             <span className="heading-highlight">Projects built with these tools,</span><br />
             <span className="text-muted">across four years of IT study.</span>

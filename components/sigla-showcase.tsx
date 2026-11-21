@@ -54,7 +54,7 @@ export default function SiglaShowcase() {
           </div>
         </div>
         <div className="sigla-video-caption">
-          <span className="sigla-caption-title">SigLa — Sign Language Translator Demo</span>
+          <span className="sigla-caption-title">SigLa: Sign Language Translator Demo</span>
         </div>
       </div>
 

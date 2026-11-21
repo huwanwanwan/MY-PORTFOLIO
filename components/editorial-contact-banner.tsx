@@ -19,7 +19,7 @@ const bannerContentMap: Record<PageId, BannerContent> = {
     titleHighlight: "Let's connect",
     titleLine2: "and build it.",
     description:
-      "Whether you need a responsive website, an Android mobile application, or a full-stack platform — reach out directly on any channel below.",
+      "Whether you need a responsive website, an Android mobile application, or a full-stack platform, reach out directly on any channel below.",
   },
   about: {
     eyebrow: "COLLABORATE & GROW",
@@ -37,7 +37,7 @@ const bannerContentMap: Record<PageId, BannerContent> = {
     titleHighlight: "Let's discuss",
     titleLine2: "your next project.",
     description:
-      "From offline-first tools like SIGLA to full-featured POS systems — I'm ready to bring your software requirements into reality.",
+      "From offline-first tools like SIGLA to full-featured POS systems, I'm ready to bring your software requirements into reality.",
   },
   skills: {
     eyebrow: "TECHNICAL ROADMAP",
@@ -55,7 +55,7 @@ const bannerContentMap: Record<PageId, BannerContent> = {
     titleHighlight: "Let's work",
     titleLine2: "together.",
     description:
-      "Grounded in strong academic performance with honors and real capstone leadership — let's connect for internships, roles, or freelance work.",
+      "Grounded in strong academic performance with honors and real capstone leadership, let's connect for internships, roles, or freelance work.",
   },
   contact: {
     eyebrow: "DIRECT CHANNELS",
@@ -64,7 +64,7 @@ const bannerContentMap: Record<PageId, BannerContent> = {
     titleHighlight: "Reach out",
     titleLine2: "anytime.",
     description:
-      "I actively monitor my email, Facebook, LinkedIn, and GitHub — send a message on your preferred channel and I'll get back to you promptly.",
+      "I actively monitor my email, Facebook, LinkedIn, and GitHub. Send a message on your preferred channel and I'll get back to you promptly.",
   },
 };
 

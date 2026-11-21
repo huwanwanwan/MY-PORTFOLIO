@@ -227,7 +227,7 @@ export function AboutSection({
     <>
       <section className="section-block content-section about-life about-personal-hero" id="about" aria-labelledby="about-heading">
         <header className="about-personal-heading">
-          <div><p className="editorial-eyebrow"><span className="editorial-eyebrow-dot" aria-hidden="true" />02 &#8212; OUTSIDE THE CODE EDITOR</p>
+          <div><p className="editorial-eyebrow"><span className="editorial-eyebrow-dot" aria-hidden="true" />02: OUTSIDE THE CODE EDITOR</p>
           <h1 id="about-heading" className="editorial-title"><span className="heading-highlight">Life and interests,</span><br /><span className="text-muted">outside daily development.</span></h1></div>
         </header>
         <div className="about-personal-layout">
@@ -250,7 +250,7 @@ export function AboutSection({
             <article className="about-personal-interest about-personal-favorites">
               <h2>My Favorites</h2>
               <dl className="about-favorites-list">
-                  <div><dt><AboutIcon name="music" /> Song</dt><dd>&ldquo;This Time I Fall&rdquo; — Jesse Lawrence</dd></div>
+                  <div><dt><AboutIcon name="music" /> Song</dt><dd>&ldquo;This Time I Fall&rdquo; by Jesse Lawrence</dd></div>
                   <div><dt><AboutIcon name="star" /> Artist</dt><dd>Maroon 5</dd></div>
                   <div><dt><AboutIcon name="film" /> Movie</dt><dd><em>More Than Blue</em></dd></div>
                   <div><dt><AboutIcon name="food" /> Food</dt><dd>Palabok</dd></div>
@@ -395,7 +395,7 @@ export function AboutSection({
         <div className="content-section-heading editorial-heading">
           <p className="editorial-eyebrow">
             <span className="editorial-eyebrow-dot" aria-hidden="true" />
-            01 — MY DEVELOPMENT PRINCIPLES
+            01: MY DEVELOPMENT PRINCIPLES
           </p>
           <h2 id="about-approach-heading" className="editorial-title">
             <span className="heading-highlight">How I approach every build,</span>
@@ -410,7 +410,7 @@ export function AboutSection({
           <article className="about-principle scroll-reveal" data-scroll-reveal>
             <div className="about-principle-top">
               <span className="about-principle-symbol"><EducationIcon name="code" /></span>
-              <span className="about-principle-highlight">01 &#8212; PLAN &amp; UNDERSTAND</span>
+              <span className="about-principle-highlight">01: PLAN &amp; UNDERSTAND</span>
             </div>
             <h3>Start with the problem.</h3>
             <p>
@@ -421,7 +421,7 @@ export function AboutSection({
           <article className="about-principle scroll-reveal" data-scroll-reveal>
             <div className="about-principle-top">
               <span className="about-principle-symbol"><AboutIcon name="layers" /></span>
-              <span className="about-principle-highlight">02 &#8212; BUILD &amp; ITERATE</span>
+              <span className="about-principle-highlight">02: BUILD &amp; ITERATE</span>
             </div>
             <h3>Shape a clear solution.</h3>
             <p>
@@ -432,7 +432,7 @@ export function AboutSection({
           <article className="about-principle scroll-reveal" data-scroll-reveal>
             <div className="about-principle-top">
               <span className="about-principle-symbol"><AboutIcon name="growth" /></span>
-              <span className="about-principle-highlight">03 &#8212; IMPROVE &amp; GROW</span>
+              <span className="about-principle-highlight">03: IMPROVE &amp; GROW</span>
             </div>
             <h3>Keep learning by building.</h3>
             <p>
@@ -557,7 +557,7 @@ export function ExperienceSection({
           <article className="journey-entry scroll-reveal" data-scroll-reveal>
             <span className="journey-index"><EducationIcon name="code" /></span>
             <div>
-              <p className="education-level">College &mdash; Current</p>
+              <p className="education-level">College: Current</p>
               <h4>Bachelor of Science in Information Technology</h4>
               <p className="journey-role">Pambayang Dalubhasaan ng Marilao (PDM)</p>
               <p>Currently pursuing a BS in Information Technology.</p>
