@@ -551,12 +551,8 @@ export function ExperienceSection({
         <div className="journey-column">
           <h2 className="journey-column-heading">Project Experience</h2>
           <ExperienceList />
-          {!slider && (
-            <>
-              <h2 className="journey-column-heading">Work Experience</h2>
-              <ExperienceList work />
-            </>
-          )}
+          <h2 className="journey-column-heading">Work Experience</h2>
+          <ExperienceList work />
         </div>
         <div className="journey-column">
           <h2 className="journey-column-heading">Education</h2>
