@@ -545,12 +545,18 @@ export function ExperienceSection({
         <Heading id="experience-heading" className="editorial-title">
           Experience &amp; Education
         </Heading>
-        <p>A look at the projects I&apos;ve built and what I&apos;ve learned along the way.</p>
+        <p>A look at my work experience, the projects I&apos;ve built, and what I&apos;ve learned along the way.</p>
       </div>
       <div className="experience-education-grid">
         <div className="journey-column">
           <h2 className="journey-column-heading">Project Experience</h2>
           <ExperienceList />
+          {!slider && (
+            <>
+              <h2 className="journey-column-heading">Work Experience</h2>
+              <ExperienceList work />
+            </>
+          )}
         </div>
         <div className="journey-column">
           <h2 className="journey-column-heading">Education</h2>

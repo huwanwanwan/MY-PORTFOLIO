@@ -127,10 +127,13 @@ const experienceProjects: Record<string, string[]> = {
   "11": ["marilao-fantasy"], "12": ["milktaste"],
 };
 
-export default function ExperienceList() {
+export default function ExperienceList({ work = false }: { work?: boolean } = {}) {
+  const entries = work
+    ? experiencesList.filter((entry) => entry.title === "Lazada")
+    : experiencesList.slice(0, 4);
   return (
     <div className="experience-list-container">
-      {experiencesList.slice(0, 4).map((entry) => (
+      {entries.map((entry) => (
         <article
           key={entry.index}
           className="journey-entry scroll-reveal visible"
@@ -140,6 +143,7 @@ export default function ExperienceList() {
           <div>
             <p className="education-level">{entry.level}</p>
             <h4>{entry.title}</h4>
+            {work && <p className="journey-role">{entry.role}</p>}
             <p>{entry.description}</p>
             <div className="tag-row">
               {entry.tags.map((tag) => (
