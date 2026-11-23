@@ -21234,6 +21234,8 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
 .page #experience .journey-index { position: relative; left: 0; top: 4px; box-sizing: border-box; width: 16px; height: 16px; min-width: 16px; margin: 0; padding: 0; border-radius: 50%; border: 3px solid var(--canvas); outline: 2px solid color-mix(in srgb,var(--accent) 28%,transparent); background: var(--accent); box-shadow: none; }
 .page #experience .journey-index > * { display: none; }
 .page #experience .journey-entry .education-level { color: var(--accent); font-size: 12px; margin-bottom: 3px; }
+.page #experience .education-honor-badges { align-items: center; gap: 6px 18px; margin-top: 8px; }
+.page #experience .education-honor-tag { padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; font-size: 13px; font-weight: 400; line-height: 1.45; letter-spacing: 0; }
 .page #experience .journey-entry h4 { font-size: 18px; line-height: 1.25; font-weight: 400; }
 .page #experience .journey-entry > div > p:not(.education-level) { font-size: 14px; line-height: 1.45; margin-top: 6px; color: var(--ink); }
 .page #experience .journey-entry .tag-row { gap: 8px; margin-top: 9px; }
