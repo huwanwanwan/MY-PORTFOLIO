@@ -142,7 +142,7 @@ export default function ExperienceList({ work = false }: { work?: boolean } = {}
           <span className="journey-index" aria-hidden="true" />
           <div>
             <p className="education-level">{entry.level}</p>
-            <h4 className={work ? undefined : "journey-project-title"}>{entry.title}</h4>
+            <h4>{entry.title}</h4>
             {work && <p className="journey-role">{entry.role}</p>}
             <p>{entry.description}</p>
             <div className="tag-row">
