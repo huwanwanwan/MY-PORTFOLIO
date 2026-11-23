@@ -543,7 +543,7 @@ export function ExperienceSection({
           EXPERIENCE &amp; EDUCATION
         </p>
         <Heading id="experience-heading" className="editorial-title">
-          Experience &amp; Education
+          <span className="heading-highlight">Experience &amp; Education</span>
         </Heading>
         <p>A look at my work experience, the projects I&apos;ve built, and what I&apos;ve learned along the way.</p>
       </div>
