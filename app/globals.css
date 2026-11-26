@@ -21426,3 +21426,9 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
     text-wrap: balance;
   }
 }
+
+/* Give the navigation container a visible lower edge in both themes. */
+html[data-theme] body .page .topbar {
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 18%, transparent) !important;
+  box-shadow: 0 5px 16px rgb(16 23 41 / 16%) !important;
+}
