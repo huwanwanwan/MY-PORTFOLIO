@@ -21312,3 +21312,46 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
 )) {
   filter: brightness(1.8) drop-shadow(0 0 0.45px rgb(255 255 255 / 65%));
 }
+
+/* Keep the project introduction and category controls compact on phones. */
+@media (max-width: 768px) {
+  .page .projects-slider-header,
+  .page .projects-slider-header .cert-gallery-intro,
+  .page .projects-slider-header .cert-gallery-actions {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .page .projects-slider-header .editorial-title {
+    display: block;
+    font-size: clamp(24px, 6vw, 30px);
+    text-wrap: balance;
+  }
+
+  .page .projects-slider-header .editorial-title > br {
+    display: none;
+  }
+
+  .page .projects-slider-header .editorial-title > .text-muted {
+    display: block;
+    margin-top: 6px;
+  }
+
+  .page .projects-slider-header .cert-filter-pills {
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    width: 100%;
+    min-width: 0;
+    border-radius: 28px;
+    padding: 4px;
+    gap: 4px;
+    overflow-x: auto !important;
+    overscroll-behavior-x: contain;
+  }
+
+  .page .projects-slider-header .cert-pill-btn {
+    flex: 0 0 auto !important;
+    min-height: 44px;
+    white-space: nowrap !important;
+  }
+}
