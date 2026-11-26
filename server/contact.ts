@@ -1,6 +1,8 @@
 import disposableDomains from "../data/disposable-email-domains.json";
 import { CONTACT_HOSTNAME } from "../data/contact-config";
 
+import { checkEmailDomain, isValidContactEmail } from "./email-validation";
+
 const blockedDomains = new Set(disposableDomains);
 const CONTACT_RECIPIENT = "militantejuanenricodomanico@gmail.com";
 export function isDisposableEmail(email: string) {
@@ -60,7 +62,7 @@ export async function handleContact(request: Request, env: ContactEnvironment, s
   const name = text("name"), email = text("email").toLowerCase(), phone = text("phone"), subject = text("subject"), message = text("message"), token = text("token");
   if (text("honeypot")) return reply("Unable to verify this submission.", 403);
   if (name.length < 2 || name.length > 100 || phone.length > 40 || subject.length > 160 || message.length < 10 || message.length > 1000 || /[\r\n]/.test(name + email + subject + phone)) return reply("Please enter your name and a message between 10 and 1,000 characters.", 400);
-  if (email.length > 254 || !/^[^\s@]+@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,63}$/.test(email)) return reply("Please enter a valid email address.", 400);
+  if (!isValidContactEmail(email)) return reply("Please enter a valid email address.", 400);
   if (isDisposableEmail(email)) return reply("Temporary or disposable email addresses are not accepted. Please use your regular email address.", 400);
   if (!token || token.length > 2048) return reply("Please complete the bot verification.", 403);
 
@@ -74,6 +76,10 @@ export async function handleContact(request: Request, env: ContactEnvironment, s
     const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(email));
     const emailKey = Array.from(new Uint8Array(digest), (value) => value.toString(16).padStart(2, "0")).join("");
     if (!(await env.CONTACT_SEND_LIMIT.limit({ key: `ip:${ip}` })).success || !(await env.CONTACT_SEND_LIMIT.limit({ key: `email:${emailKey}` })).success) return reply("Please wait a minute before sending another message.", 429);
+
+    const emailDomain = await checkEmailDomain(email, sendRequest);
+    if (emailDomain === "invalid") return reply("This email domain cannot receive email. Please check your email address.", 400);
+    if (emailDomain === "unavailable") return reply("Unable to check your email domain right now. Please try again shortly.", 503);
 
     // Keep the original configured EmailJS service behind server validation.
     // Its public key selects the account; no credentials are sent to browsers.

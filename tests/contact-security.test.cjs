@@ -7,7 +7,12 @@ require.extensions['.ts'] = (module, filename) => {
     compilerOptions: { module: ts.ModuleKind.CommonJS, esModuleInterop: true },
   }).outputText, filename);
 };
-const { handleContact, isDisposableEmail } = require('../server/contact.ts');
+const { handleContact: handleContactRaw, isDisposableEmail } = require('../server/contact.ts');
+// Existing delivery tests use a deterministic routable domain; no real DNS or mail calls.
+const handleContact = (request, env, sendRequest) => handleContactRaw(request, env, (url, options) =>
+  new URL(url).hostname === 'cloudflare-dns.com'
+    ? Promise.resolve(Response.json({ Status: 0, Answer: [{ type: 15, data: '10 mail.example.com.' }] }))
+    : sendRequest(url, options));
 const host = 'portfolio.juandomanicomilitante.workers.dev';
 const fields = { name: 'Example Visitor', email: 'visitor@gmail.com', message: 'Please help with a website project.', token: 'test-token' };
 const env = () => ({ TURNSTILE_SECRET_KEY: 'test-secret', CONTACT_RATE_LIMIT: { limit: async () => ({ success: true }) }, CONTACT_SEND_LIMIT: { limit: async () => ({ success: true }) } });
@@ -154,4 +159,55 @@ test('identifies provider authentication failure without exposing credentials or
   assert.match(body, /MAIL_AUTH/);
   assert.equal(body.includes(secret), false);
   assert.equal(body.includes('strict mode'), false);
+});
+
+const { checkEmailDomain, isValidContactEmail } = require('../server/email-validation.ts');
+for (const email of ['name@gmail.com@', 'name@gmail.com@@', '.name@gmail.com', 'name.@gmail.com', 'na..me@gmail.com', 'name()@gmail.com', `${'a'.repeat(65)}@gmail.com`, `name@${'a'.repeat(64)}.com`]) {
+  test(`rejects malformed email ${email}`, () => assert.equal(isValidContactEmail(email), false));
+}
+for (const email of ['name+project@gmail.com', 'first.last@company.com']) {
+  test(`accepts conventional email format ${email}`, () => assert.equal(isValidContactEmail(email), true));
+}
+for (const [name, dns, expected] of [
+  ['nonexistent domain', { Status: 3 }, 400],
+  ['null MX domain', { Status: 0, Answer: [{ type: 15, data: '0 .' }] }, 400],
+  ['domain without mail or address records', { Status: 0 }, 400],
+  ['temporary DNS failure', { Status: 2 }, 503],
+]) {
+  test(`blocks ${name} before either delivery provider`, async () => {
+    const calls = [];
+    const response = await handleContactRaw(request({ ...fields, email: 'visitor@invented-domain.invalid' }), env(), async url => {
+      calls.push(url);
+      if (new URL(url).hostname === 'challenges.cloudflare.com') return Response.json(verified);
+      assert.equal(new URL(url).hostname, 'cloudflare-dns.com');
+      assert.equal(new URL(url).searchParams.get('name'), 'invented-domain.invalid');
+      assert.equal(url.includes('visitor'), false);
+      return Response.json(dns);
+    });
+    assert.equal(response.status, expected);
+    assert.ok(calls.length >= 2);
+  });
+}
+test('DNS network failures fail closed before delivery', async () => {
+  const response = await handleContactRaw(request(), env(), async url => {
+    if (new URL(url).hostname === 'challenges.cloudflare.com') return Response.json(verified);
+    assert.equal(new URL(url).hostname, 'cloudflare-dns.com');
+    throw new Error('network unavailable');
+  });
+  assert.equal(response.status, 503);
+});
+test('accepts a domain with SMTP implicit MX address records', async () => {
+  assert.equal(await checkEmailDomain('visitor@company.com', async url => {
+    const type = new URL(url).searchParams.get('type');
+    return Response.json(type === 'A' ? { Status: 0, Answer: [{ type: 1, data: '192.0.2.10' }] } : { Status: 0 });
+  }), 'valid');
+});
+test('accepts an explicit MX without fallback DNS queries', async () => {
+  let count = 0;
+  assert.equal(await checkEmailDomain('visitor@gmail.com', async url => {
+    count++;
+    assert.equal(new URL(url).searchParams.get('type'), 'MX');
+    return Response.json({ Status: 0, Answer: [{ type: 15, data: '10 mail.gmail.com.' }] });
+  }), 'valid');
+  assert.equal(count, 1);
 });
