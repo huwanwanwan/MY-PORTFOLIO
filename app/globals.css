@@ -21364,3 +21364,65 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
     color: #fff;
   }
 }
+
+/* Balance the full Projects page controls on narrow screens. */
+@media (max-width: 768px) {
+  .page #projects .projects-controls-bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .page #projects .projects-category-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    min-width: 0;
+    gap: 8px;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .page #projects .project-filter-pill {
+    justify-content: center;
+    min-width: 0;
+    min-height: 44px;
+    padding: 8px 6px;
+    gap: 6px;
+    font-size: 12px;
+    white-space: normal;
+  }
+
+  .page #projects .project-filter-pill:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .page #projects .project-filter-pill.active {
+    background: #b51a2b;
+    color: #fff;
+  }
+
+  .page #projects .projects-sort-switch {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .page #projects .sort-label {
+    grid-column: 1 / -1;
+  }
+
+  .page #projects .sort-pill {
+    min-width: 0;
+    min-height: 44px;
+    padding: 8px;
+    white-space: normal;
+  }
+
+  .page #projects-heading {
+    display: block;
+    text-wrap: balance;
+  }
+}
