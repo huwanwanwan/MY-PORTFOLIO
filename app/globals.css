@@ -21436,3 +21436,35 @@ html[data-theme] body .page .topbar {
 html[data-theme="dark"] body .page .topbar {
   box-shadow: 0 6px 12px rgb(0 0 0 / 35%), 0 14px 28px -6px rgb(0 0 0 / 50%) !important;
 }
+
+/* Equal certificate containers across every row, regardless of tag wrapping. */
+.page .cert-scrollable-grid {
+  grid-auto-rows: 1fr;
+  align-items: stretch;
+}
+
+.page .cert-slide-card {
+  box-sizing: border-box;
+  min-width: 0;
+  align-self: stretch;
+}
+
+.page .cert-scrollable-grid > .cert-grid-card {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+}
+
+.page .cert-slide-card .cert-card-image-box {
+  flex: 0 0 auto;
+  aspect-ratio: 16 / 10;
+}
+
+.page .cert-slide-card .cert-card-footer {
+  margin-top: auto;
+}
+
+.page .cert-summary .cert-carousel-scroll {
+  grid-auto-rows: 1fr;
+  align-items: stretch;
+}
