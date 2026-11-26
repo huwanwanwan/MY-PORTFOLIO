@@ -16043,7 +16043,10 @@ html.dark .cert-lightbox-desc {
   .page .home-portrait-frame::after {
     content: "";
     position: absolute;
-    inset: auto 0 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
     height: 2px;
     z-index: 2;
     background: var(--portrait-outline);
