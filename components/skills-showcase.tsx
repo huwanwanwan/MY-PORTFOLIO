@@ -238,9 +238,9 @@ export default function SkillsShowcase({ projectLimit }: { projectLimit?: number
             </div>
             <div className="capability-content-layer">
               <span className="capability-num">01</span>
-              <h3>Web &amp; System Development</h3>
+              <h3>Web Application Development</h3>
               <p>
-                Building websites that work well on phones and computers. Projects include DocuLink for managing documents and InventoPOS for tracking sales and stock, using React, JavaScript, PHP, HTML, CSS, and databases.
+                Developing responsive websites and web applications with React, JavaScript, PHP, HTML, CSS, and databases. Projects include DocuLink for document management and InventoPOS for sales and inventory management.
               </p>
             </div>
           </article>
@@ -259,9 +259,9 @@ export default function SkillsShowcase({ projectLimit }: { projectLimit?: number
             </div>
             <div className="capability-content-layer">
               <span className="capability-num">02</span>
-              <h3>Mobile &amp; Accessibility Solutions</h3>
+              <h3>Mobile App Development &amp; Accessibility</h3>
               <p>
-                Building easy-to-use mobile apps with Kotlin, including <strong>SigLa</strong>, a sign language translator for people with hearing or speech difficulties. It works without an internet connection and has simple touch controls.
+                Developing accessible mobile applications with Kotlin. Projects include <strong>SigLa</strong>, a sign language translation app with offline recognition and intuitive touch controls to support communication between signers and nonsigners.
               </p>
             </div>
           </article>
@@ -280,9 +280,9 @@ export default function SkillsShowcase({ projectLimit }: { projectLimit?: number
             </div>
             <div className="capability-content-layer">
               <span className="capability-num">03</span>
-              <h3>Game Development &amp; AR</h3>
+              <h3>Game Development &amp; Augmented Reality</h3>
               <p>
-                Creating games with Unity and C#, including Attack on PDM, which adds game objects to the real world through a phone camera. Other projects include action games Force X and Almighty Jungle, 2D animation in Marilao Fantasy, and characters that react to players.
+                Creating games and augmented reality experiences with Unity and C#. Projects include Attack on PDM, which overlays virtual objects on a live camera view; action games Force X and Almighty Jungle; and 2D animation in Marilao Fantasy.
               </p>
             </div>
           </article>
@@ -301,9 +301,9 @@ export default function SkillsShowcase({ projectLimit }: { projectLimit?: number
             </div>
             <div className="capability-content-layer">
               <span className="capability-num">04</span>
-              <h3>Hardware, IoT &amp; Sensors</h3>
+              <h3>Hardware &amp; IoT Integration</h3>
               <p>
-                Connecting devices and sensors to software. Projects include RecogniZarenus, an attendance gate that uses ID card readers and face recognition, and La Niña Detector, an Arduino device that detects rain sounds and sends alerts.
+                Integrating hardware, sensors, and software for automated monitoring and alerts. Projects include RecogniZarenus, an attendance system with RFID scanning and facial recognition, and La Niña Detector, an Arduino-based device that detects rainfall sounds and sends alerts.
               </p>
             </div>
           </article>
