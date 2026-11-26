@@ -21469,19 +21469,38 @@ html[data-theme="dark"] body .page .topbar {
   align-items: stretch;
 }
 
-/* Make rejected email addresses easy to find and correct. */
-.page #contact .styled-input[aria-invalid="true"] {
-  border-color: #c8102e;
-  box-shadow: 0 0 0 2px rgb(200 16 46 / 20%);
+/* High-contrast email errors remain visible while the field has focus. */
+.page #contact {
+  --contact-error: #b42318;
+  --contact-error-bg: #fff1f0;
+  --contact-error-ring: rgb(180 35 24 / 25%);
+}
+.page.dark #contact {
+  --contact-error: #ffb4ab;
+  --contact-error-bg: #4a2029;
+  --contact-error-ring: rgb(255 180 171 / 30%);
+}
+.page #contact .styled-input[aria-invalid="true"],
+.page #contact .styled-input[aria-invalid="true"]:focus {
+  border: 2px solid var(--contact-error);
+  background: var(--contact-error-bg);
+  color: var(--contact-error);
+  box-shadow: 0 0 0 4px var(--contact-error-ring);
 }
 .page #contact .contact-field-error {
-  margin: 6px 0 0;
-  color: #b51a2b;
+  margin: 10px 0 0;
+  padding: 8px 12px;
+  border-left: 3px solid var(--contact-error);
+  border-radius: 4px;
+  background: var(--contact-error-bg);
+  color: var(--contact-error);
   font-size: 13px;
+  font-weight: 600;
   line-height: 1.5;
 }
-.page.dark #contact .styled-input[aria-invalid="true"] {
-  border-color: #ff9686;
-  box-shadow: 0 0 0 2px rgb(255 150 134 / 22%);
+.page #contact .contact-status-banner.error {
+  background: var(--contact-error-bg);
+  border: 1px solid var(--contact-error);
+  color: var(--contact-error);
+  font-weight: 600;
 }
-.page.dark #contact .contact-field-error { color: #ffafa0; }

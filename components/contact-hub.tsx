@@ -508,7 +508,7 @@ export default function ContactHub({ compact = false }: { compact?: boolean } = 
             )}
 
             {formStatus === "error" && (
-              <div className="contact-status-banner error" style={{ background: "rgba(239, 68, 68, 0.1)", border: "1px solid rgba(239, 68, 68, 0.3)", color: "#ef4444", padding: "12px 16px", borderRadius: "10px", display: "flex", alignItems: "center", gap: "10px" }}>
+              <div className="contact-status-banner error" role="alert">
                 <span>{formError || "Unable to send your message right now. Please try again later."}</span>
               </div>
             )}
