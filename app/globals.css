@@ -21338,20 +21338,29 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
   }
 
   .page .projects-slider-header .cert-filter-pills {
-    flex-wrap: nowrap !important;
-    justify-content: flex-start !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     width: 100%;
     min-width: 0;
-    border-radius: 28px;
-    padding: 4px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
     gap: 4px;
-    overflow-x: auto !important;
-    overscroll-behavior-x: contain;
+    overflow: visible !important;
   }
 
   .page .projects-slider-header .cert-pill-btn {
-    flex: 0 0 auto !important;
+    min-width: 0;
     min-height: 44px;
-    white-space: nowrap !important;
+    padding: 8px 6px !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    border-radius: 999px;
+  }
+
+  .page .projects-slider-header .cert-pill-btn.active {
+    background: #b51a2b;
+    color: #fff;
   }
 }
