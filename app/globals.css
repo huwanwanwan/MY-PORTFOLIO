@@ -16026,7 +16026,7 @@ html.dark .cert-lightbox-desc {
 
 @media (max-width: 768px) {
 
-  /* Portrait on mobile: subtle minimal divider line */
+  /* Keep a visible boundary across the bottom of the mobile portrait. */
 
   .home-portrait-frame {
 
@@ -16034,10 +16034,20 @@ html.dark .cert-lightbox-desc {
 
     margin: 0 auto;
 
-    border-bottom: 1px solid rgba(140, 140, 140, 0.3) !important;
+    border-bottom: 0;
 
     overflow: visible;
 
+  }
+
+  .page .home-portrait-frame::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 2px;
+    z-index: 2;
+    background: var(--portrait-outline);
+    pointer-events: none;
   }
 
   .home-portrait-image {
