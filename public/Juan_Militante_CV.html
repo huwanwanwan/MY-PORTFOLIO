@@ -3,11 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=/Juan_Militante_CV.pdf">
   <title>Juan Enrico D. Militante ? Resume</title>
-  <link rel="canonical" href="/Juan_Militante_CV.pdf">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #252525; color: #fff; font-family: Arial, sans-serif; }
+    .toolbar { min-height: 64px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px; padding: 12px 16px; background: #333; }
+    .toolbar a { color: #fff; text-decoration: none; border: 1px solid #777; padding: 9px 16px; border-radius: 6px; font-size: 14px; }
+    .toolbar a:hover { background: #484848; }
+    .toolbar a:focus-visible { outline: 3px solid #ffa586; outline-offset: 3px; }
+    main { min-height: calc(100svh - 64px); display: flex; align-items: center; justify-content: center; padding: 32px 20px; }
+    .resume { display: block; width: auto; height: auto; max-width: 100%; max-height: calc(100svh - 128px); box-shadow: 0 8px 32px #0008; background: #fff; }
+    @media (max-width: 600px) { main { padding: 24px 12px; } .resume { width: 100%; max-height: none; } }
+  </style>
 </head>
 <body>
-  <p><a href="/Juan_Militante_CV.pdf">Open Juan Enrico D. Militante?s resume (PDF)</a></p>
+  <nav class="toolbar" aria-label="Resume actions">
+    <a href="/Juan_Militante_CV.pdf">Open PDF / Print</a>
+    <a href="/Juan_Militante_CV.pdf" download="Juan_Militante_CV.pdf">Download PDF</a>
+  </nav>
+  <main>
+    <img class="resume" src="/resume-preview.webp" width="1191" height="1684" alt="Resume of Juan Enrico D. Militante, aspiring software developer and BSIT student. Includes professional summary, technical skills, projects, education, work experience, and certifications. Open the PDF above for selectable, accessible text.">
+  </main>
 </body>
 </html>
