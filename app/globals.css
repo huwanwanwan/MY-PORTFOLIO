@@ -21427,8 +21427,12 @@ html[data-theme="dark"] body .page .profile-intro .hero-name {
   }
 }
 
-/* Give the navigation container a visible lower edge in both themes. */
+/* Soft navigation elevation, with a deeper shadow against dark surfaces. */
 html[data-theme] body .page .topbar {
-  border-bottom: 1px solid color-mix(in srgb, var(--ink) 18%, transparent) !important;
+  border-bottom: 0 !important;
   box-shadow: 0 5px 16px rgb(16 23 41 / 16%) !important;
+}
+
+html[data-theme="dark"] body .page .topbar {
+  box-shadow: 0 6px 12px rgb(0 0 0 / 35%), 0 14px 28px -6px rgb(0 0 0 / 50%) !important;
 }
