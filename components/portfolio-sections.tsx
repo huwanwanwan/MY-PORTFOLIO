@@ -551,8 +551,6 @@ export function ExperienceSection({
         <div className="journey-column">
           <h2 className="journey-column-heading">Project Experience</h2>
           <ExperienceList />
-          <h2 className="journey-column-heading">Work Experience</h2>
-          <ExperienceList work />
         </div>
         <div className="journey-column">
           <h2 className="journey-column-heading">Education</h2>
@@ -593,6 +591,9 @@ export function ExperienceSection({
               <p className="journey-role">NCHFI</p>
             </div>
           </article>
+
+          <h2 className="journey-column-heading">Work Experience</h2>
+          <ExperienceList work />
 
         </div>
       </div>
