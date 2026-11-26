@@ -70,7 +70,7 @@ export default function Home() {
             </Link>
             <a
               className="intro-link intro-link-secondary"
-              href="/Juan_Militante_CV.html"
+              href="/Juan_Militante_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -164,7 +164,7 @@ export default function Home() {
               </Link>
               <a
                 className="intro-link intro-link-secondary"
-                href="/Juan_Militante_CV.html"
+                href="/Juan_Militante_CV.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 >

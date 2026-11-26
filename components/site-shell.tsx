@@ -212,7 +212,7 @@ export default function SiteShell({ activePage, children }: SiteShellProps) {
             </button>
             <a
               className="topbar-resume"
-              href="/Juan_Militante_CV.html"
+              href="/Juan_Militante_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="View resume (opens in a new tab)"

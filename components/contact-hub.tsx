@@ -528,7 +528,7 @@ export default function ContactHub({ compact = false }: { compact?: boolean } = 
         </div>
 
         <a
-          href="/Juan_Militante_CV.html"
+          href="/Juan_Militante_CV.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="contact-resume-download"
