@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import BotVerification from "./bot-verification";
 
@@ -30,6 +30,14 @@ export default function ContactHub({ compact = false }: { compact?: boolean } = 
   const [turnstileToken, setTurnstileToken] = useState("");
   const [verificationReset, setVerificationReset] = useState(0);
   const [formError, setFormError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const emailInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (formStatus !== "error" || !emailError) return;
+    emailInputRef.current?.focus({ preventScroll: true });
+    emailInputRef.current?.scrollIntoView({ behavior: "auto", block: "center" });
+  }, [formStatus, emailError]);
   // 5-per-day rate limiting & honeypot security
   const [dailyRemaining, setDailyRemaining] = useState<number>(MAX_DAILY_MESSAGES);
   const [nextResetHours, setNextResetHours] = useState<number>(24);
@@ -127,6 +135,7 @@ export default function ContactHub({ compact = false }: { compact?: boolean } = 
     e.preventDefault();
     if (formStatus === "submitting") return;
     setFormError("");
+    setEmailError("");
     if (!turnstileToken) {
       setFormError("Please complete the bot verification before sending.");
       setFormStatus("error");
@@ -146,8 +155,11 @@ export default function ContactHub({ compact = false }: { compact?: boolean } = 
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formState, honeypot, token: turnstileToken }),
       });
-      const result = await response.json() as { success?: boolean; error?: string };
-      if (!response.ok || result.success !== true) throw new Error(result.error || "Unable to send your message. Please try again later.");
+      const result = await response.json() as { success?: boolean; error?: string; field?: string };
+      if (!response.ok || result.success !== true) {
+        if (result.field === "email") setEmailError(result.error || "Please check your email address.");
+        throw new Error(result.error || "Unable to send your message. Please try again later.");
+      }
       try {
         localStorage.setItem("wancor_contact_daily_submissions", JSON.stringify([...getValidSubmissions(), Date.now()]));
       } catch { /* Browser storage is optional; server checks still apply. */ }
@@ -410,14 +422,25 @@ export default function ContactHub({ compact = false }: { compact?: boolean } = 
                 </label>
                 <input
                   id="contact-sender-email"
+                  ref={emailInputRef}
+                  aria-invalid={emailError ? true : undefined}
+                  aria-describedby={emailError ? "contact-email-error" : undefined}
                   maxLength={254}
                   type="email"
                   required
                   placeholder="e.g. maria@example.com"
                   value={formState.email}
-                  onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                  onChange={(e) => {
+                    setFormState({ ...formState, email: e.target.value });
+                    if (emailError) {
+                      setEmailError("");
+                      setFormError("");
+                      setFormStatus("idle");
+                    }
+                  }}
                   className="styled-input"
                 />
+                {emailError && <p id="contact-email-error" className="contact-field-error" role="alert">{emailError}</p>}
               </div>
             </div>
 

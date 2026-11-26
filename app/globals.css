@@ -21468,3 +21468,20 @@ html[data-theme="dark"] body .page .topbar {
   grid-auto-rows: 1fr;
   align-items: stretch;
 }
+
+/* Make rejected email addresses easy to find and correct. */
+.page #contact .styled-input[aria-invalid="true"] {
+  border-color: #c8102e;
+  box-shadow: 0 0 0 2px rgb(200 16 46 / 20%);
+}
+.page #contact .contact-field-error {
+  margin: 6px 0 0;
+  color: #b51a2b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.page.dark #contact .styled-input[aria-invalid="true"] {
+  border-color: #ff9686;
+  box-shadow: 0 0 0 2px rgb(255 150 134 / 22%);
+}
+.page.dark #contact .contact-field-error { color: #ffafa0; }

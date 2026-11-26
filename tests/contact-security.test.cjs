@@ -185,6 +185,8 @@ for (const [name, dns, expected] of [
       return Response.json(dns);
     });
     assert.equal(response.status, expected);
+    const result = await response.json();
+    assert.equal(result.field, expected === 400 ? 'email' : undefined);
     assert.ok(calls.length >= 2);
   });
 }
