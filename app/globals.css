@@ -21490,10 +21490,10 @@ html[data-theme="dark"] body .page .topbar {
 .page #contact .contact-field-error {
   margin: 10px 0 0;
   padding: 8px 12px;
-  border-left: 3px solid var(--contact-error);
+  border: 0;
   border-radius: 4px;
-  background: var(--contact-error-bg);
-  color: var(--contact-error);
+  background: #b42318;
+  color: #fff;
   font-size: 13px;
   font-weight: 600;
   line-height: 1.5;
